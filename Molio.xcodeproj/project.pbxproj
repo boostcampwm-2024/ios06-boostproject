@@ -18,7 +18,9 @@
 		2003BA132CDB8300002CAB3E /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2003BA0A2CDB8300002CAB3E /* Pretendard-ExtraLight.otf */; };
 		2003BA142CDB8300002CAB3E /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2003BA0B2CDB8300002CAB3E /* Pretendard-Bold.otf */; };
 		2003BA162CDB8D69002CAB3E /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2003BA152CDB8D69002CAB3E /* Font+Extension.swift */; };
+		2003BA182CDB8DE0002CAB3E /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2003BA172CDB8DE0002CAB3E /* Text+Extension.swift */; };
 		2003BA1C2CDB8EE5002CAB3E /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2003BA1B2CDB8EE5002CAB3E /* UILabel+Extension.swift */; };
+		B809707D2CDB4425007BC3C4 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809707C2CDB4425007BC3C4 /* Component.swift */; };
 		B80970802CDB4455007BC3C4 /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809707F2CDB4455007BC3C4 /* Base.swift */; };
 		B80970852CDB44E3007BC3C4 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80970842CDB44E3007BC3C4 /* Entity.swift */; };
 		B80970872CDB44F7007BC3C4 /* RepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80970862CDB44F7007BC3C4 /* RepositoryInterface.swift */; };
@@ -26,18 +28,15 @@
 		B809708E2CDB4589007BC3C4 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809708D2CDB4589007BC3C4 /* Repository.swift */; };
 		B80970942CDB45DF007BC3C4 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80970932CDB45DF007BC3C4 /* LocalStorage.swift */; };
 		B80970962CDB45EE007BC3C4 /* DTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80970952CDB45EE007BC3C4 /* DTO.swift */; };
+		B809709B2CDB4682007BC3C4 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809709A2CDB4682007BC3C4 /* Extension.swift */; };
 		B809709E2CDB640B007BC3C4 /* MusicKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809709D2CDB640B007BC3C4 /* MusicKitService.swift */; };
 		F17368F92CD86B1100F6242C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17368F82CD86B1100F6242C /* AppDelegate.swift */; };
 		F17368FB2CD86B1100F6242C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17368FA2CD86B1100F6242C /* SceneDelegate.swift */; };
 		F17368FD2CD86B1100F6242C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17368FC2CD86B1100F6242C /* ViewController.swift */; };
+		F17369002CD86B1100F6242C /* Base in Resources */ = {isa = PBXBuildFile; fileRef = F17368FF2CD86B1100F6242C /* Base */; };
 		F17369022CD86B1300F6242C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F17369012CD86B1300F6242C /* Assets.xcassets */; };
 		F17369052CD86B1300F6242C /* Base in Resources */ = {isa = PBXBuildFile; fileRef = F17369042CD86B1300F6242C /* Base */; };
 		F17369122CDAFE8C00F6242C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = F17369112CDAFE8C00F6242C /* .swiftlint.yml */; };
-		F173691F2CDB995100F6242C /* SwipeMusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F173691E2CDB995100F6242C /* SwipeMusicViewController.swift */; };
-		F17369232CDC5E5F00F6242C /* MusicTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17369222CDC5E5F00F6242C /* MusicTagView.swift */; };
-		F17369252CDC662A00F6242C /* CircleMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17369242CDC662A00F6242C /* CircleMenuButton.swift */; };
-		F17369292CDC79E100F6242C /* MusicTrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17369282CDC79E100F6242C /* MusicTrackView.swift */; };
-		F173692D2CDC9CF300F6242C /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F173692C2CDC9CF300F6242C /* UIColor+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +53,7 @@
 		2003BA152CDB8D69002CAB3E /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
 		2003BA172CDB8DE0002CAB3E /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
 		2003BA1B2CDB8EE5002CAB3E /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		B809707C2CDB4425007BC3C4 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		B809707F2CDB4455007BC3C4 /* Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
 		B80970842CDB44E3007BC3C4 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		B80970862CDB44F7007BC3C4 /* RepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryInterface.swift; sourceTree = "<group>"; };
@@ -67,15 +67,11 @@
 		F17368F82CD86B1100F6242C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F17368FA2CD86B1100F6242C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F17368FC2CD86B1100F6242C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F17368FF2CD86B1100F6242C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F17369012CD86B1300F6242C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F17369042CD86B1300F6242C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F17369062CD86B1300F6242C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F17369112CDAFE8C00F6242C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		F173691E2CDB995100F6242C /* SwipeMusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeMusicViewController.swift; sourceTree = "<group>"; };
-		F17369222CDC5E5F00F6242C /* MusicTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicTagView.swift; sourceTree = "<group>"; };
-		F17369242CDC662A00F6242C /* CircleMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleMenuButton.swift; sourceTree = "<group>"; };
-		F17369282CDC79E100F6242C /* MusicTrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicTrackView.swift; sourceTree = "<group>"; };
-		F173692C2CDC9CF300F6242C /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,7 +122,6 @@
 			isa = PBXGroup;
 			children = (
 				2003BA1B2CDB8EE5002CAB3E /* UILabel+Extension.swift */,
-				F173692C2CDC9CF300F6242C /* UIColor+Extension.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -148,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				2003BA022CDB82B5002CAB3E /* Font */,
+				F17368FE2CD86B1100F6242C /* Main.storyboard */,
 				F17369012CD86B1300F6242C /* Assets.xcassets */,
 				F17369032CD86B1300F6242C /* LaunchScreen.storyboard */,
 				F17369062CD86B1300F6242C /* Info.plist */,
@@ -168,7 +164,6 @@
 			isa = PBXGroup;
 			children = (
 				B809707A2CDB4405007BC3C4 /* Common */,
-				F173691C2CDB991D00F6242C /* SwipeMusic */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -214,7 +209,7 @@
 		B809707B2CDB440A007BC3C4 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				F17369242CDC662A00F6242C /* CircleMenuButton.swift */,
+				B809707C2CDB4425007BC3C4 /* Component.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -307,7 +302,6 @@
 				F17369112CDAFE8C00F6242C /* .swiftlint.yml */,
 				F17368F72CD86B1100F6242C /* Molio */,
 				F17368F62CD86B1100F6242C /* Products */,
-				F17369272CDC784900F6242C /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -328,32 +322,6 @@
 			path = Molio;
 			sourceTree = "<group>";
 		};
-		F173691C2CDB991D00F6242C /* SwipeMusic */ = {
-			isa = PBXGroup;
-			children = (
-				F173691D2CDB992700F6242C /* View */,
-			);
-			path = SwipeMusic;
-			sourceTree = "<group>";
-		};
-		F173691D2CDB992700F6242C /* View */ = {
-			isa = PBXGroup;
-			children = (
-				F173691E2CDB995100F6242C /* SwipeMusicViewController.swift */,
-				F17369282CDC79E100F6242C /* MusicTrackView.swift */,
-				F17369222CDC5E5F00F6242C /* MusicTagView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		F17369272CDC784900F6242C /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				B809709A2CDB4682007BC3C4 /* Extension.swift */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -368,7 +336,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				F173692B2CDC85DD00F6242C /* PBXTargetDependency */,
+				F17369152CDB004100F6242C /* PBXTargetDependency */,
 			);
 			name = Molio;
 			productName = Molio;
@@ -428,6 +396,7 @@
 				F17369052CD86B1300F6242C /* Base in Resources */,
 				2003BA112CDB8300002CAB3E /* Pretendard-Regular.otf in Resources */,
 				2003BA0E2CDB8300002CAB3E /* Pretendard-Black.otf in Resources */,
+				F17369002CD86B1100F6242C /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,37 +408,44 @@
 			buildActionMask = 2147483647;
 			files = (
 				B80970942CDB45DF007BC3C4 /* LocalStorage.swift in Sources */,
-				F173692D2CDC9CF300F6242C /* UIColor+Extension.swift in Sources */,
+				B80970922CDB45C4007BC3C4 /* Network.swift in Sources */,
 				2003BA162CDB8D69002CAB3E /* Font+Extension.swift in Sources */,
 				F17368FD2CD86B1100F6242C /* ViewController.swift in Sources */,
+				2003BA182CDB8DE0002CAB3E /* Text+Extension.swift in Sources */,
 				B80970962CDB45EE007BC3C4 /* DTO.swift in Sources */,
 				B80970892CDB451D007BC3C4 /* UseCase.swift in Sources */,
-				F173691F2CDB995100F6242C /* SwipeMusicViewController.swift in Sources */,
 				B80970872CDB44F7007BC3C4 /* RepositoryInterface.swift in Sources */,
 				2003BA1C2CDB8EE5002CAB3E /* UILabel+Extension.swift in Sources */,
+				B809707D2CDB4425007BC3C4 /* Component.swift in Sources */,
 				B80970852CDB44E3007BC3C4 /* Entity.swift in Sources */,
 				B809709E2CDB640B007BC3C4 /* MusicKitService.swift in Sources */,
+				B809709B2CDB4682007BC3C4 /* Extension.swift in Sources */,
 				2003BA012CDB7498002CAB3E /* PretendardFontName.swift in Sources */,
 				B80970802CDB4455007BC3C4 /* Base.swift in Sources */,
-				F17369292CDC79E100F6242C /* MusicTrackView.swift in Sources */,
 				F17368F92CD86B1100F6242C /* AppDelegate.swift in Sources */,
-				F17369252CDC662A00F6242C /* CircleMenuButton.swift in Sources */,
 				F17368FB2CD86B1100F6242C /* SceneDelegate.swift in Sources */,
 				B809708E2CDB4589007BC3C4 /* Repository.swift in Sources */,
-				F17369232CDC5E5F00F6242C /* MusicTagView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		F173692B2CDC85DD00F6242C /* PBXTargetDependency */ = {
+		F17369152CDB004100F6242C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			productRef = F173692A2CDC85DD00F6242C /* SwiftLintBuildToolPlugin */;
+			productRef = F17369142CDB004100F6242C /* SwiftLintBuildToolPlugin */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		F17368FE2CD86B1100F6242C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F17368FF2CD86B1100F6242C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		F17369032CD86B1300F6242C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -613,6 +589,7 @@
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Apple Music의 음악 데이터를 검색하거나 플레이리스트를 내보내려면 Apple Music 접근 권한 승인이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -646,6 +623,7 @@
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Apple Music의 음악 데이터를 검색하거나 플레이리스트를 내보내려면 Apple Music 접근 권한 승인이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -701,7 +679,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F173692A2CDC85DD00F6242C /* SwiftLintBuildToolPlugin */ = {
+		F17369142CDB004100F6242C /* SwiftLintBuildToolPlugin */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F17369102CDAFE3600F6242C /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
 			productName = "plugin:SwiftLintBuildToolPlugin";
