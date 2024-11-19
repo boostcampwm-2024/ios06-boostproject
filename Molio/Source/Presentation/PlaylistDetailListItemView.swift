@@ -19,6 +19,7 @@ struct PlaylistDetailListItemView: View {
 
             VStack(alignment: .leading) {
                 Text(music.title)
+                    .font(.body)
                 Text(music.artistName)
                     .font(.footnote)
                     .fontWeight(.ultraLight)
@@ -30,7 +31,7 @@ struct PlaylistDetailListItemView: View {
             minWidth: 0,
             maxWidth: .infinity,
             minHeight: 0,
-            maxHeight: 60
+            maxHeight: 56
         )
     }
 }
