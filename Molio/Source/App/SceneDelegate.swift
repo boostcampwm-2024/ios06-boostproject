@@ -11,7 +11,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         configureAudioSession()
         setupNavigationBarAppearance()
         
-        let defaultNetworkProvider = DefaultNetworkProvider()
+        let container = DIContainer.shared
+        container.register(NetworkProvider.self, dependency: DefaultNetworkProvider())
+        container.register(SpotifyTokenProvider.self, dependency: DefaultSpotifyTokenProvider(networkProvider: container.resolve(NetworkProvider.self)!))
+        
+//        let defaultNetworkProvider = DefaultNetworkProvider()
         let defaultSpotifyTokenProvider = DefaultSpotifyTokenProvider(networkProvider: defaultNetworkProvider)
         let defaultSpotifyAPIService = DefaultSpotifyAPIService(networkProvider: defaultNetworkProvider,
                                                                 tokenProvider: defaultSpotifyTokenProvider
