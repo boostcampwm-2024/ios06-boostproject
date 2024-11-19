@@ -4,6 +4,24 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        let container = DIContainer.shared
+        
+        container.register(NetworkProvider.self, dependency: DefaultNetworkProvider())
+        container.register(SpotifyTokenProvider.self, dependency: DefaultSpotifyTokenProvider())
+        container.register(ImageFetchService.self, dependency: DefaultImageFetchService())
+        container.register(SpotifyAPIService.self, dependency: DefaultSpotifyAPIService())
+        container.register(MusicKitService.self, dependency: DefaultMusicKitService())
+        
+        // Repository
+        container.register(RecommendedMusicRepository.self, dependency: DefaultRecommendedMusicRepository())
+        container.register(ImageRepository.self, dependency: DefaultImageRepository())
+        
+        // UseCase
+        container.register(FetchRecommendedMusicUseCase.self, dependency: DefaultFetchRecommendedMusicUseCase())
+        container.register(FetchImageUseCase.self, dependency: DefaultFetchImageUseCase())
+        container.register(FetchAvailableGenresUseCase.self, dependency: DefaultFetchAvailableGenresUseCase())
+        
         return true
     }
 

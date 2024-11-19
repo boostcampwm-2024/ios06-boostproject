@@ -11,29 +11,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         configureAudioSession()
         setupNavigationBarAppearance()
         
-        let container = DIContainer.shared
-        container.register(NetworkProvider.self, dependency: DefaultNetworkProvider())
-        container.register(SpotifyTokenProvider.self, dependency: DefaultSpotifyTokenProvider(networkProvider: container.resolve(NetworkProvider.self)!))
-        
-//        let defaultNetworkProvider = DefaultNetworkProvider()
-        let defaultSpotifyTokenProvider = DefaultSpotifyTokenProvider(networkProvider: defaultNetworkProvider)
-        let defaultSpotifyAPIService = DefaultSpotifyAPIService(networkProvider: defaultNetworkProvider,
-                                                                tokenProvider: defaultSpotifyTokenProvider
-        )
-        let defaultMusicKitService = DefaultMusicKitService()
-        let defaultMusicRepository = DefaultRecommendedMusicRepository(
-            spotifyAPIService: defaultSpotifyAPIService,
-            musicKitService: defaultMusicKitService
-        )
-        let defaultFetchMusicsUseCase = DefaultFetchRecommendedMusicUseCase(repository: defaultMusicRepository)
-        let defaultImageProvider = DefaultImageFetchService()
-        let defaultImageRepository = DefaultImageRepository(imageFetchService: defaultImageProvider)
-        let defaultFetchImageUseCase = DefaultFetchImageUseCase(repository: defaultImageRepository)
-        let swipeMusicViewModel = SwipeMusicViewModel(fetchMusicsUseCase: defaultFetchMusicsUseCase,
-                                                      fetchImageUseCase: defaultFetchImageUseCase,
-                                                      musicFilterProvider: MockMusicFilterProvider()
-        )
-        let swipeMusicViewController = SwipeMusicViewController(viewModel: swipeMusicViewModel)
+        let swipeMusicViewController = SwipeMusicViewController(viewModel: SwipeMusicViewModel())
         
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = UINavigationController(rootViewController: swipeMusicViewController)

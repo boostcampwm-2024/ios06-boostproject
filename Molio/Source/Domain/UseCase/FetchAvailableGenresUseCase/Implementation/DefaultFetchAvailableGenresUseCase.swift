@@ -1,7 +1,9 @@
 struct DefaultFetchAvailableGenresUseCase: FetchAvailableGenresUseCase {
     private let recommendedMusicRepository: RecommendedMusicRepository
     
-    init(recommendedMusicRepository: RecommendedMusicRepository) {
+    init(
+        recommendedMusicRepository: RecommendedMusicRepository = DIContainer.shared.resolve()
+    ) {
         self.recommendedMusicRepository = recommendedMusicRepository
     }
     
