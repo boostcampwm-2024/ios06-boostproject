@@ -422,6 +422,7 @@
 			children = (
 				F17368F82CD86B1100F6242C /* AppDelegate.swift */,
 				F17368FA2CD86B1100F6242C /* SceneDelegate.swift */,
+				B8046A592CEC56C900933704 /* DIContainer.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -464,7 +465,6 @@
 				F17369792CE4AAB600F6242C /* Protocol */,
 				F173695B2CE0F5B800F6242C /* Mapper */,
 				B80970992CDB4678007BC3C4 /* Extension */,
-				B8046A592CEC56C900933704 /* DIContainer.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
