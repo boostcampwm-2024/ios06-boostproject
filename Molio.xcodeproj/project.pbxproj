@@ -29,6 +29,12 @@
 		20397E702CE5DE56004ED9CE /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20397E6F2CE5DE56004ED9CE /* PersistenceManager.swift */; };
 		20397E722CE5DFC6004ED9CE /* DefaultPlaylistRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20397E712CE5DFC6004ED9CE /* DefaultPlaylistRepository.swift */; };
 		20397E802CE5FD0A004ED9CE /* DefaultPlaylistRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20397E7F2CE5FD0A004ED9CE /* DefaultPlaylistRepositoryTests.swift */; };
+		88011E9D2CEB1C9F000D33FE /* RandomMusic+samples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88011E9C2CEB1C9F000D33FE /* RandomMusic+samples.swift */; };
+		88011E9F2CEB1CDE000D33FE /* PlaylistDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88011E9E2CEB1CDE000D33FE /* PlaylistDetailViewModel.swift */; };
+		88011EA12CEB1CF6000D33FE /* CurrentPlaylistRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88011EA02CEB1CF6000D33FE /* CurrentPlaylistRepository.swift */; };
+		88011EA32CEB1DFC000D33FE /* MolioPlaylist+samples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88011EA22CEB1DFC000D33FE /* MolioPlaylist+samples.swift */; };
+		8808DF9C2CEC232900DB89B7 /* MockCurrentPlaylistRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8808DF9B2CEC232900DB89B7 /* MockCurrentPlaylistRepository.swift */; };
+		8808DF9E2CEC39CE00DB89B7 /* DefaultParallelMusicFetchForISRCsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8808DF9D2CEC39CE00DB89B7 /* DefaultParallelMusicFetchForISRCsUseCase.swift */; };
 		881622692CE3671400E81EA0 /* RandomMusicDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881622682CE3671400E81EA0 /* RandomMusicDeck.swift */; };
 		8816226B2CE3838B00E81EA0 /* DeckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8816226A2CE3838B00E81EA0 /* DeckTests.swift */; };
 		8816226D2CE3B11C00E81EA0 /* MusicDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8816226C2CE3B11C00E81EA0 /* MusicDeck.swift */; };
@@ -47,6 +53,10 @@
 		881BBCC22CDCF97900010A61 /* RecommendationRequestEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881BBCC02CDCF97900010A61 /* RecommendationRequestEntity.swift */; };
 		881BBCC42CDCF98300010A61 /* SpotifyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881BBCC32CDCF98300010A61 /* SpotifyRepository.swift */; };
 		881BBCC72CDCF98F00010A61 /* FetchRecommendedSongsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881BBCC52CDCF98F00010A61 /* FetchRecommendedSongsUseCase.swift */; };
+		88F45A5A2CEAE6AC00F447AF /* PlaylistDetailListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F45A582CEAE6AC00F447AF /* PlaylistDetailListItemView.swift */; };
+		88F45A5B2CEAE6AC00F447AF /* PlaylistDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F45A592CEAE6AC00F447AF /* PlaylistDetailView.swift */; };
+		88F6E4A22CEC3B0D00739648 /* ParallelMusicFetchForISRCsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F6E4A12CEC3B0D00739648 /* ParallelMusicFetchForISRCsUseCase.swift */; };
+		88F6E4A42CEC5C5100739648 /* PlaylistDetailViewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F6E4A32CEC5C5100739648 /* PlaylistDetailViewList.swift */; };
 		B809709E2CDB640B007BC3C4 /* MusicKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809709D2CDB640B007BC3C4 /* MusicKitService.swift */; };
 		B8D553E82CDFE25C007CCD6D /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D553E72CDFE25C007CCD6D /* NetworkProvider.swift */; };
 		B8D553EA2CDFE271007CCD6D /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D553E92CDFE271007CCD6D /* EndPoint.swift */; };
@@ -132,6 +142,12 @@
 		20397E6F2CE5DE56004ED9CE /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		20397E712CE5DFC6004ED9CE /* DefaultPlaylistRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPlaylistRepository.swift; sourceTree = "<group>"; };
 		20397E7F2CE5FD0A004ED9CE /* DefaultPlaylistRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPlaylistRepositoryTests.swift; sourceTree = "<group>"; };
+		88011E9C2CEB1C9F000D33FE /* RandomMusic+samples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RandomMusic+samples.swift"; sourceTree = "<group>"; };
+		88011E9E2CEB1CDE000D33FE /* PlaylistDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDetailViewModel.swift; sourceTree = "<group>"; };
+		88011EA02CEB1CF6000D33FE /* CurrentPlaylistRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentPlaylistRepository.swift; sourceTree = "<group>"; };
+		88011EA22CEB1DFC000D33FE /* MolioPlaylist+samples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MolioPlaylist+samples.swift"; sourceTree = "<group>"; };
+		8808DF9B2CEC232900DB89B7 /* MockCurrentPlaylistRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCurrentPlaylistRepository.swift; sourceTree = "<group>"; };
+		8808DF9D2CEC39CE00DB89B7 /* DefaultParallelMusicFetchForISRCsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultParallelMusicFetchForISRCsUseCase.swift; sourceTree = "<group>"; };
 		881622682CE3671400E81EA0 /* RandomMusicDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomMusicDeck.swift; sourceTree = "<group>"; };
 		8816226A2CE3838B00E81EA0 /* DeckTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckTests.swift; sourceTree = "<group>"; };
 		8816226C2CE3B11C00E81EA0 /* MusicDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicDeck.swift; sourceTree = "<group>"; };
@@ -150,6 +166,10 @@
 		881BBCC02CDCF97900010A61 /* RecommendationRequestEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationRequestEntity.swift; sourceTree = "<group>"; };
 		881BBCC32CDCF98300010A61 /* SpotifyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyRepository.swift; sourceTree = "<group>"; };
 		881BBCC52CDCF98F00010A61 /* FetchRecommendedSongsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecommendedSongsUseCase.swift; sourceTree = "<group>"; };
+		88F45A582CEAE6AC00F447AF /* PlaylistDetailListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDetailListItemView.swift; sourceTree = "<group>"; };
+		88F45A592CEAE6AC00F447AF /* PlaylistDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDetailView.swift; sourceTree = "<group>"; };
+		88F6E4A12CEC3B0D00739648 /* ParallelMusicFetchForISRCsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallelMusicFetchForISRCsUseCase.swift; sourceTree = "<group>"; };
+		88F6E4A32CEC5C5100739648 /* PlaylistDetailViewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDetailViewList.swift; sourceTree = "<group>"; };
 		B8046A422CE8D4BE00933704 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		B809709D2CDB640B007BC3C4 /* MusicKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicKitService.swift; sourceTree = "<group>"; };
 		B8D553E72CDFE25C007CCD6D /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
@@ -373,6 +393,14 @@
 				B809707A2CDB4405007BC3C4 /* Common */,
 				F173691C2CDB991D00F6242C /* SwipeMusic */,
 				F1E405892CEB8FA400533701 /* Login */,
+				88F45A582CEAE6AC00F447AF /* PlaylistDetailListItemView.swift */,
+				88F45A592CEAE6AC00F447AF /* PlaylistDetailView.swift */,
+				88F6E4A32CEC5C5100739648 /* PlaylistDetailViewList.swift */,
+				88011EA22CEB1DFC000D33FE /* MolioPlaylist+samples.swift */,
+				88011EA02CEB1CF6000D33FE /* CurrentPlaylistRepository.swift */,
+				88011E9E2CEB1CDE000D33FE /* PlaylistDetailViewModel.swift */,
+				8808DF9B2CEC232900DB89B7 /* MockCurrentPlaylistRepository.swift */,
+				88011E9C2CEB1C9F000D33FE /* RandomMusic+samples.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -439,6 +467,7 @@
 				F173695E2CE36D4D00F6242C /* FetchImageUsecase */,
 				F17369432CDF248700F6242C /* FetchMusicsUseCase */,
 				881BBCC62CDCF98F00010A61 /* FetchRecommendedSongsUseCase */,
+				8808DF9D2CEC39CE00DB89B7 /* DefaultParallelMusicFetchForISRCsUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -580,6 +609,7 @@
 		F17368EC2CD86B1100F6242C = {
 			isa = PBXGroup;
 			children = (
+				88F6E4A12CEC3B0D00739648 /* ParallelMusicFetchForISRCsUseCase.swift */,
 				F17369112CDAFE8C00F6242C /* .swiftlint.yml */,
 				F17368F72CD86B1100F6242C /* Molio */,
 				F17369342CDCE31C00F6242C /* MolioTests */,
@@ -888,6 +918,9 @@
 				2003BA162CDB8D69002CAB3E /* Font+Extension.swift in Sources */,
 				F17369542CDFA9FD00F6242C /* CGColorMapper.swift in Sources */,
 				F17369572CDFB03E00F6242C /* DefaultMusicKitService.swift in Sources */,
+				88F45A5A2CEAE6AC00F447AF /* PlaylistDetailListItemView.swift in Sources */,
+				88011EA32CEB1DFC000D33FE /* MolioPlaylist+samples.swift in Sources */,
+				88F45A5B2CEAE6AC00F447AF /* PlaylistDetailView.swift in Sources */,
 				2003BA222CDCB31B002CAB3E /* SwipeMusicViewModel.swift in Sources */,
 				F173694B2CDF265900F6242C /* DefaultRecommendedMusicRepository.swift in Sources */,
 				F173693D2CDF191800F6242C /* RandomMusic.swift in Sources */,
@@ -896,6 +929,7 @@
 				2003BA1C2CDB8EE5002CAB3E /* UILabel+Extension.swift in Sources */,
 				F17369682CE36E8F00F6242C /* DefaultImageRepository.swift in Sources */,
 				B8D554062CE0ED2C007CCD6D /* SpotifyAPI.swift in Sources */,
+				88F6E4A22CEC3B0D00739648 /* ParallelMusicFetchForISRCsUseCase.swift in Sources */,
 				B8D554C82CE34A47007CCD6D /* String+Extension.swift in Sources */,
 				881BBCC12CDCF97900010A61 /* MusicFilter.swift in Sources */,
 				20397E512CE33C03004ED9CE /* SwipeMusicPlayer.swift in Sources */,
@@ -905,17 +939,21 @@
 				8816226F2CE3B14200E81EA0 /* MusicFilterProvider.swift in Sources */,
 				B8D554C62CE339BC007CCD6D /* DefaultSpotifyTokenProvider.swift in Sources */,
 				B8D554C02CE322CF007CCD6D /* SpotifyTokenProviderError.swift in Sources */,
+				8808DF9E2CEC39CE00DB89B7 /* DefaultParallelMusicFetchForISRCsUseCase.swift in Sources */,
 				F17369662CE36E2900F6242C /* ImageRepository.swift in Sources */,
 				20150EC52CEA36B700FC8883 /* Playlist+CoreDataClass.swift in Sources */,
 				20150EC62CEA36B700FC8883 /* Playlist+CoreDataProperties.swift in Sources */,
 				B8D553EE2CDFE2C0007CCD6D /* HTTPResponseStatusCode.swift in Sources */,
 				B8D553EA2CDFE271007CCD6D /* EndPoint.swift in Sources */,
 				B809709E2CDB640B007BC3C4 /* MusicKitService.swift in Sources */,
+				88011E9D2CEB1C9F000D33FE /* RandomMusic+samples.swift in Sources */,
 				F17369642CE36DE300F6242C /* DefaultFetchImageUseCase.swift in Sources */,
 				20397E6A2CE5DCDD004ED9CE /* MolioModel.xcdatamodeld in Sources */,
 				F17369722CE3716100F6242C /* DafaultImageProvider.swift in Sources */,
 				2003BA012CDB7498002CAB3E /* PretendardFontName.swift in Sources */,
+				88011EA12CEB1CF6000D33FE /* CurrentPlaylistRepository.swift in Sources */,
 				B8D553E82CDFE25C007CCD6D /* NetworkProvider.swift in Sources */,
+				88011E9F2CEB1CDE000D33FE /* PlaylistDetailViewModel.swift in Sources */,
 				881BBCBB2CDCF95600010A61 /* TrackDTO.swift in Sources */,
 				881BBCBC2CDCF95600010A61 /* RecommendationsResponseDTO.swift in Sources */,
 				881BBCBD2CDCF95600010A61 /* ExternalIDsDTO.swift in Sources */,
@@ -926,6 +964,8 @@
 				F17368F92CD86B1100F6242C /* AppDelegate.swift in Sources */,
 				8816226D2CE3B11C00E81EA0 /* MusicDeck.swift in Sources */,
 				881622692CE3671400E81EA0 /* RandomMusicDeck.swift in Sources */,
+				8808DF9C2CEC232900DB89B7 /* MockCurrentPlaylistRepository.swift in Sources */,
+				88F6E4A42CEC5C5100739648 /* PlaylistDetailViewList.swift in Sources */,
 				F173695D2CE31CBA00F6242C /* InputOutputViewModel.swift in Sources */,
 				F17369462CDF24A100F6242C /* FetchRecommendedMusicUseCase.swift in Sources */,
 				F17369612CE36D8000F6242C /* FetchImageUseCase.swift in Sources */,
