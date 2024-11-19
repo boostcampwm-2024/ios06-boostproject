@@ -1,4 +1,3 @@
-import Foundation
 import SwiftUI
 
 struct PlaylistDetailListItemView: View {
@@ -38,5 +37,7 @@ struct PlaylistDetailListItemView: View {
 
 #Preview {
     PlaylistDetailListItemView(music: RandomMusic.apt)
+        .background(Color.black)
+        .foregroundStyle(.white)
 }
 
