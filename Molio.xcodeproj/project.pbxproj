@@ -468,6 +468,7 @@
 				F17369432CDF248700F6242C /* FetchMusicsUseCase */,
 				881BBCC62CDCF98F00010A61 /* FetchRecommendedSongsUseCase */,
 				8808DF9D2CEC39CE00DB89B7 /* DefaultParallelMusicFetchForISRCsUseCase.swift */,
+				88F6E4A12CEC3B0D00739648 /* ParallelMusicFetchForISRCsUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -609,7 +610,6 @@
 		F17368EC2CD86B1100F6242C = {
 			isa = PBXGroup;
 			children = (
-				88F6E4A12CEC3B0D00739648 /* ParallelMusicFetchForISRCsUseCase.swift */,
 				F17369112CDAFE8C00F6242C /* .swiftlint.yml */,
 				F17368F72CD86B1100F6242C /* Molio */,
 				F17369342CDCE31C00F6242C /* MolioTests */,
