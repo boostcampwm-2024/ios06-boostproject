@@ -1,62 +1,87 @@
-//import SwiftUI
-//import Combine
-//
-//struct PlaylistDetailView: View {
-//    @ObservedObject private var viewModel = PlaylistDetailViewModel(
-//        playlistRepository: MockCurrentPlaylistRepository(),
-//        parallelMusicFetchForISRCsUseCase: DefaultParallelMusicFetchForISRCsUseCase()
-//    )
-//    
-//    init(
-//        playlistRepository: some CurrentPlaylistRepository,
-//        parallelMusicFetchForISRCsUseCase: some ParallelMusicFetchForISRCsUseCase
-//    ) {
-//        self._viewModel = playlistRepository
-//    }
-//
-//    @State private var isPlaylistChangeSheetPresented: Bool = false
-//    
-//    var body: some View {
-//        List {
-//            ForEach(viewModel.currentPlaylist?.musicISRCs, id: \.self) { _ in
-//                PlaylistDetailListItemView(music: .apt)
-//                    .foregroundStyle(.white)
-//                    .backgroundStyle(.clear)
-//                    .listRowBackground(Color.clear)
-//                    .listRowSeparatorTint(.gray)
-//                    .listRowInsets(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 0))
-//            }
-//        }
-//        .listStyle(.plain)
-//        .background(Color.background)
-//        .scrollContentBackground(.hidden)
-//        .toolbar {
-//            ToolbarItem(placement: .topBarLeading) {
-//                Button {
-//                    isPlaylistChangeSheetPresented.toggle()
-//                } label: {
-//                    Text(viewModel.currentPlaylist?.name ?? "제목 없음")
-//                        .foregroundStyle(.white)
-//                        .font(.title)
-//                        .bold()
-//                        .padding()
-//                        .padding(.bottom, 5)
-//                }
-//            }
-//        }
-//        .toolbarBackground(
-//            Color.background,
-//            for: .navigationBar
-//        )
-//        .sheet(isPresented: $isPlaylistChangeSheetPresented) {
-//            Text("힝 속았지")
-//        }
-//    }
-//}
-//
-//#Preview {
-//    NavigationStack {
-//        PlaylistDetailView()
-//    }
-//    .navigationBarBackButtonHidden(false)
-//}
+import SwiftUI
+import Combine
+
+struct PlaylistDetailView: View {
+    @State private var isPlaylistChangeSheetPresented: Bool = false
+    @ObservedObject private var viewModel: PlaylistDetailViewModel
+    
+    init(
+        viewModel: PlaylistDetailViewModel
+    ) {
+        self.viewModel = viewModel
+    }
+    
+    var body: some View {
+        PlaylistDetailViewList(musics: [.apt, .apt, .apt])
+            .foregroundStyle(.white)
+            .listStyle(.plain)
+            .background(Color.background)
+            .scrollContentBackground(.hidden)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        isPlaylistChangeSheetPresented.toggle()
+                    } label: {
+                        HStack(spacing: 10) {
+                            Text(viewModel.currentPlaylist?.name ?? "제목 없음")
+                                .font(.pretendardBold(size: 34))
+
+                            Image(systemName: "chevron.down")
+                        }
+                        .bold()
+                        .foregroundStyle(.white)
+                        .padding()
+                        .padding(.bottom, 5)
+
+                    }
+                }
+            }
+            .toolbarBackground(
+                Color.background,
+                for: .navigationBar
+            )
+            .safeAreaInset(edge: .bottom) {
+                HStack {
+                    Spacer(minLength: 20)
+                    
+                    PlaylistDetailViewAudioPlayerControl()
+                        .layoutPriority(1)
+
+                    Spacer(minLength: 20)
+
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "square.and.arrow.up")
+                            .frame(width: 66, height: 66)
+                            .background(Color.gray, in: .circle)
+                    }
+
+                    Spacer(minLength: 20)
+                }
+                .font(.title)
+                .tint(Color.main)
+                .frame(maxWidth: .infinity, maxHeight: 66)
+                .padding(.bottom)
+            }
+            .sheet(isPresented: $isPlaylistChangeSheetPresented) {
+            }
+    }
+}
+
+#Preview {
+    let currentPlaylistRepository = MockCurrentPlaylistRepository()
+    let musicKitService = DefaultMusicKitService()
+    
+    let parallelMusicFetchForISRCsUseCase = DefaultParallelMusicFetchForISRCsUseCase(musicKitService: musicKitService)
+    
+    NavigationStack {
+        PlaylistDetailView(
+            viewModel: PlaylistDetailViewModel(
+                playlistRepository: currentPlaylistRepository,
+                parallelMusicFetchForISRCsUseCase: parallelMusicFetchForISRCsUseCase
+            )
+        )
+    }
+    .navigationBarBackButtonHidden(false)
+}
