@@ -49,4 +49,38 @@ final class PlaylistDetailViewModel: ObservableObject {
     }
 }
 
+//struct PlaylistDetailViewPlaylistName: View {
+//    @State private var currentPlaylistName: String = ""
+//    
+//    private weak var allPlaylistUseCase: (any PublishAllPlaylistUseCase)?
+//    
+//    var body: some View {
+//        Text(viewModel.currentPlaylist?.name ?? "")
+//    }
+//}
 
+protocol PublishAllPlaylistUseCase: AnyObject {
+    var playlistsPublisher: AnyPublisher<[MolioPlaylist], Never> { get }
+}
+
+final class MockPublishAllPlaylistUseCase: PublishAllPlaylistUseCase {
+    var playlistsPublisher: AnyPublisher<[MolioPlaylist], Never> {
+        Just(MolioPlaylist.samples)
+            .eraseToAnyPublisher()
+    }
+}
+
+protocol PublishCurrentPlaylistUseCase {
+    var currentPlaylistPublisher: AnyPublisher<MolioPlaylist?, Never> { get }
+}
+
+final class MockPublishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase {
+    var currentPlaylistPublisher: AnyPublisher<MolioPlaylist?, Never> {
+        Just(MolioPlaylist.samples.first)
+            .eraseToAnyPublisher()
+    }
+}
+
+protocol PublishCurrentPlaylistMusicsUseCase {
+    var currentPlaylistMusicsPublisher: AnyPublisher<[RandomMusic], Never> { get }
+}
