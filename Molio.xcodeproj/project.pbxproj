@@ -355,6 +355,20 @@
 			path = FetchRecommendedSongsUseCase;
 			sourceTree = "<group>";
 		};
+		88F6E4AE2CECC24B00739648 /* PlaylistDetail */ = {
+			isa = PBXGroup;
+			children = (
+				88F45A582CEAE6AC00F447AF /* PlaylistDetailListItemView.swift */,
+				88F6E4AC2CECAEC000739648 /* PlaylistDetailViewAudioPlayerControl.swift */,
+				88F45A592CEAE6AC00F447AF /* PlaylistDetailView.swift */,
+				88F6E4A32CEC5C5100739648 /* PlaylistDetailViewList.swift */,
+				88011EA02CEB1CF6000D33FE /* CurrentPlaylistRepository.swift */,
+				88011E9E2CEB1CDE000D33FE /* PlaylistDetailViewModel.swift */,
+				8808DF9B2CEC232900DB89B7 /* MockCurrentPlaylistRepository.swift */,
+			);
+			path = PlaylistDetail;
+			sourceTree = "<group>";
+		};
 		B80970732CDB434B007BC3C4 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -395,13 +409,7 @@
 				B809707A2CDB4405007BC3C4 /* Common */,
 				F173691C2CDB991D00F6242C /* SwipeMusic */,
 				F1E405892CEB8FA400533701 /* Login */,
-				88F45A582CEAE6AC00F447AF /* PlaylistDetailListItemView.swift */,
-				88F6E4AC2CECAEC000739648 /* PlaylistDetailViewAudioPlayerControl.swift */,
-				88F45A592CEAE6AC00F447AF /* PlaylistDetailView.swift */,
-				88F6E4A32CEC5C5100739648 /* PlaylistDetailViewList.swift */,
-				88011EA02CEB1CF6000D33FE /* CurrentPlaylistRepository.swift */,
-				88011E9E2CEB1CDE000D33FE /* PlaylistDetailViewModel.swift */,
-				8808DF9B2CEC232900DB89B7 /* MockCurrentPlaylistRepository.swift */,
+				88F6E4AE2CECC24B00739648 /* PlaylistDetail */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
