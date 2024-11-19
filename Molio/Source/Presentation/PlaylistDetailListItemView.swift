@@ -4,6 +4,10 @@ import SwiftUI
 struct PlaylistDetailListItemView: View {
     var music: RandomMusic
     
+    init(music: RandomMusic) {
+        self.music = music
+    }
+    
     var body: some View {
         HStack(spacing: 15) {
             AsyncImage(url: music.artworkImageURL) { phase in
