@@ -13,6 +13,7 @@ struct DefaultRecommendedMusicRepository: RecommendedMusicRepository {
         let musicFilter = MusicFilter(genres: genres)
         let isrcs = try await spotifyAPIService.fetchRecommendedMusicISRCs(musicFilter: musicFilter)
 
+        // TODO: 이걸 [ISRC]반환으로 바꾸고 ParallelMusicFetchForISRCsUseCase에서 그걸 처리하도록 수정하기
         return try await withThrowingTaskGroup(of: RandomMusic?.self) { group in
             var musics: [RandomMusic] = []
             for isrc in isrcs {
