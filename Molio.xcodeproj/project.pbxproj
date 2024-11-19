@@ -57,6 +57,7 @@
 		88F45A5B2CEAE6AC00F447AF /* PlaylistDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F45A592CEAE6AC00F447AF /* PlaylistDetailView.swift */; };
 		88F6E4A22CEC3B0D00739648 /* ParallelMusicFetchForISRCsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F6E4A12CEC3B0D00739648 /* ParallelMusicFetchForISRCsUseCase.swift */; };
 		88F6E4A42CEC5C5100739648 /* PlaylistDetailViewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F6E4A32CEC5C5100739648 /* PlaylistDetailViewList.swift */; };
+		88F6E4AD2CECAEC000739648 /* PlaylistDetailViewAudioPlayerControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F6E4AC2CECAEC000739648 /* PlaylistDetailViewAudioPlayerControl.swift */; };
 		B809709E2CDB640B007BC3C4 /* MusicKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809709D2CDB640B007BC3C4 /* MusicKitService.swift */; };
 		B8D553E82CDFE25C007CCD6D /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D553E72CDFE25C007CCD6D /* NetworkProvider.swift */; };
 		B8D553EA2CDFE271007CCD6D /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D553E92CDFE271007CCD6D /* EndPoint.swift */; };
@@ -170,6 +171,7 @@
 		88F45A592CEAE6AC00F447AF /* PlaylistDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDetailView.swift; sourceTree = "<group>"; };
 		88F6E4A12CEC3B0D00739648 /* ParallelMusicFetchForISRCsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallelMusicFetchForISRCsUseCase.swift; sourceTree = "<group>"; };
 		88F6E4A32CEC5C5100739648 /* PlaylistDetailViewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDetailViewList.swift; sourceTree = "<group>"; };
+		88F6E4AC2CECAEC000739648 /* PlaylistDetailViewAudioPlayerControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDetailViewAudioPlayerControl.swift; sourceTree = "<group>"; };
 		B8046A422CE8D4BE00933704 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		B809709D2CDB640B007BC3C4 /* MusicKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicKitService.swift; sourceTree = "<group>"; };
 		B8D553E72CDFE25C007CCD6D /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
@@ -394,13 +396,12 @@
 				F173691C2CDB991D00F6242C /* SwipeMusic */,
 				F1E405892CEB8FA400533701 /* Login */,
 				88F45A582CEAE6AC00F447AF /* PlaylistDetailListItemView.swift */,
+				88F6E4AC2CECAEC000739648 /* PlaylistDetailViewAudioPlayerControl.swift */,
 				88F45A592CEAE6AC00F447AF /* PlaylistDetailView.swift */,
 				88F6E4A32CEC5C5100739648 /* PlaylistDetailViewList.swift */,
-				88011EA22CEB1DFC000D33FE /* MolioPlaylist+samples.swift */,
 				88011EA02CEB1CF6000D33FE /* CurrentPlaylistRepository.swift */,
 				88011E9E2CEB1CDE000D33FE /* PlaylistDetailViewModel.swift */,
 				8808DF9B2CEC232900DB89B7 /* MockCurrentPlaylistRepository.swift */,
-				88011E9C2CEB1C9F000D33FE /* RandomMusic+samples.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -488,11 +489,13 @@
 			isa = PBXGroup;
 			children = (
 				2008FCBA2CE8A1B90060F3B8 /* PlaylistEntity.swift */,
+				88011EA22CEB1DFC000D33FE /* MolioPlaylist+samples.swift */,
 				881BBCBF2CDCF97900010A61 /* MusicFilter.swift */,
 				881622722CE3BAB900E81EA0 /* MusicDeck */,
 				881622732CE3BAC500E81EA0 /* MusicFilterProvider */,
 				881BBCC02CDCF97900010A61 /* RecommendationRequestEntity.swift */,
 				F173693C2CDF191800F6242C /* RandomMusic.swift */,
+				88011E9C2CEB1C9F000D33FE /* RandomMusic+samples.swift */,
 				F17369582CDFB73000F6242C /* RGBAColor.swift */,
 			);
 			path = Entity;
@@ -944,6 +947,7 @@
 				20150EC52CEA36B700FC8883 /* Playlist+CoreDataClass.swift in Sources */,
 				20150EC62CEA36B700FC8883 /* Playlist+CoreDataProperties.swift in Sources */,
 				B8D553EE2CDFE2C0007CCD6D /* HTTPResponseStatusCode.swift in Sources */,
+				88F6E4AD2CECAEC000739648 /* PlaylistDetailViewAudioPlayerControl.swift in Sources */,
 				B8D553EA2CDFE271007CCD6D /* EndPoint.swift in Sources */,
 				B809709E2CDB640B007BC3C4 /* MusicKitService.swift in Sources */,
 				88011E9D2CEB1C9F000D33FE /* RandomMusic+samples.swift in Sources */,
