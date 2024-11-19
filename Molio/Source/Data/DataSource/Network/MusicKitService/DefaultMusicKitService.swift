@@ -1,6 +1,6 @@
 import MusicKit
 
-final class DefaultMusicKitService: MusicKitService {
+struct DefaultMusicKitService: MusicKitService {
     /// ISRC 코드로 애플 뮤직 카탈로그 음악을 검색
     ///  - Parameters: 검색할 isrc 문자열
     ///  - Returns: 응답 데이터 (RandomMusic)

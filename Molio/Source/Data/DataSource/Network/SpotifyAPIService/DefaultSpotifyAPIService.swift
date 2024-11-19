@@ -1,4 +1,4 @@
-final class DefaultSpotifyAPIService: SpotifyAPIService {
+struct DefaultSpotifyAPIService: SpotifyAPIService {
     private let networkProvider: NetworkProvider
     private let tokenProvider: SpotifyTokenProvider
     
