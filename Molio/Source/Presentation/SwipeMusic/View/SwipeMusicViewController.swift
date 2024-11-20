@@ -301,7 +301,7 @@ final class SwipeMusicViewController: UIViewController {
     @objc private func didTapMyMolioButton() {
         // TODO: DI Container로 의존성 주입
         let viewModel = PlaylistDetailViewModel(
-            publishCurrentPlaylistUseCase: DefaultPublishCurrentPlaylistUseCase(
+            publishCurrentPlaylistUseCase: MockPublishCurrentPlaylistUseCase(
                 playlistRepository: DefaultPlaylistRepository(),
                 currentPlaylistRepository: DefaultCurrentPlaylistRepository()
             ),
