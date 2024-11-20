@@ -37,7 +37,6 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
         let _ = try await repository.saveNewPlaylist(playlistName)
         repository.addMusic(isrc: testISRC, to: playlistName)
         
-        
         guard let playlist = repository.fetchPlaylist(for: playlistName)else { return }
         
         let musics = playlist.musicISRCs
@@ -83,7 +82,6 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
         XCTAssertEqual(musics?[0], "MUSIC_2")
         XCTAssertEqual(musics?[1], "MUSIC_1")
     }
-    
     
     func testDeletePlaylist() async throws {
         let playlistName: String = "DeletePlaylist"

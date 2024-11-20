@@ -12,7 +12,9 @@ final class DefaultSpotifyTokenProvider: SpotifyTokenProvider {
         return remainingSecond < 300
     }
     
-    init(networkProvider: NetworkProvider) {
+    init(
+        networkProvider: NetworkProvider = DIContainer.shared.resolve()
+    ) {
         self.networkProvider = networkProvider
     }
     

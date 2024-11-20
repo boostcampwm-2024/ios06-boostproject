@@ -26,9 +26,9 @@ extension RandomMusicDeck: MusicDeck {
 
 final class RandomMusicDeck {
     
-    // MARK: 의존성 주입
+    // MARK: 의존성
     
-    private var fetchMusicsUseCase: any FetchRecommendedMusicUseCase
+    private var fetchRecommendedMusicUseCase: any FetchRecommendedMusicUseCase
     private var musicFilterProvider: any MusicFilterProvider
     
     // MARK: 생성자에서 초기화하는 프로퍼티
@@ -44,11 +44,11 @@ final class RandomMusicDeck {
     // MARK: 생성자
     
     init(
-        fetchMusicsUseCase: any FetchRecommendedMusicUseCase,
-        musicFilterProvider: any MusicFilterProvider
+        fetchRecommendedMusicUseCase: any FetchRecommendedMusicUseCase = DIContainer.shared.resolve(),
+        musicFilterProvider: any MusicFilterProvider = MockMusicFilterProvider()  // TODO: - 필터 전달받기
     ) {
         // 의존성 주입
-        self.fetchMusicsUseCase = fetchMusicsUseCase
+        self.fetchRecommendedMusicUseCase = fetchRecommendedMusicUseCase
         self.musicFilterProvider = musicFilterProvider
         
         // 속성 초기화
@@ -57,7 +57,7 @@ final class RandomMusicDeck {
         
         // 구독 설정
         setUpFetchMoreMusicCancellable()
-        setUpFetchMusicWhenMusicFilterChangedCancellable()
+//        setUpFetchMusicWhenMusicFilterChangedCancellable()
     }
     
     // MARK: 구독
@@ -92,9 +92,10 @@ final class RandomMusicDeck {
             }
     }
     
+    // TODO: - 장르 전달받기
     private func loadRandomMusic() {
         Task { [weak self] in
-            let fetchedMusics = try? await self?.fetchMusicsUseCase.execute(with: MusicFilter(genres: []))
+            let fetchedMusics = try? await self?.fetchRecommendedMusicUseCase.execute(with: MusicFilter(genres: [.pop]))
             
             guard let fetchedMusics else { return }
             

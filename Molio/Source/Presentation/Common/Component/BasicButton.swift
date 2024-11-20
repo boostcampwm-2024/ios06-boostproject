@@ -47,7 +47,7 @@ struct BasicButton: View {
 
 #Preview {
     VStack {
-        BasicButton(type: .cancel){
+        BasicButton(type: .cancel) {
             print("취소 버튼 눌림")
         }.padding()
         
