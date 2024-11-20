@@ -3,16 +3,15 @@ import Combine
 
 struct PlaylistDetailView: View {
     @State private var isPlaylistChangeSheetPresented: Bool = false
+    @State private var selectedIndex: Int?
     @ObservedObject private var viewModel: PlaylistDetailViewModel
 
-    init(
-        viewModel: PlaylistDetailViewModel
-    ) {
+    init(viewModel: PlaylistDetailViewModel) {
         self.viewModel = viewModel
     }
 
     var body: some View {
-        PlaylistDetailViewList(musics: [.apt, .apt, .apt])
+        PlaylistDetailListView(musics: $viewModel.currentPlaylistMusics, selectedIndex: $selectedIndex)
             .foregroundStyle(.white)
             .listStyle(.plain)
             .background(Color.background)
@@ -44,7 +43,7 @@ struct PlaylistDetailView: View {
                 HStack {
                     Spacer(minLength: 20)
 
-                    PlaylistDetailViewAudioPlayerControl()
+                    AudioPlayerControlView(musics: $viewModel.currentPlaylistMusics, selectedIndex: $selectedIndex)
                         .layoutPriority(1)
 
                     Spacer(minLength: 10)
@@ -65,6 +64,7 @@ struct PlaylistDetailView: View {
                 .padding(.bottom)
             }
             .sheet(isPresented: $isPlaylistChangeSheetPresented) {
+                Text("Playlist Change Sheet")
             }
     }
 }
