@@ -255,6 +255,7 @@ final class SwipeMusicViewController: UIViewController {
         dislikeButton.addTarget(self, action: #selector(didTapDislikeButton), for: .touchUpInside)
         playlistSelectButton.addTarget(self, action: #selector(didTapPlaylistSelectButton), for: .touchUpInside)
         filterButton.addTarget(self, action: #selector(didTapFilterButton), for: .touchUpInside)
+        myMolioButton.addTarget(self, action: #selector(didTapMyMolioButton), for: .touchUpInside)
     }
 
     /// 사용자에게 진동 feedback을 주는 메서드
@@ -290,13 +291,27 @@ final class SwipeMusicViewController: UIViewController {
     }
     
     @objc func didTapPlaylistSelectButton() {
-        // TODO: DI Container로 의존성 관리 필요
+        // TODO: DI Container로 의존성 주입
         let playlistView = CreatePlaylistView(viewModel: CreatePlaylistViewModel(createPlaylistUseCase: DefaultCreatePlaylistUseCase(repository: DefaultPlaylistRepository()), changeCurrentPlaylistUseCase: DefaultChangeCurrentPlaylistUseCase(repository: DefaultCurrentPlaylistRepository())))
         self.presentCustomSheet(
             content: playlistView
         )
     }
-
+    
+    @objc private func didTapMyMolioButton() {
+        // TODO: DI Container로 의존성 주입
+        let viewModel = PlaylistDetailViewModel(
+            publishCurrentPlaylistUseCase: DefaultPublishCurrentPlaylistUseCase(
+                playlistRepository: DefaultPlaylistRepository(),
+                currentPlaylistRepository: DefaultCurrentPlaylistRepository()
+            ),
+            musicKitService: DefaultMusicKitService()
+        )
+        let playlistDetailView = PlaylistDetailView(viewModel: viewModel)
+        let hostingController = UIHostingController(rootView: playlistDetailView)
+        self.navigationController?.pushViewController(hostingController, animated: true)
+    }
+    
     @objc private func didTapFilterButton() {
         // TODO: - 의존성 주입 & 선택된 장르 넘기기
         let networkProvider = DefaultNetworkProvider()
