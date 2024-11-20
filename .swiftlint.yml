@@ -2,6 +2,7 @@
 disabled_rules:
   - trailing_whitespace
   - multiple_closures_with_trailing_closure
+  - type_body_length
   
 # 선택적으로 적용할 룰
 opt_in_rules:
