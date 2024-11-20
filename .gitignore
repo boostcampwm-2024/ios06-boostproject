@@ -148,3 +148,6 @@ xcuserdata
 
 # Secret .xcconfig
 Secrets.xcconfig
+
+# Firebase Config File
+GoogleService-Info.plist
