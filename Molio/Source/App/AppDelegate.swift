@@ -16,11 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Repository
         container.register(RecommendedMusicRepository.self, dependency: DefaultRecommendedMusicRepository())
         container.register(ImageRepository.self, dependency: DefaultImageRepository())
+        container.register(CurrentPlaylistRepository.self, dependency: DefaultCurrentPlaylistRepository())
+        container.register(PlaylistRepository.self, dependency: DefaultPlaylistRepository())
         
         // UseCase
         container.register(FetchRecommendedMusicUseCase.self, dependency: DefaultFetchRecommendedMusicUseCase())
         container.register(FetchImageUseCase.self, dependency: DefaultFetchImageUseCase())
         container.register(FetchAvailableGenresUseCase.self, dependency: DefaultFetchAvailableGenresUseCase())
+        container.register(CreatePlaylistUseCase.self, dependency: DefaultCreatePlaylistUseCase())
+        container.register(PublishCurrentPlaylistUseCase.self, dependency: DefaultPublishCurrentPlaylistUseCase())
         
         return true
     }

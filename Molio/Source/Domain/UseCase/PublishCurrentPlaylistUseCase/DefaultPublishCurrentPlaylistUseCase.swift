@@ -6,8 +6,8 @@ final class DefaultPublishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase 
     private let currentPlaylistRepository: any CurrentPlaylistRepository
     
     init(
-        playlistRepository: any PlaylistRepository,
-        currentPlaylistRepository: any CurrentPlaylistRepository
+        playlistRepository: any PlaylistRepository = DIContainer.shared.resolve(),
+        currentPlaylistRepository: any CurrentPlaylistRepository = DIContainer.shared.resolve()
     ) {
         self.playlistRepository = playlistRepository
         self.currentPlaylistRepository = currentPlaylistRepository
