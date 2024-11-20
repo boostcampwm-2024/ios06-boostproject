@@ -62,8 +62,6 @@ final class DefaultCurrentPlaylistRepositoryTests: XCTestCase {
     }
     
     func testCurrentPlaylistSubject_아무것도_저장되어_있지_않으면_Nil을_가진다() {
-        let testUUID = UUID()
-        
         // repository 초기화
         repository = DefaultCurrentPlaylistRepository(userDefaults: testDefaults)
 

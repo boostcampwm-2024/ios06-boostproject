@@ -1,0 +1,65 @@
+# 저장소의 Action 탭에서 표시될 워크플로우 이름
+name: 👨‍🔬 CI - Test 🧪
+
+on:
+  # 워크플로우를 깃허브에서 직접 실행할 수 있게 해주는 옵션
+  workflow_dispatch:
+  # develop 브랜치에서 push나 pull request 이벤트 발생 시 해당 workflow가 트리거됨
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+
+# 하나 이상의 Job으로 구성 가능
+jobs:
+  # 빌드를 수행하는 Job의 이름
+  build:
+    # 깃허브 액션 UI에서 표시될 Job 이름
+    name: Test
+    # Job을 실행할 OS 환경
+    runs-on: macos-latest
+
+    # Job이 실행할 Step들
+    steps:
+      # uses를 사용하면 깃허브 액션에서 기본적으로 제공하는 Action을 사용할 수 있다.
+      # 레포지토리 코드를 체크아웃하는 동작. 이 작업을 통해 워크플로우가 현재 코드베이스에 접근할 수 있게 된다.
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 해당 가상 머신 환경에서의 가용 Xcode 버전을 출력
+      - name: List available Xcode versions
+        run: ls /Applications | grep Xcode
+
+      # 현재 Xcode 버전 출력
+      - name: Show current version of Xcode
+        run: xcodebuild -version
+
+      # 현재 작업 디렉토리 확인
+      - name: Show current working directory
+        run: pwd
+        
+      # 현재 작업 디렉토리 내 파일 확인
+      - name: List files in current directory
+        run: ls -al
+
+      # 시크릿 가져오기
+      - name: Bring Secret files
+        uses: actions/checkout@v4
+        with:
+          repository: kybeen/molioSecrets # 시크릿 파일이 있는 외부 저장소
+          path: Molio/Resource/Secret # 시크릿 파일을 가져올 위치
+          token: ${{ secrets.SECRET_REPO_ACCESS_TOKEN }} # private 저장소의 access token
+        
+      # 리소스 파일 확인
+      - name: Check Resource files
+        run: |
+          ls -al
+          cd Molio
+          ls -al
+          cd Resource
+          ls -al
+
+      # 테스트 스크립트 실행
+      - name: Run tests
+        run: |
+          ./run_tests.sh

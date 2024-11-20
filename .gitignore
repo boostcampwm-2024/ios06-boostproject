@@ -146,5 +146,5 @@ xcuserdata
 
 # End of https://www.toptal.com/developers/gitignore/api/swift,macos,swiftpackagemanager,cocoapods,xcode
 
-# Secret .xcconfig
-Secrets.xcconfig
+# Secret files
+Secret

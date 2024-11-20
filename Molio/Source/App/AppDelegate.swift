@@ -1,8 +1,8 @@
+import FirebaseCore
 import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let container = DIContainer.shared
@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(CreatePlaylistUseCase.self, dependency: DefaultCreatePlaylistUseCase())
         container.register(PublishCurrentPlaylistUseCase.self, dependency: DefaultPublishCurrentPlaylistUseCase())
         
+        FirebaseApp.configure()
         return true
     }
 

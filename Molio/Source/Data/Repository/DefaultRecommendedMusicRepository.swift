@@ -11,24 +11,13 @@ struct DefaultRecommendedMusicRepository: RecommendedMusicRepository {
     }
     
     func fetchMusics(with filter: MusicFilter) async throws -> [MolioMusic] {
-        let isrcs = try await spotifyAPIService.fetchRecommendedMusicISRCs(with: filter)
+        let isrcs = try await fetchRecommendedMusicISRCs(with: filter)
 
-        return try await withThrowingTaskGroup(of: MolioMusic?.self) { group in
-            var musics: [MolioMusic] = []
-            for isrc in isrcs {
-                group.addTask {
-                    return await musicKitService.getMusic(with: isrc)
-                }
-            }
-            
-            for try await music in group {
-                if let music {
-                    musics.append(music)
-                }
-            }
-            
-            return musics
-        }
+        return await musicKitService.getMusic(with: isrcs)
+    }
+    
+    func fetchRecommendedMusicISRCs(with filter: MusicFilter) async throws -> [String] {
+        return try await spotifyAPIService.fetchRecommendedMusicISRCs(with: filter)
     }
     
     func fetchMusicGenres() async throws -> [MusicGenre] {

@@ -1,6 +1,16 @@
+import AuthenticationServices
+import Combine
 import UIKit
 
 final class LoginViewController: UIViewController {
+    private let viewModel: LoginViewModel
+    private var input: LoginViewModel.Input
+    private var output: LoginViewModel.Output
+    
+    private let didCompleteAuthorizationPublisher = PassthroughSubject<ASAuthorization, Never>()
+    private let skipLoginButtonDidTapPublisher = PassthroughSubject<Void, Never>()
+    private var cancellables = Set<AnyCancellable>()
+    
     private let molioTitleLabel: UILabel = {
         let label = UILabel()
         label.molioBold(text: StringLiterals.title, size: 72)
@@ -66,21 +76,95 @@ final class LoginViewController: UIViewController {
         return label
     }()
     
+    init(viewModel: LoginViewModel) {
+        self.viewModel = viewModel
+        self.input = LoginViewModel.Input(
+            authorizationPublisherDidComplete: didCompleteAuthorizationPublisher.eraseToAnyPublisher(),
+            skipLoginButtonDidTap: skipLoginButtonDidTapPublisher.eraseToAnyPublisher()
+        )
+        self.output = viewModel.transform(from: input)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .background
         setupHierarchy()
         setupConstraint()
-        addTapGesture()
+        setupButtonTarget()
+        setupTapGesture()
+        setupBindings()
     }
     
-    private func addTapGesture() {
+    private func setupBindings() {
+        output.navigateToNextScreen
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+                self.switchToSwipeMusicController()
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func switchToSwipeMusicController() {
+        // TODO: DI Container로 변경
+        let defaultNetworkProvider = DefaultNetworkProvider()
+        let defaultSpotifyTokenProvider = DefaultSpotifyTokenProvider(networkProvider: defaultNetworkProvider)
+        let defaultSpotifyAPIService = DefaultSpotifyAPIService(
+            networkProvider: defaultNetworkProvider,
+            tokenProvider: defaultSpotifyTokenProvider
+        )
+        let defaultMusicKitService = DefaultMusicKitService()
+        let defaultMusicRepository = DefaultRecommendedMusicRepository(
+            spotifyAPIService: defaultSpotifyAPIService,
+            musicKitService: defaultMusicKitService
+        )
+        let defaultFetchMusicsUseCase = DefaultFetchRecommendedMusicUseCase(repository: defaultMusicRepository)
+        let defaultImageProvider = DefaultImageFetchService()
+        let defaultImageRepository = DefaultImageRepository(imageFetchService: defaultImageProvider)
+        let defaultFetchImageUseCase = DefaultFetchImageUseCase(repository: defaultImageRepository)
+        let swipeMusicViewModel = SwipeMusicViewModel(
+            fetchMusicsUseCase: defaultFetchMusicsUseCase,
+            fetchImageUseCase: defaultFetchImageUseCase,
+            musicFilterProvider: MockMusicFilterProvider()
+        )
+        let swipeMusicViewController = SwipeMusicViewController(viewModel: swipeMusicViewModel)
+        let navigationController = UINavigationController(rootViewController: swipeMusicViewController)
+        
+        guard let window = self.view.window else { return }
+        
+        UIView.transition(with: window, duration: 0.5) {
+            swipeMusicViewController.view.alpha = 0.0
+            window.rootViewController = navigationController
+            swipeMusicViewController.view.alpha = 1.0
+        }
+        
+        window.makeKeyAndVisible()
+    }
+    
+    private func setupButtonTarget() {
+        appleLoginButton.addTarget(self, action: #selector(didTapAppleLoginButton), for: .touchUpInside)
+    }
+    
+    private func setupTapGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapSkipLoginButtonLabel))
         skipLoginButtonLabel.addGestureRecognizer(tapGesture)
     }
     
+    @objc private func didTapAppleLoginButton() {
+        guard let request = viewModel.getAppleIDRequest() else { return }
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+    
     @objc private func didTapSkipLoginButtonLabel() {
-        // TODO: 로그인 없이 시작하는 로직 추가
+        skipLoginButtonDidTapPublisher.send()
     }
     
     private func setupHierarchy() {
@@ -126,6 +210,21 @@ final class LoginViewController: UIViewController {
             skipLoginButtonLabel.topAnchor.constraint(equalTo: appleLoginButton.bottomAnchor, constant: 17),
             skipLoginButtonLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+    }
+}
+
+extension LoginViewController: ASAuthorizationControllerDelegate {
+    func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithAuthorization authorization: ASAuthorization
+    ) {
+        didCompleteAuthorizationPublisher.send(authorization)
+    }
+}
+
+extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window ?? ASPresentationAnchor()
     }
 }
 

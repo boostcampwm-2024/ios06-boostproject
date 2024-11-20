@@ -1,19 +1,18 @@
 import SwiftUI
 
 struct CreatePlaylistView: View {
-    var onCancel: (() -> Void)?
-    var onConfirm: (() -> Void)?
-    
     @Environment(\.dismiss) var dismiss
     @FocusState private var isFocused: Bool
     @State private var text: String = ""
+    @ObservedObject var viewModel: CreatePlaylistViewModel
+
     var placeholder: String = "플레이리스트 이름을 입력해주세요"
-    
+
     var body: some View {
         ZStack {
             Color(.clear)
             VStack(spacing: 20) {
-                Spacer() 
+                Spacer()
                     .frame(height: 40)
                 
                 Text("플레이리스트 만들기")
@@ -49,11 +48,13 @@ struct CreatePlaylistView: View {
                 HStack {
                     BasicButton(type: .cancel) {
                         dismiss()
-                        onCancel?()
                     }
-                    BasicButton(type: .confirm) {
-                        dismiss()
-                        onConfirm?()
+                    BasicButton(type: .confirm, isEnabled: !text.isEmpty) {
+                        Task {
+                            await viewModel.createPlaylist(named: text)
+                            viewModel.changeCurrentPlaylist()
+                            dismiss()
+                        }
                     }
                 }
                 .padding(.horizontal, 22)
@@ -65,6 +66,9 @@ struct CreatePlaylistView: View {
 }
 
 #Preview {
-    CreatePlaylistView()
+    CreatePlaylistView(viewModel: CreatePlaylistViewModel(createPlaylistUseCase: DefaultCreatePlaylistUseCase(repository: DefaultPlaylistRepository()), changeCurrentPlaylistUseCase: DefaultChangeCurrentPlaylistUseCase(repository: DefaultCurrentPlaylistRepository())))
         .background(Color.background)
 }
+
+
+

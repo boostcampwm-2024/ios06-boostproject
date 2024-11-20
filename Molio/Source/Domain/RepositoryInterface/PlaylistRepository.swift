@@ -8,8 +8,8 @@ protocol PlaylistRepository {
     func deleteMusic(isrc: String, in playlistName: String)
     func moveMusic(isrc: String, in playlistName: String, fromIndex: Int, toIndex: Int)
 
-    func fetchPlaylists() -> [MolioPlaylist]?
-    func saveNewPlaylist(_ playlistName: String)
+    func saveNewPlaylist(_ playlistName: String) async throws -> UUID
     func deletePlaylist(_ playlistName: String)
-    func fetchPlaylist(for name: String) -> MolioPlaylist?
+    func fetchPlaylists() -> [MolioPlaylist]?
+    func fetchPlaylist(for name: String)  async throws -> MolioPlaylist?
 }

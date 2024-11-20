@@ -19,6 +19,26 @@ struct DefaultMusicKitService: MusicKitService {
         }
     }
     
+    func getMusic(with isrcs: [String]) async -> [MolioMusic] {
+        return await withTaskGroup(of: MolioMusic?.self) { group in
+            var musics: [MolioMusic] = []
+            for isrc in isrcs {
+                group.addTask { [weak self] in
+                    return await self?.getMusic(with: isrc)
+                }
+            }
+            
+            for await music in group {
+                if let music {
+                    musics.append(music)
+                }
+            }
+            
+            return musics
+        }
+
+    }
+    
     /// 애플 뮤직 접근 권한 상태를 확인
     private func checkAuthorizationStatus() -> Bool {
         switch MusicAuthorization.currentStatus {

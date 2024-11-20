@@ -6,13 +6,9 @@ enum ButtonType: String {
 }
 
 struct BasicButton: View {
-    private var type: ButtonType
-    private var action: () -> Void
-    
-    init(type: ButtonType, action: @escaping () -> Void) {
-        self.type = type
-        self.action = action
-    }
+    var type: ButtonType
+    var isEnabled: Bool = true
+    var action: () -> Void
     
     var body: some View {
         Button(action: action) {
@@ -20,10 +16,12 @@ struct BasicButton: View {
                 .font(.headline)
                 .foregroundColor(textColor)
                 .padding()
-                .frame(maxWidth: .infinity) // 버튼이 화면 전체 넓이에 맞게
+                .frame(maxWidth: .infinity)
                 .background(backgroundColor)
                 .cornerRadius(10)
         }
+        .disabled(!isEnabled)
+        .opacity(isEnabled ? 1.0 : 0.5)
     }
     
     // 버튼의 배경색을 타입에 따라 변경
@@ -34,6 +32,7 @@ struct BasicButton: View {
         case .confirm:
             return Color.mainLighter
         }
+        
     }
     
     private var textColor: Color {
