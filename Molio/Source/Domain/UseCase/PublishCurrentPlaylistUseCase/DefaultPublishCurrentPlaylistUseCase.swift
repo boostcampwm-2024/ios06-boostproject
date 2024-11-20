@@ -38,7 +38,7 @@ final class MockPublishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase {
     }
     
     func execute() -> AnyPublisher<MolioPlaylist?, Never>  {
-                let molioPlaylist = MolioPlaylist(id: UUID(), name: "", createdAt: Date(), musicISRCs: [], filters: [])
-                return Just(molioPlaylist).eraseToAnyPublisher()
+        let molioPlaylist = MolioPlaylist(id: UUID(), name: "", createdAt: Date(), musicISRCs: [], filters: [])
+        return Just(molioPlaylist).eraseToAnyPublisher()
     }
 }

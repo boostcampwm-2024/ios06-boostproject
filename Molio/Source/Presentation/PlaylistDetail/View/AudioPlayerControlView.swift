@@ -1,5 +1,5 @@
-import SwiftUI
 import AVKit
+import SwiftUI
 
 struct AudioPlayerControlView: View {
     @Binding private var musics: [MolioMusic]
