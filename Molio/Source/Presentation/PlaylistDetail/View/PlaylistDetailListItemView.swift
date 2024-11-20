@@ -10,11 +10,26 @@ struct PlaylistDetailListItemView: View {
     var body: some View {
         HStack(spacing: 15) {
             AsyncImage(url: music.artworkImageURL) { phase in
-                phase.image?
-                    .resizable()
-                    .scaledToFit()
-                    .clipShape(.rect(cornerRadius: 5))
+                switch phase {
+                case .empty:
+                    ProgressView()
+                        .frame(width: 50, height: 50)
 
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(RoundedRectangle(cornerRadius: 5))
+
+                case .failure:
+                    Rectangle()
+                        .fill(Color.white.opacity(0.5))
+                        .frame(width: 56, height: 56)
+                        .cornerRadius(3)
+
+                @unknown default:
+                    EmptyView()
+                }
             }
 
             VStack(alignment: .leading) {
@@ -38,6 +53,11 @@ struct PlaylistDetailListItemView: View {
 
 #Preview {
     PlaylistDetailListItemView(music: MolioMusic.apt)
+        .background(Color.black)
+        .foregroundStyle(.white)
+}
+#Preview {
+    PlaylistDetailListItemView(music: MolioMusic.song2)
         .background(Color.black)
         .foregroundStyle(.white)
 }
