@@ -9,10 +9,10 @@ on:
     branches:
       - main
       - develop
-  # pull_request_target:
-  #   branches:
-  #     - main
-  #     - develop
+  pull_request_target:
+    branches:
+      - main
+      - develop
 
 # 하나 이상의 Job으로 구성 가능
 jobs:
