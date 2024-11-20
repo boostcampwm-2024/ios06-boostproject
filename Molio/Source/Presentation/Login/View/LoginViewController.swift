@@ -80,7 +80,7 @@ final class LoginViewController: UIViewController {
     }
     
     @objc private func didTapSkipLoginButtonLabel() {
-        //TODO: 로그인 없이 시작하는 로직 추가
+        // TODO: 로그인 없이 시작하는 로직 추가
     }
     
     private func setupHierarchy() {

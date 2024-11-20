@@ -64,7 +64,6 @@ final class SwipeMusicViewController: UIViewController {
         )
     }
     
-   
     private let currentCardView = MusicCardView()
     
     private let nextCardView: MusicCardView = {
@@ -385,6 +384,3 @@ struct SwipeViewController_Previews: PreviewProvider {
             .edgesIgnoringSafeArea(.all)
     }
 }
-
-
-

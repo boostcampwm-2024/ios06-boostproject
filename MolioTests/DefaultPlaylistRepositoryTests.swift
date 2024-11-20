@@ -37,7 +37,6 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
         repository.saveNewPlaylist(playlistName)
         repository.addMusic(isrc: testISRC, to: playlistName)
         
-        
         guard let playlist = repository.fetchPlaylist(for: playlistName)else { return }
         
         let musics = playlist.musicISRCs
@@ -84,7 +83,6 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
         XCTAssertEqual(musics?[1], "MUSIC_1")
     }
     
-    
     func testDeletePlaylist() {
         let playlistName: String = "DeletePlaylist"
         repository.saveNewPlaylist(playlistName)
@@ -117,4 +115,3 @@ final class TestPersistenceManager {
         return persistentContainer.viewContext
     }()
 }
-
