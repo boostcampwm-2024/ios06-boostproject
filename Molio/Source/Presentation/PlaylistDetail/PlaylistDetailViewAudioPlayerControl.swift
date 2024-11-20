@@ -13,7 +13,7 @@ struct PlaylistDetailViewAudioPlayerControl: View {
             Button {
 
             } label: {
-                Image(systemName: "backward.fill")
+                Image.molioRegular(systemName: "backward.fill", size: 24, color: .main)
             }
 
             Spacer()
@@ -21,7 +21,7 @@ struct PlaylistDetailViewAudioPlayerControl: View {
             Button {
 
             } label: {
-                Image(systemName: "play.fill")
+                Image.molioRegular(systemName: "play.fill", size: 24, color: .main)
             }
 
             Spacer()
@@ -29,7 +29,7 @@ struct PlaylistDetailViewAudioPlayerControl: View {
             Button {
 
             } label: {
-                Image(systemName: "forward.fill")
+                Image.molioRegular(systemName: "forward.fill", size: 24, color: .main)
             }
 
             Spacer()

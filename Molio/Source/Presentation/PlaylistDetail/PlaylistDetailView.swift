@@ -47,16 +47,16 @@ struct PlaylistDetailView: View {
                     PlaylistDetailViewAudioPlayerControl()
                         .layoutPriority(1)
 
-                    Spacer(minLength: 20)
+                    Spacer(minLength: 10)
 
                     Button {
-                        
                     } label: {
-                        Image(systemName: "square.and.arrow.up")
-                            .frame(width: 66, height: 66)
-                            .background(Color.gray, in: .circle)
+                        Image.molioExtraBold(systemName: "square.and.arrow.up", size: 20, color: .main)
                     }
-
+                    .frame(width: 66, height: 66) 
+                    .background(Color.gray)
+                    .clipShape(Circle())
+                    .shadow(radius: 5)
                     Spacer(minLength: 20)
                 }
                 .font(.title)
@@ -67,4 +67,8 @@ struct PlaylistDetailView: View {
             .sheet(isPresented: $isPlaylistChangeSheetPresented) {
             }
     }
+}
+
+#Preview {
+    PlaylistDetailView(viewModel: PlaylistDetailViewModel(publishCurrentPlaylistUseCase: DefaultPublishCurrentPlaylistUseCase(playlistRepository: DefaultPlaylistRepository(), currentPlaylistRepository: DefaultCurrentPlaylistRepository()), musicKitService: DefaultMusicKitService()))
 }
