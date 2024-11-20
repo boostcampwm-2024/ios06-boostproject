@@ -57,7 +57,7 @@ final class RandomMusicDeck {
         
         // 구독 설정
         setUpFetchMoreMusicCancellable()
-        setUpFetchMusicWhenMusicFilterChangedCancellable()
+//        setUpFetchMusicWhenMusicFilterChangedCancellable()
     }
     
     // MARK: 구독
@@ -92,9 +92,10 @@ final class RandomMusicDeck {
             }
     }
     
+    // TODO: - 장르 전달받기
     private func loadRandomMusic() {
         Task { [weak self] in
-            let fetchedMusics = try? await self?.fetchRecommendedMusicUseCase.execute(with: MusicFilter(genres: []))
+            let fetchedMusics = try? await self?.fetchRecommendedMusicUseCase.execute(with: MusicFilter(genres: [.pop]))
             
             guard let fetchedMusics else { return }
             
