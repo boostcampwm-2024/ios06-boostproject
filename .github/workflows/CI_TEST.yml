@@ -7,7 +7,7 @@ on:
   # develop 브랜치에서 push나 pull request 이벤트 발생 시 해당 workflow가 트리거됨
   push:
     branches: [ "develop" ]
-  pull_request_target:
+  pull_request:
     branches: [ "develop" ]
 
 # 하나 이상의 Job으로 구성 가능
