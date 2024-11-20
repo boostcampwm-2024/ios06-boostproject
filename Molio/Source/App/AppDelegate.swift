@@ -24,7 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(FetchImageUseCase.self, dependency: DefaultFetchImageUseCase())
         container.register(FetchAvailableGenresUseCase.self, dependency: DefaultFetchAvailableGenresUseCase())
         container.register(CreatePlaylistUseCase.self, dependency: DefaultCreatePlaylistUseCase())
-        container.register(PublishCurrentPlaylistUseCase.self, dependency: DefaultPublishCurrentPlaylistUseCase())
+        container.register(ChangeCurrentPlaylistUseCase.self, dependency: DefaultChangeCurrentPlaylistUseCase())
+//        container.register(PublishCurrentPlaylistUseCase.self, dependency: DefaultPublishCurrentPlaylistUseCase())
         
         FirebaseApp.configure()
         return true

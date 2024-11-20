@@ -66,9 +66,6 @@ struct CreatePlaylistView: View {
 }
 
 #Preview {
-    CreatePlaylistView(viewModel: CreatePlaylistViewModel(createPlaylistUseCase: DefaultCreatePlaylistUseCase(repository: DefaultPlaylistRepository()), changeCurrentPlaylistUseCase: DefaultChangeCurrentPlaylistUseCase(repository: DefaultCurrentPlaylistRepository())))
+    CreatePlaylistView(viewModel: CreatePlaylistViewModel())
         .background(Color.background)
 }
-
-
-

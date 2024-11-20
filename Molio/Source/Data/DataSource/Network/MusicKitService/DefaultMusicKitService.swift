@@ -23,8 +23,8 @@ struct DefaultMusicKitService: MusicKitService {
         return await withTaskGroup(of: MolioMusic?.self) { group in
             var musics: [MolioMusic] = []
             for isrc in isrcs {
-                group.addTask { [weak self] in
-                    return await self?.getMusic(with: isrc)
+                group.addTask {
+                    return await getMusic(with: isrc)
                 }
             }
             

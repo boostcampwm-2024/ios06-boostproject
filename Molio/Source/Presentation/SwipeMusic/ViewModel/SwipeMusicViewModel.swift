@@ -47,7 +47,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
     init(
         fetchRecommendedMusicUseCase: FetchRecommendedMusicUseCase = DIContainer.shared.resolve(),
         fetchImageUseCase: FetchImageUseCase = DIContainer.shared.resolve(),
-        musicFilterProvider: any MusicFilterProvider = MockMusicFilterProvider() // TODO: - 삭제
+        musicFilterProvider: any MusicFilterProvider = MockMusicFilterProvider() // TODO: - 필터 전달받기
     ) {
         self.musicDeck = RandomMusicDeck(
             fetchRecommendedMusicUseCase: fetchRecommendedMusicUseCase,

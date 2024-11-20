@@ -44,8 +44,8 @@ final class RandomMusicDeck {
     // MARK: 생성자
     
     init(
-        fetchRecommendedMusicUseCase: any FetchRecommendedMusicUseCase,
-        musicFilterProvider: any MusicFilterProvider
+        fetchRecommendedMusicUseCase: any FetchRecommendedMusicUseCase = DIContainer.shared.resolve(),
+        musicFilterProvider: any MusicFilterProvider = MockMusicFilterProvider()  // TODO: - 필터 전달받기
     ) {
         // 의존성 주입
         self.fetchRecommendedMusicUseCase = fetchRecommendedMusicUseCase
