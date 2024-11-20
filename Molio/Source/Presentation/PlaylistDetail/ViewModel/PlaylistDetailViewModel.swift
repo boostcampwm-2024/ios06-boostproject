@@ -18,11 +18,11 @@ final class PlaylistDetailViewModel: ObservableObject {
             .sink { [weak self] playlist in
                 guard let playlist else { return }
                 
-                self?.currentPlaylist = playlist
+                self?.currentPlaylistMusics = MolioMusic.all
                 
-                Task {
-                    self?.currentPlaylistMusics = await musicKitService.getMusic(with: playlist.musicISRCs)
-                }
+//                Task {
+//                    self?.currentPlaylistMusics = await musicKitService.getMusic(with: playlist.musicISRCs)
+//                }
             }
             .store(in: &subscriptions)
     }
