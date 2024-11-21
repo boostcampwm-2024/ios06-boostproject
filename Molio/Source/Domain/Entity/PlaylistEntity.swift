@@ -5,5 +5,5 @@ struct MolioPlaylist {
     let name: String
     let createdAt: Date
     let musicISRCs: [String]
-    let filters: [String]
+    let filter: MusicFilter
 }

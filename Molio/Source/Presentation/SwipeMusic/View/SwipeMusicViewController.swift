@@ -294,9 +294,7 @@ final class SwipeMusicViewController: UIViewController {
     }
     
     @objc private func didTapFilterButton() {
-        // TODO: - 선택된 장르 넘기기
-        let musicViewModel = MusicFilterViewModel(selectedGenres: [])
-        
+        let musicViewModel = MusicFilterViewModel()
         let musicFilterVC = MusicFilterViewController(rootView: MusicFilterView(viewModel: musicViewModel))
         navigationController?.pushViewController(musicFilterVC, animated: true)
     }
