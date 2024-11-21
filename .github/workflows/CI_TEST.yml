@@ -46,16 +46,6 @@ jobs:
       - name: Check Swift version
         run: xcrun swift --version
 
-      # Swift 버전 설치
-      - name: Set up Swift 5.0
-        uses: actions/setup-swift@v2
-        with:
-          swift-version: '5.8'  # 원하는 Swift 버전 입력
-      
-      # Swift 버전 확인
-      - name: Check Swift version
-        run: xcrun swift --version
-
       # 현재 작업 디렉토리 확인
       - name: Show current working directory
         run: pwd
