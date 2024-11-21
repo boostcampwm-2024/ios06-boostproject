@@ -24,3 +24,21 @@ import Foundation
 //            .eraseToAnyPublisher()
 //    }
 //}
+
+final class MockPublishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase {
+    private let playlistRepository: any PlaylistRepository
+    private let currentPlaylistRepository: any CurrentPlaylistRepository
+    
+    init(
+        playlistRepository: any PlaylistRepository,
+        currentPlaylistRepository: any CurrentPlaylistRepository
+    ) {
+        self.playlistRepository = playlistRepository
+        self.currentPlaylistRepository = currentPlaylistRepository
+    }
+    
+    func execute() -> AnyPublisher<MolioPlaylist?, Never>  {
+        let molioPlaylist = MolioPlaylist(id: UUID(), name: "", createdAt: Date(), musicISRCs: [], filters: [])
+        return Just(molioPlaylist).eraseToAnyPublisher()
+    }
+}
