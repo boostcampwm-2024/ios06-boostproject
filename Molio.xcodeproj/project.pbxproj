@@ -132,6 +132,7 @@
 		F173697B2CE4AAC600F6242C /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F173697A2CE4AAC600F6242C /* AudioPlayer.swift */; };
 		F1770B2A2CEE455800C81272 /* ExportPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1770B292CEE455800C81272 /* ExportPlaylistView.swift */; };
 		F1770B2C2CEEFF2200C81272 /* ExportPlaylistItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1770B2B2CEEFF2200C81272 /* ExportPlaylistItemView.swift */; };
+		F1770B2E2CEF0F4B00C81272 /* ExportMusicListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1770B2D2CEF0F4B00C81272 /* ExportMusicListPage.swift */; };
 		F1E4058C2CEB8FC500533701 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E4058B2CEB8FC500533701 /* LoginViewController.swift */; };
 		F1E4058F2CEC626700533701 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1E4058E2CEC626700533701 /* GoogleService-Info.plist */; };
 		F1E405962CEC678800533701 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F1E405952CEC678800533701 /* FirebaseAnalytics */; };
@@ -286,6 +287,7 @@
 		F173697A2CE4AAC600F6242C /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		F1770B292CEE455800C81272 /* ExportPlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPlaylistView.swift; sourceTree = "<group>"; };
 		F1770B2B2CEEFF2200C81272 /* ExportPlaylistItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPlaylistItemView.swift; sourceTree = "<group>"; };
+		F1770B2D2CEF0F4B00C81272 /* ExportMusicListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportMusicListPage.swift; sourceTree = "<group>"; };
 		F1E4058B2CEB8FC500533701 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F1E4058D2CEC232900533701 /* Molio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Molio.entitlements; sourceTree = "<group>"; };
 		F1E4058E2CEC626700533701 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1010,6 +1012,7 @@
 			children = (
 				F1770B292CEE455800C81272 /* ExportPlaylistView.swift */,
 				F1770B2B2CEEFF2200C81272 /* ExportPlaylistItemView.swift */,
+				F1770B2D2CEF0F4B00C81272 /* ExportMusicListPage.swift */,
 			);
 			path = ExportPlaylist;
 			sourceTree = "<group>";
@@ -1235,6 +1238,7 @@
 				B8046A3C2CE755DB00933704 /* Image+Extension.swift in Sources */,
 				B8046A582CEBC08300933704 /* MockDefaultFetchAvailableGenresUseCase.swift in Sources */,
 				B8D554C02CE322CF007CCD6D /* SpotifyTokenProviderError.swift in Sources */,
+				F1770B2E2CEF0F4B00C81272 /* ExportMusicListPage.swift in Sources */,
 				F17369662CE36E2900F6242C /* ImageRepository.swift in Sources */,
 				201048542CEA280E0015E800 /* presentCustomSheet.swift in Sources */,
 				88E4834E2CEDDD66003D624E /* MolioMusic+sample.swift in Sources */,
