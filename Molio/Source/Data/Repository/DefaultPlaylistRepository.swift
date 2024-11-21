@@ -61,12 +61,13 @@ final class DefaultPlaylistRepository: PlaylistRepository {
         do {
             let playlists = try context.fetch(fetchRequest)
             let molioPlaylists = playlists.map { playlist in
-                MolioPlaylist(
+                let filter = MusicFilter(genres: playlist.filters.compactMap { MusicGenre(rawValue: $0) })
+                return MolioPlaylist(
                     id: playlist.id,
                     name: playlist.name,
                     createdAt: playlist.createdAt,
                     musicISRCs: playlist.musicISRCs,
-                    filters: playlist.filters
+                    filter: filter
                 )
             }
             return molioPlaylists
@@ -107,12 +108,14 @@ final class DefaultPlaylistRepository: PlaylistRepository {
         
         do {
             guard let playlist = try context.fetch(fetchRequest).first else { return nil }
+            let filter = MusicFilter(genres: playlist.filters.compactMap { MusicGenre(rawValue: $0) })
             return MolioPlaylist(
                 id: playlist.id,
                 name: playlist.name,
                 createdAt: playlist.createdAt,
                 musicISRCs: playlist.musicISRCs,
-                filters: playlist.filters)
+                filter: filter
+            )
             
         } catch {
             print("Failed to fetch playlist: \(error)")
