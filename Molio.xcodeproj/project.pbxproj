@@ -20,7 +20,7 @@
 		2003BA162CDB8D69002CAB3E /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2003BA152CDB8D69002CAB3E /* Font+Extension.swift */; };
 		2003BA1C2CDB8EE5002CAB3E /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2003BA1B2CDB8EE5002CAB3E /* UILabel+Extension.swift */; };
 		2003BA222CDCB31B002CAB3E /* SwipeMusicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2003BA212CDCB31B002CAB3E /* SwipeMusicViewModel.swift */; };
-		2008FCBB2CE8A1B90060F3B8 /* PlaylistEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2008FCBA2CE8A1B90060F3B8 /* PlaylistEntity.swift */; };
+		2008FCBB2CE8A1B90060F3B8 /* MolioPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2008FCBA2CE8A1B90060F3B8 /* MolioPlaylist.swift */; };
 		2009183C2CEC9C0E0058D8C7 /* CurrentPlaylistRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2009183B2CEC9C0E0058D8C7 /* CurrentPlaylistRepository.swift */; };
 		2009183E2CEC9C5B0058D8C7 /* DefaultCurrentPlaylistRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2009183D2CEC9C5B0058D8C7 /* DefaultCurrentPlaylistRepository.swift */; };
 		200918422CECA79A0058D8C7 /* UserDefaultsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200918412CECA79A0058D8C7 /* UserDefaultsError.swift */; };
@@ -175,7 +175,7 @@
 		2003BA172CDB8DE0002CAB3E /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
 		2003BA1B2CDB8EE5002CAB3E /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		2003BA212CDCB31B002CAB3E /* SwipeMusicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeMusicViewModel.swift; sourceTree = "<group>"; };
-		2008FCBA2CE8A1B90060F3B8 /* PlaylistEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistEntity.swift; sourceTree = "<group>"; };
+		2008FCBA2CE8A1B90060F3B8 /* MolioPlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MolioPlaylist.swift; sourceTree = "<group>"; };
 		2009183B2CEC9C0E0058D8C7 /* CurrentPlaylistRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentPlaylistRepository.swift; sourceTree = "<group>"; };
 		2009183D2CEC9C5B0058D8C7 /* DefaultCurrentPlaylistRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCurrentPlaylistRepository.swift; sourceTree = "<group>"; };
 		200918412CECA79A0058D8C7 /* UserDefaultsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsError.swift; sourceTree = "<group>"; };
@@ -728,7 +728,7 @@
 			isa = PBXGroup;
 			children = (
 				F1E4059C2CEC935B00533701 /* Auth */,
-				2008FCBA2CE8A1B90060F3B8 /* PlaylistEntity.swift */,
+				2008FCBA2CE8A1B90060F3B8 /* MolioPlaylist.swift */,
 				881BBCBF2CDCF97900010A61 /* MusicFilter.swift */,
 				881622722CE3BAB900E81EA0 /* MusicDeck */,
 				881622732CE3BAC500E81EA0 /* MusicFilterProvider */,
@@ -1331,7 +1331,7 @@
 				2009183C2CEC9C0E0058D8C7 /* CurrentPlaylistRepository.swift in Sources */,
 				F17368FB2CD86B1100F6242C /* SceneDelegate.swift in Sources */,
 				2075FEC42CECDE29009834BE /* ChangeCurrentPlaylistIUseCase.swift in Sources */,
-				2008FCBB2CE8A1B90060F3B8 /* PlaylistEntity.swift in Sources */,
+				2008FCBB2CE8A1B90060F3B8 /* MolioPlaylist.swift in Sources */,
 				F17369232CDC5E5F00F6242C /* MusicTagView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
