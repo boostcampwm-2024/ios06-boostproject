@@ -47,6 +47,9 @@ struct AudioPlayerControlView: View {
             guard let index = index, musics.indices.contains(index) else { return }
             play(musics[index])
         }
+        .onDisappear {
+            NotificationCenter.default.removeObserver(self)
+        }
     }
     
     private func setupPlayer() {
@@ -55,7 +58,7 @@ struct AudioPlayerControlView: View {
             object: nil,
             queue: .main
         ) { [self] _ in
-            handlePlaybackCompletion()
+            self.handlePlaybackCompletion()
         }
     }
     
@@ -88,12 +91,24 @@ struct AudioPlayerControlView: View {
     }
     
     private func playNext() {
-        guard let index = selectedIndex, index + 1 < musics.count else { return }
-        selectedIndex = index + 1
+        if let index = selectedIndex {
+            /// 마지막 노래에서 다음노래 버튼 누르면 처음으로 돌아간다
+            if (index + 1) == musics.count {
+                selectedIndex = 0
+            } else {
+                selectedIndex = index + 1
+            }
+        }
     }
     
     private func playPrevious() {
-        guard let index = selectedIndex, index > 0 else { return }
-        selectedIndex = index - 1
+        if let index = selectedIndex {
+            /// 처음에서 이전노래 버튼 누르면 맨 마지막 노래로 돌아간다.
+            if (index - 1) < 0 {
+                selectedIndex = musics.count - 1
+            } else {
+                selectedIndex = index - 1
+            }
+        }
     }
 }

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct PlaylistDetailListView: View {
     @Binding private var musics: [MolioMusic]
-    @Binding private var selectedIndex: Int? // 선택된 인덱스
+    @Binding private var selectedIndex: Int?
 
     init(musics: Binding<[MolioMusic]>, selectedIndex: Binding<Int?>) {
         self._musics = musics
@@ -25,6 +25,7 @@ struct PlaylistDetailListView: View {
         .scrollContentBackground(.hidden)
     }
 }
+
 #Preview {
     ZStack {
         Color.black
