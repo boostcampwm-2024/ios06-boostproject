@@ -10,7 +10,7 @@ struct CreatePlaylistView: View {
 
     var body: some View {
         ZStack {
-            Color(.clear)
+            Color.background
             VStack(spacing: 20) {
                 Spacer()
                     .frame(height: 40)
@@ -62,10 +62,41 @@ struct CreatePlaylistView: View {
                 Spacer()
             }
         }.ignoresSafeArea()
+        
     }
+
 }
 
 #Preview {
     CreatePlaylistView(viewModel: CreatePlaylistViewModel())
         .background(Color.background)
+}
+
+struct GlassmorphismBackground: View {
+    var gradientColors: [Color] = [
+        Color.white.opacity(0.23),
+        Color.white.opacity(0.30),
+        Color.white.opacity(0.25)
+    ]
+    var gradientStartPoint: UnitPoint = .topLeading
+    var gradientEndPoint: UnitPoint = .bottomTrailing
+    var blurRadius: CGFloat = 10.0
+
+    var body: some View {
+        ZStack {
+            // 그라데이션 레이어
+            LinearGradient(
+                gradient: Gradient(colors: gradientColors),
+                startPoint: gradientStartPoint,
+                endPoint: gradientEndPoint
+            )
+            .ignoresSafeArea()
+            
+            // 블러 효과
+            Color.black
+                .opacity(0.2) // 반투명 색상
+                .blur(radius: blurRadius)
+                .ignoresSafeArea()
+        }
+    }
 }

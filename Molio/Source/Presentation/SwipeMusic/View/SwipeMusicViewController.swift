@@ -272,9 +272,7 @@ final class SwipeMusicViewController: UIViewController {
     }
     
     @objc func didTapPlaylistSelectButton() {
-        // TODO: DI Container로 의존성 주입
-        let playlistView = CreatePlaylistView(viewModel: CreatePlaylistViewModel(createPlaylistUseCase: DefaultCreatePlaylistUseCase(repository: DefaultPlaylistRepository()), changeCurrentPlaylistUseCase: DefaultChangeCurrentPlaylistUseCase(repository: DefaultCurrentPlaylistRepository())))
-        
+        // TODO: DI Container로 의존성 주입        
         let selectplaylistView = SelectPlaylistView(viewModel: SelectPlaylistViewModel())
         self.presentCustomSheet(
             content: selectplaylistView
@@ -292,6 +290,7 @@ final class SwipeMusicViewController: UIViewController {
         )
         let playlistDetailView = PlaylistDetailView(viewModel: viewModel)
         let hostingController = UIHostingController(rootView: playlistDetailView)
+        hostingController.view.backgroundColor = .clear
         self.navigationController?.pushViewController(hostingController, animated: true)
     }
     

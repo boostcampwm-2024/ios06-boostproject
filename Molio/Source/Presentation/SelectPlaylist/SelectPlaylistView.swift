@@ -3,7 +3,8 @@ import SwiftUI
 struct SelectPlaylistView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel: SelectPlaylistViewModel
-    
+    @State private var isModalPresented = false 
+
     var placeholder: String = "00님의 몰리오"
     
     var body: some View {
@@ -53,12 +54,18 @@ struct SelectPlaylistView: View {
                     Spacer()
                     
                     Button(action: {
+                        isModalPresented.toggle()
                     }) {
                         Image.molioBlack(systemName: "plus", size: 20, color: .white)
                             .frame(width: 40, height: 40)
                             .background(Color.white.opacity(0.3))
                             .clipShape(Circle())
                             .shadow(radius: 5)
+                    }
+                    .sheet(isPresented: $isModalPresented) {
+                        CreatePlaylistView(viewModel: CreatePlaylistViewModel(createPlaylistUseCase: DefaultCreatePlaylistUseCase(repository: DefaultPlaylistRepository()), changeCurrentPlaylistUseCase: DefaultChangeCurrentPlaylistUseCase(repository: DefaultCurrentPlaylistRepository())))
+                            .presentationDetents([.fraction(0.5)]) 
+                            .presentationDragIndicator(.visible)
                     }
                     
                     Spacer()
