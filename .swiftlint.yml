@@ -2,6 +2,8 @@
 disabled_rules:
   - trailing_whitespace
   - multiple_closures_with_trailing_closure
+  - type_body_length
+  - line_length
   
 # 선택적으로 적용할 룰
 opt_in_rules:
@@ -19,9 +21,9 @@ force_try:
   severity: warning # 명시적으로 지정
   
 # 경고 및 에러 둘 다 존재하는 룰의 경우 값을 하나만 지정하면 암시적으로 경고 수준에 설정됨
-line_length:
-  warning: 120
-  ignores_comments: true
+# line_length:
+#  warning: 120
+#  ignores_comments: true
   
 # 함수 길이 100줄로 제한
 function_body_length:
