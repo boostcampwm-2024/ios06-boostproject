@@ -70,5 +70,5 @@ struct PlaylistDetailView: View {
 }
 
 #Preview {
-    PlaylistDetailView(viewModel: PlaylistDetailViewModel(publishCurrentPlaylistUseCase: MockPublishCurrentPlaylistUseCase(playlistRepository: DefaultPlaylistRepository(), currentPlaylistRepository: DefaultCurrentPlaylistRepository()), musicKitService: DefaultMusicKitService()))
+    PlaylistDetailView(viewModel: PlaylistDetailViewModel(publishCurrentPlaylistUseCase: DefaultPublishCurrentPlaylistUseCase(playlistRepository: DefaultPlaylistRepository(), currentPlaylistRepository: DefaultCurrentPlaylistRepository()), musicKitService: DefaultMusicKitService()))
 }
