@@ -70,4 +70,4 @@ jobs:
       # 테스트 스크립트 실행
       - name: Run build
         run: |
-          ./run_build.sh
+          ./scripts/run_build.sh
