@@ -2,7 +2,6 @@ import Combine
 @testable import Molio
 
 final class MockPublishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase {
-    
     // 원하는 MolioPlaylist을 설정할 수 있는 프로퍼티
     var mockPlaylist: MolioPlaylist?
     

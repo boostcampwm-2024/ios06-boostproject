@@ -87,12 +87,14 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
         let playlistName: String = "DeletePlaylist"
         let _ = try await repository.saveNewPlaylist(playlistName)
         let id = repository.fetchPlaylist(for: playlistName)?.id
-        print(id ?? "nil")
+        guard id != nil else {
+            XCTFail("id is nil")
+            return
+        }
 
         repository.deletePlaylist(playlistName)
         let currId = repository.fetchPlaylist(for: playlistName)?.id
-
-        XCTAssertEqual(currId, nil)
+        XCTAssertNil(currId)
 
     }
 }
