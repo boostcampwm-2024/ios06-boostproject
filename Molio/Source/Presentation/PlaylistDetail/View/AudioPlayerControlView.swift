@@ -81,9 +81,15 @@ struct AudioPlayerControlView: View {
         if isPlaying {
             player.pause()
             isPlaying = false
-        } else if let index = selectedIndex, musics.indices.contains(index) {
-            play(musics[index])
-            isPlaying = true
+        } else {
+            /// 아무것도 선택하지 않고, 재생 버튼을 누르면 처음부터 시작한다.
+            if selectedIndex == nil {
+                selectedIndex = 0
+            }
+            if let index = selectedIndex, musics.indices.contains(index) {
+                play(musics[index])
+                isPlaying = true
+            }
         }
     }
     
