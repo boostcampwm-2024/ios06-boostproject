@@ -9,6 +9,10 @@ on:
     branches:
       - main
       - develop
+      - "S002/*"
+      - "S003/*"
+      - "S015/*"
+      - "S023/*"
   pull_request:
     branches:
       - main
