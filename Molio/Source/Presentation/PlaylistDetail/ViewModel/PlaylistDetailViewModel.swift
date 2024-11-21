@@ -15,14 +15,13 @@ final class PlaylistDetailViewModel: ObservableObject {
         // 현재 플레이리스트 구독
         publishCurrentPlaylistUseCase
             .execute()
-            .sink { [weak self] playlist in
-                guard let playlist else { return }
+            .sink { _ in
                 
-                self?.currentPlaylist = playlist
+                self.currentPlaylistMusics = MolioMusic.all
                 
-                Task {
-                    self?.currentPlaylistMusics = await musicKitService.getMusic(with: playlist.musicISRCs)
-                }
+//                Task {
+//                    self?.currentPlaylistMusics = await musicKitService.getMusic(with: playlist.musicISRCs)
+//                }
             }
             .store(in: &subscriptions)
     }
