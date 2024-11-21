@@ -15,9 +15,9 @@ final class PlaylistDetailViewModel: ObservableObject {
         // 현재 플레이리스트 구독
         publishCurrentPlaylistUseCase
             .execute()
-            .sink { [weak self] _ in
+            .sink { _ in
                 
-                self?.currentPlaylistMusics = MolioMusic.all
+                self.currentPlaylistMusics = MolioMusic.all
                 
 //                Task {
 //                    self?.currentPlaylistMusics = await musicKitService.getMusic(with: playlist.musicISRCs)
