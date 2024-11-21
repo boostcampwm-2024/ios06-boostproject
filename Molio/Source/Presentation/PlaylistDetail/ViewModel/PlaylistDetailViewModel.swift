@@ -15,8 +15,7 @@ final class PlaylistDetailViewModel: ObservableObject {
         // 현재 플레이리스트 구독
         publishCurrentPlaylistUseCase
             .execute()
-            .sink { [weak self] playlist in
-                guard let playlist else { return }
+            .sink { [weak self] _ in
                 
                 self?.currentPlaylistMusics = MolioMusic.all
                 

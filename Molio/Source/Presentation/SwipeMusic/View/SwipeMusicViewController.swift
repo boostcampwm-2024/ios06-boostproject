@@ -453,6 +453,3 @@ struct SwipeViewController_Previews: PreviewProvider {
             .edgesIgnoringSafeArea(.all)
     }
 }
-
-
-

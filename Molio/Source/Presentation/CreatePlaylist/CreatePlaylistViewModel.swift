@@ -21,4 +21,3 @@ final class CreatePlaylistViewModel: ObservableObject {
         changeCurrentPlaylistUseCase.execute(playlistId: playlistId)
     }
 }
-

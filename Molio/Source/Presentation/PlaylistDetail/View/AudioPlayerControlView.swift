@@ -47,9 +47,6 @@ struct AudioPlayerControlView: View {
             guard let index = index, musics.indices.contains(index) else { return }
             play(musics[index])
         }
-        .onDisappear {
-            NotificationCenter.default.removeObserver(self)
-        }
     }
     
     private func setupPlayer() {
