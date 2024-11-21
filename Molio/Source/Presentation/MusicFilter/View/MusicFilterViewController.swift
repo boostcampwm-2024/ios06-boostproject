@@ -25,4 +25,9 @@ final class MusicFilterViewController: UIHostingController<MusicFilterView> {
         navigationItem.titleView = titleLabel
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButtonItemLabel)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
 }
