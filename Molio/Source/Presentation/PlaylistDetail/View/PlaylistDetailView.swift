@@ -7,7 +7,7 @@ struct PlaylistDetailView: View {
     @ObservedObject private var viewModel: PlaylistDetailViewModel
 
     init(viewModel: PlaylistDetailViewModel) {
-        self.viewModel = viewModel
+        self._viewModel = ObservedObject(initialValue: viewModel)
     }
 
     var body: some View {

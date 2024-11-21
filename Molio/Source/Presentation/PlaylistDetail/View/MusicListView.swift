@@ -1,10 +1,17 @@
 import SwiftUI
+import Combine
 
 struct MusicListView: View {
     @Binding private var musics: [MolioMusic]
     @Binding private var selectedIndex: Int?
-
-    init(musics: Binding<[MolioMusic]>, selectedIndex: Binding<Int?>) {
+    
+    @State private var isAlertPresenting: Bool = false
+    @State private var removeTargetMusic: MolioMusic?
+    
+    init(
+        musics: Binding<[MolioMusic]>,
+        selectedIndex: Binding<Int?>
+    ) {
         self._musics = musics
         self._selectedIndex = selectedIndex
     }
@@ -20,17 +27,45 @@ struct MusicListView: View {
                 .onTapGesture {
                     selectedIndex = index
                 }
+                .swipeActions {
+                    Button(role: .destructive) {
+                        withAnimation {
+                            removeTargetMusic = music
+                            isAlertPresenting.toggle()
+                        }
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                    
+                }
         }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
+        .alert("정말 삭제하시겠습니까?", isPresented: $isAlertPresenting, presenting: removeTargetMusic) { music in
+            // 삭제 확인 버튼
+            Button("삭제", role: .destructive) {
+                deleteMusic(music: music)
+                removeTargetMusic = nil
+            }
+            // 취소 버튼
+            Button("취소", role: .cancel) {
+                // 취소 시 추가 작업이 필요하다면 여기에 작성
+                removeTargetMusic = nil
+            }
+        }
     }
+    
+    private func deleteMusic(music: MolioMusic) {
+        print("Delete \(music.title)")
+    }
+    
+    
 }
 
 #Preview {
     ZStack {
         Color.black
-        MusicListView(
-            musics: .constant(
+        MusicListView(musics: .constant(
                 MolioMusic.all
             ),
             selectedIndex: .constant(0)
