@@ -3,7 +3,7 @@ import SwiftUI
 enum ButtonType: String {
     case cancel = "취소"
     case confirm = "완료"
-    case saveImage = "이미지 저장"
+    case saveImage = "전체 이미지 저장"
     case shareInstagram = "인스타 공유"
 }
 
