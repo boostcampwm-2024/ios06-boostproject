@@ -5,7 +5,9 @@ final class DefaultPublishAllPlaylistTitleUseCase: PublishAllPlaylistTitleUseCas
     
     private let allPlaylistTitlePublisher: AnyPublisher<[String], Never>
     
-    init(playlistRepository: any PlaylistRepository) {
+    init(
+        playlistRepository: any PlaylistRepository = DIContainer.shared.resolve()
+    ) {
         self.allPlaylistTitlePublisher = playlistRepository.playlistsPublisher
             .flatMap { playlist in
                 Just(playlist.map { $0.name })
