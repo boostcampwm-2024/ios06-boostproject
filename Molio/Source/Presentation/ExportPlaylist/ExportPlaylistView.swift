@@ -1,8 +1,17 @@
 import SwiftUI
 
 struct ExportPlaylistView: View {
-    @State private var selectedTab = 0
-    var pageCount = 3
+    let itemHeight: CGFloat = 54.0
+    let exportMusicListPageTopPadding: CGFloat = 50.0
+    let exportMusicListPageBottomPadding: CGFloat = 72.0
+    
+    @State var selectedTab = 0
+    let musics: [MolioMusic]
+    @State private var exportMolioMusics: [[MolioMusic]] = []
+    
+    var numberOfPages: Int {
+        return max(1, exportMolioMusics.count)
+    }
     
     var body: some View {
         NavigationStack {
@@ -11,15 +20,37 @@ struct ExportPlaylistView: View {
                 
                 VStack {
                     TabView(selection: $selectedTab) {
-                        ForEach(0..<pageCount, id: \.self) { index in
-                            VStack {
-                                Rectangle()
-                                    .fill(.white)
+                        ForEach(0..<numberOfPages, id: \.self) { pageIndex in
+                            ZStack {
+                                VStack {
+                                    Rectangle()
+                                        .fill(.white)
+                                        .cornerRadius(22)
+                                        .frame(maxHeight: .infinity)
+                                    Spacer(minLength: 57)
+                                }
+                                .padding(EdgeInsets(
+                                    top: 34,
+                                    leading: 22,
+                                    bottom: 15,
+                                    trailing: 22)
+                                )
+                                GeometryReader { geometry in
+                                    ExportMusicListPage(
+                                        musics: pageIndex < exportMolioMusics.count ? exportMolioMusics[pageIndex] : []
+                                    )
                                     .cornerRadius(22)
-                                    .frame(maxHeight: .infinity)
-                                Spacer(minLength: 57)
+                                    .padding(EdgeInsets(
+                                        top: exportMusicListPageTopPadding,
+                                        leading: 22,
+                                        bottom: 72,
+                                        trailing: exportMusicListPageBottomPadding)
+                                    )
+                                    .onAppear {
+                                        updateExportMolioMusics(height: geometry.size.height)
+                                    }
+                                }
                             }
-                            .padding(EdgeInsets(top: 34, leading: 22, bottom: 15, trailing: 22))
                         }
                     }
                     .tabViewStyle(.page)
@@ -36,11 +67,28 @@ struct ExportPlaylistView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {  }) {
+                    Button(action: {
+                        // TODO: 뒤로가기 action 추가.
+                    }) {
                         Image(systemName: "chevron.left")
                             .foregroundStyle(.main)
                     }
                 }
+            }
+        }
+    }
+    
+    /// 화면 크기에 맞게 Molio Music을 page에 맞는 모델로 변경하는 메서드
+    func updateExportMolioMusics(height: CGFloat) {
+        guard height > 0 else { return }
+        let viewHeight = height - exportMusicListPageTopPadding - exportMusicListPageBottomPadding
+        let itemMaxCountPerPage = Int(viewHeight / itemHeight)
+        
+        exportMolioMusics = musics.reduce(into: [[MolioMusic]]()) { result, element in
+            if let last = result.last, last.count < itemMaxCountPerPage {
+                result[result.count - 1].append(element)
+            } else {
+                result.append([element])
             }
         }
     }
@@ -53,5 +101,5 @@ extension ExportPlaylistView {
 }
 
 #Preview {
-    ExportPlaylistView()
+    ExportPlaylistView(musics: [MolioMusic.apt, MolioMusic.apt, MolioMusic.apt, MolioMusic.apt])
 }
