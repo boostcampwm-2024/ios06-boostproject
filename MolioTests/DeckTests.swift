@@ -3,21 +3,7 @@ import XCTest
 
 final class DeckTests: XCTestCase {
     private var deck: RandomMusicDeck = {
-        let networkProvider = DefaultNetworkProvider()
-        
-        let spotifyTokenProvider = MockSpotifyTokenProvider()
-        
-        let spotifyAPIService = DefaultSpotifyAPIService(networkProvider: networkProvider, tokenProvider: spotifyTokenProvider)
-        
-        let musicKitService = DefaultMusicKitService()
-        
-        let repository = DefaultRecommendedMusicRepository(spotifyAPIService: spotifyAPIService, musicKitService: musicKitService)
-        
-        let fetchMusicUseCase = DefaultFetchRecommendedMusicUseCase(repository: repository)
-        
-        let musicFilterProvider = MockMusicFilterProvider()
-        
-        return RandomMusicDeck(fetchMusicsUseCase: fetchMusicUseCase, musicFilterProvider: musicFilterProvider)
+        return RandomMusicDeck()
     }()
     
     func testDeckFetch() async {
@@ -25,7 +11,7 @@ final class DeckTests: XCTestCase {
             print(randomMusics)
         }
         
-        Thread.sleep(forTimeInterval: 30)
+        Thread.sleep(forTimeInterval: 1)
     }
     
     func testDeckSwipe() {

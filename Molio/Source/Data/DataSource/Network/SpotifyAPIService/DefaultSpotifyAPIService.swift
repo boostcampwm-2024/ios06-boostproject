@@ -1,8 +1,11 @@
-final class DefaultSpotifyAPIService: SpotifyAPIService {
+struct DefaultSpotifyAPIService: SpotifyAPIService {
     private let networkProvider: NetworkProvider
     private let tokenProvider: SpotifyTokenProvider
     
-    init(networkProvider: NetworkProvider, tokenProvider: SpotifyTokenProvider) {
+    init(
+        networkProvider: NetworkProvider = DIContainer.shared.resolve(),
+        tokenProvider: SpotifyTokenProvider = DIContainer.shared.resolve()
+    ) {
         self.networkProvider = networkProvider
         self.tokenProvider = tokenProvider
     }

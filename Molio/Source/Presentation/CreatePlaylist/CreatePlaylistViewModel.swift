@@ -4,9 +4,10 @@ final class CreatePlaylistViewModel: ObservableObject {
     private let createPlaylistUseCase: CreatePlaylistUseCase
     private let changeCurrentPlaylistUseCase: ChangeCurrentPlaylistUseCase
     private var playlistId: UUID?
+    
     init(
-        createPlaylistUseCase: CreatePlaylistUseCase,
-        changeCurrentPlaylistUseCase: ChangeCurrentPlaylistUseCase
+        createPlaylistUseCase: CreatePlaylistUseCase = DIContainer.shared.resolve(),
+        changeCurrentPlaylistUseCase: ChangeCurrentPlaylistUseCase = DIContainer.shared.resolve()
     ) {
         self.createPlaylistUseCase = createPlaylistUseCase
         self.changeCurrentPlaylistUseCase = changeCurrentPlaylistUseCase

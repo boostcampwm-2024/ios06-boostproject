@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MusicFilterView: View {
     @ObservedObject private var musicFilterViewModel: MusicFilterViewModel
-
+    
     init(viewModel: MusicFilterViewModel) {
         self.musicFilterViewModel = viewModel
     }
