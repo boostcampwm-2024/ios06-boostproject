@@ -5,7 +5,7 @@ final class SwipeMusicViewController: UIViewController {
     private let viewModel: SwipeMusicViewModel
     private var input: SwipeMusicViewModel.Input
     private var output: SwipeMusicViewModel.Output
-    private let musicPlayer: AudioPlayer = SwipeMusicPlayer()
+    private let musicPlayer: AudioPlayer
 
     private let musicCardDidChangeSwipePublisher = PassthroughSubject<CGFloat, Never>()
     private let musicCardDidFinishSwipePublisher = PassthroughSubject<CGFloat, Never>()
@@ -91,7 +91,7 @@ final class SwipeMusicViewController: UIViewController {
                                                  buttonImage: UIImage(systemName: "music.note"),
                                                  buttonImageSize: CGSize(width: 18.0, height: 24.0))
     
-    init(viewModel: SwipeMusicViewModel) {
+    init(viewModel: SwipeMusicViewModel, musicPlayer: AudioPlayer = DIContainer.shared.resolve()) {
         self.viewModel = viewModel
         self.input = SwipeMusicViewModel.Input(
             musicCardDidChangeSwipe: musicCardDidChangeSwipePublisher.eraseToAnyPublisher(),
@@ -100,6 +100,7 @@ final class SwipeMusicViewController: UIViewController {
             dislikeButtonDidTap: dislikeButtonDidTapPublisher.eraseToAnyPublisher()
         )
         self.output = viewModel.transform(from: input)
+        self.musicPlayer = musicPlayer
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -112,7 +113,7 @@ final class SwipeMusicViewController: UIViewController {
             dislikeButtonDidTap: dislikeButtonDidTapPublisher.eraseToAnyPublisher()
         )
         self.output = viewModel.transform(from: input)
-
+        self.musicPlayer = DIContainer.shared.resolve()
         super.init(coder: coder)
     }
     
