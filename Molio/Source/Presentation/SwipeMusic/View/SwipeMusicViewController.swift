@@ -274,8 +274,10 @@ final class SwipeMusicViewController: UIViewController {
     @objc func didTapPlaylistSelectButton() {
         // TODO: DI Container로 의존성 주입
         let playlistView = CreatePlaylistView(viewModel: CreatePlaylistViewModel(createPlaylistUseCase: DefaultCreatePlaylistUseCase(repository: DefaultPlaylistRepository()), changeCurrentPlaylistUseCase: DefaultChangeCurrentPlaylistUseCase(repository: DefaultCurrentPlaylistRepository())))
+        
+        let selectplaylistView = SelectPlaylistView(viewModel: SelectPlaylistViewModel())
         self.presentCustomSheet(
-            content: playlistView
+            content: selectplaylistView
         )
     }
     

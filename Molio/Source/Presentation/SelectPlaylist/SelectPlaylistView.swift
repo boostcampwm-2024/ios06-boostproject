@@ -2,46 +2,76 @@ import SwiftUI
 
 struct SelectPlaylistView: View {
     @Environment(\.dismiss) var dismiss
-    @FocusState private var isFocused: Bool
-    var playlists: [MolioPlaylist] = [MolioPlaylist(id: UUID(), name: "플레이리스트 1", createdAt: Date(), musicISRCs: [], filters: []), MolioPlaylist(id: UUID(), name: "플레이리스트 2", createdAt: Date(), musicISRCs: [], filters: [])]
-    
-    //@ObservedObject var viewModel: CreatePlaylistViewModel
+    @ObservedObject var viewModel: SelectPlaylistViewModel
     
     var placeholder: String = "00님의 몰리오"
     
     var body: some View {
         ZStack {
             Color(.clear)
-            VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: 0) {
                 Spacer()
                     .frame(height: 40)
                 
                 Text("그냥님의 몰리오")
-                    .font(.custom(PretendardFontName.Bold, size: 28))
+                    .font(.custom(PretendardFontName.Bold, size: 36))
                     .foregroundStyle(Color.white)
+                    .padding(.horizontal, 22)
                 
-                List(playlists) { playlist in
+                Spacer()
+                    .frame(height: 5)
+                
+                List(viewModel.playlists) { playlist in
                     Button(action: {
+                        viewModel.selectedPlaylist = playlist
                     }) {
                         HStack {
                             Text(playlist.name)
+                                .font(.custom(PretendardFontName.Medium, size: 18))
+                                .tint(.white)
+                                .opacity(0.8)
+                                .frame(height: 50)
+
                             Spacer()
-                            Image(systemName: "checkmark")
-                                .foregroundColor(.blue)
+                            if viewModel.selectedPlaylist?.id == playlist.id {
+                                Image(systemName: "checkmark")
+                                    .foregroundStyle(.main)
+                            }
                         }
                     }
                     .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets())
+                    .listRowSeparator(.hidden)
+
                 }
-                .background(Color.clear)
+                .frame(minHeight: 200)
+                .padding(.horizontal, 0)
+                .padding(.vertical, 0)
+                .scrollContentBackground(.hidden)
+
+                HStack (alignment: .center, content: {
+                    Spacer()
+                    
+                    Button(action: {
+                    }) {
+                        Image.molioBlack(systemName: "plus", size: 20, color: .white)
+                            .frame(width: 40, height: 40)
+                            .background(Color.white.opacity(0.3))
+                            .clipShape(Circle())
+                            .shadow(radius: 5)
+                    }
+                    
+                    Spacer()
+                })
+                .padding(.top, 20)
+        
                 Spacer()
             }
-            .padding(.horizontal, 22)
-            
-        }.ignoresSafeArea()
+        }
     }
 }
 
 #Preview {
-    SelectPlaylistView()
+    SelectPlaylistView(viewModel: SelectPlaylistViewModel())
         .background(Color.background)
 }
