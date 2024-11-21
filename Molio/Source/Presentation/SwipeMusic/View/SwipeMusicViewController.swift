@@ -281,6 +281,7 @@ final class SwipeMusicViewController: UIViewController {
     }
     
     @objc private func didTapMyMolioButton() {
+        musicPlayer.stop()
         // TODO: DI Container로 의존성 주입
         let viewModel = PlaylistDetailViewModel(
             publishCurrentPlaylistUseCase: DefaultPublishCurrentPlaylistUseCase(
@@ -295,6 +296,7 @@ final class SwipeMusicViewController: UIViewController {
     }
     
     @objc private func didTapFilterButton() {
+        musicPlayer.stop()
         // TODO: - 선택된 장르 넘기기
         let musicViewModel = MusicFilterViewModel(selectedGenres: [])
         
