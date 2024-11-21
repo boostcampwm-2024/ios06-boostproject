@@ -72,9 +72,11 @@ struct AudioPlayerControlView: View {
     
     private func play(_ music: MolioMusic) {
         let item = AVPlayerItem(url: music.previewAsset)
-        player.replaceCurrentItem(with: item)
-        player.play()
-        isPlaying = true
+        DispatchQueue.main.async {
+            player.replaceCurrentItem(with: item)
+            player.play()
+            isPlaying = true
+        }
     }
     
     private func togglePlayPause() {
@@ -88,8 +90,8 @@ struct AudioPlayerControlView: View {
             }
             if let index = selectedIndex, musics.indices.contains(index) {
                 play(musics[index])
-                isPlaying = true
             }
+            isPlaying = true
         }
     }
     
