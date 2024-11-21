@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(ChangeCurrentPlaylistUseCase.self, dependency: DefaultChangeCurrentPlaylistUseCase())
         container.register(PublishCurrentPlaylistUseCase.self, dependency: DefaultPublishCurrentPlaylistUseCase())
         container.register(PublishAllMusicInCurrentPlaylistUseCase.self, dependency: DefaultPublishAllMusicInCurrentPlaylistUseCase())
+        container.register(UpdatePlaylistUseCase.self, dependency: DefaultUpdatePlaylistUseCase())
         
         FirebaseApp.configure()
         return true
