@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct PlaylistDetailListView: View {
+struct MusicListView: View {
     @Binding private var musics: [MolioMusic]
     @Binding private var selectedIndex: Int?
 
@@ -13,7 +13,7 @@ struct PlaylistDetailListView: View {
         List(musics.indices, id: \.self) { index in
             let music = musics[index]
             
-            PlaylistDetailListItemView(music: music)
+            MusicCellView(music: music)
                 .listRowBackground(selectedIndex == index ? .main.opacity(0.2) : Color.clear)
                 .listRowSeparatorTint(.gray)
                 .listRowInsets(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 0))
@@ -29,7 +29,7 @@ struct PlaylistDetailListView: View {
 #Preview {
     ZStack {
         Color.black
-        PlaylistDetailListView(
+        MusicListView(
             musics: .constant(
                 MolioMusic.all
             ),

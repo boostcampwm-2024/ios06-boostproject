@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct PlaylistDetailListItemView: View {
+struct MusicCellView: View {
     var music: MolioMusic
 
     init(music: MolioMusic) {
@@ -52,12 +52,12 @@ struct PlaylistDetailListItemView: View {
 }
 
 #Preview {
-    PlaylistDetailListItemView(music: MolioMusic.apt)
+    MusicCellView(music: MolioMusic.apt)
         .background(Color.black)
         .foregroundStyle(.white)
 }
 #Preview {
-    PlaylistDetailListItemView(music: MolioMusic.song2)
+    MusicCellView(music: MolioMusic.song2)
         .background(Color.black)
         .foregroundStyle(.white)
 }

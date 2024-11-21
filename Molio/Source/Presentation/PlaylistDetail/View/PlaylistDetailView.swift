@@ -11,7 +11,7 @@ struct PlaylistDetailView: View {
     }
 
     var body: some View {
-        PlaylistDetailListView(musics: $viewModel.currentPlaylistMusics, selectedIndex: $selectedIndex)
+        MusicListView(musics: $viewModel.currentPlaylistMusics, selectedIndex: $selectedIndex)
             .foregroundStyle(.white)
             .listStyle(.plain)
             .background(Color.background)
