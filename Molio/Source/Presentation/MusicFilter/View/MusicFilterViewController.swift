@@ -1,6 +1,24 @@
 import SwiftUI
 
+// MARK: - Implementation
+
 final class MusicFilterViewController: UIHostingController<MusicFilterView> {
+    weak var delegate: MusicFilterViewControllerDelegate?
+    
+    // MARK: - Initializer
+    
+    init(viewModel: MusicFilterViewModel) {
+        delegate = viewModel
+        let musicFilterView = MusicFilterView(viewModel: viewModel)
+        super.init(rootView: musicFilterView)
+    }
+    
+    @MainActor @preconcurrency required dynamic init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    // MARK: - Navigation Bar Item
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.molioSemiBold(text: "내 필터 편집", size: 17)
@@ -19,6 +37,8 @@ final class MusicFilterViewController: UIHostingController<MusicFilterView> {
         return button
     }()
     
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = false
@@ -29,6 +49,7 @@ final class MusicFilterViewController: UIHostingController<MusicFilterView> {
         navigationItem.titleView = titleLabel
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
         
+        saveButton.addTarget(self, action: #selector(didTapSaveButton), for: .touchUpInside)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -36,9 +57,17 @@ final class MusicFilterViewController: UIHostingController<MusicFilterView> {
         navigationController?.navigationBar.isHidden = true
     }
     
+    // MARK: - Event
+    
     @objc func didTapSaveButton() {
-        print("저장 버튼눌림")
+        delegate?.didSaveButtonTapped()
     }
+}
+
+// MARK: - Delegate
+
+protocol MusicFilterViewControllerDelegate: AnyObject {
+    func didSaveButtonTapped()
 }
 
 // MARK: - Preview
@@ -48,7 +77,7 @@ import SwiftUI
 struct MusicFilterViewControllerPreview: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> MusicFilterViewController {
         let musicFilterViewModel = MusicFilterViewModel()
-        return MusicFilterViewController(rootView: MusicFilterView(viewModel: musicFilterViewModel))
+        return MusicFilterViewController(viewModel: musicFilterViewModel)
     }
     
     func updateUIViewController(_ uiViewController: MusicFilterViewController, context: Context) {}

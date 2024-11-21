@@ -294,8 +294,8 @@ final class SwipeMusicViewController: UIViewController {
     }
     
     @objc private func didTapFilterButton() {
-        let musicViewModel = MusicFilterViewModel()
-        let musicFilterVC = MusicFilterViewController(rootView: MusicFilterView(viewModel: musicViewModel))
+        let viewModel = MusicFilterViewModel()
+        let musicFilterVC = MusicFilterViewController(viewModel: viewModel)
         navigationController?.pushViewController(musicFilterVC, animated: true)
     }
     
