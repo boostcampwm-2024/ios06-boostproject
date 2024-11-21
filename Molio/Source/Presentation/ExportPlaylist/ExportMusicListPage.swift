@@ -8,10 +8,13 @@ struct ExportMusicListPage: View {
             ForEach(musics, id: \.isrc) { item in
                 ExportPlaylistItemView(music: item)
                     .listRowInsets(EdgeInsets())
+                    .background(Color.white)
+                    .foregroundStyle(.black)
             }
         }
         .listStyle(.plain)
         .scrollDisabled(true)
+        .background(Color.white)
     }
 }
 
