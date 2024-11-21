@@ -2,14 +2,15 @@
 disabled_rules:
   - trailing_whitespace
   - multiple_closures_with_trailing_closure
+  - type_body_length
+  - line_length
   
 # 선택적으로 적용할 룰
 opt_in_rules:
   - empty_count # .isEmpty 대신 .count == 0를 사용하면 경고
 included: # 린트 과정에 포함할 파일 경로. 이 항목이 존재하면 `--path`는 무시됨
 excluded: # 린트 과정에서 무시할 파일 경로. `included`보다 우선순위 높음
-- Molio/Source/App/AppDelegate.swift
-- Molio/Source/App/SceneDelegate.swift
+- Molio/Source/App
 # DTO 모델 생성 시 추가하기
 # 테스트 타겟 생성 시 추가하기
 
@@ -20,9 +21,9 @@ force_try:
   severity: warning # 명시적으로 지정
   
 # 경고 및 에러 둘 다 존재하는 룰의 경우 값을 하나만 지정하면 암시적으로 경고 수준에 설정됨
-line_length:
-  warning: 120
-  ignores_comments: true
+# line_length:
+#  warning: 120
+#  ignores_comments: true
   
 # 함수 길이 100줄로 제한
 function_body_length:

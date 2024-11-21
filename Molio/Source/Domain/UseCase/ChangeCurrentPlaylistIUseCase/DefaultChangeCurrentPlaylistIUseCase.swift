@@ -3,7 +3,9 @@ import Foundation
 struct DefaultChangeCurrentPlaylistUseCase: ChangeCurrentPlaylistUseCase {
     private let repository: CurrentPlaylistRepository
     
-    init(repository: any CurrentPlaylistRepository) {
+    init(
+        repository: any CurrentPlaylistRepository = DIContainer.shared.resolve()
+    ) {
         self.repository = repository
     }
     

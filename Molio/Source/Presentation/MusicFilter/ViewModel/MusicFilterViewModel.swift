@@ -7,7 +7,7 @@ final class MusicFilterViewModel: ObservableObject {
     @Published private(set) var selectedGenres: Set<MusicGenre>
     
     init(
-        fetchAvailableGenresUseCase: FetchAvailableGenresUseCase,
+        fetchAvailableGenresUseCase: FetchAvailableGenresUseCase = DIContainer.shared.resolve(),
         allGenres: [MusicGenre] = MusicGenre.allCases,
         selectedGenres: Set<MusicGenre> = []
     ) {

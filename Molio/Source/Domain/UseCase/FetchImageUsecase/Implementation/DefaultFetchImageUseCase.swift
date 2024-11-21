@@ -3,7 +3,9 @@ import Foundation
 struct DefaultFetchImageUseCase: FetchImageUseCase {
     private let repository: ImageRepository
     
-    init(repository: ImageRepository) {
+    init(
+        repository: ImageRepository = DIContainer.shared.resolve()
+    ) {
         self.repository = repository
     }
     

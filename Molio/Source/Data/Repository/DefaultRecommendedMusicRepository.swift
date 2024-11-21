@@ -2,8 +2,9 @@ struct DefaultRecommendedMusicRepository: RecommendedMusicRepository {
     private let spotifyAPIService: SpotifyAPIService
     private let musicKitService: MusicKitService
     
-    init(spotifyAPIService: SpotifyAPIService,
-         musicKitService: MusicKitService
+    init(
+        spotifyAPIService: SpotifyAPIService = DIContainer.shared.resolve(),
+        musicKitService: MusicKitService = DIContainer.shared.resolve()
     ) {
         self.spotifyAPIService = spotifyAPIService
         self.musicKitService = musicKitService

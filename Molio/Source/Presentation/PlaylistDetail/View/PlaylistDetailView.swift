@@ -3,16 +3,15 @@ import Combine
 
 struct PlaylistDetailView: View {
     @State private var isPlaylistChangeSheetPresented: Bool = false
+    @State private var selectedIndex: Int?
     @ObservedObject private var viewModel: PlaylistDetailViewModel
 
-    init(
-        viewModel: PlaylistDetailViewModel
-    ) {
+    init(viewModel: PlaylistDetailViewModel) {
         self.viewModel = viewModel
     }
 
     var body: some View {
-        PlaylistDetailViewList(musics: [.apt, .apt, .apt])
+        MusicListView(musics: $viewModel.currentPlaylistMusics, selectedIndex: $selectedIndex)
             .foregroundStyle(.white)
             .listStyle(.plain)
             .background(Color.background)
@@ -44,19 +43,19 @@ struct PlaylistDetailView: View {
                 HStack {
                     Spacer(minLength: 20)
 
-                    PlaylistDetailViewAudioPlayerControl()
+                    AudioPlayerControlView(musics: $viewModel.currentPlaylistMusics, selectedIndex: $selectedIndex)
                         .layoutPriority(1)
 
-                    Spacer(minLength: 20)
+                    Spacer(minLength: 10)
 
                     Button {
-                        
                     } label: {
-                        Image(systemName: "square.and.arrow.up")
-                            .frame(width: 66, height: 66)
-                            .background(Color.gray, in: .circle)
+                        Image.molioExtraBold(systemName: "square.and.arrow.up", size: 20, color: .main)
                     }
-
+                    .frame(width: 66, height: 66) 
+                    .background(Color.gray)
+                    .clipShape(Circle())
+                    .shadow(radius: 5)
                     Spacer(minLength: 20)
                 }
                 .font(.title)
@@ -65,6 +64,11 @@ struct PlaylistDetailView: View {
                 .padding(.bottom)
             }
             .sheet(isPresented: $isPlaylistChangeSheetPresented) {
+                Text("Playlist Change Sheet")
             }
     }
+}
+
+#Preview {
+    PlaylistDetailView(viewModel: PlaylistDetailViewModel(publishCurrentPlaylistUseCase: DefaultPublishCurrentPlaylistUseCase(playlistRepository: DefaultPlaylistRepository(), currentPlaylistRepository: DefaultCurrentPlaylistRepository()), musicKitService: DefaultMusicKitService()))
 }

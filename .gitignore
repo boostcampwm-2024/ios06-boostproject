@@ -146,8 +146,5 @@ xcuserdata
 
 # End of https://www.toptal.com/developers/gitignore/api/swift,macos,swiftpackagemanager,cocoapods,xcode
 
-# Secret .xcconfig
-Secrets.xcconfig
-
-# Firebase Config File
-GoogleService-Info.plist
+# Secret files
+Secret

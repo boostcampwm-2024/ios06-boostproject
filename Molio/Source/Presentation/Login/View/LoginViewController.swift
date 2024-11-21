@@ -111,28 +111,7 @@ final class LoginViewController: UIViewController {
     }
     
     private func switchToSwipeMusicController() {
-        // TODO: DI Container로 변경
-        let defaultNetworkProvider = DefaultNetworkProvider()
-        let defaultSpotifyTokenProvider = DefaultSpotifyTokenProvider(networkProvider: defaultNetworkProvider)
-        let defaultSpotifyAPIService = DefaultSpotifyAPIService(
-            networkProvider: defaultNetworkProvider,
-            tokenProvider: defaultSpotifyTokenProvider
-        )
-        let defaultMusicKitService = DefaultMusicKitService()
-        let defaultMusicRepository = DefaultRecommendedMusicRepository(
-            spotifyAPIService: defaultSpotifyAPIService,
-            musicKitService: defaultMusicKitService
-        )
-        let defaultFetchMusicsUseCase = DefaultFetchRecommendedMusicUseCase(repository: defaultMusicRepository)
-        let defaultImageProvider = DefaultImageFetchService()
-        let defaultImageRepository = DefaultImageRepository(imageFetchService: defaultImageProvider)
-        let defaultFetchImageUseCase = DefaultFetchImageUseCase(repository: defaultImageRepository)
-        let swipeMusicViewModel = SwipeMusicViewModel(
-            fetchMusicsUseCase: defaultFetchMusicsUseCase,
-            fetchImageUseCase: defaultFetchImageUseCase,
-            musicFilterProvider: MockMusicFilterProvider()
-        )
-        let swipeMusicViewController = SwipeMusicViewController(viewModel: swipeMusicViewModel)
+        let swipeMusicViewController = SwipeMusicViewController(viewModel: SwipeMusicViewModel())
         let navigationController = UINavigationController(rootViewController: swipeMusicViewController)
         
         guard let window = self.view.window else { return }

@@ -120,7 +120,6 @@ final class DefaultPlaylistRepository: PlaylistRepository {
         }
     }
     
-    
     // MARK: - Private Method
     
     private func setupChangeObserver() {
@@ -180,4 +179,3 @@ final class DefaultPlaylistRepository: PlaylistRepository {
         print(context)
     }
 }
-

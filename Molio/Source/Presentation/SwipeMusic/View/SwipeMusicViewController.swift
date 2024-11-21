@@ -104,26 +104,7 @@ final class SwipeMusicViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
-        let defaultNetworkProvider = DefaultNetworkProvider()
-        let defaultSpotifyTokenProvider = DefaultSpotifyTokenProvider(networkProvider: defaultNetworkProvider)
-        let defaultSpotifyAPIService = DefaultSpotifyAPIService(networkProvider: defaultNetworkProvider,
-                                                                tokenProvider: defaultSpotifyTokenProvider
-        )
-        let defaultMusicKitService = DefaultMusicKitService()
-        let defaultMusicRepository = DefaultRecommendedMusicRepository(
-            spotifyAPIService: defaultSpotifyAPIService,
-            musicKitService: defaultMusicKitService
-        )
-        let defaultFetchMusicsUseCase = DefaultFetchRecommendedMusicUseCase(repository: defaultMusicRepository)
-        let defaultImageProvider = DefaultImageFetchService()
-        let defaultImageRepository = DefaultImageRepository(imageFetchService: defaultImageProvider)
-        let defaultFetchImageUseCase = DefaultFetchImageUseCase(repository: defaultImageRepository)
-        let swipeMusicViewModel = SwipeMusicViewModel(
-            fetchMusicsUseCase: defaultFetchMusicsUseCase,
-            fetchImageUseCase: defaultFetchImageUseCase,
-            musicFilterProvider: MockMusicFilterProvider()
-        )
-        self.viewModel = swipeMusicViewModel
+        self.viewModel = SwipeMusicViewModel()
         self.input = SwipeMusicViewModel.Input(
             musicCardDidChangeSwipe: musicCardDidChangeSwipePublisher.eraseToAnyPublisher(),
             musicCardDidFinishSwipe: musicCardDidFinishSwipePublisher.eraseToAnyPublisher(),
@@ -255,6 +236,7 @@ final class SwipeMusicViewController: UIViewController {
         dislikeButton.addTarget(self, action: #selector(didTapDislikeButton), for: .touchUpInside)
         playlistSelectButton.addTarget(self, action: #selector(didTapPlaylistSelectButton), for: .touchUpInside)
         filterButton.addTarget(self, action: #selector(didTapFilterButton), for: .touchUpInside)
+        myMolioButton.addTarget(self, action: #selector(didTapMyMolioButton), for: .touchUpInside)
     }
 
     /// 사용자에게 진동 feedback을 주는 메서드
@@ -290,33 +272,30 @@ final class SwipeMusicViewController: UIViewController {
     }
     
     @objc func didTapPlaylistSelectButton() {
-        // TODO: DI Container로 의존성 관리 필요
+        // TODO: DI Container로 의존성 주입
         let playlistView = CreatePlaylistView(viewModel: CreatePlaylistViewModel(createPlaylistUseCase: DefaultCreatePlaylistUseCase(repository: DefaultPlaylistRepository()), changeCurrentPlaylistUseCase: DefaultChangeCurrentPlaylistUseCase(repository: DefaultCurrentPlaylistRepository())))
         self.presentCustomSheet(
             content: playlistView
         )
     }
-
+    
+    @objc private func didTapMyMolioButton() {
+        // TODO: DI Container로 의존성 주입
+        let viewModel = PlaylistDetailViewModel(
+            publishCurrentPlaylistUseCase: DefaultPublishCurrentPlaylistUseCase(
+                playlistRepository: DefaultPlaylistRepository(),
+                currentPlaylistRepository: DefaultCurrentPlaylistRepository()
+            ),
+            musicKitService: DefaultMusicKitService()
+        )
+        let playlistDetailView = PlaylistDetailView(viewModel: viewModel)
+        let hostingController = UIHostingController(rootView: playlistDetailView)
+        self.navigationController?.pushViewController(hostingController, animated: true)
+    }
+    
     @objc private func didTapFilterButton() {
-        // TODO: - 의존성 주입 & 선택된 장르 넘기기
-        let networkProvider = DefaultNetworkProvider()
-        let tokenProvider = DefaultSpotifyTokenProvider(networkProvider: networkProvider)
-        let defaultSpotifyAPIService = DefaultSpotifyAPIService(
-            networkProvider: networkProvider,
-            tokenProvider: tokenProvider
-        )
-        let defaultMusicKitService = DefaultMusicKitService()
-        let defaultRecommendedMusicRepository = DefaultRecommendedMusicRepository(
-            spotifyAPIService: defaultSpotifyAPIService,
-            musicKitService: defaultMusicKitService
-        )
-        let defaultFetchAvailableGenresUseCase = DefaultFetchAvailableGenresUseCase(
-            recommendedMusicRepository: defaultRecommendedMusicRepository
-        )
-        let musicViewModel = MusicFilterViewModel(
-            fetchAvailableGenresUseCase: defaultFetchAvailableGenresUseCase,
-            selectedGenres: []
-        )
+        // TODO: - 선택된 장르 넘기기
+        let musicViewModel = MusicFilterViewModel(selectedGenres: [])
         
         let musicFilterVC = MusicFilterViewController(rootView: MusicFilterView(viewModel: musicViewModel))
         navigationController?.pushViewController(musicFilterVC, animated: true)
@@ -404,26 +383,7 @@ final class SwipeMusicViewController: UIViewController {
 import SwiftUI
 struct SwipeViewControllerPreview: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> SwipeMusicViewController {
-        let defaultNetworkProvider = DefaultNetworkProvider()
-        let defaultSpotifyTokenProvider = DefaultSpotifyTokenProvider(networkProvider: defaultNetworkProvider)
-        let defaultSpotifyAPIService = DefaultSpotifyAPIService(networkProvider: defaultNetworkProvider,
-                                                                tokenProvider: defaultSpotifyTokenProvider
-        )
-        let defaultMusicKitService = DefaultMusicKitService()
-        let defaultMusicRepository = DefaultRecommendedMusicRepository(
-            spotifyAPIService: defaultSpotifyAPIService,
-            musicKitService: defaultMusicKitService
-        )
-        let defaultFetchMusicsUseCase = DefaultFetchRecommendedMusicUseCase(repository: defaultMusicRepository)
-        let defaultImageProvider = DefaultImageFetchService()
-        let defaultImageRepository = DefaultImageRepository(imageFetchService: defaultImageProvider)
-        let defaultFetchImageUseCase = DefaultFetchImageUseCase(repository: defaultImageRepository)
-        let swipeMusicViewModel = SwipeMusicViewModel(
-            fetchMusicsUseCase: defaultFetchMusicsUseCase,
-            fetchImageUseCase: defaultFetchImageUseCase,
-            musicFilterProvider: MockMusicFilterProvider()
-        )
-        
+        let swipeMusicViewModel = SwipeMusicViewModel()
         return SwipeMusicViewController(viewModel: swipeMusicViewModel)
     }
     
@@ -438,6 +398,3 @@ struct SwipeViewController_Previews: PreviewProvider {
             .edgesIgnoringSafeArea(.all)
     }
 }
-
-
-
