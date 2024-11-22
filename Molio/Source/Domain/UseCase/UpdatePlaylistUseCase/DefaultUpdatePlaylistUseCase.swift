@@ -11,6 +11,7 @@ struct DefaultUpdatePlaylistUseCase: UpdatePlaylistUseCase {
     
     func execute(id: UUID, to updatedPlaylist: MolioPlaylist) async throws {
         // TODO: - 리포지토리 기능 연결
-        print(#file, #function)
+        print(#fileID, #function)
+        try await playlistRepository.updatePlaylist(id: id, to: updatedPlaylist)
     }
 }

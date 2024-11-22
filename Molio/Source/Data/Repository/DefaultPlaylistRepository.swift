@@ -123,6 +123,10 @@ final class DefaultPlaylistRepository: PlaylistRepository {
         }
     }
     
+    func updatePlaylist(id: UUID, to newValue: MolioPlaylist) async throws {
+        print(#fileID, #function)
+    }
+    
     // MARK: - Private Method
     
     private func setupChangeObserver() {
