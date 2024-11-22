@@ -5,11 +5,12 @@ struct AudioPlayerControlView: View {
     @Binding private var musics: [MolioMusic]
     @Binding private var selectedIndex: Int?
     @State private var isPlaying: Bool = false
-    private var player = AVPlayer()
+    private var player: AudioPlayer
     
-    init(musics: Binding<[MolioMusic]>, selectedIndex: Binding<Int?>) {
+    init(musics: Binding<[MolioMusic]>, selectedIndex: Binding<Int?>, player: AudioPlayer = DIContainer.shared.resolve()) {
         self._musics = musics
         self._selectedIndex = selectedIndex
+        self.player = player
         setupPlayer()
     }
     
@@ -71,9 +72,8 @@ struct AudioPlayerControlView: View {
     }
     
     private func play(_ music: MolioMusic) {
-        let item = AVPlayerItem(url: music.previewAsset)
         DispatchQueue.main.async {
-            player.replaceCurrentItem(with: item)
+            player.loadSong(with: music.previewAsset)
             player.play()
             isPlaying = true
         }
