@@ -3,6 +3,8 @@ import SwiftUI
 enum ButtonType: String {
     case cancel = "취소"
     case confirm = "완료"
+    case saveImage = "전체 이미지 저장"
+    case shareInstagram = "인스타 공유"
 }
 
 struct BasicButton: View {
@@ -31,6 +33,10 @@ struct BasicButton: View {
             return Color.white.opacity(0.2)
         case .confirm:
             return Color.mainLighter
+        case .saveImage:
+            return Color.mainLighter
+        case .shareInstagram:
+            return Color.mainLighter
         }
         
     }
@@ -40,6 +46,10 @@ struct BasicButton: View {
         case .cancel:
             return Color.white
         case .confirm:
+            return Color.black
+        case .saveImage:
+            return Color.black
+        case .shareInstagram:
             return Color.black
         }
     }

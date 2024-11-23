@@ -5,8 +5,8 @@ final class SwipeMusicViewController: UIViewController {
     private let viewModel: SwipeMusicViewModel
     private var input: SwipeMusicViewModel.Input
     private var output: SwipeMusicViewModel.Output
-    private let musicPlayer: AudioPlayer = SwipeMusicPlayer()
-    
+    private let musicPlayer: AudioPlayer
+
     private let musicCardDidChangeSwipePublisher = PassthroughSubject<CGFloat, Never>()
     private let musicCardDidFinishSwipePublisher = PassthroughSubject<CGFloat, Never>()
     private let likeButtonDidTapPublisher = PassthroughSubject<Void, Never>()
@@ -91,7 +91,7 @@ final class SwipeMusicViewController: UIViewController {
                                                  buttonImage: UIImage(systemName: "music.note"),
                                                  buttonImageSize: CGSize(width: 18.0, height: 24.0))
     
-    init(viewModel: SwipeMusicViewModel) {
+    init(viewModel: SwipeMusicViewModel, musicPlayer: AudioPlayer = DIContainer.shared.resolve()) {
         self.viewModel = viewModel
         self.input = SwipeMusicViewModel.Input(
             musicCardDidChangeSwipe: musicCardDidChangeSwipePublisher.eraseToAnyPublisher(),
@@ -100,6 +100,7 @@ final class SwipeMusicViewController: UIViewController {
             dislikeButtonDidTap: dislikeButtonDidTapPublisher.eraseToAnyPublisher()
         )
         self.output = viewModel.transform(from: input)
+        self.musicPlayer = musicPlayer
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -112,7 +113,7 @@ final class SwipeMusicViewController: UIViewController {
             dislikeButtonDidTap: dislikeButtonDidTapPublisher.eraseToAnyPublisher()
         )
         self.output = viewModel.transform(from: input)
-        
+        self.musicPlayer = DIContainer.shared.resolve()
         super.init(coder: coder)
     }
     
@@ -288,6 +289,7 @@ final class SwipeMusicViewController: UIViewController {
     }
     
     @objc private func didTapMyMolioButton() {
+        musicPlayer.stop()
         // TODO: DI Container로 의존성 주입
         let viewModel = PlaylistDetailViewModel(
             publishCurrentPlaylistUseCase: DefaultPublishCurrentPlaylistUseCase(
@@ -303,6 +305,7 @@ final class SwipeMusicViewController: UIViewController {
     }
     
     @objc private func didTapFilterButton() {
+        musicPlayer.stop()
         // TODO: - 선택된 장르 넘기기
         let musicViewModel = MusicFilterViewModel(selectedGenres: [])
         
