@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ExportMusicListPage: View {
+struct ExportPlaylistPageView: View {
     let musicItems: [ExportMusicItem]
     
     var body: some View {

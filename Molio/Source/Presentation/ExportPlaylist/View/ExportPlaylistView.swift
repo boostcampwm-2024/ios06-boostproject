@@ -30,7 +30,7 @@ struct ExportPlaylistView: View {
                                     trailing: 22)
                                 )
                                 GeometryReader { geometry in
-                                    ExportMusicListPage(
+                                    ExportPlaylistPageView(
                                         musicItems: viewModel.paginatedMusicItems.isEmpty ? [] : viewModel.paginatedMusicItems[pageIndex]
                                     )
                                     .cornerRadius(22)
@@ -93,7 +93,7 @@ struct ExportPlaylistView: View {
         var saveImageCount: Int = 0
         for page in 0..<viewModel.numberOfPages {
             let render = ImageRenderer(
-                content: ExportMusicListPage(musicItems: viewModel.paginatedMusicItems[page])
+                content: ExportPlaylistPageView(musicItems: viewModel.paginatedMusicItems[page])
                     .frame(width: UIScreen.main.bounds.width - 44)
             )
             render.scale = 3.0
