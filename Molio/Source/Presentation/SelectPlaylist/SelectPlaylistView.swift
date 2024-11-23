@@ -67,6 +67,11 @@ struct SelectPlaylistView: View {
                             .presentationDetents([.fraction(0.5)])
                             .presentationDragIndicator(.visible)
                     }
+                    .onChange(of: isModalPresented) { newValue in
+                        if !newValue {
+                            viewModel.reloadData()
+                        }
+                    }
                     
                     Spacer()
                 })
