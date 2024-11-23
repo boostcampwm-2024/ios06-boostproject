@@ -81,17 +81,26 @@ struct ExportPlaylistView: View {
                 }
             }
         }
+        .alert(
+            viewModel.alertState.title,
+            isPresented: $viewModel.showAlert) {
+                Button("확인") { }
+            } message: {
+                Text(viewModel.alertState.message)
+            }
     }
     
     /// 플레이리스트를 사진 앨범에 내보내는 메서드
     @MainActor private func exportPlaylistToAlbum() async {
         guard await !viewModel.isPhotoLibraryDenied() else {
-            // TODO: 설정에서 다시 세팅하는 알림창 구현
+            viewModel.alertState = .deniedPhotoLibrary
+            viewModel.showAlert = true
             return
         }
         
         guard !viewModel.paginatedMusicItems.isEmpty else {
-            // TODO: 저장될 사진이 없습니다. 알림창 구현
+            viewModel.alertState = .emptyMusicItems
+            viewModel.showAlert = true
             return
         }
         
@@ -110,9 +119,11 @@ struct ExportPlaylistView: View {
         }
         
         if saveImageCount == viewModel.numberOfPages {
-            // TODO: 이미지 저장 성공 알림
+            viewModel.alertState = .successSaveImage
+            viewModel.showAlert = true
         } else {
-            // TODO: 이미지 저장 실패 알림
+            viewModel.alertState = .failureSaveImage
+            viewModel.showAlert = true
         }
     }
 }
