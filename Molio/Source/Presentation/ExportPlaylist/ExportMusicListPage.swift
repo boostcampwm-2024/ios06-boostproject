@@ -1,23 +1,18 @@
 import SwiftUI
 
 struct ExportMusicListPage: View {
-    let musics: [MolioMusic]
+    let musicItems: [ExportMusicItem]
     
     var body: some View {
-        List {
-            ForEach(musics, id: \.isrc) { item in
-                ExportPlaylistItemView(music: item)
-                    .listRowInsets(EdgeInsets())
+        VStack(spacing: 0) {
+            ForEach(musicItems, id: \.uuid) { item in
+                ExportPlaylistItemView(musicItems: item)
                     .background(Color.white)
                     .foregroundStyle(.black)
+                Divider()
+                    .padding(.leading, 74)
             }
         }
-        .listStyle(.plain)
-        .scrollDisabled(true)
         .background(Color.white)
     }
-}
-
-#Preview {
-    ExportMusicListPage(musics: [MolioMusic.apt, MolioMusic.apt, MolioMusic.apt])
 }
