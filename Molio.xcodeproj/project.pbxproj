@@ -753,10 +753,10 @@
 			isa = PBXGroup;
 			children = (
 				F1E4059C2CEC935B00533701 /* Auth */,
-				2008FCBA2CE8A1B90060F3B8 /* MolioPlaylist.swift */,
-				881BBCBF2CDCF97900010A61 /* MusicFilter.swift */,
 				881622722CE3BAB900E81EA0 /* MusicDeck */,
 				881622732CE3BAC500E81EA0 /* MusicFilterProvider */,
+				2008FCBA2CE8A1B90060F3B8 /* MolioPlaylist.swift */,
+				881BBCBF2CDCF97900010A61 /* MusicFilter.swift */,
 				881BBCC02CDCF97900010A61 /* RecommendationRequestEntity.swift */,
 				F173693C2CDF191800F6242C /* MolioMusic.swift */,
 				88E4834D2CEDDD66003D624E /* MolioMusic+sample.swift */,
