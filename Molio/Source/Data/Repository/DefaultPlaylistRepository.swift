@@ -59,7 +59,9 @@ final class DefaultPlaylistRepository: PlaylistRepository {
     
     func fetchPlaylists() -> [MolioPlaylist]? {
         do {
+            fetchRequest.predicate = nil // 조건 없이 모든 데이터를 가져옴
             let playlists = try context.fetch(fetchRequest)
+
             let molioPlaylists = playlists.map { playlist in
                 MolioPlaylist(
                     id: playlist.id,
@@ -69,6 +71,7 @@ final class DefaultPlaylistRepository: PlaylistRepository {
                     filters: playlist.filters
                 )
             }
+
             return molioPlaylists
         } catch {
             print("Failed to fetch playlists: \(error)")
@@ -101,22 +104,31 @@ final class DefaultPlaylistRepository: PlaylistRepository {
         saveContext()
     }
     
-    func fetchPlaylist(for name: String) -> MolioPlaylist? {
-        fetchRequest.predicate = NSPredicate(format: "name == %@", name)
-        fetchRequest.fetchLimit = 1
-        
-        do {
-            guard let playlist = try context.fetch(fetchRequest).first else { return nil }
-            return MolioPlaylist(
-                id: playlist.id,
-                name: playlist.name,
-                createdAt: playlist.createdAt,
-                musicISRCs: playlist.musicISRCs,
-                filters: playlist.filters)
-            
-        } catch {
-            print("Failed to fetch playlist: \(error)")
-            return nil
+    func fetchPlaylist(for id: String) async -> MolioPlaylist? {
+        await withCheckedContinuation { continuation in
+            context.perform {
+                self.fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+                self.fetchRequest.returnsObjectsAsFaults = false
+                do {
+                    guard let playlist = try self.context.fetch(self.fetchRequest).first else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    print("fetchPlaylist", playlist)
+                    
+                    let molioPlaylist = MolioPlaylist(
+                        id: playlist.id,
+                        name: playlist.name,
+                        createdAt: playlist.createdAt,
+                        musicISRCs: playlist.musicISRCs,
+                        filters: playlist.filters
+                    )
+                    continuation.resume(returning: molioPlaylist)
+                } catch {
+                    print("Failed to fetch playlist: \(error)")
+                    continuation.resume(returning: nil)
+                }
+            }
         }
     }
     
