@@ -881,6 +881,16 @@
 			path = Foundation;
 			sourceTree = "<group>";
 		};
+		F135BCE32CF1DB01006C6C4F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F1770B292CEE455800C81272 /* ExportPlaylistView.swift */,
+				F1770B2B2CEEFF2200C81272 /* ExportPlaylistItemView.swift */,
+				F1770B2D2CEF0F4B00C81272 /* ExportMusicListPage.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		F17368EC2CD86B1100F6242C = {
 			isa = PBXGroup;
 			children = (
@@ -1060,9 +1070,7 @@
 			children = (
 				F1A3BB7A2CF0E4F40062C79C /* Model */,
 				F1A3BB7D2CF0E50F0062C79C /* ViewModel */,
-				F1770B292CEE455800C81272 /* ExportPlaylistView.swift */,
-				F1770B2B2CEEFF2200C81272 /* ExportPlaylistItemView.swift */,
-				F1770B2D2CEF0F4B00C81272 /* ExportMusicListPage.swift */,
+				F135BCE32CF1DB01006C6C4F /* View */,
 			);
 			path = ExportPlaylist;
 			sourceTree = "<group>";
