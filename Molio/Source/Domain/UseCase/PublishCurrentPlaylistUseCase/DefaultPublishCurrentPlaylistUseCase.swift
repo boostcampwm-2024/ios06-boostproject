@@ -24,9 +24,8 @@ final class DefaultPublishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase 
                             promise(.success(nil))
                             return                         
                             }                    
+                        let playlist = try await self.playlistRepository.fetchPlaylist(for: playlistUUID.uuidString)
 
-                        let playlist = try? await self.playlistRepository.fetchPlaylist(for: playlistUUID.uuidString)
-                        
                         promise(.success(playlist))
                     }
                     

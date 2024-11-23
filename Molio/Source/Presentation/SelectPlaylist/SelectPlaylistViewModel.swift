@@ -1,39 +1,53 @@
+import Combine
 import Foundation
 
 final class SelectPlaylistViewModel: ObservableObject {
-//    private let createPlaylistUseCase: CreatePlaylistUseCase
-//    private let changeCurrentPlaylistUseCase: ChangeCurrentPlaylistUseCase
-    @Published var playlists: [MolioPlaylist] = [
-        MolioPlaylist(id: UUID(), name: "🎧 카공할 때 듣는 플리", createdAt: Date(), musicISRCs: [], filters: []),
-        MolioPlaylist(id: UUID(), name: "🤸🏼‍♂️ 헬스할 때 듣는 플리", createdAt: Date(), musicISRCs: [], filters: []),
-        MolioPlaylist(id: UUID(), name: "🤸🏼‍♂️ 헬스할 때 듣는 플리", createdAt: Date(), musicISRCs: [], filters: []),
-        MolioPlaylist(id: UUID(), name: "🤸🏼‍♂️ 헬스할 때 듣는 플리", createdAt: Date(), musicISRCs: [], filters: []),
-        MolioPlaylist(id: UUID(), name: "🤸🏼‍♂️ 헬스할 때 듣는 플리", createdAt: Date(), musicISRCs: [], filters: []),
-        MolioPlaylist(id: UUID(), name: "🤸🏼‍♂️ 헬스할 때 듣는 플리", createdAt: Date(), musicISRCs: [], filters: []),
-        MolioPlaylist(id: UUID(), name: "🤸🏼‍♂️ 헬스할 때 듣는 플리", createdAt: Date(), musicISRCs: [], filters: []),
-        MolioPlaylist(id: UUID(), name: "🤸🏼‍♂️ 헬스할 때 듣는 플리", createdAt: Date(), musicISRCs: [], filters: []),
-        MolioPlaylist(id: UUID(), name: "🤸🏼‍♂️ 헬스할 때 듣는 플리", createdAt: Date(), musicISRCs: [], filters: []),
-        MolioPlaylist(id: UUID(), name: "🤸🏼‍♂️ 헬스할 때 듣는 플리", createdAt: Date(), musicISRCs: [], filters: []),
-        MolioPlaylist(id: UUID(), name: "🤸🏼‍♂️ 헬스할 때 듣는 플리", createdAt: Date(), musicISRCs: [], filters: []),
-        MolioPlaylist(id: UUID(), name: "🤸🏼‍♂️ 헬스할 때 듣는 플리", createdAt: Date(), musicISRCs: [], filters: []),
-        MolioPlaylist(id: UUID(), name: "🤸🏼‍♂️ 헬스할 때 듣는 플리", createdAt: Date(), musicISRCs: [], filters: []),
-        MolioPlaylist(id: UUID(), name: "🤸🏼‍♂️ 헬스할 때 듣는 플리", createdAt: Date(), musicISRCs: [], filters: []),
-        MolioPlaylist(id: UUID(), name: "🤸🏼‍♂️ 헬스할 때 듣는 플리", createdAt: Date(), musicISRCs: [], filters: []),
-        MolioPlaylist(id: UUID(), name: "🤸🏼‍♂️ 헬스할 때 듣는 플리", createdAt: Date(), musicISRCs: [], filters: []),
-
-    ]
-        
-
-    
+    @Published var playlists: [MolioPlaylist] = []
     @Published var selectedPlaylist: MolioPlaylist?
     
-//    init(
-//        createPlaylistUseCase: CreatePlaylistUseCase = DIContainer.shared.resolve(),
-//        changeCurrentPlaylistUseCase: ChangeCurrentPlaylistUseCase = DIContainer.shared.resolve()
-//    ) {
-//        self.createPlaylistUseCase = createPlaylistUseCase
-//        self.changeCurrentPlaylistUseCase = changeCurrentPlaylistUseCase
-//    }
+    private let fetchAllPlaylistsUseCase: FetchAllPlaylistsUseCase
+    private let changeCurrentPlaylistUseCase: ChangeCurrentPlaylistUseCase
+    private let publishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase
+    private var cancellables = Set<AnyCancellable>()
     
-  
+    init(
+        fetchAllPlaylistsUseCase: FetchAllPlaylistsUseCase = DefaultFetchAllPlaylistsUseCase(),
+        changeCurrentPlaylistUseCase: ChangeCurrentPlaylistUseCase = DefaultChangeCurrentPlaylistUseCase(),
+        publishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase = DIContainer.shared.resolve()
+    ) {
+        self.fetchAllPlaylistsUseCase = fetchAllPlaylistsUseCase
+        self.changeCurrentPlaylistUseCase = changeCurrentPlaylistUseCase
+        self.publishCurrentPlaylistUseCase = publishCurrentPlaylistUseCase
+        
+        bindPublishCurrentPlaylist()
+        fetchPlaylists()
+    }
+    
+    func fetchPlaylists() {
+        Task {
+            let playlists = await fetchAllPlaylistsUseCase.execute()
+            DispatchQueue.main.async {
+                self.playlists = playlists
+            }
+        }
+    }
+    
+    func selectPlaylist(_ playlist: MolioPlaylist) {
+        selectedPlaylist = playlist
+    }
+    
+    func savePlaylist () {
+        guard let selectedPlaylist else { return }
+        changeCurrentPlaylistUseCase.execute(playlistId: selectedPlaylist.id)
+    }
+    
+    private func bindPublishCurrentPlaylist() {
+        publishCurrentPlaylistUseCase.execute()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] publishedPlaylist in
+                guard let self = self else { return }
+                self.selectedPlaylist = publishedPlaylist
+            }
+            .store(in: &cancellables)
+    }
 }

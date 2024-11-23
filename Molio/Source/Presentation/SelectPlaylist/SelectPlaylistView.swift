@@ -2,9 +2,9 @@ import SwiftUI
 
 struct SelectPlaylistView: View {
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var viewModel: SelectPlaylistViewModel
-    @State private var isModalPresented = false 
-
+    @StateObject var viewModel: SelectPlaylistViewModel
+    @State private var isModalPresented = false
+    
     var placeholder: String = "00님의 몰리오"
     
     var body: some View {
@@ -22,9 +22,9 @@ struct SelectPlaylistView: View {
                 Spacer()
                     .frame(height: 5)
                 
-                List(viewModel.playlists) { playlist in
+                List(viewModel.playlists, id: \.id) { playlist in
                     Button(action: {
-                        viewModel.selectedPlaylist = playlist
+                        viewModel.selectPlaylist(playlist)
                     }) {
                         HStack {
                             Text(playlist.name)
@@ -32,7 +32,7 @@ struct SelectPlaylistView: View {
                                 .tint(.white)
                                 .opacity(0.8)
                                 .frame(height: 50)
-
+                            
                             Spacer()
                             if viewModel.selectedPlaylist?.id == playlist.id {
                                 Image(systemName: "checkmark")
@@ -43,14 +43,14 @@ struct SelectPlaylistView: View {
                     .listRowBackground(Color.clear)
                     .listRowInsets(EdgeInsets())
                     .listRowSeparator(.hidden)
-
+                    
                 }
                 .frame(minHeight: 200)
                 .padding(.horizontal, 0)
                 .padding(.vertical, 0)
                 .scrollContentBackground(.hidden)
-
-                HStack (alignment: .center, content: {
+               
+                HStack(alignment: .center, content: {
                     Spacer()
                     
                     Button(action: {
@@ -64,16 +64,18 @@ struct SelectPlaylistView: View {
                     }
                     .sheet(isPresented: $isModalPresented) {
                         CreatePlaylistView(viewModel: CreatePlaylistViewModel(createPlaylistUseCase: DefaultCreatePlaylistUseCase(repository: DefaultPlaylistRepository()), changeCurrentPlaylistUseCase: DefaultChangeCurrentPlaylistUseCase(repository: DefaultCurrentPlaylistRepository())))
-                            .presentationDetents([.fraction(0.5)]) 
+                            .presentationDetents([.fraction(0.5)])
                             .presentationDragIndicator(.visible)
                     }
                     
                     Spacer()
                 })
                 .padding(.top, 20)
-        
+                
                 Spacer()
             }
+        }.onDisappear {
+            viewModel.savePlaylist()
         }
     }
 }
