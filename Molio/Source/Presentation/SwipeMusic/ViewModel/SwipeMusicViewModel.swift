@@ -11,6 +11,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
     }
     
     struct Output {
+        let selectedPlaylist: AnyPublisher<MolioPlaylist, Never>
         let isLoading: AnyPublisher<Bool, Never> // TODO: 로딩 UI 구현 및 연결
         let buttonHighlight: AnyPublisher<ButtonHighlight, Never>
         let musicCardSwipeAnimation: AnyPublisher<SwipeDirection, Never>
@@ -24,18 +25,20 @@ final class SwipeMusicViewModel: InputOutputViewModel {
         case right = 1.0
         case none = 0
     }
-
+    
     struct ButtonHighlight {
         let isLikeHighlighted: Bool
         let isDislikeHighlighted: Bool
     }
-
+    
     var swipeThreshold: CGFloat {
         return 170.0
     }
     
     private let musicDeck: any MusicDeck
     private let fetchImageUseCase: FetchImageUseCase
+    private let publishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase
+    private let selectedPlaylistPublisher = PassthroughSubject<MolioPlaylist, Never>()
     private let isLoadingPublisher = PassthroughSubject<Bool, Never>()
     private let buttonHighlightPublisher = PassthroughSubject<ButtonHighlight, Never>()
     private let musicCardSwipeAnimationPublisher = PassthroughSubject<SwipeDirection, Never>()
@@ -47,13 +50,17 @@ final class SwipeMusicViewModel: InputOutputViewModel {
     init(
         fetchRecommendedMusicUseCase: FetchRecommendedMusicUseCase = DIContainer.shared.resolve(),
         fetchImageUseCase: FetchImageUseCase = DIContainer.shared.resolve(),
-        musicFilterProvider: any MusicFilterProvider = MockMusicFilterProvider() // TODO: - 필터 전달받기
+        musicFilterProvider: any MusicFilterProvider = MockMusicFilterProvider(), // TODO: - 필터 전달받기
+        publishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase = DIContainer.shared.resolve()
+        
     ) {
         self.musicDeck = RandomMusicDeck(
             fetchRecommendedMusicUseCase: fetchRecommendedMusicUseCase,
             musicFilterProvider: musicFilterProvider
         )
         self.fetchImageUseCase = fetchImageUseCase
+        self.publishCurrentPlaylistUseCase = publishCurrentPlaylistUseCase
+        
         setupBindings()
     }
     
@@ -71,7 +78,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
                 self?.buttonHighlightPublisher.send(buttonHighlight)
             }
             .store(in: &cancellables)
-
+        
         input.musicCardDidFinishSwipe
             .map { [weak self] translation -> SwipeDirection in
                 guard let self else { return .none }
@@ -94,7 +101,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
                 )
             }
             .store(in: &cancellables)
-
+        
         input.likeButtonDidTap
             .throttle(for: .seconds(0.4), scheduler: RunLoop.main, latest: false)
             .sink { [weak self] _ in
@@ -103,7 +110,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
                 self.musicCardSwipeAnimationPublisher.send(.right)
             }
             .store(in: &cancellables)
-
+        
         input.dislikeButtonDidTap
             .throttle(for: .seconds(0.4), scheduler: RunLoop.main, latest: false)
             .sink { [weak self] _ in
@@ -112,8 +119,9 @@ final class SwipeMusicViewModel: InputOutputViewModel {
                 self.musicCardSwipeAnimationPublisher.send(.left)
             }
             .store(in: &cancellables)
-
+        
         return Output(
+            selectedPlaylist: selectedPlaylistPublisher.eraseToAnyPublisher(),
             isLoading: isLoadingPublisher.eraseToAnyPublisher(),
             buttonHighlight: buttonHighlightPublisher.eraseToAnyPublisher(),
             musicCardSwipeAnimation: musicCardSwipeAnimationPublisher.eraseToAnyPublisher(),
@@ -168,6 +176,16 @@ final class SwipeMusicViewModel: InputOutputViewModel {
                 }
             }
             .store(in: &cancellables)
+       
+        // MARK: 현재 플레이리스트
+        publishCurrentPlaylistUseCase.execute()
+            .sink { [weak self] playlist in
+                guard let self else { return }
+                if let playlist = playlist {
+                    self.selectedPlaylistPublisher.send(playlist)
+                }
+            }
+            .store(in: &cancellables)
     }
     
     private func loadMusicCard(from music: MolioMusic) async throws -> SwipeMusicTrackModel {
@@ -176,7 +194,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
         }
         
         let imageData = try await fetchImageUseCase.execute(url: imageURL)
-
+        
         return SwipeMusicTrackModel(randomMusic: music, imageData: imageData)
     }
 }

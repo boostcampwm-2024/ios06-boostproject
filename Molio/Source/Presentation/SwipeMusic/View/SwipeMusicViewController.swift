@@ -6,7 +6,7 @@ final class SwipeMusicViewController: UIViewController {
     private var input: SwipeMusicViewModel.Input
     private var output: SwipeMusicViewModel.Output
     private let musicPlayer: AudioPlayer = SwipeMusicPlayer()
-
+    
     private let musicCardDidChangeSwipePublisher = PassthroughSubject<CGFloat, Never>()
     private let musicCardDidFinishSwipePublisher = PassthroughSubject<CGFloat, Never>()
     private let likeButtonDidTapPublisher = PassthroughSubject<Void, Never>()
@@ -18,7 +18,7 @@ final class SwipeMusicViewController: UIViewController {
     private let basicBackgroundColor = UIColor(resource: .background)
     private var impactFeedBack = UIImpactFeedbackGenerator(style: .medium)
     private var hasProvidedImpactFeedback: Bool = false
-
+    
     private let playlistSelectButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 10
@@ -30,7 +30,7 @@ final class SwipeMusicViewController: UIViewController {
     
     private let selectedPlaylistTitleLabel: UILabel = {
         let label = UILabel()
-        label.molioMedium(text: "🎧카공할 때 듣는 플리", size: 16) // TODO: 서버 연결시 text 제거
+        label.molioMedium( text: "", size: 16)
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -112,7 +112,7 @@ final class SwipeMusicViewController: UIViewController {
             dislikeButtonDidTap: dislikeButtonDidTapPublisher.eraseToAnyPublisher()
         )
         self.output = viewModel.transform(from: input)
-
+        
         super.init(coder: coder)
     }
     
@@ -130,6 +130,14 @@ final class SwipeMusicViewController: UIViewController {
     }
     
     private func setupBindings() {
+        output.selectedPlaylist
+            .receive(on: RunLoop.main)
+            .sink { [weak self] playlist in
+                guard let self else { return }
+                self.selectedPlaylistTitleLabel.text = playlist.name
+            }
+            .store(in: &cancellables)
+        
         output.currentMusicTrack
             .receive(on: RunLoop.main)
             .sink { [weak self] music in
@@ -162,7 +170,7 @@ final class SwipeMusicViewController: UIViewController {
                 self.dislikeButton.isHighlighted = buttonHighlight.isDislikeHighlighted
             }
             .store(in: &cancellables)
-
+        
         output.musicCardSwipeAnimation
             .receive(on: RunLoop.main)
             .sink { [weak self] swipeDirection in
@@ -181,7 +189,7 @@ final class SwipeMusicViewController: UIViewController {
     private func animateMusicCard(direction: SwipeMusicViewModel.SwipeDirection) {
         let currentCenter = currentCardView.center
         let frameWidth = view.frame.width
-
+        
         switch direction {
         case .left, .right:
             self.isMusicCardAnimating = true
@@ -204,7 +212,7 @@ final class SwipeMusicViewController: UIViewController {
                     }
                     
                     self.isMusicCardAnimating = false
-            })
+                })
         case .none:
             UIView.animate(withDuration: 0.3) { [weak self] in
                 guard let self else { return }
@@ -238,7 +246,7 @@ final class SwipeMusicViewController: UIViewController {
         filterButton.addTarget(self, action: #selector(didTapFilterButton), for: .touchUpInside)
         myMolioButton.addTarget(self, action: #selector(didTapMyMolioButton), for: .touchUpInside)
     }
-
+    
     /// 사용자에게 진동 feedback을 주는 메서드
     private func providedImpactFeedback(translationX: CGFloat) {
         if abs(translationX) > viewModel.swipeThreshold && !hasProvidedImpactFeedback {
@@ -248,7 +256,7 @@ final class SwipeMusicViewController: UIViewController {
             hasProvidedImpactFeedback = false
         }
     }
-
+    
     @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
         guard let card = gesture.view else { return }
         
@@ -266,13 +274,13 @@ final class SwipeMusicViewController: UIViewController {
     @objc private func didTapLikeButton() {
         likeButtonDidTapPublisher.send()
     }
-
+    
     @objc private func didTapDislikeButton() {
         dislikeButtonDidTapPublisher.send()
     }
     
     @objc func didTapPlaylistSelectButton() {
-        // TODO: DI Container로 의존성 주입        
+        // TODO: DI Container로 의존성 주입
         let selectplaylistView = SelectPlaylistView(viewModel: SelectPlaylistViewModel())
         self.presentCustomSheet(
             content: selectplaylistView
