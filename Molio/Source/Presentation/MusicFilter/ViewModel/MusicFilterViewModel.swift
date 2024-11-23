@@ -57,25 +57,23 @@ final class MusicFilterViewModel: ObservableObject {
             .store(in: &subscriptions)
     }
     
-    /// 장르 설정 정보 저장
-    private func saveGenreSelection() throws {
+    /// 새 장르로 변경된 필터 정보로 플레이리스트를 업데이트
+    private func updateFilterWithNewGenre() async throws {
+        print(#fileID, #function)
         guard let currentPlaylist = currentPlaylist else { return }
         let newFilter = MusicFilter(genres: Array(selectedGenres))
         let updatedPlaylist = currentPlaylist.updateFilter(to: newFilter)
-        Task {
-            try await updatePlaylistUseCase.execute(id: currentPlaylist.id, to: updatedPlaylist)
-        }
+        try await updatePlaylistUseCase.execute(id: currentPlaylist.id, to: updatedPlaylist)
     }
 }
 
 // MARK: - Delegate
 
 extension MusicFilterViewModel: MusicFilterViewControllerDelegate {
-    func didSaveButtonTapped() {
-        do {
-            try saveGenreSelection()
-        } catch {
-            // TODO: - 에러 처리
-        }
+    /// 저장 버튼 탭 시 동작
+    func didSaveButtonTapped() async throws -> MusicFilter {
+        print(#fileID, #function)
+        try await updateFilterWithNewGenre()
+        return MusicFilter(genres: Array(selectedGenres))
     }
 }

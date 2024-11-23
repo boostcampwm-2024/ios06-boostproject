@@ -11,6 +11,7 @@ final class SwipeMusicViewController: UIViewController {
     private let musicCardDidFinishSwipePublisher = PassthroughSubject<CGFloat, Never>()
     private let likeButtonDidTapPublisher = PassthroughSubject<Void, Never>()
     private let dislikeButtonDidTapPublisher = PassthroughSubject<Void, Never>()
+    private let filterDidUpdatePublisher = PassthroughSubject<MusicFilter, Never>()
     private var cancellables = Set<AnyCancellable>()
     
     private var isMusicCardAnimating = false
@@ -97,7 +98,8 @@ final class SwipeMusicViewController: UIViewController {
             musicCardDidChangeSwipe: musicCardDidChangeSwipePublisher.eraseToAnyPublisher(),
             musicCardDidFinishSwipe: musicCardDidFinishSwipePublisher.eraseToAnyPublisher(),
             likeButtonDidTap: likeButtonDidTapPublisher.eraseToAnyPublisher(),
-            dislikeButtonDidTap: dislikeButtonDidTapPublisher.eraseToAnyPublisher()
+            dislikeButtonDidTap: dislikeButtonDidTapPublisher.eraseToAnyPublisher(),
+            filterDidUpdate: filterDidUpdatePublisher.eraseToAnyPublisher()
         )
         self.output = viewModel.transform(from: input)
         super.init(nibName: nil, bundle: nil)
@@ -109,7 +111,8 @@ final class SwipeMusicViewController: UIViewController {
             musicCardDidChangeSwipe: musicCardDidChangeSwipePublisher.eraseToAnyPublisher(),
             musicCardDidFinishSwipe: musicCardDidFinishSwipePublisher.eraseToAnyPublisher(),
             likeButtonDidTap: likeButtonDidTapPublisher.eraseToAnyPublisher(),
-            dislikeButtonDidTap: dislikeButtonDidTapPublisher.eraseToAnyPublisher()
+            dislikeButtonDidTap: dislikeButtonDidTapPublisher.eraseToAnyPublisher(),
+            filterDidUpdate: filterDidUpdatePublisher.eraseToAnyPublisher()
         )
         self.output = viewModel.transform(from: input)
 
@@ -295,7 +298,9 @@ final class SwipeMusicViewController: UIViewController {
     
     @objc private func didTapFilterButton() {
         let viewModel = MusicFilterViewModel()
-        let musicFilterVC = MusicFilterViewController(viewModel: viewModel)
+        let musicFilterVC = MusicFilterViewController(viewModel: viewModel) { [weak self] updatedFilter in
+            self?.filterDidUpdatePublisher.send(updatedFilter)
+        }
         navigationController?.pushViewController(musicFilterVC, animated: true)
     }
     

@@ -8,6 +8,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
         let musicCardDidFinishSwipe: AnyPublisher<CGFloat, Never>
         let likeButtonDidTap: AnyPublisher<Void, Never>
         let dislikeButtonDidTap: AnyPublisher<Void, Never>
+        let filterDidUpdate: AnyPublisher<MusicFilter, Never>
     }
     
     struct Output {
@@ -46,8 +47,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
     
     init(
         fetchRecommendedMusicUseCase: FetchRecommendedMusicUseCase = DIContainer.shared.resolve(),
-        fetchImageUseCase: FetchImageUseCase = DIContainer.shared.resolve(),
-        musicFilterProvider: any MusicFilterProvider = MockMusicFilterProvider() // TODO: - 필터 전달받기
+        fetchImageUseCase: FetchImageUseCase = DIContainer.shared.resolve()
     ) {
         self.musicDeck = RandomMusicDeck(
             fetchRecommendedMusicUseCase: fetchRecommendedMusicUseCase,
@@ -110,6 +110,13 @@ final class SwipeMusicViewModel: InputOutputViewModel {
                 guard let self else { return }
                 self.musicDeck.dislikeCurrentMusic()
                 self.musicCardSwipeAnimationPublisher.send(.left)
+            }
+            .store(in: &cancellables)
+        
+        input.filterDidUpdate
+            .sink { newFilter in
+                print(#fileID, "\(newFilter.genres)로 필터 업데이트됨")
+                // TODO: - 업데이트된 필터로 노래 새로 불러오기
             }
             .store(in: &cancellables)
 
