@@ -5,6 +5,7 @@ final class ExportPlaylistViewModel: ObservableObject {
     let exportMusicListPageTopPadding: CGFloat = 50.0
     let exportMusicListPageBottomPadding: CGFloat = 72.0
     
+    @Published var isLoadingMusic = true
     @Published var selectedTab = 0
     @Published private(set) var paginatedMusicItems: [[ExportMusicItem]] = []
     
@@ -39,6 +40,7 @@ final class ExportPlaylistViewModel: ObservableObject {
         
         await MainActor.run {
             paginatedMusicItems = result
+            isLoadingMusic = false
         }
     }
     

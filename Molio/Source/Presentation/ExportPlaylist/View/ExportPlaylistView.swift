@@ -29,6 +29,11 @@ struct ExportPlaylistView: View {
                                     bottom: 15,
                                     trailing: 22)
                                 )
+                                if viewModel.isLoadingMusic {
+                                    ProgressView()
+                                        .progressViewStyle(CircularProgressViewStyle(tint: .background))
+                                        .scaleEffect(1.0, anchor: .center)
+                                }
                                 GeometryReader { geometry in
                                     ExportPlaylistPageView(
                                         musicItems: viewModel.paginatedMusicItems.isEmpty ? [] : viewModel.paginatedMusicItems[pageIndex]
