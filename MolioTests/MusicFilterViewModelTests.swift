@@ -49,7 +49,7 @@ final class MusicFilterViewModelTests: XCTestCase {
         XCTAssertEqual(result, mockUUID)
     }
     
-    func tset_현재플레이리스트가_있을때_정보를_받아오면_현재_플레이리스트_필터의_선택된_장르_정보로_갱신된다() {
+    func test_현재플레이리스트가_있을때_정보를_받아오면_현재_플레이리스트_필터의_선택된_장르_정보로_갱신된다() {
         // Given
         let mockUUID = UUID(uuidString: "12345678-1234-1234-1234-1234567890ab")!
         let mockFilter = MusicFilter(genres: [.pop, .acoustic])
