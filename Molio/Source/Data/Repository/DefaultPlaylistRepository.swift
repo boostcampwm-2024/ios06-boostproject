@@ -114,7 +114,6 @@ final class DefaultPlaylistRepository: PlaylistRepository {
                         continuation.resume(returning: nil)
                         return
                     }
-                    print("fetchPlaylist", playlist)
                     
                     let molioPlaylist = MolioPlaylist(
                         id: playlist.id,
