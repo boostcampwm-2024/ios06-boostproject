@@ -5,8 +5,10 @@ final class ExportPlaylistViewModel: ObservableObject {
     let exportMusicListPageTopPadding: CGFloat = 50.0
     let exportMusicListPageBottomPadding: CGFloat = 72.0
     
+    var alertState: AlertType = .successSaveImage
     @Published var isLoadingMusic = true
     @Published var selectedTab = 0
+    @Published var showAlert = false
     @Published private(set) var paginatedMusicItems: [[ExportMusicItem]] = []
     
     private let musics: [MolioMusic]
@@ -90,5 +92,38 @@ final class ExportPlaylistViewModel: ObservableObject {
         }
         
         return isAuthorized == .denied
+    }
+    
+    enum AlertType {
+        case deniedPhotoLibrary
+        case emptyMusicItems
+        case successSaveImage
+        case failureSaveImage
+        
+        var title: String {
+            switch self {
+            case .deniedPhotoLibrary:
+                "사진 접근 권한이 필요합니다"
+            case .emptyMusicItems:
+                "플레이리스트가 비어 있습니다"
+            case .successSaveImage:
+                "저장이 완료되었습니다"
+            case .failureSaveImage:
+                "저장에 실패했습니다"
+            }
+        }
+        
+        var message: String {
+            switch self {
+            case .deniedPhotoLibrary:
+                "사진을 저장하려면 사진 접근 권한이 필요합니다. 설정에서 접근 권한을 허용해 주세요. 설정 > Molio > 사진 접근 허용"
+            case .emptyMusicItems:
+                "사진에 저장할 음악이 없습니다.\n메인화면에서 취향에 맞는 음악을 추가해 주세요."
+            case .successSaveImage:
+                "Molio 이미지가 사진에 성공적으로 저장되었습니다."
+            case .failureSaveImage:
+                "이미지를 저장하는 중 오류가 발생했습니다. 다시 시도해 주세요."
+            }
+        }
     }
 }
