@@ -1,3 +1,3 @@
 protocol FetchAllPlaylistsUseCase {
-    func execute() -> [MolioPlaylist]
+    func execute() async -> [MolioPlaylist] 
 }

@@ -1,3 +1,5 @@
+import Foundation
+
 final class DefaultFetchAllPlaylistsUseCase: FetchAllPlaylistsUseCase {
     private let playlistRepository: any PlaylistRepository
 
@@ -7,7 +9,12 @@ final class DefaultFetchAllPlaylistsUseCase: FetchAllPlaylistsUseCase {
         self.playlistRepository = playlistRepository
     }
     
-    func execute() -> [MolioPlaylist] {
-        playlistRepository.fetchPlaylists() ?? []
+    func execute() async -> [MolioPlaylist] {
+        return await withCheckedContinuation { continuation in
+            DispatchQueue.global().async {
+                let playlists = self.playlistRepository.fetchPlaylists() ?? []
+                continuation.resume(returning: playlists)
+            }
+        }
     }
 }
