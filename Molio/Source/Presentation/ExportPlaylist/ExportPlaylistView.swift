@@ -1,16 +1,10 @@
 import SwiftUI
 
 struct ExportPlaylistView: View {
-    let itemHeight: CGFloat = 54.0
-    let exportMusicListPageTopPadding: CGFloat = 50.0
-    let exportMusicListPageBottomPadding: CGFloat = 72.0
+    @ObservedObject private var viewModel: ExportPlaylistViewModel
     
-    @State var selectedTab = 0
-    let musics: [MolioMusic]
-    @State private var exportMolioMusics: [[MolioMusic]] = []
-    
-    var numberOfPages: Int {
-        return max(1, exportMolioMusics.count)
+    init(viewModel: ExportPlaylistViewModel) {
+        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -19,8 +13,8 @@ struct ExportPlaylistView: View {
                 Color.background.ignoresSafeArea()
                 
                 VStack {
-                    TabView(selection: $selectedTab) {
-                        ForEach(0..<numberOfPages, id: \.self) { pageIndex in
+                    TabView(selection: $viewModel.selectedTab) {
+                        ForEach(0..<viewModel.numberOfPages, id: \.self) { pageIndex in
                             ZStack {
                                 VStack {
                                     Rectangle()
@@ -37,17 +31,19 @@ struct ExportPlaylistView: View {
                                 )
                                 GeometryReader { geometry in
                                     ExportMusicListPage(
-                                        musics: pageIndex < exportMolioMusics.count ? exportMolioMusics[pageIndex] : []
+                                        musicItems: viewModel.paginatedMusicItems.isEmpty ? [] : viewModel.paginatedMusicItems[pageIndex]
                                     )
                                     .cornerRadius(22)
                                     .padding(EdgeInsets(
-                                        top: exportMusicListPageTopPadding,
+                                        top: viewModel.exportMusicListPageTopPadding,
                                         leading: 22,
                                         bottom: 72,
-                                        trailing: exportMusicListPageBottomPadding)
+                                        trailing: viewModel.exportMusicListPageBottomPadding)
                                     )
                                     .onAppear {
-                                        updateExportMolioMusics(height: geometry.size.height)
+                                        Task {
+                                            await viewModel.updateExportMolioMusics(height: geometry.size.height)
+                                        }
                                     }
                                 }
                             }
@@ -56,7 +52,11 @@ struct ExportPlaylistView: View {
                     .tabViewStyle(.page)
                     
                     HStack(spacing: 15) {
-                        BasicButton(type: .saveImage) { }
+                        BasicButton(type: .saveImage) {
+                            Task {
+                                await exportPlaylistToAlbum()
+                            }
+                        }
                         BasicButton(type: .shareInstagram) { }
                     }
                     .padding(.horizontal, 22)
@@ -78,18 +78,36 @@ struct ExportPlaylistView: View {
         }
     }
     
-    /// 화면 크기에 맞게 Molio Music을 page에 맞는 모델로 변경하는 메서드
-    func updateExportMolioMusics(height: CGFloat) {
-        guard height > 0 else { return }
-        let viewHeight = height - exportMusicListPageTopPadding - exportMusicListPageBottomPadding
-        let itemMaxCountPerPage = Int(viewHeight / itemHeight)
+    /// 플레이리스트를 사진 앨범에 내보내는 메서드
+    @MainActor private func exportPlaylistToAlbum() async {
+        guard await !viewModel.isPhotoLibraryDenied() else {
+            // TODO: 설정에서 다시 세팅하는 알림창 구현
+            return
+        }
         
-        exportMolioMusics = musics.reduce(into: [[MolioMusic]]()) { result, element in
-            if let last = result.last, last.count < itemMaxCountPerPage {
-                result[result.count - 1].append(element)
-            } else {
-                result.append([element])
+        guard !viewModel.paginatedMusicItems.isEmpty else {
+            // TODO: 저장될 사진이 없습니다. 알림창 구현
+            return
+        }
+        
+        var saveImageCount: Int = 0
+        for page in 0..<viewModel.numberOfPages {
+            let render = ImageRenderer(
+                content: ExportMusicListPage(musicItems: viewModel.paginatedMusicItems[page])
+                    .frame(width: UIScreen.main.bounds.width - 44)
+            )
+            render.scale = 3.0
+            
+            if let image = render.uiImage {
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                saveImageCount += 1
             }
+        }
+        
+        if saveImageCount == viewModel.numberOfPages {
+            // TODO: 이미지 저장 성공 알림
+        } else {
+            // TODO: 이미지 저장 실패 알림
         }
     }
 }
@@ -98,8 +116,4 @@ extension ExportPlaylistView {
     enum StringLiterals {
         static let navigationTitle: String = "molio 내보내기"
     }
-}
-
-#Preview {
-    ExportPlaylistView(musics: [MolioMusic.apt, MolioMusic.apt, MolioMusic.apt, MolioMusic.apt])
 }
