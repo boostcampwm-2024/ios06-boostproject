@@ -11,6 +11,7 @@ final class DefaultPlaylistRepository: PlaylistRepository {
     private let alertNotFoundPlaylist: String = "해당 플레이리스트를 못 찾았습니다."
     private let alertNotFoundMusicsinPlaylist: String = "플레이리스트에 음악이 없습니다."
     private let alertFailDeletePlaylist: String = "플레이리스트를 삭제할 수 없습니다"
+    private let alertFailUpdatePlaylist: String = "플레이리스트를 업데이트할 수 없습니다"
     
     var playlistsPublisher: AnyPublisher<[MolioPlaylist], Never> {
         playlistsSubject.eraseToAnyPublisher()
@@ -125,6 +126,20 @@ final class DefaultPlaylistRepository: PlaylistRepository {
     
     func updatePlaylist(id: UUID, to newValue: MolioPlaylist) async throws {
         print(#fileID, #function)
+//        fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+//        
+//        do {
+//            let playlists = try context.fetch(fetchRequest)
+//            guard let playlistToUpdate = playlists.first else {
+//                showAlert(alertNotFoundPlaylist)
+//                throw CoreDataError.updateFailed
+//            }
+//            // TODO: - 객체 덮어씌우기
+//            try context.save()
+//        } catch {
+//            showAlert(alertFailUpdatePlaylist)
+//            throw CoreDataError.updateFailed
+//        }
     }
     
     // MARK: - Private Method
