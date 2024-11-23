@@ -3,6 +3,7 @@ import Foundation
 enum CoreDataError: Error {
     case invalidName
     case saveFailed
+    case updateFailed
     case notFound
     case contextUnavailable
     case unknownError
@@ -13,6 +14,8 @@ enum CoreDataError: Error {
             return "The playlist name provided is invalid."
         case .saveFailed:
             return "Failed to save the playlist."
+        case .updateFailed:
+            return "Failed to update the playlist."
         case .notFound:
             return "The requested playlist could not be found."
         case .contextUnavailable:
