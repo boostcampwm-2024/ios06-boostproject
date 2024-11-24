@@ -29,12 +29,13 @@ struct MusicListView: View {
                         selectedIndex = index
                     }
                     .swipeActions {
-                        Button(role: .destructive) {
+                        Button {
                             removeTargetMusic = music
                             isAlertPresenting.toggle()
                         } label: {
                             Label("Delete", systemImage: "trash")
                         }
+                        .tint(.red)
                     }
             }
         }
