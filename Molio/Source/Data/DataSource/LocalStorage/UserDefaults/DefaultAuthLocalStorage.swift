@@ -1,7 +1,7 @@
 import Foundation
 
 struct DefaultAuthLocalStorage: AuthLocalStorage {
-    private let userDefault = UserDefaults()
+    private let userDefault = UserDefaults.standard
     private let authModeKey: String = "auth_mode"
     private let authSelectionKey: String = "auth_selection"
     
