@@ -114,6 +114,7 @@
 		F135BCF02CF441B7006C6C4F /* DefaultAuthStateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCEF2CF441B7006C6C4F /* DefaultAuthStateRepository.swift */; };
 		F135BCF22CF445C0006C6C4F /* AuthLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCF12CF445C0006C6C4F /* AuthLocalStorage.swift */; };
 		F135BCF42CF445D7006C6C4F /* DefaultAuthLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCF32CF445D7006C6C4F /* DefaultAuthLocalStorage.swift */; };
+		F135BCF82CF45E39006C6C4F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCF72CF45E39006C6C4F /* SplashViewController.swift */; };
 		F17368F92CD86B1100F6242C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17368F82CD86B1100F6242C /* AppDelegate.swift */; };
 		F17368FB2CD86B1100F6242C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17368FA2CD86B1100F6242C /* SceneDelegate.swift */; };
 		F17369022CD86B1300F6242C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F17369012CD86B1300F6242C /* Assets.xcassets */; };
@@ -278,6 +279,7 @@
 		F135BCEF2CF441B7006C6C4F /* DefaultAuthStateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthStateRepository.swift; sourceTree = "<group>"; };
 		F135BCF12CF445C0006C6C4F /* AuthLocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLocalStorage.swift; sourceTree = "<group>"; };
 		F135BCF32CF445D7006C6C4F /* DefaultAuthLocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthLocalStorage.swift; sourceTree = "<group>"; };
+		F135BCF72CF45E39006C6C4F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		F17368F52CD86B1100F6242C /* Molio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Molio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F17368F82CD86B1100F6242C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F17368FA2CD86B1100F6242C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -651,6 +653,7 @@
 		B80970762CDB43E2007BC3C4 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				F135BCF52CF45DB0006C6C4F /* Splash */,
 				F1770B272CEE44CA00C81272 /* ExportPlaylist */,
 				88E483442CEDDD3C003D624E /* PlaylistDetail */,
 				2075FEBF2CECDDA0009834BE /* CreatePlaylist */,
@@ -905,6 +908,22 @@
 				F135BCEB2CF43F7A006C6C4F /* DefaultManageAuthenticationUseCase.swift */,
 			);
 			path = ManageAuthenticationUseCase;
+			sourceTree = "<group>";
+		};
+		F135BCF52CF45DB0006C6C4F /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				F135BCF62CF45E2D006C6C4F /* View */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		F135BCF62CF45E2D006C6C4F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F135BCF72CF45E39006C6C4F /* SplashViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		F17368EC2CD86B1100F6242C = {
@@ -1385,6 +1404,7 @@
 				F17369592CDFB73000F6242C /* RGBAColor.swift in Sources */,
 				B8046A3E2CE8780000933704 /* MusicFilterViewController.swift in Sources */,
 				2009183C2CEC9C0E0058D8C7 /* CurrentPlaylistRepository.swift in Sources */,
+				F135BCF82CF45E39006C6C4F /* SplashViewController.swift in Sources */,
 				F17368FB2CD86B1100F6242C /* SceneDelegate.swift in Sources */,
 				2075FEC42CECDE29009834BE /* ChangeCurrentPlaylistIUseCase.swift in Sources */,
 				2008FCBB2CE8A1B90060F3B8 /* PlaylistEntity.swift in Sources */,
