@@ -77,6 +77,9 @@ jobs:
           cd Resource
           ls -al
 
+      - name: Resolve Swift Packages
+        run: xcodebuild -resolvePackageDependencies
+
       # 테스트 스크립트 실행
       - name: Run tests
         run: |
