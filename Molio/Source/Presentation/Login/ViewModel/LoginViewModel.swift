@@ -49,6 +49,7 @@ final class LoginViewModel: InputOutputViewModel {
                 Task {
                     do {
                         try await self.signInAppleUseCase.excute(info: appleAuthinfo)
+                        self.manageAuthenticationUseCase.setAuthMode(.authenticated)
                         self.navigateToNextScreenPublisher.send()
                     } catch {
                         self.errorPublisher.send(error.localizedDescription) // TODO: Error 메시지 지정
@@ -60,6 +61,7 @@ final class LoginViewModel: InputOutputViewModel {
         input.skipLoginButtonDidTap
             .sink { [weak self] _ in
                 guard let self else { return }
+                self.manageAuthenticationUseCase.setAuthMode(.guest)
                 self.navigateToNextScreenPublisher.send()
             }
             .store(in: &cancellables)
