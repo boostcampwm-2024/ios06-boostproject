@@ -41,6 +41,7 @@
 		20397E702CE5DE56004ED9CE /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20397E6F2CE5DE56004ED9CE /* PersistenceManager.swift */; };
 		20397E722CE5DFC6004ED9CE /* DefaultPlaylistRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20397E712CE5DFC6004ED9CE /* DefaultPlaylistRepository.swift */; };
 		20397E802CE5FD0A004ED9CE /* DefaultPlaylistRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20397E7F2CE5FD0A004ED9CE /* DefaultPlaylistRepositoryTests.swift */; };
+		205E6A422CF4C4D9005E9150 /* CRUDProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205E6A412CF4C4D9005E9150 /* CRUDProtocol.swift */; };
 		2075FEC12CECDDC0009834BE /* CreatePlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC02CECDDC0009834BE /* CreatePlaylistViewModel.swift */; };
 		2075FEC42CECDE29009834BE /* ChangeCurrentPlaylistIUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC32CECDE29009834BE /* ChangeCurrentPlaylistIUseCase.swift */; };
 		2075FEC62CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC52CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift */; };
@@ -204,6 +205,7 @@
 		20397E6F2CE5DE56004ED9CE /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		20397E712CE5DFC6004ED9CE /* DefaultPlaylistRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPlaylistRepository.swift; sourceTree = "<group>"; };
 		20397E7F2CE5FD0A004ED9CE /* DefaultPlaylistRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPlaylistRepositoryTests.swift; sourceTree = "<group>"; };
+		205E6A412CF4C4D9005E9150 /* CRUDProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUDProtocol.swift; sourceTree = "<group>"; };
 		2075FEC02CECDDC0009834BE /* CreatePlaylistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaylistViewModel.swift; sourceTree = "<group>"; };
 		2075FEC32CECDE29009834BE /* ChangeCurrentPlaylistIUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCurrentPlaylistIUseCase.swift; sourceTree = "<group>"; };
 		2075FEC52CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChangeCurrentPlaylistIUseCase.swift; sourceTree = "<group>"; };
@@ -756,6 +758,7 @@
 				20397E592CE5CB3C004ED9CE /* PlaylistRepository.swift */,
 				F1E405A62CECA22900533701 /* SignAppleRepository.swift */,
 				2009183B2CEC9C0E0058D8C7 /* CurrentPlaylistRepository.swift */,
+				205E6A412CF4C4D9005E9150 /* CRUDProtocol.swift */,
 			);
 			path = RepositoryInterface;
 			sourceTree = "<group>";
@@ -1327,6 +1330,7 @@
 				B8D554062CE0ED2C007CCD6D /* SpotifyAPI.swift in Sources */,
 				B8046A442CE9250B00933704 /* MusicGenre.swift in Sources */,
 				B8D554C82CE34A47007CCD6D /* String+Extension.swift in Sources */,
+				205E6A422CF4C4D9005E9150 /* CRUDProtocol.swift in Sources */,
 				881BBCC12CDCF97900010A61 /* MusicFilter.swift in Sources */,
 				2010485B2CEA2B1B0015E800 /* DefaultCreatePlaylistUseCase.swift in Sources */,
 				201048512CEA23190015E800 /* addGradientBackground.swift in Sources */,
