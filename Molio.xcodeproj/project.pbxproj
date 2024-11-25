@@ -1258,6 +1258,7 @@
 					};
 					F17369322CDCE31C00F6242C = {
 						CreatedOnToolsVersion = 15.4;
+						TestTargetID = F17368F42CD86B1100F6242C;
 					};
 				};
 			};
@@ -1689,6 +1690,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2010484A2CE9FC8D0015E800 /* Secrets.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
@@ -1704,6 +1706,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Molio.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Molio";
 			};
 			name = Debug;
 		};
@@ -1711,6 +1714,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2010484A2CE9FC8D0015E800 /* Secrets.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
@@ -1726,6 +1730,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Molio.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Molio";
 			};
 			name = Release;
 		};
