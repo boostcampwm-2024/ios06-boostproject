@@ -8,4 +8,6 @@ protocol MusicDeck {
     func likeCurrentMusic()
     
     func dislikeCurrentMusic()
+    
+    func reset(with filter: MusicFilter)
 }

@@ -50,8 +50,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
         fetchImageUseCase: FetchImageUseCase = DIContainer.shared.resolve()
     ) {
         self.musicDeck = RandomMusicDeck(
-            fetchRecommendedMusicUseCase: fetchRecommendedMusicUseCase,
-            musicFilterProvider: musicFilterProvider
+            fetchRecommendedMusicUseCase: fetchRecommendedMusicUseCase
         )
         self.fetchImageUseCase = fetchImageUseCase
         setupBindings()
@@ -114,9 +113,9 @@ final class SwipeMusicViewModel: InputOutputViewModel {
             .store(in: &cancellables)
         
         input.filterDidUpdate
-            .sink { newFilter in
+            .sink { [weak self] newFilter in
                 print(#fileID, "\(newFilter.genres)로 필터 업데이트됨")
-                // TODO: - 업데이트된 필터로 노래 새로 불러오기
+                self?.musicDeck.reset(with: newFilter)
             }
             .store(in: &cancellables)
 
