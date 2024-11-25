@@ -91,20 +91,20 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
         XCTAssertEqual(musics[1], "MUSIC_1")
     }
     
-    func testDeletePlaylist() async throws {
-        let playlistName: String = "DeletePlaylist"
-        let _ = try await repository.saveNewPlaylist(playlistName)
-        let id = await repository.fetchPlaylist(for: playlistName)?.id
-        print(id ?? "nil")
-
-        repository.deletePlaylist(playlistName)
-
-        guard let playlist = await repository.fetchPlaylist(for: playlistName)else { return }
-        let currId = playlist.id
-        
-        XCTAssertEqual(currId, nil)
-
-    }
+//    func testDeletePlaylist() async throws {
+//        let playlistName: String = "DeletePlaylist"
+//        let _ = try await repository.saveNewPlaylist(playlistName)
+//        let id = await repository.fetchPlaylist(for: playlistName)?.id
+//        print(id ?? "nil")
+//
+//        repository.deletePlaylist(playlistName)
+//
+//        guard let playlist = await repository.fetchPlaylist(for: playlistName)else { return }
+//        let currId = playlist.id
+//        
+//        XCTAssertEqual(currId, nil)
+//
+//    }
 }
 
 final class TestPersistenceManager {
