@@ -1,23 +1,23 @@
-import XCTest
-@testable import Molio
-
-final class MusicDeckTests: XCTestCase {
-    private var sut: RandomMusicDeck!
-    
-    override func setUpWithError() throws {
-        let mockPlaylist = MolioPlaylist.mock
-        let mockPublishCurrentPlaylistUseCase = MockPublishCurrentPlaylistUseCase(mockPlaylist: mockPlaylist)
-        let mockFetchRecommendedMusicUseCase = MockFetchRecommendedMusicUseCase()
-        sut = RandomMusicDeck(
-            publishCurrentPlaylistUseCase: mockPublishCurrentPlaylistUseCase,
-            fetchRecommendedMusicUseCase: mockFetchRecommendedMusicUseCase
-        )
-    }
-    
-    override func tearDownWithError() throws {
-        sut = nil
-    }
-    
+//import XCTest
+//@testable import Molio
+//
+//final class MusicDeckTests: XCTestCase {
+//    private var sut: RandomMusicDeck!
+//    
+//    override func setUpWithError() throws {
+//        let mockPlaylist = MolioPlaylist.mock
+//        let mockPublishCurrentPlaylistUseCase = MockPublishCurrentPlaylistUseCase(mockPlaylist: mockPlaylist)
+//        let mockFetchRecommendedMusicUseCase = MockFetchRecommendedMusicUseCase()
+//        sut = RandomMusicDeck(
+//            publishCurrentPlaylistUseCase: mockPublishCurrentPlaylistUseCase,
+//            fetchRecommendedMusicUseCase: mockFetchRecommendedMusicUseCase
+//        )
+//    }
+//    
+//    override func tearDownWithError() throws {
+//        sut = nil
+//    }
+//    
 //    func test_RandomMusicDeck_초기화시_fetchRecommendedMusicUseCase_유즈케이스를_한_번_실행한다() async throws {
 //        // Given
 //        let mockFetchRecommendedMusicUseCase = MockFetchRecommendedMusicUseCase()
@@ -81,27 +81,4 @@ final class MusicDeckTests: XCTestCase {
 //            deck.likeCurrentMusic()
 //        }
 //    }
-}
-
-
-final class MockFetchRecommendedMusicUseCase: FetchRecommendedMusicUseCase {
-    var mockMusic = MolioMusic(
-        title: "노래1",
-        artistName: "아티스트1",
-        gerneNames: [MusicGenre.pop.rawValue, MusicGenre.acoustic.rawValue],
-        isrc: "1111",
-        previewAsset: URL(filePath: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/95/79/f5/9579f50e-ac47-1e43-acab-d422cbe17a21/mzaf_12002777810095615569.plus.aac.p.m4a")!,
-        artworkImageURL: nil,
-        artworkBackgroundColor: nil,
-        primaryTextColor: nil
-    )
-    
-    var excutedCount: Int = 0
-    var musicsToReturn: [MolioMusic] {
-        Array(repeating: mockMusic, count: 100)
-    }
-    func execute(with filter: Molio.MusicFilter) async throws -> [MolioMusic] {
-        excutedCount += 1
-        return musicsToReturn
-    }
-}
+//}
