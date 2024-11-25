@@ -115,6 +115,7 @@
 		F135BCF22CF445C0006C6C4F /* AuthLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCF12CF445C0006C6C4F /* AuthLocalStorage.swift */; };
 		F135BCF42CF445D7006C6C4F /* DefaultAuthLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCF32CF445D7006C6C4F /* DefaultAuthLocalStorage.swift */; };
 		F135BCF82CF45E39006C6C4F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCF72CF45E39006C6C4F /* SplashViewController.swift */; };
+		F135BCFB2CF4620C006C6C4F /* SplahViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCFA2CF4620C006C6C4F /* SplahViewModel.swift */; };
 		F17368F92CD86B1100F6242C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17368F82CD86B1100F6242C /* AppDelegate.swift */; };
 		F17368FB2CD86B1100F6242C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17368FA2CD86B1100F6242C /* SceneDelegate.swift */; };
 		F17369022CD86B1300F6242C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F17369012CD86B1300F6242C /* Assets.xcassets */; };
@@ -280,6 +281,7 @@
 		F135BCF12CF445C0006C6C4F /* AuthLocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLocalStorage.swift; sourceTree = "<group>"; };
 		F135BCF32CF445D7006C6C4F /* DefaultAuthLocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthLocalStorage.swift; sourceTree = "<group>"; };
 		F135BCF72CF45E39006C6C4F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		F135BCFA2CF4620C006C6C4F /* SplahViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplahViewModel.swift; sourceTree = "<group>"; };
 		F17368F52CD86B1100F6242C /* Molio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Molio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F17368F82CD86B1100F6242C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F17368FA2CD86B1100F6242C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -913,6 +915,7 @@
 		F135BCF52CF45DB0006C6C4F /* Splash */ = {
 			isa = PBXGroup;
 			children = (
+				F135BCF92CF461F8006C6C4F /* ViewModel */,
 				F135BCF62CF45E2D006C6C4F /* View */,
 			);
 			path = Splash;
@@ -924,6 +927,14 @@
 				F135BCF72CF45E39006C6C4F /* SplashViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		F135BCF92CF461F8006C6C4F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F135BCFA2CF4620C006C6C4F /* SplahViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		F17368EC2CD86B1100F6242C = {
@@ -1288,6 +1299,7 @@
 				B88F80BE2CE4927B000480E6 /* FilterTag.swift in Sources */,
 				F17369492CDF250200F6242C /* DefaultFetchRecommendedMusicUseCase.swift in Sources */,
 				B8D554842CE0F3F3007CCD6D /* SpotifyAccessTokenResponseDTO.swift in Sources */,
+				F135BCFB2CF4620C006C6C4F /* SplahViewModel.swift in Sources */,
 				F173697B2CE4AAC600F6242C /* AudioPlayer.swift in Sources */,
 				F1E4058C2CEB8FC500533701 /* LoginViewController.swift in Sources */,
 				B8D553F22CDFE33A007CCD6D /* SpotifyAuthorizationAPI.swift in Sources */,
