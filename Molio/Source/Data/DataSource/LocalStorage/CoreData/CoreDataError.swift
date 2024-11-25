@@ -1,6 +1,6 @@
 import Foundation
 
-enum CoreDataError: Error {
+enum CoreDataError: LocalizedError {
     case invalidName
     case saveFailed
     case updateFailed
@@ -8,7 +8,7 @@ enum CoreDataError: Error {
     case contextUnavailable
     case unknownError
 
-    var localizedDescription: String {
+    var errorDescription: String? {
         switch self {
         case .invalidName:
             return "The playlist name provided is invalid."

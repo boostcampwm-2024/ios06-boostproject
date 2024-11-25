@@ -78,7 +78,7 @@ final class MusicFilterViewController: UIHostingController<MusicFilterView> {
                     self?.onPopCompletion(updatedFilter)
                 }
             } catch {
-                // TODO: - 에러 처리
+                showAlertWithOKButton(title: "필터 수정에 실패했습니다", message: error.localizedDescription)
             }
         }
     }
