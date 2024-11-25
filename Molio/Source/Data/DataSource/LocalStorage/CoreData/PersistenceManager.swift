@@ -18,15 +18,14 @@ final class PersistenceManager {
         return persistenceContainer.viewContext
     }
     
-    func saveContext() {
+    func saveContext() throws {
         let context = persistenceContainer.viewContext
         if context.hasChanges {
             do {
                 try context.save()
             } catch {
                 let nserror = error as NSError
-                fatalError("Unresolved Error \(nserror), \(nserror.userInfo)")
-                // TODO: 사용자 알림창 띄워주기로 변경
+                throw CoreDataError.saveFailed
             }
         }
     }

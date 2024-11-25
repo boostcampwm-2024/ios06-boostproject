@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(RecommendedMusicRepository.self, dependency: DefaultRecommendedMusicRepository())
         container.register(ImageRepository.self, dependency: DefaultImageRepository())
         container.register(CurrentPlaylistRepository.self, dependency: DefaultCurrentPlaylistRepository())
-        container.register(PlaylistRepository.self, dependency: DefaultPlaylistRepository())
+        container.register(PlaylistRepository.self, dependency: MockPlaylistRepository())
         
         // UseCase
         container.register(FetchRecommendedMusicUseCase.self, dependency: DefaultFetchRecommendedMusicUseCase())
