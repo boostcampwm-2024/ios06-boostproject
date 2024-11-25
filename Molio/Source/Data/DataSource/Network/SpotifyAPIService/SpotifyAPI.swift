@@ -53,7 +53,7 @@ extension SpotifyAPI: EndPoint {
             return nil
         case .getRecommendations(let genres, _):
             return [
-                "limit": "20", // TODO: - 개수 정하기
+                "limit": "100",
                 "market": "KR",
                 "seed_genres": genres.joined(separator: ",")
             ]
