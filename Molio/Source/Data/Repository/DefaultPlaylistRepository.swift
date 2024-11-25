@@ -124,22 +124,42 @@ final class DefaultPlaylistRepository: PlaylistRepository {
         }
     }
     
-    func updatePlaylist(id: UUID, to newValue: MolioPlaylist) async throws {
+    /// 플레이리스트 정보 업데이트
+    func updatePlaylist(
+        of id: UUID,
+        name: String?,
+        filter: MusicFilter?,
+        musicISRCs: [String]?,
+        like: [String]?
+    ) async throws {
         print(#fileID, #function)
-//        fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
-//        
-//        do {
-//            let playlists = try context.fetch(fetchRequest)
-//            guard let playlistToUpdate = playlists.first else {
-//                showAlert(alertNotFoundPlaylist)
-//                throw CoreDataError.updateFailed
-//            }
-//            // TODO: - 객체 덮어씌우기
-//            try context.save()
-//        } catch {
-//            showAlert(alertFailUpdatePlaylist)
-//            throw CoreDataError.updateFailed
-//        }
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        
+        do {
+            let playlists = try context.fetch(fetchRequest)
+            guard let playlistToUpdate = playlists.first else {
+                showAlert(alertNotFoundPlaylist)
+                throw CoreDataError.updateFailed
+            }
+            
+            if let name = name {
+                playlistToUpdate.name = name
+            }
+            if let filter = filter {
+                playlistToUpdate.filters = filter.genres.map(\.rawValue)
+            }
+            if let musicISRCs = musicISRCs {
+                playlistToUpdate.filters = musicISRCs
+            }
+            if let like = like {
+                // TODO: - 좋아요 업데이트
+            }
+            
+            try context.save()
+        } catch {
+            showAlert(alertFailUpdatePlaylist)
+            throw CoreDataError.updateFailed
+        }
     }
     
     // MARK: - Private Method

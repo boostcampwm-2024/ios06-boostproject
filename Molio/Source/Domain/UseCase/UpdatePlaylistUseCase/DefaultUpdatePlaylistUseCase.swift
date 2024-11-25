@@ -9,8 +9,8 @@ struct DefaultUpdatePlaylistUseCase: UpdatePlaylistUseCase {
         self.playlistRepository = playlistRepository
     }
     
-    func execute(id: UUID, to updatedPlaylist: MolioPlaylist) async throws {
+    func execute(of id: UUID, name: String?, filter: MusicFilter?, musicISRCs: [String]?, like: [String]?) async throws {
         print(#fileID, #function)
-        try await playlistRepository.updatePlaylist(id: id, to: updatedPlaylist)
+        try await playlistRepository.updatePlaylist(of: id, name: name, filter: filter, musicISRCs: musicISRCs, like: like)
     }
 }

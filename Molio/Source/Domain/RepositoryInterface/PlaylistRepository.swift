@@ -12,5 +12,5 @@ protocol PlaylistRepository {
     func deletePlaylist(_ playlistName: String)
     func fetchPlaylists() -> [MolioPlaylist]?
     func fetchPlaylist(for name: String)  async throws -> MolioPlaylist?
-    func updatePlaylist(id: UUID, to newValue: MolioPlaylist) async throws
+    func updatePlaylist(of id: UUID, name: String?, filter: MusicFilter?, musicISRCs: [String]?, like: [String]?) async throws
 }

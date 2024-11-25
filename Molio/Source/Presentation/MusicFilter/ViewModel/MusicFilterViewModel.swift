@@ -62,8 +62,13 @@ final class MusicFilterViewModel: ObservableObject {
         print(#fileID, #function)
         guard let currentPlaylist = currentPlaylist else { return }
         let newFilter = MusicFilter(genres: Array(selectedGenres))
-        let updatedPlaylist = currentPlaylist.updateFilter(to: newFilter)
-        try await updatePlaylistUseCase.execute(id: currentPlaylist.id, to: updatedPlaylist)
+        try await updatePlaylistUseCase.execute(
+            of: currentPlaylist.id,
+            name: nil,
+            filter: newFilter,
+            musicISRCs: nil,
+            like: nil
+        )
     }
 }
 
