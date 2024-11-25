@@ -2,15 +2,15 @@ import XCTest
 import CoreData
 @testable import Molio
 
-final class DefaultPlaylistRepositoryTests: XCTestCase {
-    var repository: DefaultPlaylistRepository!
+final class CoreDataPlaylistRepositoryTests: XCTestCase {
+    var repository: CoreDataPlaylistRepository!
     var context: NSManagedObjectContext!
     let fetchRequest: NSFetchRequest<Playlist> = Playlist.fetchRequest()
 
     override func setUp() {
         super.setUp()
-        context = TestPersistenceManager.shared.context
-        repository = DefaultPlaylistRepository(context: context)
+        context = TestPersistenceManager.shared.newInMemoryContext()
+        repository = CoreDataPlaylistRepository(context: context)
         
     }
     
@@ -20,111 +20,138 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
         super.tearDown()
     }
     
-    func testSaveNewPlaylist() async throws {
-        let playlistName: String = "TestPlaylist"
-        
-        let _ = try await repository.saveNewPlaylist(playlistName)
-                
-        guard let playlist = await repository.fetchPlaylist(for: playlistName)else { return }
-                
-        XCTAssertEqual(playlist.name, playlistName)
-    }
-    
-    func testAddMusic() async throws {
-        let playlistName: String = "AddMusicPlaylist"
-        let testISRC = "TEST_ISRC"
-        
-        let _ = try await repository.saveNewPlaylist(playlistName)
-        repository.addMusic(isrc: testISRC, to: playlistName)
-        
-        guard let playlist = await repository.fetchPlaylist(for: playlistName)else { return }
-        
-        let musics = playlist.musicISRCs
-        
-        XCTAssertEqual(musics.count, 1)
-        XCTAssertEqual(musics.first, testISRC)
-    }
-    
-    func testDeleteMusic() async throws {
-        let playlistName: String = "AddMusicPlaylist"
-        let testISRC = "TEST_ISRC"
-        
-        repository.addMusic(isrc: testISRC, to: playlistName)
-        repository.deleteMusic(isrc: testISRC, in: playlistName)
-        
-        guard let playlist = await repository.fetchPlaylist(for: playlistName)else { return }
-        
-        let musics = playlist.musicISRCs
-        
-        XCTAssertTrue(musics.isEmpty ?? false)
-    }
-    
-    func testFetchMusics() async throws {
-        let playlistName: String = "FetchMusicsPlaylist"
-        let _ = try await repository.saveNewPlaylist(playlistName)
-        
-        repository.addMusic(isrc: "MUSIC_1", to: playlistName)
-        repository.addMusic(isrc: "MUSIC_2", to: playlistName)
-        
-        guard let playlist = await repository.fetchPlaylist(for: playlistName)else { return }
-        let musics = playlist.musicISRCs
+    func testCreatePlaylist() async throws {
+        let playlist = MolioPlaylist(
+            id: UUID(),
+            name: "Test Playlist",
+            createdAt: Date(),
+            musicISRCs: ["ISRC001", "ISRC002"],
+            filters: ["Filter1"]
+        )
 
-        XCTAssertEqual(musics.count, 2)
-        XCTAssertEqual(musics[0], "MUSIC_1")
-        XCTAssertEqual(musics[1], "MUSIC_2")
-    }
-    
-    func testMoveMusic() async throws {
-        let playlistName: String = "MoveMusicPlaylist"
-        let _ = try await repository.saveNewPlaylist(playlistName)
-
-        repository.addMusic(isrc: "MUSIC_1", to: playlistName)
-        repository.addMusic(isrc: "MUSIC_2", to: playlistName)
-
-        repository.moveMusic(isrc: "MUSIC_1", in: playlistName, fromIndex: 0, toIndex: 1)
-
+        try await repository.create(playlist)
         
-        guard let playlist = await repository.fetchPlaylist(for: playlistName)else { return }
-        let musics = playlist.musicISRCs
-
-        XCTAssertEqual(musics[0], "MUSIC_2")
-        XCTAssertEqual(musics[1], "MUSIC_1")
+        let fetchedPlaylist = try await repository.read(by: playlist.id.uuidString)
+        
+        XCTAssertNotNil(fetchedPlaylist)
+        XCTAssertEqual(fetchedPlaylist?.name, playlist.name)
+        XCTAssertEqual(fetchedPlaylist?.musicISRCs, playlist.musicISRCs)
+        XCTAssertEqual(fetchedPlaylist?.filters, playlist.filters)
     }
-    
+
+    func testReadPlaylist() async throws {
+        let playlist = MolioPlaylist(
+            id: UUID(),
+            name: "Sample Playlist",
+            createdAt: Date(),
+            musicISRCs: ["ISRC123"],
+            filters: ["Genre1"]
+        )
+
+        try await repository.create(playlist)
+
+        let fetchedPlaylist = try await repository.read(by: playlist.id.uuidString)
+        XCTAssertNotNil(fetchedPlaylist)
+        XCTAssertEqual(fetchedPlaylist?.id, playlist.id)
+        XCTAssertEqual(fetchedPlaylist?.name, playlist.name)
+        XCTAssertEqual(fetchedPlaylist?.musicISRCs, playlist.musicISRCs)
+        XCTAssertEqual(fetchedPlaylist?.filters, playlist.filters)
+    }
+
+    func testReadAllPlaylists() async throws {
+        let playlist1 = MolioPlaylist(
+            id: UUID(),
+            name: "Playlist 1",
+            createdAt: Date(),
+            musicISRCs: ["ISRC001"],
+            filters: ["Filter1"]
+        )
+
+        let playlist2 = MolioPlaylist(
+            id: UUID(),
+            name: "Playlist 2",
+            createdAt: Date(),
+            musicISRCs: ["ISRC002", "ISRC003"],
+            filters: ["Filter2"]
+        )
+
+        try await repository.create(playlist1)
+        try await repository.create(playlist2)
+
+        let playlists = try await repository.readAll()
+        XCTAssertEqual(playlists.count, 2)
+        XCTAssertTrue(playlists.contains { $0.id == playlist1.id })
+        XCTAssertTrue(playlists.contains { $0.id == playlist2.id })
+    }
+
+    func testUpdatePlaylist() async throws {
+        let uuid = UUID()
+        let playlist = MolioPlaylist(
+            id: uuid,
+            name: "Old Playlist Name",
+            createdAt: Date(),
+            musicISRCs: ["ISRC001"],
+            filters: ["Filter1"]
+        )
+
+        try await repository.create(playlist)
+        
+        let updatedPlaylist = MolioPlaylist(
+            id: uuid,
+            name: "Updated Playlist Name",
+            createdAt: Date(),
+            musicISRCs: ["ISRC004"],
+            filters: ["Filter2"]
+        )
+
+        try await repository.update(updatedPlaylist)
+        let fetchedPlaylist = try await repository.read(by: updatedPlaylist.id.uuidString)
+        XCTAssertNotNil(fetchedPlaylist)
+        
+        XCTAssertEqual(fetchedPlaylist?.name, updatedPlaylist.name)
+        XCTAssertEqual(fetchedPlaylist?.musicISRCs, updatedPlaylist.musicISRCs)
+        XCTAssertEqual(fetchedPlaylist?.filters, updatedPlaylist.filters)
+    }
+
     func testDeletePlaylist() async throws {
-        let playlistName: String = "DeletePlaylist"
-        let _ = try await repository.saveNewPlaylist(playlistName)
-        let id = await repository.fetchPlaylist(for: playlistName)?.id
-        print(id ?? "nil")
+        let playlist = MolioPlaylist(
+            id: UUID(),
+            name: "Playlist to Delete",
+            createdAt: Date(),
+            musicISRCs: ["ISRC001"],
+            filters: ["Filter1"]
+        )
 
-        repository.deletePlaylist(playlistName)
+        try await repository.create(playlist)
 
-        guard let playlist = await repository.fetchPlaylist(for: playlistName)else { return }
-        let currId = playlist.id
-        
-        XCTAssertEqual(currId, nil)
+        try await repository.delete(by: playlist.id.uuidString)
 
+        let fetchedPlaylist = try await repository.read(by: playlist.id.uuidString)
+        XCTAssertNil(fetchedPlaylist)
     }
 }
 
 final class TestPersistenceManager {
     static let shared = TestPersistenceManager()
     private init() {}
-    
-    lazy var context: NSManagedObjectContext = {
-        let persistentContainer = NSPersistentContainer(name: "MolioModel")
+
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "MolioModel")
         let description = NSPersistentStoreDescription()
         description.type = NSInMemoryStoreType
-        persistentContainer.persistentStoreDescriptions = [description]
+        container.persistentStoreDescriptions = [description]
 
-        persistentContainer.loadPersistentStores { _, error in
+        container.loadPersistentStores { _, error in
             if let error = error {
                 fatalError("Failed to load in-memory Core Data stack: \(error)")
             }
         }
-
-        let context = persistentContainer.viewContext
-        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy // 병합 정책 설정
-        return context
+        return container
     }()
+
+    func newInMemoryContext() -> NSManagedObjectContext {
+        let context = persistentContainer.newBackgroundContext()
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        return context
+    }
 }
