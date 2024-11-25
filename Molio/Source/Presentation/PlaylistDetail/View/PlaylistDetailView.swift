@@ -11,60 +11,60 @@ struct PlaylistDetailView: View {
     }
 
     var body: some View {
-        MusicListView(musics: $viewModel.currentPlaylistMusics, selectedIndex: $selectedIndex)
-            .foregroundStyle(.white)
-            .listStyle(.plain)
-            .background(Color.background)
-            .scrollContentBackground(.hidden)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        isPlaylistChangeSheetPresented.toggle()
-                    } label: {
-                        HStack(spacing: 10) {
-                            Text(viewModel.currentPlaylist?.name ?? "제목 없음")
-                                .font(.pretendardBold(size: 34))
+        VStack(alignment: .leading, spacing: 0) {
+            Button {
+                isPlaylistChangeSheetPresented.toggle()
+            } label: {
+                HStack(spacing: 10) {
+                    Text(viewModel.currentPlaylist?.name ?? "제목 없음")
+                        .font(.pretendardBold(size: 34))
 
-                            Image(systemName: "chevron.down")
-                        }
-                        .bold()
-                        .foregroundStyle(.white)
-                        .padding()
-                        .padding(.bottom, 5)
-                    }
+                    Image(systemName: "chevron.down")
                 }
+                .bold()
+                .foregroundStyle(.white)
             }
-            .toolbarBackground(
-                Color.background,
-                for: .navigationBar
-            )
-            .safeAreaInset(edge: .bottom) {
-                HStack {
-                    Spacer(minLength: 20)
+            .padding(.leading, 12)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            
+            MusicListView(musics: $viewModel.currentPlaylistMusics, selectedIndex: $selectedIndex)
+                .foregroundStyle(.white)
+                .listStyle(.plain)
+                .background(Color.background)
+                .scrollContentBackground(.hidden)
+                .toolbarBackground(
+                    Color.background,
+                    for: .navigationBar
+                )
+        }
+        .background(Color.background)
+        .safeAreaInset(edge: .bottom) {
+            HStack {
+                Spacer(minLength: 20)
 
-                    AudioPlayerControlView(musics: $viewModel.currentPlaylistMusics, selectedIndex: $selectedIndex)
-                        .layoutPriority(1)
+                AudioPlayerControlView(musics: $viewModel.currentPlaylistMusics, selectedIndex: $selectedIndex)
+                    .layoutPriority(1)
 
-                    Spacer(minLength: 10)
+                Spacer(minLength: 10)
 
-                    Button {
-                    } label: {
-                        Image.molioExtraBold(systemName: "square.and.arrow.up", size: 20, color: .main)
-                    }
-                    .frame(width: 66, height: 66) 
-                    .background(Color.gray)
-                    .clipShape(Circle())
-                    .shadow(radius: 5)
-                    Spacer(minLength: 20)
+                Button {
+                } label: {
+                    Image.molioExtraBold(systemName: "square.and.arrow.up", size: 20, color: .main)
                 }
-                .font(.title)
-                .tint(Color.main)
-                .frame(maxWidth: .infinity, maxHeight: 66)
-                .padding(.bottom)
+                .frame(width: 66, height: 66)
+                .background(Color.gray)
+                .clipShape(Circle())
+                .shadow(radius: 5)
+                Spacer(minLength: 20)
             }
-            .sheet(isPresented: $isPlaylistChangeSheetPresented) {
-                Text("Playlist Change Sheet")
-            }
+            .font(.title)
+            .tint(Color.main)
+            .frame(maxWidth: .infinity, maxHeight: 66)
+            .padding(.bottom)
+        }
+        .sheet(isPresented: $isPlaylistChangeSheetPresented) {
+            Text("Playlist Change Sheet")
+        }
     }
 }
 
