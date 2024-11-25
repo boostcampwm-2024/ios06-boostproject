@@ -11,5 +11,5 @@ protocol PlaylistRepository {
     func saveNewPlaylist(_ playlistName: String) async throws -> UUID
     func deletePlaylist(_ playlistName: String)
     func fetchPlaylists() -> [MolioPlaylist]?
-    func fetchPlaylist(for name: String)  async throws -> MolioPlaylist?
+    func fetchPlaylist(for id: String) async throws -> MolioPlaylist?
 }
