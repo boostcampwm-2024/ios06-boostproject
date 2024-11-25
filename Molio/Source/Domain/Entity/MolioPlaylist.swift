@@ -6,6 +6,24 @@ struct MolioPlaylist: Identifiable {
     let createdAt: Date
     let musicISRCs: [String]
     let filter: MusicFilter
+    let like: [String]? // TODO
+
+    init(
+        id: UUID,
+        name: String,
+        createdAt: Date,
+        musicISRCs: [String],
+        filter: MusicFilter,
+        like: [String]? = []
+    ) {
+        self.id = id
+        self.name = name
+        self.createdAt = createdAt
+        self.musicISRCs = musicISRCs
+        self.filter = filter
+        self.like = like
+    }
+
 }
 
 extension MolioPlaylist {
