@@ -14,7 +14,7 @@ final class MusicFilterViewModel: ObservableObject {
     
     init(
         fetchAvailableGenresUseCase: FetchAvailableGenresUseCase = DIContainer.shared.resolve(),
-        publishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase = MockPublishCurrentPlaylistUseCase(), // TODO: - 실제 구현체 변경
+        publishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase = DIContainer.shared.resolve(),
         updatePlaylistUseCase: UpdatePlaylistUseCase = DIContainer.shared.resolve(),
         allGenres: [MusicGenre] = MusicGenre.allCases,
         selectedGenres: Set<MusicGenre> = []
