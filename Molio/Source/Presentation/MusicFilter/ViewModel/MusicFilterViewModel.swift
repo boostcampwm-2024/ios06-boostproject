@@ -50,6 +50,7 @@ final class MusicFilterViewModel: ObservableObject {
     /// - 현재 플레이리스트에서 선택된 장르들
     private func bindCurrentPlaylist() {
         publishCurrentPlaylistUseCase.execute()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] playlist in
                 self?.currentPlaylist = playlist
                 self?.selectedGenres = Set<MusicGenre>(playlist?.filter.genres ?? [])
