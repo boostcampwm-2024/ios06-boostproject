@@ -25,9 +25,9 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
         
         let _ = try await repository.saveNewPlaylist(playlistName)
                 
-        let playlist = await repository.fetchPlaylist(for: playlistName)
-        
-        XCTAssertEqual(playlist?.name, playlistName)
+        guard let playlist = await repository.fetchPlaylist(for: playlistName)else { return }
+                
+        XCTAssertEqual(playlist.name, playlistName)
     }
     
     func testAddMusic() async throws {
@@ -45,15 +45,18 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
         XCTAssertEqual(musics.first, testISRC)
     }
     
-    func testDeleteMusic() async {
+    func testDeleteMusic() async throws {
         let playlistName: String = "AddMusicPlaylist"
         let testISRC = "TEST_ISRC"
         
         repository.addMusic(isrc: testISRC, to: playlistName)
         repository.deleteMusic(isrc: testISRC, in: playlistName)
         
-        let musics = await repository.fetchPlaylist(for: playlistName)?.musicISRCs
-        XCTAssertTrue(musics?.isEmpty ?? false)
+        guard let playlist = await repository.fetchPlaylist(for: playlistName)else { return }
+        
+        let musics = playlist.musicISRCs
+        
+        XCTAssertTrue(musics.isEmpty ?? false)
     }
     
     func testFetchMusics() async throws {
@@ -62,11 +65,13 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
         
         repository.addMusic(isrc: "MUSIC_1", to: playlistName)
         repository.addMusic(isrc: "MUSIC_2", to: playlistName)
+        
+        guard let playlist = await repository.fetchPlaylist(for: playlistName)else { return }
+        let musics = playlist.musicISRCs
 
-        let musics = await repository.fetchPlaylist(for: playlistName)?.musicISRCs
-        XCTAssertEqual(musics?.count, 2)
-        XCTAssertEqual(musics?[0], "MUSIC_1")
-        XCTAssertEqual(musics?[1], "MUSIC_2")
+        XCTAssertEqual(musics.count, 2)
+        XCTAssertEqual(musics[0], "MUSIC_1")
+        XCTAssertEqual(musics[1], "MUSIC_2")
     }
     
     func testMoveMusic() async throws {
@@ -78,20 +83,25 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
 
         repository.moveMusic(isrc: "MUSIC_1", in: playlistName, fromIndex: 0, toIndex: 1)
 
-        let musics = try await repository.fetchPlaylist(for: playlistName)?.musicISRCs
-        XCTAssertEqual(musics?[0], "MUSIC_2")
-        XCTAssertEqual(musics?[1], "MUSIC_1")
+        
+        guard let playlist = await repository.fetchPlaylist(for: playlistName)else { return }
+        let musics = playlist.musicISRCs
+
+        XCTAssertEqual(musics[0], "MUSIC_2")
+        XCTAssertEqual(musics[1], "MUSIC_1")
     }
     
     func testDeletePlaylist() async throws {
         let playlistName: String = "DeletePlaylist"
         let _ = try await repository.saveNewPlaylist(playlistName)
-        let id = try await repository.fetchPlaylist(for: playlistName)?.id
+        let id = await repository.fetchPlaylist(for: playlistName)?.id
         print(id ?? "nil")
 
         repository.deletePlaylist(playlistName)
-        let currId = try await repository.fetchPlaylist(for: playlistName)?.id
 
+        guard let playlist = await repository.fetchPlaylist(for: playlistName)else { return }
+        let currId = playlist.id
+        
         XCTAssertEqual(currId, nil)
 
     }
@@ -104,14 +114,17 @@ final class TestPersistenceManager {
     lazy var context: NSManagedObjectContext = {
         let persistentContainer = NSPersistentContainer(name: "MolioModel")
         let description = NSPersistentStoreDescription()
-        description.type = NSInMemoryStoreType // 인메모리로 설정
+        description.type = NSInMemoryStoreType
         persistentContainer.persistentStoreDescriptions = [description]
-        
+
         persistentContainer.loadPersistentStores { _, error in
             if let error = error {
                 fatalError("Failed to load in-memory Core Data stack: \(error)")
             }
         }
-        return persistentContainer.viewContext
+
+        let context = persistentContainer.viewContext
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy // 병합 정책 설정
+        return context
     }()
 }
