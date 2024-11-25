@@ -38,7 +38,7 @@ final class RandomMusicDeck {
     private let publishCurrentPlaylistUseCase: any PublishCurrentPlaylistUseCase
     private let fetchRecommendedMusicUseCase: any FetchRecommendedMusicUseCase
     
-    private var currentMusicFilter: MusicFilter? = nil
+    private var currentMusicFilter: MusicFilter?
     private let randomMusics: CurrentValueSubject<[MolioMusic], Never>
     private var cancellables = Set<AnyCancellable>()
 

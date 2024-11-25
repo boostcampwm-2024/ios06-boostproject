@@ -4,7 +4,7 @@ import Foundation
 final class MockUpdatePlaylistUseCase: UpdatePlaylistUseCase {
     var executedCount: Int = 0
     
-    func execute(id: UUID, to updatedPlaylist: Molio.MolioPlaylist) async throws {
+    func execute(of id: UUID, name: String?, filter: MusicFilter?, musicISRCs: [String]?, like: [String]?) async throws {
         executedCount += 1
     }
 }

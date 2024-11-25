@@ -31,7 +31,7 @@ final class MockPlaylistRepository: PlaylistRepository {
         MolioPlaylist(id: UUID(), name: name, createdAt: Date.now, musicISRCs: [], filter: MusicFilter(genres: []))
     }
     
-    func updatePlaylist(id: UUID, to newValue: Molio.MolioPlaylist) async throws {
+    func updatePlaylist(of id: UUID, name: String?, filter: MusicFilter?, musicISRCs: [String]?, like: [String]?) async throws {
         guard !willThrowError else { throw CoreDataError.updateFailed }
     }
 }

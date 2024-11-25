@@ -46,7 +46,7 @@
 		2075FEC62CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC52CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift */; };
 		2075FEC82CECDF4D009834BE /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC72CECDF4D009834BE /* CoreDataError.swift */; };
 		881622692CE3671400E81EA0 /* RandomMusicDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881622682CE3671400E81EA0 /* RandomMusicDeck.swift */; };
-		8816226B2CE3838B00E81EA0 /* DeckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8816226A2CE3838B00E81EA0 /* DeckTests.swift */; };
+		8816226B2CE3838B00E81EA0 /* MusicDeckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8816226A2CE3838B00E81EA0 /* MusicDeckTests.swift */; };
 		8816226D2CE3B11C00E81EA0 /* MusicDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8816226C2CE3B11C00E81EA0 /* MusicDeck.swift */; };
 		8816226F2CE3B14200E81EA0 /* MusicFilterProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8816226E2CE3B14200E81EA0 /* MusicFilterProvider.swift */; };
 		881622712CE3B16200E81EA0 /* MockMusicFilterProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881622702CE3B16200E81EA0 /* MockMusicFilterProvider.swift */; };
@@ -209,7 +209,7 @@
 		2075FEC52CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChangeCurrentPlaylistIUseCase.swift; sourceTree = "<group>"; };
 		2075FEC72CECDF4D009834BE /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		881622682CE3671400E81EA0 /* RandomMusicDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomMusicDeck.swift; sourceTree = "<group>"; };
-		8816226A2CE3838B00E81EA0 /* DeckTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckTests.swift; sourceTree = "<group>"; };
+		8816226A2CE3838B00E81EA0 /* MusicDeckTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicDeckTests.swift; sourceTree = "<group>"; };
 		8816226C2CE3B11C00E81EA0 /* MusicDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicDeck.swift; sourceTree = "<group>"; };
 		8816226E2CE3B14200E81EA0 /* MusicFilterProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicFilterProvider.swift; sourceTree = "<group>"; };
 		881622702CE3B16200E81EA0 /* MockMusicFilterProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMusicFilterProvider.swift; sourceTree = "<group>"; };
@@ -982,7 +982,7 @@
 			children = (
 				B8D553F32CDFE5E6007CCD6D /* Test Double */,
 				B8D553F62CDFE623007CCD6D /* NetworkProviderTests.swift */,
-				8816226A2CE3838B00E81EA0 /* DeckTests.swift */,
+				8816226A2CE3838B00E81EA0 /* MusicDeckTests.swift */,
 				B8D554C12CE32B9A007CCD6D /* SpotifyTokenProviderTests.swift */,
 				88F6E4A82CEC88C700739648 /* PublishCurrentPlaylistUseCaseTests.swift */,
 				88C8B5F22CEF296A0079ACB5 /* PublishAllMusicInCurrentPlaylistUseCaseTests.swift */,
@@ -1399,7 +1399,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8816226B2CE3838B00E81EA0 /* DeckTests.swift in Sources */,
+				8816226B2CE3838B00E81EA0 /* MusicDeckTests.swift in Sources */,
 				20397E802CE5FD0A004ED9CE /* DefaultPlaylistRepositoryTests.swift in Sources */,
 				B8D554872CE0F41F007CCD6D /* NetworkProviderTests.swift in Sources */,
 				B876E6512CEF78030048CAF9 /* MockPublishCurrentPlaylistUseCase.swift in Sources */,
