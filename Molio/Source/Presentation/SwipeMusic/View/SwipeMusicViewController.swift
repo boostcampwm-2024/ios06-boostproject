@@ -297,8 +297,9 @@ final class SwipeMusicViewController: UIViewController {
             musicKitService: DefaultMusicKitService()
         )
         let playlistDetailView = PlaylistDetailView(viewModel: viewModel)
-        let hostingController = UIHostingController(rootView: playlistDetailView)
-        hostingController.view.backgroundColor = .clear
+        
+        let hostingController = PlaylistDetailViewController(rootView: playlistDetailView)
+        
         self.navigationController?.pushViewController(hostingController, animated: true)
     }
     

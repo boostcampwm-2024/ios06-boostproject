@@ -31,7 +31,6 @@ struct PlaylistDetailView: View {
                         .foregroundStyle(.white)
                         .padding()
                         .padding(.bottom, 5)
-
                     }
                 }
             }
