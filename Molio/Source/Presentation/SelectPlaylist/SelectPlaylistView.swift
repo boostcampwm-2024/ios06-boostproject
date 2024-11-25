@@ -61,7 +61,7 @@ struct SelectPlaylistView: View {
                             .shadow(radius: 5)
                     }
                     .sheet(isPresented: $isModalPresented) {
-                        CreatePlaylistView(viewModel: CreatePlaylistViewModel(createPlaylistUseCase: DefaultCreatePlaylistUseCase(repository: DefaultPlaylistRepository()), changeCurrentPlaylistUseCase: DefaultChangeCurrentPlaylistUseCase(repository: DefaultCurrentPlaylistRepository())))
+                        CreatePlaylistView(viewModel: CreatePlaylistViewModel(createPlaylistUseCase: DefaultCreatePlaylistUseCase(repository: MockPlaylistRepository()), changeCurrentPlaylistUseCase: DefaultChangeCurrentPlaylistUseCase(repository: DefaultCurrentPlaylistRepository())))
                             .presentationDetents([.fraction(0.5)])
                             .presentationDragIndicator(.visible)
                     }
