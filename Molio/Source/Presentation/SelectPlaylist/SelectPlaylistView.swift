@@ -4,9 +4,7 @@ struct SelectPlaylistView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var viewModel: SelectPlaylistViewModel
     @State private var isModalPresented = false
-    
-    var placeholder: String = "00님의 몰리오"
-    
+        
     var body: some View {
         ZStack {
             Color(.clear)
@@ -14,7 +12,7 @@ struct SelectPlaylistView: View {
                 Spacer()
                     .frame(height: 40)
                 
-                Text("그냥님의 몰리오")
+                Text("그냥님의 몰리오") // TODO: 로그인 정보 불어와 적용하기
                     .font(.custom(PretendardFontName.Bold, size: 36))
                     .foregroundStyle(Color.white)
                     .padding(.horizontal, 22)
@@ -69,7 +67,7 @@ struct SelectPlaylistView: View {
                     }
                     .onChange(of: isModalPresented) { newValue in
                         if !newValue {
-                            viewModel.reloadData()
+                            viewModel.fetchPlaylists()
                         }
                     }
                     

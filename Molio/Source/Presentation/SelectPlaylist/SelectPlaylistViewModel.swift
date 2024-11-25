@@ -19,14 +19,17 @@ final class SelectPlaylistViewModel: ObservableObject {
         self.changeCurrentPlaylistUseCase = changeCurrentPlaylistUseCase
         self.publishCurrentPlaylistUseCase = publishCurrentPlaylistUseCase
         
-        reloadData()
-    }
-
-    func reloadData() {
         bindPublishCurrentPlaylist()
         fetchPlaylists()
     }
-
+    
+    func fetchPlaylists() {
+        Task {
+            @MainActor in
+            self.playlists = await fetchAllPlaylistsUseCase.execute()
+        }
+    }
+    
     func selectPlaylist(_ playlist: MolioPlaylist) {
         selectedPlaylist = playlist
     }
@@ -35,17 +38,8 @@ final class SelectPlaylistViewModel: ObservableObject {
         guard let selectedPlaylist else { return }
         changeCurrentPlaylistUseCase.execute(playlistId: selectedPlaylist.id)
     }
-
-    // MARK: - Private Method
     
-    private func fetchPlaylists() {
-        Task {
-            let playlists = await fetchAllPlaylistsUseCase.execute()
-            DispatchQueue.main.async {
-                self.playlists = playlists
-            }
-        }
-    }
+    // MARK: - Private Method
     
     private func bindPublishCurrentPlaylist() {
         publishCurrentPlaylistUseCase.execute()

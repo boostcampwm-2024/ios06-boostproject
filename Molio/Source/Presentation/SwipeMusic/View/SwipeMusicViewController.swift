@@ -280,7 +280,6 @@ final class SwipeMusicViewController: UIViewController {
     }
     
     @objc func didTapPlaylistSelectButton() {
-        // TODO: DI Container로 의존성 주입
         let selectplaylistView = SelectPlaylistView(viewModel: SelectPlaylistViewModel())
         self.presentCustomSheet(
             content: selectplaylistView
@@ -288,7 +287,6 @@ final class SwipeMusicViewController: UIViewController {
     }
     
     @objc private func didTapMyMolioButton() {
-        // TODO: DI Container로 의존성 주입
         let viewModel = PlaylistDetailViewModel(
             publishCurrentPlaylistUseCase: DefaultPublishCurrentPlaylistUseCase(
                 playlistRepository: DefaultPlaylistRepository(),

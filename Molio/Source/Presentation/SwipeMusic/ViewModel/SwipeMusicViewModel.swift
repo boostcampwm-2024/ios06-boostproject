@@ -38,6 +38,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
     private let musicDeck: any MusicDeck
     private let fetchImageUseCase: FetchImageUseCase
     private let publishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase
+   
     private let selectedPlaylistPublisher = PassthroughSubject<MolioPlaylist, Never>()
     private let isLoadingPublisher = PassthroughSubject<Bool, Never>()
     private let buttonHighlightPublisher = PassthroughSubject<ButtonHighlight, Never>()
