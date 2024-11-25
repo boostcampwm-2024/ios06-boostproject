@@ -1,6 +1,6 @@
 import Foundation
 
-struct MolioPlaylist {
+struct MolioPlaylist: Identifiable {
     let id: UUID
     let name: String
     let createdAt: Date

@@ -15,17 +15,16 @@ final class DefaultPublishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase 
     
     func execute() -> AnyPublisher<MolioPlaylist?, Never> {
         currentPlaylistRepository.currentPlaylistPublisher
-            .flatMap {  playlistUUID in
+            .flatMap { playlistUUID in
                 return Future { promise in
                     Task { [weak self] in
                         guard let self,
                               let playlistUUID else {
                             promise(.success(nil))
-                            return
-                        }
+                            return                         
+                            }                    
+                        let playlist = try await self.playlistRepository.fetchPlaylist(for: playlistUUID.uuidString)
 
-                        let playlist = try? await self.playlistRepository.fetchPlaylist(for: playlistUUID.uuidString)
-                        
                         promise(.success(playlist))
                     }
                     

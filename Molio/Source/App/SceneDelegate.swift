@@ -35,5 +35,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func setupNavigationBarAppearance() {
         let appearance = UINavigationBar.appearance()
         appearance.tintColor = .main
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
 }
