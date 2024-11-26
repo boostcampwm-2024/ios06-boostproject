@@ -188,9 +188,9 @@
 		F1E405A52CECA19200533701 /* DefaultSignInAppleUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405A42CECA19200533701 /* DefaultSignInAppleUseCase.swift */; };
 		F1E405A72CECA22900533701 /* SignAppleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405A62CECA22900533701 /* SignAppleRepository.swift */; };
 		F1E405A92CECA2D000533701 /* DefaultSignAppleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405A82CECA2D000533701 /* DefaultSignAppleRepository.swift */; };
-		F1E405AC2CECA31D00533701 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405AB2CECA31D00533701 /* FirebaseService.swift */; };
-		F1E405AE2CECA35E00533701 /* DefaultFirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405AD2CECA35E00533701 /* DefaultFirebaseService.swift */; };
-		F1E405B02CECA3F500533701 /* FirebaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405AF2CECA3F500533701 /* FirebaseError.swift */; };
+		F1E405AC2CECA31D00533701 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405AB2CECA31D00533701 /* AuthService.swift */; };
+		F1E405AE2CECA35E00533701 /* DefaultFirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405AD2CECA35E00533701 /* DefaultFirebaseAuthService.swift */; };
+		F1E405B02CECA3F500533701 /* FirebaseAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405AF2CECA3F500533701 /* FirebaseAuthError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -385,9 +385,9 @@
 		F1E405A42CECA19200533701 /* DefaultSignInAppleUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSignInAppleUseCase.swift; sourceTree = "<group>"; };
 		F1E405A62CECA22900533701 /* SignAppleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignAppleRepository.swift; sourceTree = "<group>"; };
 		F1E405A82CECA2D000533701 /* DefaultSignAppleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSignAppleRepository.swift; sourceTree = "<group>"; };
-		F1E405AB2CECA31D00533701 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
-		F1E405AD2CECA35E00533701 /* DefaultFirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFirebaseService.swift; sourceTree = "<group>"; };
-		F1E405AF2CECA3F500533701 /* FirebaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseError.swift; sourceTree = "<group>"; };
+		F1E405AB2CECA31D00533701 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		F1E405AD2CECA35E00533701 /* DefaultFirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFirebaseAuthService.swift; sourceTree = "<group>"; };
+		F1E405AF2CECA3F500533701 /* FirebaseAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -559,7 +559,7 @@
 		205E6A4A2CF57099005E9150 /* Error */ = {
 			isa = PBXGroup;
 			children = (
-				F1E405AF2CECA3F500533701 /* FirebaseError.swift */,
+				F1E405AF2CECA3F500533701 /* FirebaseAuthError.swift */,
 				205E6A4B2CF570AC005E9150 /* FirebaseStorageError.swift */,
 			);
 			path = Error;
@@ -1404,8 +1404,8 @@
 			children = (
 				205E6A4D2CF570C3005E9150 /* Manager */,
 				205E6A4A2CF57099005E9150 /* Error */,
-				F1E405AB2CECA31D00533701 /* FirebaseService.swift */,
-				F1E405AD2CECA35E00533701 /* DefaultFirebaseService.swift */,
+				F1E405AB2CECA31D00533701 /* AuthService.swift */,
+				F1E405AD2CECA35E00533701 /* DefaultFirebaseAuthService.swift */,
 			);
 			path = FirebaseService;
 			sourceTree = "<group>";
@@ -1615,8 +1615,8 @@
 				F1770B2C2CEEFF2200C81272 /* ExportPlaylistItemView.swift in Sources */,
 				F1A3BB7C2CF0E5070062C79C /* ExportMusicItem.swift in Sources */,
 				F17369642CE36DE300F6242C /* DefaultFetchImageUseCase.swift in Sources */,
-				F1E405AC2CECA31D00533701 /* FirebaseService.swift in Sources */,
-				F1E405B02CECA3F500533701 /* FirebaseError.swift in Sources */,
+				F1E405AC2CECA31D00533701 /* AuthService.swift in Sources */,
+				F1E405B02CECA3F500533701 /* FirebaseAuthError.swift in Sources */,
 				20397E6A2CE5DCDD004ED9CE /* MolioModel.xcdatamodeld in Sources */,
 				F17369722CE3716100F6242C /* DefaultImageFetchService.swift in Sources */,
 				2003BA012CDB7498002CAB3E /* PretendardFontName.swift in Sources */,
@@ -1631,7 +1631,7 @@
 				205E6A5E2CF5D7EB005E9150 /* PlaylistLocalStorage.swift in Sources */,
 				B8D554892CE10A3A007CCD6D /* DefaultSpotifyAPIService.swift in Sources */,
 				881BBCBE2CDCF95600010A61 /* RecommendationsRequestDTO.swift in Sources */,
-				F1E405AE2CECA35E00533701 /* DefaultFirebaseService.swift in Sources */,
+				F1E405AE2CECA35E00533701 /* DefaultFirebaseAuthService.swift in Sources */,
 				F1E4059E2CEC936700533701 /* AppleAuthInfo.swift in Sources */,
 				F17369292CDC79E100F6242C /* MusicCardView.swift in Sources */,
 				F173693F2CDF21BC00F6242C /* RecommendedMusicRepository.swift in Sources */,
