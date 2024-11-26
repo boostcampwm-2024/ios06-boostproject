@@ -133,6 +133,11 @@ final class SwipeMusicViewController: UIViewController {
         addPanGestureToMusicTrack()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        musicPlayer.play()
+    }
+    
     private func setupBindings() {
         output.selectedPlaylist
             .receive(on: RunLoop.main)
