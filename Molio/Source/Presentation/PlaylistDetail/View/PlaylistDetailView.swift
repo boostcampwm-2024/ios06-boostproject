@@ -2,9 +2,10 @@ import SwiftUI
 import Combine
 
 struct PlaylistDetailView: View {
-    @State private var isPlaylistChangeSheetPresented: Bool = false
     @State private var selectedIndex: Int?
     @ObservedObject private var viewModel: PlaylistDetailViewModel
+    
+    var didPlaylistButtonTapped: (() -> Void)?
 
     init(viewModel: PlaylistDetailViewModel) {
         self.viewModel = viewModel
@@ -13,7 +14,7 @@ struct PlaylistDetailView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Button {
-                isPlaylistChangeSheetPresented.toggle()
+                didPlaylistButtonTapped?()
             } label: {
                 HStack(spacing: 10) {
                     Text.molioBold(viewModel.currentPlaylist?.name ?? "제목 없음", size: 34)
@@ -48,9 +49,6 @@ struct PlaylistDetailView: View {
             .frame(maxWidth: .infinity, maxHeight: 66)
             .padding(.horizontal, 22)
             .padding(.bottom, 23)
-        }
-        .sheet(isPresented: $isPlaylistChangeSheetPresented) {
-            Text("Playlist Change Sheet")
         }
     }
 }

@@ -2,8 +2,14 @@ import SwiftUI
 
 struct SelectPlaylistView: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject var viewModel: SelectPlaylistViewModel
+    @ObservedObject var viewModel: SelectPlaylistViewModel
     @State private var isModalPresented = false
+    private let isCreatable: Bool
+    
+    init(viewModel: SelectPlaylistViewModel, isCreatable: Bool = true) {
+        self.viewModel = viewModel
+        self.isCreatable = isCreatable
+    }
         
     var body: some View {
         ZStack {
@@ -12,7 +18,7 @@ struct SelectPlaylistView: View {
                 Spacer()
                     .frame(height: 40)
                 
-                Text("그냥님의 몰리오") // TODO: 로그인 정보 불어와 적용하기
+                Text("그냥님의 몰리오") // TODO: 로그인 정보 불러와 적용하기
                     .font(.custom(PretendardFontName.Bold, size: 36))
                     .foregroundStyle(Color.white)
                     .padding(.horizontal, 22)
@@ -51,23 +57,26 @@ struct SelectPlaylistView: View {
                 HStack(alignment: .center, content: {
                     Spacer()
                     
-                    Button(action: {
-                        isModalPresented.toggle()
-                    }) {
-                        Image.molioBlack(systemName: "plus", size: 20, color: .white)
-                            .frame(width: 40, height: 40)
-                            .background(Color.white.opacity(0.3))
-                            .clipShape(Circle())
-                            .shadow(radius: 5)
-                    }
-                    .sheet(isPresented: $isModalPresented) {
-                        CreatePlaylistView(viewModel: CreatePlaylistViewModel(createPlaylistUseCase: DefaultCreatePlaylistUseCase(repository: MockPlaylistRepository()), changeCurrentPlaylistUseCase: DefaultChangeCurrentPlaylistUseCase(repository: DefaultCurrentPlaylistRepository())))
-                            .presentationDetents([.fraction(0.5)])
-                            .presentationDragIndicator(.visible)
-                    }
-                    .onChange(of: isModalPresented) { newValue in
-                        if !newValue {
-                            viewModel.fetchPlaylists()
+                    if isCreatable {
+                        Button(action: {
+                            isModalPresented.toggle()
+                        }) {
+                            Image.molioBlack(systemName: "plus", size: 20, color: .white)
+                                .frame(width: 40, height: 40)
+                                .background(Color.white.opacity(0.3))
+                                .clipShape(Circle())
+                                .shadow(radius: 5)
+                        }
+                        .sheet(isPresented: $isModalPresented) {
+                            let viewModel = CreatePlaylistViewModel()
+                            CreatePlaylistView(viewModel: viewModel)
+                                .presentationDetents([.fraction(0.5)])
+                                .presentationDragIndicator(.visible)
+                        }
+                        .onChange(of: isModalPresented) { newValue in
+                            if !newValue {
+                                viewModel.fetchPlaylists()
+                            }
                         }
                     }
                     

@@ -6,6 +6,9 @@ final class PlaylistDetailViewController: UIHostingController<PlaylistDetailView
     init(viewModel: PlaylistDetailViewModel) {
         let playlistDetailView = PlaylistDetailView(viewModel: viewModel)
         super.init(rootView: playlistDetailView)
+        rootView.didPlaylistButtonTapped = { [weak self] in
+            self?.presentPlaylistChangeSheet()
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -28,5 +31,12 @@ final class PlaylistDetailViewController: UIHostingController<PlaylistDetailView
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.isHidden = true
+    }
+    
+    // MARK: - Present Sheet
+    
+    private func presentPlaylistChangeSheet() {
+        let selectPlaylistView = SelectPlaylistView(viewModel: SelectPlaylistViewModel(), isCreatable: false)
+        self.presentCustomSheet(content: selectPlaylistView)
     }
 }
