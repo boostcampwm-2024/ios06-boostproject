@@ -8,24 +8,70 @@ final class FirestoreManager {
         self.db = Firestore.firestore()
     }
     
-    func create<T: FirebaseDataModel>(entity: T) async throws {
+    // MARK: - CREATE
+    
+    func create<T: FirestoreEntity>(entity: T) async throws {
         guard let entityDictionary = entity.toDictionary else {
             throw FirestoreError.failedToConvertToDictionary
         }
         
         try await db.collection(T.collectionName).addDocument(data: entityDictionary)
     }
-    
-    func read<T: FirebaseDataModel & Decodable>(entityType: T.Type, id: String) async throws -> T? {
-        let document = db.collection(entityType.collectionName)
+
+    // MARK: - READ
+
+    func read<T: FirestoreEntity & Decodable>(entityType: T.Type, id: String) async throws -> T? {
+        let query = db.collection(entityType.collectionName)
             .whereField(entityType.firebaseIDFieldName, isEqualTo: id)
         
-        let snapshot = try await document.getDocuments()
+        let documentSnapshot = try await getFirstDocumentSnapshot(query: query)
+
+        return try documentSnapshot.data(as: T.self)
+    }
         
-        guard let document = snapshot.documents.first else {
-            return nil
+    func readAll<T: FirestoreEntity & Decodable>(entityType: T.Type) async throws -> [T] {
+        let query = try await db.collection(entityType.collectionName).getDocuments()
+        
+        return query.documents.compactMap { document in
+            try? document.data(as: T.self)
+        }
+    }
+    
+    // MARK: - UPDATE
+
+    func update<T: FirestoreEntity>(entity: T) async throws {
+        let idString = entity.idString
+        
+        guard let newEntityDictionary = entity.toDictionary else {
+            throw FirestoreError.failedToConvertToDictionary
         }
         
-        return try document.data(as: T.self)
+        let query = db.collection(T.collectionName).whereField(T.firebaseIDFieldName, isEqualTo: idString)
+        
+        let documentSnapshot = try await getFirstDocumentSnapshot(query: query)
+
+        try await documentSnapshot.reference.updateData(newEntityDictionary)
+    }
+    
+    // MARK: - DELETE
+    
+    func delete<T: FirestoreEntity>(entity: T) async throws {
+        let idString = entity.idString
+        
+        let query = db.collection(T.collectionName).whereField(T.firebaseIDFieldName, isEqualTo: idString)
+
+        let documentSnapshot = try await getFirstDocumentSnapshot(query: query)
+        
+        try await documentSnapshot.reference.delete()
+    }
+    
+    private func getFirstDocumentSnapshot(query: Query) async throws -> DocumentSnapshot {
+        let snapshot = try await query.getDocuments()
+        
+        guard let documentSnapshot = snapshot.documents.first else {
+            throw FirestoreError.documentNotFound
+        }
+        
+        return documentSnapshot
     }
 }

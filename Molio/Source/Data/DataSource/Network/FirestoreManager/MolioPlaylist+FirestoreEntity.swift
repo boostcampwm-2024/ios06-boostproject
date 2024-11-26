@@ -1,12 +1,8 @@
 import Foundation
 
-extension MolioPlaylist: FirebaseDataModel {
-    static var collectionName: String {
-        "playlists"
-    }
-    
-    static var firebaseIDFieldName: String {
-        "playlistID"
+extension MolioPlaylist: FirestoreEntity {
+    var idString: String {
+        id.uuidString
     }
     
     var toDictionary: [String: Any]? {
@@ -18,5 +14,13 @@ extension MolioPlaylist: FirebaseDataModel {
             "playlistID": id.uuidString,
             "playlistName": name
         ]
+    }
+    
+    static var collectionName: String {
+        "playlists"
+    }
+    
+    static var firebaseIDFieldName: String {
+        "playlistID"
     }
 }
