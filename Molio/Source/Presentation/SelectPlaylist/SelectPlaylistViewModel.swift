@@ -24,14 +24,15 @@ final class SelectPlaylistViewModel: ObservableObject {
     }
     
     func fetchPlaylists() {
-        Task {
-            @MainActor in
-            self.playlists = await fetchAllPlaylistsUseCase.execute()
+        Task { @MainActor in
+            playlists = await fetchAllPlaylistsUseCase.execute()
         }
     }
     
     func selectPlaylist(_ playlist: MolioPlaylist) {
-        selectedPlaylist = playlist
+        Task { @MainActor in
+            selectedPlaylist = playlist
+        }
     }
     
     func savePlaylist () {
