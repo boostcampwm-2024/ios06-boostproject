@@ -105,21 +105,20 @@ final class LoginViewController: UIViewController {
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
                 guard let self else { return }
-                self.switchToSwipeMusicController()
+                self.switchToTabBarController()
             }
             .store(in: &cancellables)
     }
     
-    private func switchToSwipeMusicController() {
-        let swipeMusicViewController = SwipeMusicViewController(viewModel: SwipeMusicViewModel())
-        let navigationController = UINavigationController(rootViewController: swipeMusicViewController)
+    private func switchToTabBarController() {
+        let molioTabBarController = MolioTabBarController()
         
         guard let window = self.view.window else { return }
         
         UIView.transition(with: window, duration: 0.5) {
-            swipeMusicViewController.view.alpha = 0.0
-            window.rootViewController = navigationController
-            swipeMusicViewController.view.alpha = 1.0
+            molioTabBarController.view.alpha = 0.0
+            window.rootViewController = molioTabBarController
+            molioTabBarController.view.alpha = 1.0
         }
         
         window.makeKeyAndVisible()

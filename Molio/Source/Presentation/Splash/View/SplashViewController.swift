@@ -69,17 +69,15 @@ final class SplashViewController: UIViewController {
         let nextViewController = switch nextScreenType {
         case .login:
             LoginViewController(viewModel: LoginViewModel())
-        case .swipe:
-            SwipeMusicViewController(viewModel: SwipeMusicViewModel())
+        case .main:
+            MolioTabBarController()
         }
-        
-        let navigationController = UINavigationController(rootViewController: nextViewController)
         
         guard let window = self.view.window else { return }
         
         UIView.transition(with: window, duration: 0.5) {
             nextViewController.view.alpha = 0.0
-            window.rootViewController = navigationController
+            window.rootViewController = nextViewController
             nextViewController.view.alpha = 1.0
         }
         

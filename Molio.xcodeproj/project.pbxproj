@@ -130,6 +130,8 @@
 		F135BCF42CF445D7006C6C4F /* DefaultAuthLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCF32CF445D7006C6C4F /* DefaultAuthLocalStorage.swift */; };
 		F135BCF82CF45E39006C6C4F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCF72CF45E39006C6C4F /* SplashViewController.swift */; };
 		F135BCFB2CF4620C006C6C4F /* SplahViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCFA2CF4620C006C6C4F /* SplahViewModel.swift */; };
+		F135BCFE2CF4BDE3006C6C4F /* MolioTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCFD2CF4BDE3006C6C4F /* MolioTabBarController.swift */; };
+		F135BD032CF4C382006C6C4F /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BD022CF4C382006C6C4F /* CommunityViewController.swift */; };
 		F17368F92CD86B1100F6242C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17368F82CD86B1100F6242C /* AppDelegate.swift */; };
 		F17368FB2CD86B1100F6242C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17368FA2CD86B1100F6242C /* SceneDelegate.swift */; };
 		F17369022CD86B1300F6242C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F17369012CD86B1300F6242C /* Assets.xcassets */; };
@@ -312,6 +314,8 @@
 		F135BCF32CF445D7006C6C4F /* DefaultAuthLocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthLocalStorage.swift; sourceTree = "<group>"; };
 		F135BCF72CF45E39006C6C4F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		F135BCFA2CF4620C006C6C4F /* SplahViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplahViewModel.swift; sourceTree = "<group>"; };
+		F135BCFD2CF4BDE3006C6C4F /* MolioTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MolioTabBarController.swift; sourceTree = "<group>"; };
+		F135BD022CF4C382006C6C4F /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 		F17368F52CD86B1100F6242C /* Molio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Molio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F17368F82CD86B1100F6242C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F17368FA2CD86B1100F6242C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -707,6 +711,8 @@
 		B80970762CDB43E2007BC3C4 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				F135BCFF2CF4C358006C6C4F /* Community */,
+				F135BCFC2CF4BD70006C6C4F /* Tabbar */,
 				F135BCF52CF45DB0006C6C4F /* Splash */,
 				F1770B272CEE44CA00C81272 /* ExportPlaylist */,
 				88E483442CEDDD3C003D624E /* PlaylistDetail */,
@@ -1038,6 +1044,22 @@
 				F135BCFA2CF4620C006C6C4F /* SplahViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F135BCFC2CF4BD70006C6C4F /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				F135BCFD2CF4BDE3006C6C4F /* MolioTabBarController.swift */,
+			);
+			path = Tabbar;
+			sourceTree = "<group>";
+		};
+		F135BCFF2CF4C358006C6C4F /* Community */ = {
+			isa = PBXGroup;
+			children = (
+				F135BD022CF4C382006C6C4F /* CommunityViewController.swift */,
+			);
+			path = Community;
 			sourceTree = "<group>";
 		};
 		F17368EC2CD86B1100F6242C = {
@@ -1436,6 +1458,7 @@
 				B88F80BB2CE48C59000480E6 /* MusicFilterView.swift in Sources */,
 				B8046A4B2CEA629E00933704 /* SpotifyAvailableGenreSeedsDTO.swift in Sources */,
 				F17369542CDFA9FD00F6242C /* CGColorMapper.swift in Sources */,
+				F135BCFE2CF4BDE3006C6C4F /* MolioTabBarController.swift in Sources */,
 				2009183E2CEC9C5B0058D8C7 /* DefaultCurrentPlaylistRepository.swift in Sources */,
 				F17369572CDFB03E00F6242C /* DefaultMusicKitService.swift in Sources */,
 				88F6E4A72CEC852C00739648 /* DefaultPublishCurrentPlaylistUseCase.swift in Sources */,
@@ -1483,6 +1506,7 @@
 				88F6E4AB2CEC8B5A00739648 /* PublishCurrentPlaylistUseCase.swift in Sources */,
 				B8046A542CEB93F900933704 /* FetchAvailableGenresUseCase.swift in Sources */,
 				2075FEC12CECDDC0009834BE /* CreatePlaylistViewModel.swift in Sources */,
+				F135BD032CF4C382006C6C4F /* CommunityViewController.swift in Sources */,
 				B8046A562CEB943B00933704 /* DefaultFetchAvailableGenresUseCase.swift in Sources */,
 				2075FEC82CECDF4D009834BE /* CoreDataError.swift in Sources */,
 				B8D553EA2CDFE271007CCD6D /* EndPoint.swift in Sources */,
