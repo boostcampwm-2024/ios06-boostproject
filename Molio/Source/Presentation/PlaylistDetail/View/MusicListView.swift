@@ -63,9 +63,7 @@ struct MusicListView: View {
     ZStack {
         Color.black
         MusicListView(
-            musics: .constant(
-                MolioMusic.all
-            ),
+            musics: .constant(MolioMusic.all),
             selectedIndex: .constant(0)
         )
         .foregroundStyle(.white)

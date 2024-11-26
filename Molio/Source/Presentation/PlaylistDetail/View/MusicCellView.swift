@@ -38,6 +38,7 @@ struct MusicCellView: View {
             Spacer()
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 56)
+        .contentShape(Rectangle())
     }
 }
 
