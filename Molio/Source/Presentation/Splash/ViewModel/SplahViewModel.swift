@@ -24,7 +24,7 @@ final class SplahViewModel: InputOutputViewModel {
             .sink { [weak self] _ in
                 guard let self else { return }
                 let nextScreen = manageAuthenticationUseCase.isAuthModeSelected() 
-                ? NextScreenType.swipe
+                ? NextScreenType.main
                 : NextScreenType.login
                 navigateToNextScreenPublisher.send(nextScreen)
             }
@@ -35,6 +35,6 @@ final class SplahViewModel: InputOutputViewModel {
     
     enum NextScreenType {
         case login
-        case swipe
+        case main
     }
 }
