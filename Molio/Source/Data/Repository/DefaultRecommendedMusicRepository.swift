@@ -16,13 +16,13 @@ struct DefaultRecommendedMusicRepository: RecommendedMusicRepository {
         return await musicKitService.getMusic(with: isrcs)
     }
     
-    func fetchRecommendedMusicISRCs(with filter: MusicFilter) async throws -> [String] {
-        return try await spotifyAPIService.fetchRecommendedMusicISRCs(with: filter)
-    }
-    
     func fetchMusicGenres() async throws -> [MusicGenre] {
         let availableGenreSeedsDTO = try await spotifyAPIService.fetchAvailableGenreSeeds()
         let musicGenreArr = availableGenreSeedsDTO.genres.compactMap { MusicGenre(rawValue: $0) }
         return musicGenreArr
+    }
+    
+    private func fetchRecommendedMusicISRCs(with filter: MusicFilter) async throws -> [String] {
+        return try await spotifyAPIService.fetchRecommendedMusicISRCs(with: filter)
     }
 }

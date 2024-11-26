@@ -16,22 +16,22 @@ struct TagLayout: Layout {
         var totalWidth: CGFloat = 0
         var totalHeight: CGFloat = 0
         var currentRowWidth: CGFloat = 0
-        var currentRowHeight: CGFloat = 0
+        var maxRowHeight: CGFloat = 0
+        var rowCount: Int = 1
 
         for subview in subviews {
             let subviewSize = subview.sizeThatFits(.unspecified)
             // 줄바꿈 시 total size 계산
-            if currentRowWidth + subviewSize.width > proposalWidth {
+            if currentRowWidth + subviewSize.width + horizontalSpacing > proposalWidth {
                 totalWidth = max(totalWidth, currentRowWidth)
-                totalHeight += currentRowHeight + verticalSpacing
+                rowCount += 1
                 currentRowWidth = 0
-                currentRowHeight = 0
             }
             currentRowWidth += subviewSize.width + horizontalSpacing
-            currentRowHeight = max(currentRowHeight, subviewSize.height)
+            maxRowHeight = max(maxRowHeight, subviewSize.height)
         }
         totalWidth = max(totalWidth, currentRowWidth)
-        totalHeight += currentRowHeight
+        totalHeight = (maxRowHeight + verticalSpacing) * CGFloat(rowCount)
 
         return CGSize(width: totalWidth, height: totalHeight)
     }

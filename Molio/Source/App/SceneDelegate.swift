@@ -10,11 +10,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         configureAudioSession()
         setupNavigationBarAppearance()
-        
-        let swipeMusicViewController = SwipeMusicViewController(viewModel: SwipeMusicViewModel())
+        let splashViewController = SplashViewController(viewModel: SplahViewModel())
         
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = UINavigationController(rootViewController: swipeMusicViewController)
+        window?.rootViewController = UINavigationController(rootViewController: splashViewController)
         window?.makeKeyAndVisible()
     }
     

@@ -1,7 +1,7 @@
 struct DefaultSignAppleRepository: SignAppleRepository {
     private let firebaseService: FirebaseService
     
-    init(firebaseService: FirebaseService) {
+    init(firebaseService: FirebaseService = DIContainer.shared.resolve()) {
         self.firebaseService = firebaseService
     }
     

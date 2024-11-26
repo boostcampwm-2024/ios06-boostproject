@@ -26,7 +26,7 @@ final class CoreDataPlaylistRepositoryTests: XCTestCase {
             name: "Test Playlist",
             createdAt: Date(),
             musicISRCs: ["ISRC001", "ISRC002"],
-            filters: ["Filter1"]
+            filter: MusicFilter(genres: [.pop])
         )
 
         try await repository.create(playlist)
@@ -36,7 +36,7 @@ final class CoreDataPlaylistRepositoryTests: XCTestCase {
         XCTAssertNotNil(fetchedPlaylist)
         XCTAssertEqual(fetchedPlaylist?.name, playlist.name)
         XCTAssertEqual(fetchedPlaylist?.musicISRCs, playlist.musicISRCs)
-        XCTAssertEqual(fetchedPlaylist?.filters, playlist.filters)
+        XCTAssertEqual(fetchedPlaylist?.filter.genres, playlist.filter.genres)
     }
 
     func testReadPlaylist() async throws {
@@ -45,7 +45,7 @@ final class CoreDataPlaylistRepositoryTests: XCTestCase {
             name: "Sample Playlist",
             createdAt: Date(),
             musicISRCs: ["ISRC123"],
-            filters: ["Genre1"]
+            filter: MusicFilter(genres: [.pop])
         )
 
         try await repository.create(playlist)
@@ -55,7 +55,7 @@ final class CoreDataPlaylistRepositoryTests: XCTestCase {
         XCTAssertEqual(fetchedPlaylist?.id, playlist.id)
         XCTAssertEqual(fetchedPlaylist?.name, playlist.name)
         XCTAssertEqual(fetchedPlaylist?.musicISRCs, playlist.musicISRCs)
-        XCTAssertEqual(fetchedPlaylist?.filters, playlist.filters)
+        XCTAssertEqual(fetchedPlaylist?.filter.genres, playlist.filter.genres)
     }
 
     func testReadAllPlaylists() async throws {
@@ -64,7 +64,7 @@ final class CoreDataPlaylistRepositoryTests: XCTestCase {
             name: "Playlist 1",
             createdAt: Date(),
             musicISRCs: ["ISRC001"],
-            filters: ["Filter1"]
+            filter: MusicFilter(genres: [.pop])
         )
 
         let playlist2 = MolioPlaylist(
@@ -72,7 +72,7 @@ final class CoreDataPlaylistRepositoryTests: XCTestCase {
             name: "Playlist 2",
             createdAt: Date(),
             musicISRCs: ["ISRC002", "ISRC003"],
-            filters: ["Filter2"]
+            filter: MusicFilter(genres: [.pop])
         )
 
         try await repository.create(playlist1)
@@ -91,7 +91,7 @@ final class CoreDataPlaylistRepositoryTests: XCTestCase {
             name: "Old Playlist Name",
             createdAt: Date(),
             musicISRCs: ["ISRC001"],
-            filters: ["Filter1"]
+            filter: MusicFilter(genres: [.pop])
         )
 
         try await repository.create(playlist)
@@ -101,7 +101,7 @@ final class CoreDataPlaylistRepositoryTests: XCTestCase {
             name: "Updated Playlist Name",
             createdAt: Date(),
             musicISRCs: ["ISRC004"],
-            filters: ["Filter2"]
+            filter: MusicFilter(genres: [.pop])
         )
 
         try await repository.update(updatedPlaylist)
@@ -110,7 +110,7 @@ final class CoreDataPlaylistRepositoryTests: XCTestCase {
         
         XCTAssertEqual(fetchedPlaylist?.name, updatedPlaylist.name)
         XCTAssertEqual(fetchedPlaylist?.musicISRCs, updatedPlaylist.musicISRCs)
-        XCTAssertEqual(fetchedPlaylist?.filters, updatedPlaylist.filters)
+        XCTAssertEqual(fetchedPlaylist?.filter.genres, updatedPlaylist.filter.genres)
     }
 
     func testDeletePlaylist() async throws {
@@ -119,7 +119,7 @@ final class CoreDataPlaylistRepositoryTests: XCTestCase {
             name: "Playlist to Delete",
             createdAt: Date(),
             musicISRCs: ["ISRC001"],
-            filters: ["Filter1"]
+            filter: MusicFilter(genres: [.pop])
         )
 
         try await repository.create(playlist)

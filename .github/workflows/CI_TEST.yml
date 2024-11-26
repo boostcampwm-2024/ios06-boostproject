@@ -29,6 +29,12 @@ jobs:
 
     # Job이 실행할 Step들
     steps:
+      - name: Install yeetd
+        run: |
+          wget https://github.com/biscuitehh/yeetd/releases/download/1.0/yeetd-normal.pkg
+          sudo installer -pkg yeetd-normal.pkg -target /
+          yeetd &
+
       # uses를 사용하면 깃허브 액션에서 기본적으로 제공하는 Action을 사용할 수 있다.
       # 레포지토리 코드를 체크아웃하는 동작. 이 작업을 통해 워크플로우가 현재 코드베이스에 접근할 수 있게 된다.
       - name: Checkout
@@ -70,6 +76,9 @@ jobs:
           ls -al
           cd Resource
           ls -al
+
+      - name: Resolve Swift Packages
+        run: xcodebuild -resolvePackageDependencies
 
       # 테스트 스크립트 실행
       - name: Run tests

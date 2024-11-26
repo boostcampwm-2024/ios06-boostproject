@@ -12,7 +12,6 @@ final class CoreDataPlaylistRepository: CRUDProtocol {
     private let alertNotFoundMusicsinPlaylist: String = "플레이리스트에 음악이 없습니다."
     private let alertFailDeletePlaylist: String = "플레이리스트를 삭제할 수 없습니다"
     
-    
     // MARK: - CRUD Implementation
     
     init (context: NSManagedObjectContext = PersistenceManager.shared.context) {
@@ -32,7 +31,7 @@ final class CoreDataPlaylistRepository: CRUDProtocol {
             playlist.name = entity.name
             playlist.createdAt = Date()
             playlist.musicISRCs = entity.musicISRCs
-            playlist.filters = entity.filters
+            playlist.filters = entity.filter.genres.map(\.rawValue)
             
             try self.saveContext()
         }
@@ -53,12 +52,13 @@ final class CoreDataPlaylistRepository: CRUDProtocol {
                         return
                     }
                     
+                    let filter = MusicFilter(genres: playlist.filters.compactMap { MusicGenre(rawValue: $0) })
                     let molioPlaylist = MolioPlaylist(
                         id: playlist.id,
                         name: playlist.name,
                         createdAt: playlist.createdAt,
                         musicISRCs: playlist.musicISRCs,
-                        filters: playlist.filters
+                        filter: filter
                     )
                     
                     continuation.resume(returning: molioPlaylist)
@@ -74,11 +74,12 @@ final class CoreDataPlaylistRepository: CRUDProtocol {
         try await context.perform {
             let playlists = try self.context.fetch(self.fetchRequest)
             return playlists.map { playlist in
-                MolioPlaylist(id: playlist.id,
+                let filter = MusicFilter(genres: playlist.filters.compactMap { MusicGenre(rawValue: $0) })
+                return MolioPlaylist(id: playlist.id,
                               name: playlist.name,
                               createdAt: playlist.createdAt,
                               musicISRCs: playlist.musicISRCs,
-                              filters: playlist.filters
+                              filter: filter
                 )
             }
         }
@@ -94,7 +95,7 @@ final class CoreDataPlaylistRepository: CRUDProtocol {
                 }
                 playlist.name = entity.name
                 playlist.musicISRCs = entity.musicISRCs
-                playlist.filters = entity.filters
+                playlist.filters = entity.filter.genres.map(\.rawValue)
                 
                 try self.saveContext()
             } catch {
@@ -141,6 +142,7 @@ final class MockPlaylistRepository: PlaylistRepository {
     private let alertNotFoundPlaylist: String = "해당 플레이리스트를 못 찾았습니다."
     private let alertNotFoundMusicsinPlaylist: String = "플레이리스트에 음악이 없습니다."
     private let alertFailDeletePlaylist: String = "플레이리스트를 삭제할 수 없습니다"
+    private let alertFailUpdatePlaylist: String = "플레이리스트를 업데이트할 수 없습니다"
     
     var playlistsPublisher: AnyPublisher<[MolioPlaylist], Never> {
         playlistsSubject.eraseToAnyPublisher()
@@ -190,12 +192,13 @@ final class MockPlaylistRepository: PlaylistRepository {
             let playlists = try context.fetch(fetchRequest)
             
             let molioPlaylists = playlists.map { playlist in
-                MolioPlaylist(
+                let filter = MusicFilter(genres: playlist.filters.compactMap { MusicGenre(rawValue: $0) })
+                return MolioPlaylist(
                     id: playlist.id,
                     name: playlist.name,
                     createdAt: playlist.createdAt,
                     musicISRCs: playlist.musicISRCs,
-                    filters: playlist.filters
+                    filter: filter
                 )
             }
             
@@ -241,12 +244,13 @@ final class MockPlaylistRepository: PlaylistRepository {
                         return
                     }
                     
+                    let filter = MusicFilter(genres: playlist.filters.compactMap { MusicGenre(rawValue: $0) })
                     let molioPlaylist = MolioPlaylist(
                         id: playlist.id,
                         name: playlist.name,
                         createdAt: playlist.createdAt,
                         musicISRCs: playlist.musicISRCs,
-                        filters: playlist.filters
+                        filter: filter
                     )
                     continuation.resume(returning: molioPlaylist)
                 } catch {
@@ -254,6 +258,42 @@ final class MockPlaylistRepository: PlaylistRepository {
                     continuation.resume(returning: nil)
                 }
             }
+        }
+    }
+    
+    /// 플레이리스트 정보 업데이트
+    func updatePlaylist(
+        of id: UUID,
+        name: String?,
+        filter: MusicFilter?,
+        musicISRCs: [String]?,
+        like: [String]?
+    ) async throws {
+        print(#fileID, #function)
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        
+        do {
+            let playlists = try context.fetch(fetchRequest)
+            guard let playlistToUpdate = playlists.first else {
+                showAlert(alertNotFoundPlaylist)
+                throw CoreDataError.updateFailed
+            }
+            
+            if let name = name {
+                playlistToUpdate.name = name
+            }
+            if let filter = filter {
+                playlistToUpdate.filters = filter.genres.map(\.rawValue)
+            }
+            if let musicISRCs = musicISRCs {
+                playlistToUpdate.filters = musicISRCs
+            }
+            // TODO: - 좋아요 업데이트
+            
+            try context.save()
+        } catch {
+            showAlert(alertFailUpdatePlaylist)
+            throw CoreDataError.updateFailed
         }
     }
     
@@ -271,7 +311,6 @@ final class MockPlaylistRepository: PlaylistRepository {
         guard let playlists = fetchPlaylists() else { return }
         playlistsSubject.send(playlists)
     }
-    
     
     private func saveContexts() throws {
         do {

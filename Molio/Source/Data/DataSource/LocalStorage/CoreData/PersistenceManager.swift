@@ -24,7 +24,6 @@ final class PersistenceManager {
             do {
                 try context.save()
             } catch {
-                let nserror = error as NSError
                 throw CoreDataError.saveFailed
             }
         }

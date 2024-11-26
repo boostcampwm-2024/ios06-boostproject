@@ -15,13 +15,18 @@ final class LoginViewModel: InputOutputViewModel {
     }
     
     private let signInAppleUseCase: SignInAppleUseCase
+    private let manageAuthenticationUseCase: ManageAuthenticationUseCase
     private var currentNonce: String?
     private let navigateToNextScreenPublisher = PassthroughSubject<Void, Never>()
     private let errorPublisher = PassthroughSubject<String, Never>()
     private var cancellables = Set<AnyCancellable>()
     
-    init(signInAppleUseCase: SignInAppleUseCase) {
+    init(
+        signInAppleUseCase: SignInAppleUseCase = DIContainer.shared.resolve(),
+        manageAuthenticationUseCase: ManageAuthenticationUseCase = DIContainer.shared.resolve()
+    ) {
         self.signInAppleUseCase = signInAppleUseCase
+        self.manageAuthenticationUseCase = manageAuthenticationUseCase
     }
     
     func transform(from input: Input) -> Output {
@@ -44,6 +49,7 @@ final class LoginViewModel: InputOutputViewModel {
                 Task {
                     do {
                         try await self.signInAppleUseCase.excute(info: appleAuthinfo)
+                        self.manageAuthenticationUseCase.setAuthMode(.authenticated)
                         self.navigateToNextScreenPublisher.send()
                     } catch {
                         self.errorPublisher.send(error.localizedDescription) // TODO: Error 메시지 지정
@@ -54,7 +60,9 @@ final class LoginViewModel: InputOutputViewModel {
         
         input.skipLoginButtonDidTap
             .sink { [weak self] _ in
-                self?.navigateToNextScreenPublisher.send()
+                guard let self else { return }
+                self.manageAuthenticationUseCase.setAuthMode(.guest)
+                self.navigateToNextScreenPublisher.send()
             }
             .store(in: &cancellables)
         
