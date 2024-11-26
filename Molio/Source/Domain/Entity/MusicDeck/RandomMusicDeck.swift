@@ -67,7 +67,7 @@ final class RandomMusicDeck {
         publishCurrentPlaylistUseCase.execute()
             .map { $0?.filter }
             .sink { [weak self] currentPlaylistFilter in
-                print("현재 플레이리스트 필터 받음!! \(currentPlaylistFilter)")
+                print("현재 플레이리스트 필터 받음!! \(String(describing: currentPlaylistFilter?.genres))")
                 self?.currentMusicFilter = currentPlaylistFilter
             }
             .store(in: &cancellables)

@@ -23,7 +23,7 @@ final class PublishAllMusicInCurrentPlaylistUseCaseTests: XCTestCase {
     func testPlaylistMusicsWhenPlaylistChanged() {
         let mockPublishCurrentPlaylistUseCase = MockPublishCurrentPlaylistUseCase()
         
-        let useCase = DefaultPublishAllMusicInCurrentPlaylistUseCase(publishCurrentPlaylistUseCase: mockPublishCurrentPlaylistUseCase, musicKitService: DefaultMusicKitService())
+        let _ = DefaultPublishAllMusicInCurrentPlaylistUseCase(publishCurrentPlaylistUseCase: mockPublishCurrentPlaylistUseCase, musicKitService: DefaultMusicKitService())
         
         let expectation1 = expectation(description: "First playlist emitted")
         let expectation2 = expectation(description: "Second playlist emitted")

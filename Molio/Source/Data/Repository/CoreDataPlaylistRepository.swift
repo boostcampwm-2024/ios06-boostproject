@@ -12,7 +12,6 @@ final class CoreDataPlaylistRepository: CRUDProtocol {
     private let alertNotFoundMusicsinPlaylist: String = "플레이리스트에 음악이 없습니다."
     private let alertFailDeletePlaylist: String = "플레이리스트를 삭제할 수 없습니다"
     
-    
     // MARK: - CRUD Implementation
     
     init (context: NSManagedObjectContext = PersistenceManager.shared.context) {
@@ -289,9 +288,7 @@ final class MockPlaylistRepository: PlaylistRepository {
             if let musicISRCs = musicISRCs {
                 playlistToUpdate.filters = musicISRCs
             }
-            if let like = like {
-                // TODO: - 좋아요 업데이트
-            }
+            // TODO: - 좋아요 업데이트
             
             try context.save()
         } catch {
@@ -314,7 +311,6 @@ final class MockPlaylistRepository: PlaylistRepository {
         guard let playlists = fetchPlaylists() else { return }
         playlistsSubject.send(playlists)
     }
-    
     
     private func saveContexts() throws {
         do {
