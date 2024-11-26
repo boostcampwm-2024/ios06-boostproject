@@ -6,11 +6,7 @@ final class PlaylistDetailViewModel: ObservableObject {
     private let musicKitService: MusicKitService // TODO: - 유즈케이스 분리
     
     @Published var currentPlaylist: MolioPlaylist?
-    @Published var currentPlaylistMusics: [MolioMusic] = [] {
-        didSet {
-            print("currentPlaylistMusics 수정됨: \(currentPlaylistMusics)")
-        }
-    }
+    @Published var currentPlaylistMusics: [MolioMusic] = []
     
     private var subscriptions: Set<AnyCancellable> = []
     
@@ -33,9 +29,7 @@ final class PlaylistDetailViewModel: ObservableObject {
                 print("현재 플레이리스트 노래 개수: \(playlist.musicISRCs.count)")
                 Task { @MainActor [weak self] in
                     let playlistMusics = await self?.musicKitService.getMusic(with: playlist.musicISRCs) ?? []
-                    // TODO: - 실제 플레이리스트 노래를 불러와야 함
-//                    self?.currentPlaylistMusics = playlistMusics
-                    self?.currentPlaylistMusics = MolioMusic.all
+                    self?.currentPlaylistMusics = playlistMusics
                 }
             }
             .store(in: &subscriptions)
