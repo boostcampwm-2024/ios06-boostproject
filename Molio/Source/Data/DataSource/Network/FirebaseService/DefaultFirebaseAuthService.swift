@@ -2,7 +2,7 @@ import FirebaseAuth
 
 struct DefaultFirebaseAuthService: AuthService {
     
-    func getCurrentUser() throws -> User? {
+    func getCurrentUser() throws -> User {
         guard let currentUser = Auth.auth().currentUser else {
             throw FirebaseAuthError.userNotFound
         }
