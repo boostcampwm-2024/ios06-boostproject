@@ -1,7 +1,11 @@
 import SwiftUI
 
 struct SettingTextItemView: View {
-    let titleText: String
+    private let titleText: String
+    
+    init(titleText: String) {
+        self.titleText = titleText
+    }
     
     var body: some View {
         VStack(spacing: 0) {

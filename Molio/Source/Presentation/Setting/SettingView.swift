@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SettingView: View {
     var body: some View {
-        var authMode: AuthMode = .authenticated
+        let authMode: AuthMode = .authenticated
         
         NavigationStack {
             VStack(spacing: 0) {
@@ -46,7 +46,7 @@ struct SettingView: View {
                 }
                 Spacer()
             }
-            .background(Color(uiColor: UIColor(resource: .background)))
+            .background(Color.background)
             .navigationTitle("설정")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
