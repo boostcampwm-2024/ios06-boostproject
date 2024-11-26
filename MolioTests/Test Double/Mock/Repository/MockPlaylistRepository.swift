@@ -10,7 +10,7 @@ final class MockPlaylistRepository: PlaylistRepository {
         return Just(mockPlaylist).eraseToAnyPublisher()
     }
     
-    func addMusic(isrc: String, to playlistName: String) {}
+    func addMusic(isrc: String, to playlistID: UUID) async throws {}
     
     func deleteMusic(isrc: String, in playlistName: String) {}
     
