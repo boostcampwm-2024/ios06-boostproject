@@ -56,15 +56,14 @@ final class MolioTabBarController: UITabBarController {
         return swipeMusicViewNavigationController
     }
     
-    private func createCommunityViewController() -> UINavigationController {
+    private func createCommunityViewController() -> UIViewController {
         let communityViewController = CommunityViewController()
-        let communityViewNavigationController = UINavigationController(rootViewController: communityViewController)
         communityViewController.tabBarItem = UITabBarItem(
             title: "",
             image: UIImage(resource: .personCircle).withRenderingMode(.alwaysOriginal),
             selectedImage: UIImage(resource: .personCircle).withRenderingMode(.alwaysOriginal)
         )
         
-        return communityViewNavigationController
+        return communityViewController
     }
 }
