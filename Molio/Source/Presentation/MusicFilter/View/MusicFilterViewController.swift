@@ -72,7 +72,6 @@ final class MusicFilterViewController: UIHostingController<MusicFilterView> {
     // MARK: - Event
     
     @objc func didTapSaveButton() {
-        print(#fileID, #function)
         Task {
             do {
                 guard let delegate = delegate else { return }

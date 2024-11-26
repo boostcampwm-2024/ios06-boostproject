@@ -173,7 +173,6 @@ final class MockPlaylistRepository: PlaylistRepository {
             }
             playlistToAdd.musicISRCs.append(isrc)
             try context.save()
-            print("\(isrc) 추가 성공")
         } catch {
             showAlert(alertFailUpdatePlaylist)
             throw CoreDataError.updateFailed
@@ -281,7 +280,6 @@ final class MockPlaylistRepository: PlaylistRepository {
         musicISRCs: [String]?,
         like: [String]?
     ) async throws {
-        print(#fileID, #function)
         fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
         
         do {

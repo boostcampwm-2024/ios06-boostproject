@@ -60,7 +60,6 @@ final class MusicFilterViewModel: ObservableObject {
     
     /// 새 장르로 변경된 필터 정보로 플레이리스트를 업데이트
     private func updateFilterWithNewGenre() async throws {
-        print(#fileID, #function)
         guard let currentPlaylist = currentPlaylist else { return }
         let newFilter = MusicFilter(genres: Array(selectedGenres))
         try await updatePlaylistUseCase.execute(
@@ -78,7 +77,6 @@ final class MusicFilterViewModel: ObservableObject {
 extension MusicFilterViewModel: MusicFilterViewControllerDelegate {
     /// 저장 버튼 탭 시 동작
     func didSaveButtonTapped() async throws -> MusicFilter {
-        print(#fileID, #function)
         try await updateFilterWithNewGenre()
         return MusicFilter(genres: Array(selectedGenres))
     }

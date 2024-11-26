@@ -29,7 +29,6 @@ extension RandomMusicDeck: MusicDeck {
     /// - `currentMusicFilter`(현재 필터) 변경
     /// - `randomMusics` 배열 비우기 (최대 2개까지 남겨준다.)
     func reset(with filter: MusicFilter) {
-        print(#fileID, #function)
         currentMusicFilter = filter
         let cardCountToRemove = max(0, self.randomMusics.value.count - 2)
         randomMusics.value.removeLast(cardCountToRemove)
@@ -77,8 +76,6 @@ final class RandomMusicDeck {
             .sink { [weak self] currentPlaylist in
                 self?.currentPlaylist = currentPlaylist
                 self?.currentMusicFilter = currentPlaylist?.filter
-                print("현재 플레이리스트 받음!! -> \(String(describing: currentPlaylist?.name))")
-                print("필터: \(String(describing: currentPlaylist?.filter.genres))")
             }
             .store(in: &cancellables)
     }
@@ -88,7 +85,6 @@ final class RandomMusicDeck {
         randomMusics
             .map { $0.count }
             .sink { [weak self] musicCount in
-                print("musicCount가 \(musicCount)임!!")
                 if musicCount < 10 {
                     self?.loadRandomMusic()
                 }
@@ -98,9 +94,7 @@ final class RandomMusicDeck {
     
     /// 현재 필터 기반으로 랜덤 추천 음악 불러오기
     private func loadRandomMusic() {
-        print(#fileID, #function)
         let filter = currentMusicFilter ?? MusicFilter(genres: [])
-        print("\(filter)로 랜덤 추천 음악을 다시 불러옵니다.")
         Task { [weak self] in
             let fetchedMusics = try? await self?.fetchRecommendedMusicUseCase.execute(with: filter)
             

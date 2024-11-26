@@ -26,7 +26,6 @@ final class PlaylistDetailViewModel: ObservableObject {
             .sink { playlist in
                 guard let playlist = playlist else { return }
                 self.currentPlaylist = playlist
-                print("현재 플레이리스트 노래 개수: \(playlist.musicISRCs.count)")
                 Task { @MainActor [weak self] in
                     let playlistMusics = await self?.musicKitService.getMusic(with: playlist.musicISRCs) ?? []
                     self?.currentPlaylistMusics = playlistMusics
