@@ -2,20 +2,20 @@ import XCTest
 import CoreData
 @testable import Molio
 
-final class CoreDataPlaylistRepositoryTests: XCTestCase {
-    var repository: CoreDataPlaylistRepository!
+final class CoreDataPlaylistStorageTests: XCTestCase {
+    var storage: CoreDataPlaylistStorage!
     var context: NSManagedObjectContext!
     let fetchRequest: NSFetchRequest<Playlist> = Playlist.fetchRequest()
 
     override func setUp() {
         super.setUp()
         context = TestPersistenceManager.shared.newInMemoryContext()
-        repository = CoreDataPlaylistRepository(context: context)
+        storage = CoreDataPlaylistStorage(context: context)
         
     }
     
     override func tearDown() {
-        repository = nil
+        storage = nil
         context = nil
         super.tearDown()
     }
@@ -29,9 +29,9 @@ final class CoreDataPlaylistRepositoryTests: XCTestCase {
             filter: MusicFilter(genres: [.pop])
         )
 
-        try await repository.create(playlist)
+        try await storage.create(playlist)
         
-        let fetchedPlaylist = try await repository.read(by: playlist.id.uuidString)
+        let fetchedPlaylist = try await storage.read(by: playlist.id.uuidString)
         
         XCTAssertNotNil(fetchedPlaylist)
         XCTAssertEqual(fetchedPlaylist?.name, playlist.name)
@@ -48,9 +48,9 @@ final class CoreDataPlaylistRepositoryTests: XCTestCase {
             filter: MusicFilter(genres: [.pop])
         )
 
-        try await repository.create(playlist)
+        try await storage.create(playlist)
 
-        let fetchedPlaylist = try await repository.read(by: playlist.id.uuidString)
+        let fetchedPlaylist = try await storage.read(by: playlist.id.uuidString)
         XCTAssertNotNil(fetchedPlaylist)
         XCTAssertEqual(fetchedPlaylist?.id, playlist.id)
         XCTAssertEqual(fetchedPlaylist?.name, playlist.name)
@@ -75,10 +75,10 @@ final class CoreDataPlaylistRepositoryTests: XCTestCase {
             filter: MusicFilter(genres: [.pop])
         )
 
-        try await repository.create(playlist1)
-        try await repository.create(playlist2)
+        try await storage.create(playlist1)
+        try await storage.create(playlist2)
 
-        let playlists = try await repository.readAll()
+        let playlists = try await storage.readAll()
         XCTAssertEqual(playlists.count, 2)
         XCTAssertTrue(playlists.contains { $0.id == playlist1.id })
         XCTAssertTrue(playlists.contains { $0.id == playlist2.id })
@@ -94,7 +94,7 @@ final class CoreDataPlaylistRepositoryTests: XCTestCase {
             filter: MusicFilter(genres: [.pop])
         )
 
-        try await repository.create(playlist)
+        try await storage.create(playlist)
         
         let updatedPlaylist = MolioPlaylist(
             id: uuid,
@@ -104,8 +104,8 @@ final class CoreDataPlaylistRepositoryTests: XCTestCase {
             filter: MusicFilter(genres: [.pop])
         )
 
-        try await repository.update(updatedPlaylist)
-        let fetchedPlaylist = try await repository.read(by: updatedPlaylist.id.uuidString)
+        try await storage.update(updatedPlaylist)
+        let fetchedPlaylist = try await storage.read(by: updatedPlaylist.id.uuidString)
         XCTAssertNotNil(fetchedPlaylist)
         
         XCTAssertEqual(fetchedPlaylist?.name, updatedPlaylist.name)
@@ -122,11 +122,11 @@ final class CoreDataPlaylistRepositoryTests: XCTestCase {
             filter: MusicFilter(genres: [.pop])
         )
 
-        try await repository.create(playlist)
+        try await storage.create(playlist)
 
-        try await repository.delete(by: playlist.id.uuidString)
+        try await storage.delete(by: playlist.id.uuidString)
 
-        let fetchedPlaylist = try await repository.read(by: playlist.id.uuidString)
+        let fetchedPlaylist = try await storage.read(by: playlist.id.uuidString)
         XCTAssertNil(fetchedPlaylist)
     }
 }
