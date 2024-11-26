@@ -294,7 +294,7 @@ final class SwipeMusicViewController: UIViewController {
         musicPlayer.stop()
         let viewModel = PlaylistDetailViewModel(
             publishCurrentPlaylistUseCase: DefaultPublishCurrentPlaylistUseCase(
-                playlistRepository: DefaultPlaylistRepository(),
+                playlistRepository: MockPlaylistRepository(),
                 currentPlaylistRepository: DefaultCurrentPlaylistRepository()
             ),
             musicKitService: DefaultMusicKitService()
