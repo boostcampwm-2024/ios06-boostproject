@@ -6,6 +6,23 @@ struct MolioPlaylist: Identifiable {
     let createdAt: Date
     let musicISRCs: [String]
     let filter: MusicFilter
+    let like: [String]? // TODO
+
+    init(
+        id: UUID,
+        name: String,
+        createdAt: Date,
+        musicISRCs: [String],
+        filter: MusicFilter,
+        like: [String]? = []
+    ) {
+        self.id = id
+        self.name = name
+        self.createdAt = createdAt
+        self.musicISRCs = musicISRCs
+        self.filter = filter
+        self.like = like
+    }
 }
 
 extension MolioPlaylist {
@@ -16,4 +33,22 @@ extension MolioPlaylist {
         musicISRCs: [],
         filter: MusicFilter(genres: [.pop, .acoustic])
     )
+    
+    func copy(
+        id: UUID? = nil,
+        name: String? = nil,
+        createdAt: Date? = nil,
+        musicISRCs: [String]? = nil,
+        filter: MusicFilter? = nil,
+        like: [String]? = nil
+    ) -> MolioPlaylist {
+        return MolioPlaylist(
+            id: id ?? self.id,
+            name: name ?? self.name,
+            createdAt: createdAt ?? self.createdAt,
+            musicISRCs: musicISRCs ?? self.musicISRCs,
+            filter: filter ?? self.filter,
+            like: like ?? self.like
+        )
+    }
 }
