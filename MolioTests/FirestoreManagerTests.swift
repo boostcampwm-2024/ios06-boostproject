@@ -3,21 +3,22 @@ import XCTest
 
 final class FirestoreManagerTests: XCTestCase {
     var firestoreManager: FirestoreManager!
-    var createdEntity: [any FirestoreEntity] = []
+    var createdPlaylist: [MolioPlaylist] = []
 
     override func setUp() async throws {
         try await super.setUp()
         self.firestoreManager = FirestoreManager()
-        self.createdEntity = []
+        self.createdPlaylist = []
     }
 
     override func tearDown() async throws {
         // 테스트에서 생성된 엔티티들을 삭제
-        for createdEntity in self.createdEntity {
-            try await self.firestoreManager.delete(entity: createdEntity)
+        for createdEntity in self.createdPlaylist {
+            try await self.firestoreManager.delete(entityType: MolioPlaylist.self, idString: createdEntity.idString)
         }
+        
         self.firestoreManager = nil
-        self.createdEntity = []
+        self.createdPlaylist = []
         
         try await super.tearDown()
     }
@@ -28,7 +29,7 @@ final class FirestoreManagerTests: XCTestCase {
         try await self.firestoreManager.create(entity: playlist)
         
         // 생성된 플레이리스트의 ID를 저장하여 나중에 삭제
-        self.createdEntity.append(playlist)
+        self.createdPlaylist.append(playlist)
         
         XCTAssertNotNil(playlist)
     }
@@ -43,7 +44,7 @@ final class FirestoreManagerTests: XCTestCase {
         try await self.firestoreManager.create(entity: playlist)
         
         // 생성된 플레이리스트의 ID를 저장하여 나중에 삭제
-        self.createdEntity.append(playlist)
+        self.createdPlaylist.append(playlist)
         
         // Then: Firestore에서 플레이리스트를 다시 읽어옴
         let fetchedPlaylist = try await self.firestoreManager.read(entityType: MolioPlaylist.self, id: playlistID.uuidString)
@@ -65,8 +66,8 @@ final class FirestoreManagerTests: XCTestCase {
         try await self.firestoreManager.create(entity: playlist2)
         
         // 생성된 플레이리스트들의 ID를 저장하여 나중에 삭제
-        self.createdEntity.append(playlist1)
-        self.createdEntity.append(playlist2)
+        self.createdPlaylist.append(playlist1)
+        self.createdPlaylist.append(playlist2)
         
         // Then: Firestore에서 모든 플레이리스트를 읽어옴
         let fetchedPlaylists = try await self.firestoreManager.readAll(entityType: MolioPlaylist.self)
@@ -84,7 +85,7 @@ final class FirestoreManagerTests: XCTestCase {
         try await self.firestoreManager.create(entity: playlist)
         
         // 생성된 플레이리스트의 ID를 저장하여 나중에 삭제
-        self.createdEntity.append(playlist)
+        self.createdPlaylist.append(playlist)
         
         // When: 이름이 변경된 새로운 플레이리스트 인스턴스 생성 및 업데이트
         let updatedPlaylist = playlist.copy(name: "Updated Name")

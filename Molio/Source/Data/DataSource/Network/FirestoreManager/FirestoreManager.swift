@@ -4,8 +4,10 @@ import FirebaseFirestore
 final class FirestoreManager {
     private let db: Firestore
     
-    init() {
-        self.db = Firestore.firestore()
+    init(
+        db: Firestore = Firestore.firestore()
+    ) {
+        self.db = db
     }
     
     // MARK: - CREATE
@@ -55,9 +57,7 @@ final class FirestoreManager {
     
     // MARK: - DELETE
     
-    func delete<T: FirestoreEntity>(entity: T) async throws {
-        let idString = entity.idString
-        
+    func delete<T: FirestoreEntity>(entityType: T.Type, idString: String) async throws {
         let query = db.collection(T.collectionName).whereField(T.firebaseIDFieldName, isEqualTo: idString)
 
         let documentSnapshot = try await getFirstDocumentSnapshot(query: query)
