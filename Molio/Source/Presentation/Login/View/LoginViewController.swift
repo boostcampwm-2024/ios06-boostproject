@@ -105,12 +105,12 @@ final class LoginViewController: UIViewController {
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
                 guard let self else { return }
-                self.switchToSwipeMusicController()
+                self.switchToTabBarController()
             }
             .store(in: &cancellables)
     }
     
-    private func switchToSwipeMusicController() {
+    private func switchToTabBarController() {
         let molioTabBarController = MolioTabBarController()
         
         guard let window = self.view.window else { return }
