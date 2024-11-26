@@ -1,53 +1,43 @@
 import SwiftUI
 
 struct MusicCellView: View {
-    var music: MolioMusic
+    private let music: MolioMusic
 
     init(music: MolioMusic) {
         self.music = music
     }
 
     var body: some View {
-        HStack(spacing: 15) {
+        HStack(spacing: 12) {
             AsyncImage(url: music.artworkImageURL) { phase in
                 switch phase {
                 case .empty:
                     ProgressView()
-                        .frame(width: 50, height: 50)
 
                 case .success(let image):
                     image
                         .resizable()
                         .scaledToFit()
-                        .clipShape(RoundedRectangle(cornerRadius: 5))
 
                 case .failure:
                     Rectangle()
-                        .fill(Color.white.opacity(0.5))
-                        .frame(width: 56, height: 56)
-                        .cornerRadius(3)
+                        .fill(.tag)
 
                 @unknown default:
                     EmptyView()
                 }
             }
-
+            .frame(width: 50, height: 50)
+            
             VStack(alignment: .leading) {
-                Text(music.title)
-                    .font(.body)
-                Text(music.artistName)
-                    .font(.footnote)
-                    .fontWeight(.ultraLight)
+                Text.molioRegular(music.title, size: 17)
+                Text.molioRegular(music.artistName, size: 13)
+                    .foregroundStyle(.secondary)
             }
 
             Spacer()
         }
-        .frame(
-            minWidth: 0,
-            maxWidth: .infinity,
-            minHeight: 0,
-            maxHeight: 56
-        )
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 56)
     }
 }
 
