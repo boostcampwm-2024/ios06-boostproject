@@ -111,15 +111,14 @@ final class LoginViewController: UIViewController {
     }
     
     private func switchToSwipeMusicController() {
-        let swipeMusicViewController = SwipeMusicViewController(viewModel: SwipeMusicViewModel())
-        let navigationController = UINavigationController(rootViewController: swipeMusicViewController)
+        let molioTabBarController = MolioTabBarController()
         
         guard let window = self.view.window else { return }
         
         UIView.transition(with: window, duration: 0.5) {
-            swipeMusicViewController.view.alpha = 0.0
-            window.rootViewController = navigationController
-            swipeMusicViewController.view.alpha = 1.0
+            molioTabBarController.view.alpha = 0.0
+            window.rootViewController = molioTabBarController
+            molioTabBarController.view.alpha = 1.0
         }
         
         window.makeKeyAndVisible()
