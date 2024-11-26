@@ -6,21 +6,20 @@ final class DefaultPublishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase 
     private let currentPlaylistRepository: any CurrentPlaylistRepository
     
     init(
-        playlistRepository: any PlaylistRepository = DIContainer.shared.resolve(PlaylistRepository.self) ,
-        currentPlaylistRepository: any CurrentPlaylistRepository = DIContainer.shared.resolve(CurrentPlaylistRepository.self)
+        playlistRepository: any PlaylistRepository = DIContainer.shared.resolve(),
+        currentPlaylistRepository: any CurrentPlaylistRepository = DIContainer.shared.resolve()
     ) {
         self.playlistRepository = playlistRepository
         self.currentPlaylistRepository = currentPlaylistRepository
     }
     
-    func execute() -> AnyPublisher<MolioPlaylist?, Never>  {
+    func execute() -> AnyPublisher<MolioPlaylist?, Never> {
         currentPlaylistRepository.currentPlaylistPublisher
-            .flatMap {  playlistUUID in
+            .flatMap { playlistUUID in
                 return Future { promise in
                     Task { [weak self] in
-                        guard
-                            let self,
-                            let playlistUUID else {
+                        guard let self,
+                              let playlistUUID else {
                             promise(.success(nil))
                             return                         
                             }                    

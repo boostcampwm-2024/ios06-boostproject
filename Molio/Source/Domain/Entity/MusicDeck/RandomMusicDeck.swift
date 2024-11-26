@@ -20,82 +20,79 @@ extension RandomMusicDeck: MusicDeck {
         removeCurrentMusic()
         // TODO: 현재 노래에 대한 싫어요 로직
     }
+    
+    /// 필터 변경 시 덱 초기화
+    /// - `currentMusicFilter`(현재 필터) 변경
+    /// - `randomMusics` 배열 비우기 (최대 2개까지 남겨준다.)
+    func reset(with filter: MusicFilter) {
+        print(#fileID, #function)
+        currentMusicFilter = filter
+        let cardCountToRemove = max(0, self.randomMusics.value.count - 2)
+        randomMusics.value.removeLast(cardCountToRemove)
+    }
 }
 
 // MARK: 프로토콜 요구사항을 위한 구현체
 
 final class RandomMusicDeck {
+    private let publishCurrentPlaylistUseCase: any PublishCurrentPlaylistUseCase
+    private let fetchRecommendedMusicUseCase: any FetchRecommendedMusicUseCase
     
-    // MARK: 의존성
-    
-    private var fetchRecommendedMusicUseCase: any FetchRecommendedMusicUseCase
-    private var musicFilterProvider: any MusicFilterProvider
-    
-    // MARK: 생성자에서 초기화하는 프로퍼티
-    
-    var randomMusics: CurrentValueSubject<[MolioMusic], Never>
-    private var musicFilter: CurrentValueSubject<MusicFilter?, Never>
-    
-    // MARK: Cancellable들
-    
-    private var fetchMoreMusicCancellable: AnyCancellable?
-    private var fetchMusicWhenMusicFilterChangedCancellable: AnyCancellable?
+    private var currentMusicFilter: MusicFilter?
+    private let randomMusics: CurrentValueSubject<[MolioMusic], Never>
+    private var cancellables = Set<AnyCancellable>()
 
     // MARK: 생성자
     
     init(
-        fetchRecommendedMusicUseCase: any FetchRecommendedMusicUseCase = DIContainer.shared.resolve(),
-        musicFilterProvider: any MusicFilterProvider = MockMusicFilterProvider()  // TODO: - 필터 전달받기
+        publishCurrentPlaylistUseCase: any PublishCurrentPlaylistUseCase = DIContainer.shared.resolve(),
+        fetchRecommendedMusicUseCase: any FetchRecommendedMusicUseCase = DIContainer.shared.resolve()
     ) {
         // 의존성 주입
+        self.publishCurrentPlaylistUseCase = publishCurrentPlaylistUseCase
         self.fetchRecommendedMusicUseCase = fetchRecommendedMusicUseCase
-        self.musicFilterProvider = musicFilterProvider
         
         // 속성 초기화
         self.randomMusics = CurrentValueSubject([])
-        self.musicFilter = CurrentValueSubject(nil)
         
         // 구독 설정
-        setUpFetchMoreMusicCancellable()
-//        setUpFetchMusicWhenMusicFilterChangedCancellable()
+        setupCurrentPlaylistCancellable()
+        setupFetchMoreMusicCancellable()
     }
     
     // MARK: 구독
     
-    // Sink에서 하는 행동을 위주로 이름지었다.
-    private func setUpFetchMoreMusicCancellable() {
-        self.fetchMoreMusicCancellable = self.randomMusics
-            .sink { [weak self] randomMusic in
-                if randomMusic.count < 10 {
+    /// 현재 플레이리스트의 필터 정보 불러오기
+    private func setupCurrentPlaylistCancellable() {
+        publishCurrentPlaylistUseCase.execute()
+            .map { $0?.filter }
+            .sink { [weak self] currentPlaylistFilter in
+                print("현재 플레이리스트 필터 받음!! \(String(describing: currentPlaylistFilter?.genres))")
+                self?.currentMusicFilter = currentPlaylistFilter
+            }
+            .store(in: &cancellables)
+    }
+    
+    /// 현재 불러온 음악 개수가 10개 미만이 되면 추가로 불러온다.
+    private func setupFetchMoreMusicCancellable() {
+        randomMusics
+            .map { $0.count }
+            .sink { [weak self] musicCount in
+                print("musicCount가 \(musicCount)임!!")
+                if musicCount < 10 {
                     self?.loadRandomMusic()
                 }
             }
+            .store(in: &cancellables)
     }
     
-    // 필터 프로바이더의 필터가 변경되는 경우 deck에서도 필터를 바꾼다.
-    private func setUpFetchMusicWhenMusicFilterChangedCancellable() {
-        self.fetchMusicWhenMusicFilterChangedCancellable = musicFilterProvider.getMusicFilterPublisher()
-            .removeDuplicates { musicFilterBefore, musicFilterAfter in
-                musicFilterBefore.genres == musicFilterAfter.genres
-            }
-            .sink { [weak self] musicFilter in
-                guard let self else { return }
-                
-                self.musicFilter.value = musicFilter
-                
-                let cardCountToRemove = max(0, self.randomMusics.value.count - 2)
-                
-                // 2개 빼고 다 제거 (덱의 노래 카드를 다 제거하면 아무 것도 보이지 않는 상태로 꽤 오래 기다려야 할 수도 있다)
-                self.randomMusics.value.removeLast(cardCountToRemove)
-                
-                self.loadRandomMusic()
-            }
-    }
-    
-    // TODO: - 장르 전달받기
+    /// 현재 필터 기반으로 랜덤 추천 음악 불러오기
     private func loadRandomMusic() {
+        print(#fileID, #function)
+        let filter = currentMusicFilter ?? MusicFilter(genres: [])
+        print("\(filter)로 랜덤 추천 음악을 다시 불러옵니다.")
         Task { [weak self] in
-            let fetchedMusics = try? await self?.fetchRecommendedMusicUseCase.execute(with: MusicFilter(genres: [.pop]))
+            let fetchedMusics = try? await self?.fetchRecommendedMusicUseCase.execute(with: filter)
             
             guard let fetchedMusics else { return }
             
