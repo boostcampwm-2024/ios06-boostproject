@@ -2,7 +2,7 @@ import CoreData
 import Combine
 import Foundation
 
-final class CoreDataPlaylistRepository: CRUDProtocol {
+final class CoreDataPlaylistStorage: PlaylistLocalStorage {
     private let context: NSManagedObjectContext
     private let fetchRequest: NSFetchRequest<Playlist> = Playlist.fetchRequest()
     
