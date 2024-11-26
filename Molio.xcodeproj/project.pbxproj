@@ -39,7 +39,7 @@
 		20397E5A2CE5CB3C004ED9CE /* PlaylistRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20397E592CE5CB3C004ED9CE /* PlaylistRepository.swift */; };
 		20397E6A2CE5DCDD004ED9CE /* MolioModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20397E682CE5DCDD004ED9CE /* MolioModel.xcdatamodeld */; };
 		20397E702CE5DE56004ED9CE /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20397E6F2CE5DE56004ED9CE /* PersistenceManager.swift */; };
-		20397E722CE5DFC6004ED9CE /* CoreDataPlaylistRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20397E712CE5DFC6004ED9CE /* CoreDataPlaylistRepository.swift */; };
+		20397E722CE5DFC6004ED9CE /* CoreDataPlaylistStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20397E712CE5DFC6004ED9CE /* CoreDataPlaylistStorage.swift */; };
 		20397E802CE5FD0A004ED9CE /* DefaultPlaylistRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20397E7F2CE5FD0A004ED9CE /* DefaultPlaylistRepositoryTests.swift */; };
 		205E6A422CF4C4D9005E9150 /* PlaylistLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205E6A412CF4C4D9005E9150 /* PlaylistLocalStorage.swift */; };
 		205E6A442CF563BC005E9150 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205E6A432CF563BC005E9150 /* FirebaseStorageManager.swift */; };
@@ -235,7 +235,7 @@
 		20397E592CE5CB3C004ED9CE /* PlaylistRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistRepository.swift; sourceTree = "<group>"; };
 		20397E692CE5DCDD004ED9CE /* MolioModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MolioModel.xcdatamodel; sourceTree = "<group>"; };
 		20397E6F2CE5DE56004ED9CE /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
-		20397E712CE5DFC6004ED9CE /* CoreDataPlaylistRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPlaylistRepository.swift; sourceTree = "<group>"; };
+		20397E712CE5DFC6004ED9CE /* CoreDataPlaylistStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPlaylistStorage.swift; sourceTree = "<group>"; };
 		20397E7F2CE5FD0A004ED9CE /* DefaultPlaylistRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPlaylistRepositoryTests.swift; sourceTree = "<group>"; };
 		205E6A412CF4C4D9005E9150 /* PlaylistLocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistLocalStorage.swift; sourceTree = "<group>"; };
 		205E6A432CF563BC005E9150 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
@@ -468,7 +468,7 @@
 			isa = PBXGroup;
 			children = (
 				205E6A412CF4C4D9005E9150 /* PlaylistLocalStorage.swift */,
-				20397E712CE5DFC6004ED9CE /* CoreDataPlaylistRepository.swift */,
+				20397E712CE5DFC6004ED9CE /* CoreDataPlaylistStorage.swift */,
 				20397E6F2CE5DE56004ED9CE /* PersistenceManager.swift */,
 				2075FEC72CECDF4D009834BE /* CoreDataError.swift */,
 			);
@@ -1640,7 +1640,7 @@
 				881BBCB52CDCF91B00010A61 /* MockSpotifyTokenProvider.swift in Sources */,
 				F1E405A72CECA22900533701 /* SignAppleRepository.swift in Sources */,
 				F1A3BB792CF0E0BF0062C79C /* ExportPlaylistViewModel.swift in Sources */,
-				20397E722CE5DFC6004ED9CE /* CoreDataPlaylistRepository.swift in Sources */,
+				20397E722CE5DFC6004ED9CE /* CoreDataPlaylistStorage.swift in Sources */,
 				881BBCB62CDCF91B00010A61 /* SpotifyAPIService.swift in Sources */,
 				20397E5A2CE5CB3C004ED9CE /* PlaylistRepository.swift in Sources */,
 				200918422CECA79A0058D8C7 /* UserDefaultsError.swift in Sources */,
