@@ -25,15 +25,17 @@ struct PlaylistDetailView: View {
             
             // TODO: - 하이라이트 리믹스 & 전체 재생 버튼
 
-            MusicListView(musics: .constant(MolioMusic.all + MolioMusic.all + MolioMusic.all), selectedIndex: $selectedIndex)
+            MusicListView(
+                musics: $viewModel.currentPlaylistMusics,
+                selectedIndex: $selectedIndex
+            )
         }
         .background(Color.background)
         .safeAreaInset(edge: .bottom) {
             HStack(spacing: 11) {
-
                 AudioPlayerControlView(musics: $viewModel.currentPlaylistMusics, selectedIndex: $selectedIndex)
                     .layoutPriority(1)
-
+                
                 Button {
                     
                 } label: {
