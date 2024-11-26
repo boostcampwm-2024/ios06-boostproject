@@ -1,7 +1,7 @@
 struct DefaultSignInAppleUseCase: SignInAppleUseCase {
     private let signAppleRepository: SignAppleRepository
     
-    init(signAppleRepository: SignAppleRepository) {
+    init(signAppleRepository: SignAppleRepository = DIContainer.shared.resolve()) {
         self.signAppleRepository = signAppleRepository
     }
     
