@@ -1,4 +1,4 @@
-enum MusicGenre: String, CaseIterable {
+enum MusicGenre: String, CaseIterable, Decodable {
     case acoustic
     case afrobeat
     case altRock = "alt-rock"
