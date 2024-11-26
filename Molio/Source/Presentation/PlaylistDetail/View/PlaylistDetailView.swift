@@ -37,7 +37,7 @@ struct PlaylistDetailView: View {
                     .layoutPriority(1)
                 
                 Button {
-                    
+                    // TODO: - 플레이리스트 내보내기
                 } label: {
                     Image.molioSemiBold(systemName: "square.and.arrow.up", size: 20, color: .main)
                 }
@@ -47,6 +47,7 @@ struct PlaylistDetailView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: 66)
             .padding(.horizontal, 22)
+            .padding(.bottom, 23)
         }
         .sheet(isPresented: $isPlaylistChangeSheetPresented) {
             Text("Playlist Change Sheet")

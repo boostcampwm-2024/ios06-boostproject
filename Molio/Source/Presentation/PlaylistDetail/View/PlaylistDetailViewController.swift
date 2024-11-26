@@ -16,9 +16,13 @@ final class PlaylistDetailViewController: UIHostingController<PlaylistDetailView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = false
         view.backgroundColor = .clear
         // TODO: - 뒤로가기 버튼 텍스트 숨기기
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
