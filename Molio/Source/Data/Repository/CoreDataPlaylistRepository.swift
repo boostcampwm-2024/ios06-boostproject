@@ -163,7 +163,6 @@ final class MockPlaylistRepository: PlaylistRepository {
     }
     
     func addMusic(isrc: String, to playlistID: UUID) async throws {
-        print(#fileID, #function)
         fetchRequest.predicate = NSPredicate(format: "id == %@", playlistID as CVarArg)
         
         do {

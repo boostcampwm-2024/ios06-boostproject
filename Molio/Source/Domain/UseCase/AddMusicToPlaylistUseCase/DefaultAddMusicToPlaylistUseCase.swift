@@ -10,7 +10,6 @@ struct DefaultAddMusicToPlaylistUseCase: AddMusicToPlaylistUseCase {
     }
     
     func execute(isrc: String, to playlistID: UUID) async throws {
-        print(#fileID, #function)
         try await playlistRepository.addMusic(isrc: isrc, to: playlistID)
     }
 }
