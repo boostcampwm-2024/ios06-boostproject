@@ -4,7 +4,7 @@ import FirebaseStorage
 
 final class FirebaseStorageManagerTests: XCTestCase {
     var manager: FirebaseStorageManager!
-    let testImage = UIImage(named: "AlbumCoverSample")! // 테스트용 이미지
+    let testImageData: Data = (UIImage(named: "AlbumCoverSample")?.jpegData(compressionQuality: 0.8)!)! // 테스트용 이미지
     let testFolder = "test_images"
     
     override func setUp() {
@@ -20,7 +20,7 @@ final class FirebaseStorageManagerTests: XCTestCase {
     func testUploadImageSuccess() {
         let expectation = self.expectation(description: "Image upload succeeds")
         
-        manager.uploadImage(image: testImage, folder: testFolder) { result in
+        manager.uploadImage(imageData: testImageData, folder: testFolder) { result in
             switch result {
             case .success(let downloadURL):
                 XCTAssertNotNil(downloadURL, "Download URL should not be nil")
@@ -36,10 +36,10 @@ final class FirebaseStorageManagerTests: XCTestCase {
     }
     
     func testUploadImageFailure() {
-        let invalidImage = UIImage() // Empty UIImage, invalid for uploading
+        let invalidImageData = Data()// Empty UIImage, invalid for uploading
         let expectation = self.expectation(description: "Image upload fails due to invalid data")
         
-        manager.uploadImage(image: invalidImage, folder: testFolder) { result in
+        manager.uploadImage(imageData: invalidImageData, folder: testFolder) { result in
             switch result {
             case .success(let downloadURL):
                 XCTFail("Upload should not succeed with invalid data, but returned URL: \(downloadURL)")
