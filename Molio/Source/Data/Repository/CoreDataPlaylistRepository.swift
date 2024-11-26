@@ -162,10 +162,23 @@ final class MockPlaylistRepository: PlaylistRepository {
         setupChangeObserver()
     }
     
-    func addMusic(isrc: String, to playlistName: String) {
-        guard let playlist = fetchRawPlaylist(for: playlistName) else { return }
+    func addMusic(isrc: String, to playlistID: UUID) async throws {
+        print(#fileID, #function)
+        fetchRequest.predicate = NSPredicate(format: "id == %@", playlistID as CVarArg)
         
-        playlist.musicISRCs.append(isrc)
+        do {
+            let playlists = try context.fetch(fetchRequest)
+            guard let playlistToAdd = playlists.first else {
+                showAlert(alertNotFoundPlaylist)
+                throw CoreDataError.updateFailed
+            }
+            playlistToAdd.musicISRCs.append(isrc)
+            try context.save()
+            print("\(isrc) 추가 성공")
+        } catch {
+            showAlert(alertFailUpdatePlaylist)
+            throw CoreDataError.updateFailed
+        }
     }
     
     func deleteMusic(isrc: String, in playlistName: String) {
