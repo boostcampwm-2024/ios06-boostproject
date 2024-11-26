@@ -18,8 +18,7 @@ struct SelectPlaylistView: View {
                 Spacer()
                     .frame(height: 40)
                 
-                Text("그냥님의 몰리오") // TODO: 로그인 정보 불러와 적용하기
-                    .font(.custom(PretendardFontName.Bold, size: 36))
+                Text.molioBold("그냥님의 몰리오", size: 36) // TODO: 로그인 정보 불러와 적용하기
                     .foregroundStyle(Color.white)
                     .padding(.horizontal, 22)
                 

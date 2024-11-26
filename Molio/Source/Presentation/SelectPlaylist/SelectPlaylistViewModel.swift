@@ -24,14 +24,15 @@ final class SelectPlaylistViewModel: ObservableObject {
     }
     
     func fetchPlaylists() {
-        Task { @MainActor in
-            playlists = await fetchAllPlaylistsUseCase.execute()
+        Task { @MainActor [weak self] in
+            guard let playlists = await self?.fetchAllPlaylistsUseCase.execute() else { return }
+            self?.playlists = playlists
         }
     }
     
     func selectPlaylist(_ playlist: MolioPlaylist) {
-        Task { @MainActor in
-            selectedPlaylist = playlist
+        Task { @MainActor [weak self] in
+            self?.selectedPlaylist = playlist
         }
     }
     
