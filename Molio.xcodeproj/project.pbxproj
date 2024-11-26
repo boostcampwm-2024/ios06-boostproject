@@ -143,6 +143,9 @@
 		F135BCFB2CF4620C006C6C4F /* SplahViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCFA2CF4620C006C6C4F /* SplahViewModel.swift */; };
 		F135BCFE2CF4BDE3006C6C4F /* MolioTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCFD2CF4BDE3006C6C4F /* MolioTabBarController.swift */; };
 		F135BD032CF4C382006C6C4F /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BD022CF4C382006C6C4F /* CommunityViewController.swift */; };
+		F135BD082CF5A6C4006C6C4F /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BD072CF5A6C4006C6C4F /* SettingView.swift */; };
+		F135BD0A2CF5C671006C6C4F /* ProfileItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BD092CF5C671006C6C4F /* ProfileItemView.swift */; };
+		F135BD0C2CF5C68C006C6C4F /* SettingTextItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BD0B2CF5C68C006C6C4F /* SettingTextItemView.swift */; };
 		F17368F92CD86B1100F6242C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17368F82CD86B1100F6242C /* AppDelegate.swift */; };
 		F17368FB2CD86B1100F6242C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17368FA2CD86B1100F6242C /* SceneDelegate.swift */; };
 		F17369022CD86B1300F6242C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F17369012CD86B1300F6242C /* Assets.xcassets */; };
@@ -186,9 +189,9 @@
 		F1E405A52CECA19200533701 /* DefaultSignInAppleUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405A42CECA19200533701 /* DefaultSignInAppleUseCase.swift */; };
 		F1E405A72CECA22900533701 /* SignAppleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405A62CECA22900533701 /* SignAppleRepository.swift */; };
 		F1E405A92CECA2D000533701 /* DefaultSignAppleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405A82CECA2D000533701 /* DefaultSignAppleRepository.swift */; };
-		F1E405AC2CECA31D00533701 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405AB2CECA31D00533701 /* FirebaseService.swift */; };
-		F1E405AE2CECA35E00533701 /* DefaultFirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405AD2CECA35E00533701 /* DefaultFirebaseService.swift */; };
-		F1E405B02CECA3F500533701 /* FirebaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405AF2CECA3F500533701 /* FirebaseError.swift */; };
+		F1E405AC2CECA31D00533701 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405AB2CECA31D00533701 /* AuthService.swift */; };
+		F1E405AE2CECA35E00533701 /* DefaultFirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405AD2CECA35E00533701 /* DefaultFirebaseAuthService.swift */; };
+		F1E405B02CECA3F500533701 /* FirebaseAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405AF2CECA3F500533701 /* FirebaseAuthError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -336,6 +339,9 @@
 		F135BCFA2CF4620C006C6C4F /* SplahViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplahViewModel.swift; sourceTree = "<group>"; };
 		F135BCFD2CF4BDE3006C6C4F /* MolioTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MolioTabBarController.swift; sourceTree = "<group>"; };
 		F135BD022CF4C382006C6C4F /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
+		F135BD072CF5A6C4006C6C4F /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		F135BD092CF5C671006C6C4F /* ProfileItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileItemView.swift; sourceTree = "<group>"; };
+		F135BD0B2CF5C68C006C6C4F /* SettingTextItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTextItemView.swift; sourceTree = "<group>"; };
 		F17368F52CD86B1100F6242C /* Molio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Molio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F17368F82CD86B1100F6242C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F17368FA2CD86B1100F6242C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -381,9 +387,9 @@
 		F1E405A42CECA19200533701 /* DefaultSignInAppleUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSignInAppleUseCase.swift; sourceTree = "<group>"; };
 		F1E405A62CECA22900533701 /* SignAppleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignAppleRepository.swift; sourceTree = "<group>"; };
 		F1E405A82CECA2D000533701 /* DefaultSignAppleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSignAppleRepository.swift; sourceTree = "<group>"; };
-		F1E405AB2CECA31D00533701 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
-		F1E405AD2CECA35E00533701 /* DefaultFirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFirebaseService.swift; sourceTree = "<group>"; };
-		F1E405AF2CECA3F500533701 /* FirebaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseError.swift; sourceTree = "<group>"; };
+		F1E405AB2CECA31D00533701 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		F1E405AD2CECA35E00533701 /* DefaultFirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFirebaseAuthService.swift; sourceTree = "<group>"; };
+		F1E405AF2CECA3F500533701 /* FirebaseAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -556,7 +562,7 @@
 		205E6A4A2CF57099005E9150 /* Error */ = {
 			isa = PBXGroup;
 			children = (
-				F1E405AF2CECA3F500533701 /* FirebaseError.swift */,
+				F1E405AF2CECA3F500533701 /* FirebaseAuthError.swift */,
 				205E6A4B2CF570AC005E9150 /* FirebaseStorageError.swift */,
 			);
 			path = Error;
@@ -777,6 +783,7 @@
 		B80970762CDB43E2007BC3C4 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				F135BD062CF5A6AB006C6C4F /* Setting */,
 				F135BCFF2CF4C358006C6C4F /* Community */,
 				F135BCFC2CF4BD70006C6C4F /* Tabbar */,
 				F135BCF52CF45DB0006C6C4F /* Splash */,
@@ -1137,6 +1144,16 @@
 			path = Community;
 			sourceTree = "<group>";
 		};
+		F135BD062CF5A6AB006C6C4F /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				F135BD072CF5A6C4006C6C4F /* SettingView.swift */,
+				F135BD092CF5C671006C6C4F /* ProfileItemView.swift */,
+				F135BD0B2CF5C68C006C6C4F /* SettingTextItemView.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		F17368EC2CD86B1100F6242C = {
 			isa = PBXGroup;
 			children = (
@@ -1390,8 +1407,8 @@
 			children = (
 				205E6A4D2CF570C3005E9150 /* Manager */,
 				205E6A4A2CF57099005E9150 /* Error */,
-				F1E405AB2CECA31D00533701 /* FirebaseService.swift */,
-				F1E405AD2CECA35E00533701 /* DefaultFirebaseService.swift */,
+				F1E405AB2CECA31D00533701 /* AuthService.swift */,
+				F1E405AD2CECA35E00533701 /* DefaultFirebaseAuthService.swift */,
 			);
 			path = FirebaseService;
 			sourceTree = "<group>";
@@ -1536,6 +1553,7 @@
 				88E4834C2CEDDD4A003D624E /* MusicCellView.swift in Sources */,
 				F173692D2CDC9CF300F6242C /* UIColor+Extension.swift in Sources */,
 				2003BA162CDB8D69002CAB3E /* Font+Extension.swift in Sources */,
+				F135BD0A2CF5C671006C6C4F /* ProfileItemView.swift in Sources */,
 				F1E405A92CECA2D000533701 /* DefaultSignAppleRepository.swift in Sources */,
 				B88F80BC2CE490CD000480E6 /* Text+Extension.swift in Sources */,
 				B88F80BB2CE48C59000480E6 /* MusicFilterView.swift in Sources */,
@@ -1559,6 +1577,7 @@
 				2003BA1C2CDB8EE5002CAB3E /* UILabel+Extension.swift in Sources */,
 				F17369682CE36E8F00F6242C /* DefaultImageRepository.swift in Sources */,
 				B876E6402CEF69480048CAF9 /* MockPublishCurrentPlaylistUseCase.swift in Sources */,
+				F135BD0C2CF5C68C006C6C4F /* SettingTextItemView.swift in Sources */,
 				B8D554062CE0ED2C007CCD6D /* SpotifyAPI.swift in Sources */,
 				B8046A442CE9250B00933704 /* MusicGenre.swift in Sources */,
 				B8D554C82CE34A47007CCD6D /* String+Extension.swift in Sources */,
@@ -1598,8 +1617,8 @@
 				F1770B2C2CEEFF2200C81272 /* ExportPlaylistItemView.swift in Sources */,
 				F1A3BB7C2CF0E5070062C79C /* ExportMusicItem.swift in Sources */,
 				F17369642CE36DE300F6242C /* DefaultFetchImageUseCase.swift in Sources */,
-				F1E405AC2CECA31D00533701 /* FirebaseService.swift in Sources */,
-				F1E405B02CECA3F500533701 /* FirebaseError.swift in Sources */,
+				F1E405AC2CECA31D00533701 /* AuthService.swift in Sources */,
+				F1E405B02CECA3F500533701 /* FirebaseAuthError.swift in Sources */,
 				20397E6A2CE5DCDD004ED9CE /* MolioModel.xcdatamodeld in Sources */,
 				F17369722CE3716100F6242C /* DefaultImageFetchService.swift in Sources */,
 				2003BA012CDB7498002CAB3E /* PretendardFontName.swift in Sources */,
@@ -1616,7 +1635,7 @@
 				B8D554892CE10A3A007CCD6D /* DefaultSpotifyAPIService.swift in Sources */,
 				B81086EE2CF5E34D00403E88 /* AddMusicToPlaylistUseCase.swift in Sources */,
 				881BBCBE2CDCF95600010A61 /* RecommendationsRequestDTO.swift in Sources */,
-				F1E405AE2CECA35E00533701 /* DefaultFirebaseService.swift in Sources */,
+				F1E405AE2CECA35E00533701 /* DefaultFirebaseAuthService.swift in Sources */,
 				F1E4059E2CEC936700533701 /* AppleAuthInfo.swift in Sources */,
 				F17369292CDC79E100F6242C /* MusicCardView.swift in Sources */,
 				F173693F2CDF21BC00F6242C /* RecommendedMusicRepository.swift in Sources */,
@@ -1625,6 +1644,7 @@
 				F17368F92CD86B1100F6242C /* AppDelegate.swift in Sources */,
 				8816226D2CE3B11C00E81EA0 /* MusicDeck.swift in Sources */,
 				F1E4059B2CEC6E9B00533701 /* LoginViewModel.swift in Sources */,
+				F135BD082CF5A6C4006C6C4F /* SettingView.swift in Sources */,
 				201048592CEA2B020015E800 /* CreatePlaylistUseCase.swift in Sources */,
 				881622692CE3671400E81EA0 /* RandomMusicDeck.swift in Sources */,
 				F173695D2CE31CBA00F6242C /* InputOutputViewModel.swift in Sources */,
