@@ -12,13 +12,17 @@ extension RandomMusicDeck: MusicDeck {
     }
 
     func likeCurrentMusic() {
-        removeCurrentMusic()
-        // TODO: 현재 노래에 대한 좋아요 로직
+        Task {
+            if let currentMusic = randomMusics.value.first,
+               let currentPlaylist = currentPlaylist {
+                try await addMusicToPlaylistUseCase.execute(isrc: currentMusic.isrc, to: currentPlaylist.id)
+            }
+            removeCurrentMusic()
+        }
     }
     
     func dislikeCurrentMusic() {
         removeCurrentMusic()
-        // TODO: 현재 노래에 대한 싫어요 로직
     }
     
     /// 필터 변경 시 덱 초기화
@@ -35,20 +39,25 @@ extension RandomMusicDeck: MusicDeck {
 // MARK: 프로토콜 요구사항을 위한 구현체
 
 final class RandomMusicDeck {
+    private let addMusicToPlaylistUseCase: any AddMusicToPlaylistUseCase
     private let publishCurrentPlaylistUseCase: any PublishCurrentPlaylistUseCase
     private let fetchRecommendedMusicUseCase: any FetchRecommendedMusicUseCase
     
-    private var currentMusicFilter: MusicFilter?
     private let randomMusics: CurrentValueSubject<[MolioMusic], Never>
     private var cancellables = Set<AnyCancellable>()
+    
+    private var currentMusicFilter: MusicFilter?
+    private var currentPlaylist: MolioPlaylist?
 
     // MARK: 생성자
     
     init(
+        addMusicToPlaylistUseCase: any AddMusicToPlaylistUseCase = DIContainer.shared.resolve(),
         publishCurrentPlaylistUseCase: any PublishCurrentPlaylistUseCase = DIContainer.shared.resolve(),
         fetchRecommendedMusicUseCase: any FetchRecommendedMusicUseCase = DIContainer.shared.resolve()
     ) {
         // 의존성 주입
+        self.addMusicToPlaylistUseCase = addMusicToPlaylistUseCase
         self.publishCurrentPlaylistUseCase = publishCurrentPlaylistUseCase
         self.fetchRecommendedMusicUseCase = fetchRecommendedMusicUseCase
         
@@ -65,10 +74,11 @@ final class RandomMusicDeck {
     /// 현재 플레이리스트의 필터 정보 불러오기
     private func setupCurrentPlaylistCancellable() {
         publishCurrentPlaylistUseCase.execute()
-            .map { $0?.filter }
-            .sink { [weak self] currentPlaylistFilter in
-                print("현재 플레이리스트 필터 받음!! \(String(describing: currentPlaylistFilter?.genres))")
-                self?.currentMusicFilter = currentPlaylistFilter
+            .sink { [weak self] currentPlaylist in
+                self?.currentPlaylist = currentPlaylist
+                self?.currentMusicFilter = currentPlaylist?.filter
+                print("현재 플레이리스트 받음!! -> \(String(describing: currentPlaylist?.name))")
+                print("필터: \(String(describing: currentPlaylist?.filter.genres))")
             }
             .store(in: &cancellables)
     }
