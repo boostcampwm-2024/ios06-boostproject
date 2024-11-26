@@ -292,17 +292,9 @@ final class SwipeMusicViewController: UIViewController {
     
     @objc private func didTapMyMolioButton() {
         musicPlayer.stop()
-        let viewModel = PlaylistDetailViewModel(
-            publishCurrentPlaylistUseCase: DefaultPublishCurrentPlaylistUseCase(
-                playlistRepository: MockPlaylistRepository(),
-                currentPlaylistRepository: DefaultCurrentPlaylistRepository()
-            ),
-            musicKitService: DefaultMusicKitService()
-        )
-        let playlistDetailView = PlaylistDetailView(viewModel: viewModel)
-        let hostingController = UIHostingController(rootView: playlistDetailView)
-        hostingController.view.backgroundColor = .clear
-        self.navigationController?.pushViewController(hostingController, animated: true)
+        let viewModel = PlaylistDetailViewModel()
+        let playlistDetailVC = PlaylistDetailViewController(viewModel: viewModel)
+        self.navigationController?.pushViewController(playlistDetailVC, animated: true)
     }
     
     @objc private func didTapFilterButton() {

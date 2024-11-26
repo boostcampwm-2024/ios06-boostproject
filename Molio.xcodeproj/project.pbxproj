@@ -88,6 +88,7 @@
 		B8046A582CEBC08300933704 /* MockDefaultFetchAvailableGenresUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8046A572CEBC08300933704 /* MockDefaultFetchAvailableGenresUseCase.swift */; };
 		B8046A5A2CEC56C900933704 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8046A592CEC56C900933704 /* DIContainer.swift */; };
 		B809709E2CDB640B007BC3C4 /* MusicKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809709D2CDB640B007BC3C4 /* MusicKitService.swift */; };
+		B81086EB2CF5AEFD00403E88 /* PlaylistDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81086EA2CF5AEFD00403E88 /* PlaylistDetailViewController.swift */; };
 		B82B288E2CEF7E6D00D67725 /* MusicFilterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B288D2CEF7E6D00D67725 /* MusicFilterViewModelTests.swift */; };
 		B82B28902CEF846C00D67725 /* MockUpdatePlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B288F2CEF846C00D67725 /* MockUpdatePlaylistUseCase.swift */; };
 		B82B28922CF255C900D67725 /* showAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B28912CF255C900D67725 /* showAlert.swift */; };
@@ -271,6 +272,7 @@
 		B8046A572CEBC08300933704 /* MockDefaultFetchAvailableGenresUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDefaultFetchAvailableGenresUseCase.swift; sourceTree = "<group>"; };
 		B8046A592CEC56C900933704 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		B809709D2CDB640B007BC3C4 /* MusicKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicKitService.swift; sourceTree = "<group>"; };
+		B81086EA2CF5AEFD00403E88 /* PlaylistDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDetailViewController.swift; sourceTree = "<group>"; };
 		B82B288D2CEF7E6D00D67725 /* MusicFilterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicFilterViewModelTests.swift; sourceTree = "<group>"; };
 		B82B288F2CEF846C00D67725 /* MockUpdatePlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUpdatePlaylistUseCase.swift; sourceTree = "<group>"; };
 		B82B28912CF255C900D67725 /* showAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = showAlert.swift; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 				88E483482CEDDD4A003D624E /* MusicListView.swift */,
 				88E483452CEDDD4A003D624E /* MusicCellView.swift */,
 				88E483472CEDDD4A003D624E /* AudioPlayerControlView.swift */,
+				B81086EA2CF5AEFD00403E88 /* PlaylistDetailViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1500,6 +1503,7 @@
 				88C8B5EB2CEF1E130079ACB5 /* PublishAllMusicInCurrentPlaylistUseCase.swift in Sources */,
 				B8D553E82CDFE25C007CCD6D /* NetworkProvider.swift in Sources */,
 				881BBCBB2CDCF95600010A61 /* TrackDTO.swift in Sources */,
+				B81086EB2CF5AEFD00403E88 /* PlaylistDetailViewController.swift in Sources */,
 				881BBCBC2CDCF95600010A61 /* RecommendationsResponseDTO.swift in Sources */,
 				881BBCBD2CDCF95600010A61 /* ExternalIDsDTO.swift in Sources */,
 				B8046A5A2CEC56C900933704 /* DIContainer.swift in Sources */,

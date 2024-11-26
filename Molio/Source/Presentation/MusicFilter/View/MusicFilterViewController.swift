@@ -20,7 +20,7 @@ final class MusicFilterViewController: UIHostingController<MusicFilterView> {
         super.init(rootView: musicFilterView)
     }
     
-    @MainActor @preconcurrency required dynamic init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         onPopCompletion = { _ in }
         super.init(coder: aDecoder)
     }
