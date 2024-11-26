@@ -69,7 +69,6 @@
 		881BBCC12CDCF97900010A61 /* MusicFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881BBCBF2CDCF97900010A61 /* MusicFilter.swift */; };
 		881BBCC22CDCF97900010A61 /* RecommendationRequestEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881BBCC02CDCF97900010A61 /* RecommendationRequestEntity.swift */; };
 		885D1B592CF4C7E400F532E0 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D1B582CF4C7E400F532E0 /* FirestoreManager.swift */; };
-		885D1B5C2CF4C8C900F532E0 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 885D1B5B2CF4C8C900F532E0 /* FirebaseFirestore */; };
 		885D1B5E2CF4CF3A00F532E0 /* FirestoreManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D1B5D2CF4CF3900F532E0 /* FirestoreManagerTests.swift */; };
 		885D1B612CF4D27800F532E0 /* FirestoreEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D1B602CF4D27800F532E0 /* FirestoreEntity.swift */; };
 		885D1B632CF4D28700F532E0 /* MolioPlaylist+FirestoreEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D1B622CF4D28700F532E0 /* MolioPlaylist+FirestoreEntity.swift */; };
@@ -99,6 +98,8 @@
 		B8046A5A2CEC56C900933704 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8046A592CEC56C900933704 /* DIContainer.swift */; };
 		B809709E2CDB640B007BC3C4 /* MusicKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809709D2CDB640B007BC3C4 /* MusicKitService.swift */; };
 		B81086EB2CF5AEFD00403E88 /* PlaylistDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81086EA2CF5AEFD00403E88 /* PlaylistDetailViewController.swift */; };
+		B81086EE2CF5E34D00403E88 /* AddMusicToPlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81086ED2CF5E34D00403E88 /* AddMusicToPlaylistUseCase.swift */; };
+		B81086F02CF5E35D00403E88 /* DefaultAddMusicToPlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81086EF2CF5E35D00403E88 /* DefaultAddMusicToPlaylistUseCase.swift */; };
 		B82B288E2CEF7E6D00D67725 /* MusicFilterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B288D2CEF7E6D00D67725 /* MusicFilterViewModelTests.swift */; };
 		B82B28902CEF846C00D67725 /* MockUpdatePlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B288F2CEF846C00D67725 /* MockUpdatePlaylistUseCase.swift */; };
 		B82B28922CF255C900D67725 /* showAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B28912CF255C900D67725 /* showAlert.swift */; };
@@ -292,6 +293,8 @@
 		B8046A592CEC56C900933704 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		B809709D2CDB640B007BC3C4 /* MusicKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicKitService.swift; sourceTree = "<group>"; };
 		B81086EA2CF5AEFD00403E88 /* PlaylistDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDetailViewController.swift; sourceTree = "<group>"; };
+		B81086ED2CF5E34D00403E88 /* AddMusicToPlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMusicToPlaylistUseCase.swift; sourceTree = "<group>"; };
+		B81086EF2CF5E35D00403E88 /* DefaultAddMusicToPlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAddMusicToPlaylistUseCase.swift; sourceTree = "<group>"; };
 		B82B288D2CEF7E6D00D67725 /* MusicFilterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicFilterViewModelTests.swift; sourceTree = "<group>"; };
 		B82B288F2CEF846C00D67725 /* MockUpdatePlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUpdatePlaylistUseCase.swift; sourceTree = "<group>"; };
 		B82B28912CF255C900D67725 /* showAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = showAlert.swift; sourceTree = "<group>"; };
@@ -842,6 +845,7 @@
 		B80970812CDB4472007BC3C4 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				B81086EC2CF5E33200403E88 /* AddMusicToPlaylistUseCase */,
 				B876E6412CEF6AF50048CAF9 /* UpdatePlaylistUseCase */,
 				20C6558E2CEF48BA00C60B9C /* FetchAllPlaylistsUseCase */,
 				F135BCE42CF43BC2006C6C4F /* ManageAuthenticationUseCase */,
@@ -953,6 +957,15 @@
 				2003BA192CDB8EB5002CAB3E /* SwiftUI */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		B81086EC2CF5E33200403E88 /* AddMusicToPlaylistUseCase */ = {
+			isa = PBXGroup;
+			children = (
+				B81086ED2CF5E34D00403E88 /* AddMusicToPlaylistUseCase.swift */,
+				B81086EF2CF5E35D00403E88 /* DefaultAddMusicToPlaylistUseCase.swift */,
+			);
+			path = AddMusicToPlaylistUseCase;
 			sourceTree = "<group>";
 		};
 		B82EB41C2CEDED990023210A /* Secret */ = {
@@ -1535,6 +1548,7 @@
 				F1770B2A2CEE455800C81272 /* ExportPlaylistView.swift in Sources */,
 				F173693D2CDF191800F6242C /* MolioMusic.swift in Sources */,
 				F135BCF22CF445C0006C6C4F /* AuthLocalStorage.swift in Sources */,
+				B81086F02CF5E35D00403E88 /* DefaultAddMusicToPlaylistUseCase.swift in Sources */,
 				20397E702CE5DE56004ED9CE /* PersistenceManager.swift in Sources */,
 				88C8B5ED2CEF1E240079ACB5 /* DefaultPublishAllMusicInCurrentPlaylistUseCase.swift in Sources */,
 				F173691F2CDB995100F6242C /* SwipeMusicViewController.swift in Sources */,
@@ -1595,6 +1609,7 @@
 				881BBCBD2CDCF95600010A61 /* ExternalIDsDTO.swift in Sources */,
 				B8046A5A2CEC56C900933704 /* DIContainer.swift in Sources */,
 				B8D554892CE10A3A007CCD6D /* DefaultSpotifyAPIService.swift in Sources */,
+				B81086EE2CF5E34D00403E88 /* AddMusicToPlaylistUseCase.swift in Sources */,
 				881BBCBE2CDCF95600010A61 /* RecommendationsRequestDTO.swift in Sources */,
 				F1E405AE2CECA35E00533701 /* DefaultFirebaseService.swift in Sources */,
 				F1E4059E2CEC936700533701 /* AppleAuthInfo.swift in Sources */,
@@ -1652,7 +1667,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8816226B2CE3838B00E81EA0 /* DeckTests.swift in Sources */,
+				8816226B2CE3838B00E81EA0 /* MusicDeckTests.swift in Sources */,
 				205E6A4F2CF572B9005E9150 /* FirebaseStorageManagerTests.swift in Sources */,
 				8816226B2CE3838B00E81EA0 /* MusicDeckTests.swift in Sources */,
 				20397E802CE5FD0A004ED9CE /* DefaultPlaylistRepositoryTests.swift in Sources */,
