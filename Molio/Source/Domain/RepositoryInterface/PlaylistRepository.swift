@@ -4,7 +4,7 @@ import Combine
 protocol PlaylistRepository {
     var playlistsPublisher: AnyPublisher<[MolioPlaylist], Never> { get }
     
-    func addMusic(isrc: String, to playlistName: String)
+    func addMusic(isrc: String, to playlistID: UUID) async throws
     func deleteMusic(isrc: String, in playlistName: String)
     func moveMusic(isrc: String, in playlistName: String, fromIndex: Int, toIndex: Int)
 

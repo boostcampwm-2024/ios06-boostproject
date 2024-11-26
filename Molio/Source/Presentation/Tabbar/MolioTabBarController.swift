@@ -7,18 +7,6 @@ final class MolioTabBarController: UITabBarController {
         setupTabBarAppearance()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        setupTabBarFrame()
-    }
-    
-    private func setupTabBarFrame() {
-        let safeAreaHeight = view.safeAreaInsets.bottom
-        let tabBarHeight: CGFloat = 61
-        tabBar.frame.size.height = tabBarHeight + safeAreaHeight
-        tabBar.frame.origin.y = view.frame.height - tabBarHeight - safeAreaHeight
-    }
-    
     private func setupTabBarAppearance() {
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()

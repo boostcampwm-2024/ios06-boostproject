@@ -49,8 +49,6 @@ final class PublishCurrentPlaylistUseCaseTests: XCTestCase {
         // Wait for all expectations to be fulfilled within a timeout
         wait(for: [expectation1, expectation2, expectation3], timeout: 2.0)
         
-        print(emittedPlaylists.map { $0?.name })
-        
         // Now perform your assertions
         if emittedPlaylists.count >= 3 {
             XCTAssertNotEqual(emittedPlaylists[0]?.name, emittedPlaylists[1]?.name, "First and second playlists should have different names.")

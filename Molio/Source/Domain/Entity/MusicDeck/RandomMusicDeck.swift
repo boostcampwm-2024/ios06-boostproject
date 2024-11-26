@@ -12,20 +12,23 @@ extension RandomMusicDeck: MusicDeck {
     }
 
     func likeCurrentMusic() {
-        removeCurrentMusic()
-        // TODO: 현재 노래에 대한 좋아요 로직
+        Task {
+            if let currentMusic = randomMusics.value.first,
+               let currentPlaylist = currentPlaylist {
+                try await addMusicToPlaylistUseCase.execute(isrc: currentMusic.isrc, to: currentPlaylist.id)
+            }
+            removeCurrentMusic()
+        }
     }
     
     func dislikeCurrentMusic() {
         removeCurrentMusic()
-        // TODO: 현재 노래에 대한 싫어요 로직
     }
     
     /// 필터 변경 시 덱 초기화
     /// - `currentMusicFilter`(현재 필터) 변경
     /// - `randomMusics` 배열 비우기 (최대 2개까지 남겨준다.)
     func reset(with filter: MusicFilter) {
-        print(#fileID, #function)
         currentMusicFilter = filter
         let cardCountToRemove = max(0, self.randomMusics.value.count - 2)
         randomMusics.value.removeLast(cardCountToRemove)
@@ -35,20 +38,25 @@ extension RandomMusicDeck: MusicDeck {
 // MARK: 프로토콜 요구사항을 위한 구현체
 
 final class RandomMusicDeck {
+    private let addMusicToPlaylistUseCase: any AddMusicToPlaylistUseCase
     private let publishCurrentPlaylistUseCase: any PublishCurrentPlaylistUseCase
     private let fetchRecommendedMusicUseCase: any FetchRecommendedMusicUseCase
     
-    private var currentMusicFilter: MusicFilter?
     private let randomMusics: CurrentValueSubject<[MolioMusic], Never>
     private var cancellables = Set<AnyCancellable>()
+    
+    private var currentMusicFilter: MusicFilter?
+    private var currentPlaylist: MolioPlaylist?
 
     // MARK: 생성자
     
     init(
+        addMusicToPlaylistUseCase: any AddMusicToPlaylistUseCase = DIContainer.shared.resolve(),
         publishCurrentPlaylistUseCase: any PublishCurrentPlaylistUseCase = DIContainer.shared.resolve(),
         fetchRecommendedMusicUseCase: any FetchRecommendedMusicUseCase = DIContainer.shared.resolve()
     ) {
         // 의존성 주입
+        self.addMusicToPlaylistUseCase = addMusicToPlaylistUseCase
         self.publishCurrentPlaylistUseCase = publishCurrentPlaylistUseCase
         self.fetchRecommendedMusicUseCase = fetchRecommendedMusicUseCase
         
@@ -65,10 +73,9 @@ final class RandomMusicDeck {
     /// 현재 플레이리스트의 필터 정보 불러오기
     private func setupCurrentPlaylistCancellable() {
         publishCurrentPlaylistUseCase.execute()
-            .map { $0?.filter }
-            .sink { [weak self] currentPlaylistFilter in
-                print("현재 플레이리스트 필터 받음!! \(String(describing: currentPlaylistFilter?.genres))")
-                self?.currentMusicFilter = currentPlaylistFilter
+            .sink { [weak self] currentPlaylist in
+                self?.currentPlaylist = currentPlaylist
+                self?.currentMusicFilter = currentPlaylist?.filter
             }
             .store(in: &cancellables)
     }
@@ -78,7 +85,6 @@ final class RandomMusicDeck {
         randomMusics
             .map { $0.count }
             .sink { [weak self] musicCount in
-                print("musicCount가 \(musicCount)임!!")
                 if musicCount < 10 {
                     self?.loadRandomMusic()
                 }
@@ -88,9 +94,7 @@ final class RandomMusicDeck {
     
     /// 현재 필터 기반으로 랜덤 추천 음악 불러오기
     private func loadRandomMusic() {
-        print(#fileID, #function)
         let filter = currentMusicFilter ?? MusicFilter(genres: [])
-        print("\(filter)로 랜덤 추천 음악을 다시 불러옵니다.")
         Task { [weak self] in
             let fetchedMusics = try? await self?.fetchRecommendedMusicUseCase.execute(with: filter)
             

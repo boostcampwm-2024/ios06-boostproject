@@ -20,7 +20,7 @@ final class MusicFilterViewController: UIHostingController<MusicFilterView> {
         super.init(rootView: musicFilterView)
     }
     
-    @MainActor @preconcurrency required dynamic init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         onPopCompletion = { _ in }
         super.init(coder: aDecoder)
     }
@@ -49,7 +49,6 @@ final class MusicFilterViewController: UIHostingController<MusicFilterView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = false
         view.backgroundColor = .background
         
         // TODO: - 뒤로가기 버튼 텍스트 숨기기
@@ -60,6 +59,11 @@ final class MusicFilterViewController: UIHostingController<MusicFilterView> {
         saveButton.addTarget(self, action: #selector(didTapSaveButton), for: .touchUpInside)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.isHidden = true
@@ -68,7 +72,6 @@ final class MusicFilterViewController: UIHostingController<MusicFilterView> {
     // MARK: - Event
     
     @objc func didTapSaveButton() {
-        print(#fileID, #function)
         Task {
             do {
                 guard let delegate = delegate else { return }
