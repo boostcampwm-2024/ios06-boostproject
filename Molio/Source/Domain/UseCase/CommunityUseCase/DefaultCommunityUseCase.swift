@@ -1,10 +1,13 @@
 final class DefaultCommunityUseCase: CommunityUseCase {
     private let service: FollowRelationService
+    private let authService: AuthService
     
     init(
-        service: FollowRelationService
+        service: FollowRelationService,
+        authService: AuthService
     ) {
         self.service = service
+        self.authService = authService
     }
     
     func following(from userID: String, to targetID: String) async throws {
@@ -23,7 +26,8 @@ final class DefaultCommunityUseCase: CommunityUseCase {
         try await service.deleteFollowRelation(relationID: relationID)
     }
     
-    func fetchFollowingList(userID: String) async throws -> [MolioFollowRelation] {
+    func fetchMyFollowingList() async throws -> [MolioFollowRelation] {
+        let userID = try await fetchMyUserID()
         let relations = try await service.readFollowRelation(followingID: userID, followerID: nil, state: true)
         return relations.map { relation in
             MolioFollowRelation(
@@ -36,7 +40,21 @@ final class DefaultCommunityUseCase: CommunityUseCase {
         }
     }
     
-    func fetchMyFollowerList(userID: String) async throws -> [MolioFollowRelation] {
+    func fetchFreindFollowingList(userID: String) async throws -> [MolioFollowRelation] {
+        let relations = try await service.readFollowRelation(followingID: userID, followerID: nil, state: true)
+        return relations.map { relation in
+            MolioFollowRelation(
+                id: relation.id,
+                date: relation.date,
+                following: relation.following,
+                follower: relation.follower,
+                state: relation.state
+            )
+        }
+    }
+    
+    func fetchMyFollowerList() async throws -> [MolioFollowRelation] {
+        let userID = try await fetchMyUserID()
         let relations = try await service.readFollowRelation(followingID: nil, followerID: userID, state: nil)
         return relations.map { relation in
             MolioFollowRelation(
@@ -60,5 +78,10 @@ final class DefaultCommunityUseCase: CommunityUseCase {
                 state: relation.state
             )
         }
+    }
+    
+    // MARK: - Private Method
+    private func fetchMyUserID() async throws -> String {
+        return try authService.getCurrentID()
     }
 }
