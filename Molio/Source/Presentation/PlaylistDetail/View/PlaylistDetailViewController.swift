@@ -2,10 +2,13 @@ import SwiftUI
 
 final class PlaylistDetailViewController: UIHostingController<PlaylistDetailView> {
     // MARK: - Initializer
+    private let viewModel: PlaylistDetailViewModel
     
     init(viewModel: PlaylistDetailViewModel) {
+        self.viewModel = viewModel
         let playlistDetailView = PlaylistDetailView(viewModel: viewModel)
         super.init(rootView: playlistDetailView)
+        
         rootView.didPlaylistButtonTapped = { [weak self] in
             self?.presentPlaylistChangeSheet()
         }
@@ -15,6 +18,7 @@ final class PlaylistDetailViewController: UIHostingController<PlaylistDetailView
     }
 
     required init?(coder aDecoder: NSCoder) {
+        self.viewModel = PlaylistDetailViewModel()
         super.init(coder: aDecoder)
     }
     
@@ -44,7 +48,7 @@ final class PlaylistDetailViewController: UIHostingController<PlaylistDetailView
     }
     
     private func presentPlaylistExportSheet() {
-        let platformSelectionView = PlatformSelectionView()
-        self.presentCustomSheet(content: platformSelectionView)
+        let platformSelectionVC = PlatformSelectionViewController(viewModel: viewModel)
+        self.presentCustomSheet(platformSelectionVC)
     }
 }

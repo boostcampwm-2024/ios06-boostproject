@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct PlatformSelectionView: View {
+    @ObservedObject var viewModel: PlaylistDetailViewModel
     @State private var selectedPlatform: ExportPlatform?
     
     var body: some View {
@@ -47,6 +48,6 @@ struct PlatformSelectionView: View {
 #Preview {
     ZStack {
         Color.background
-        PlatformSelectionView()
+        PlatformSelectionView(viewModel: PlaylistDetailViewModel())
     }
 }
