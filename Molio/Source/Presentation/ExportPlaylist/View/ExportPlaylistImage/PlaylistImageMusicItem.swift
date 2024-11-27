@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ExportPlaylistItemView: View {
+struct PlaylistImageMusicItem: View {
     var musicItems: ExportMusicItem
     
     init(musicItems: ExportMusicItem) {
