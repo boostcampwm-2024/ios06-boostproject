@@ -1,7 +1,7 @@
 import Foundation
 
 protocol UserUseCase {
-    func createUser(userID: String, userName: String, description: String?, imageURL: URL?) async throws
+    func createUser(userID: String, userName: String, imageURL: URL?, description: String?) async throws
     func fetchUser(userID: String) async throws -> MolioUser
     func updateUserName(userID: String, newName: String) async throws
     func updateUserDescription(userID: String, newDescription: String?) async throws
