@@ -62,6 +62,18 @@ final class DefaultPlaylistRepository: RealPlaylistRepository {
     func moveMusic(userID: String?, isrc: String, in playlistID: UUID, fromIndex: Int, toIndex: Int) async throws {
         if let userID = userID {
             // TODO: Implement Firestore logic for moving music
+            guard let playlist = try await playlistStorage.read(by: playlistID.uuidString) else { return }
+            var newMusicISRCs = playlist.musicISRCs
+            
+            let music = newMusicISRCs.remove(at: fromIndex)
+            newMusicISRCs.insert(music, at: toIndex)
+            
+            let updatedPlaylist = playlist.copy(musicISRCs: newMusicISRCs)
+            
+            let updatedPlaylistDTO = MolioPlaylistMapper.map(from: updatedPlaylist)
+            
+            try await playlistService.updatePlaylist(newPlaylist: updatedPlaylistDTO)
+            
         } else {
             // TODO: Implement local storage logic for moving music
         }
