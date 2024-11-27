@@ -19,18 +19,25 @@ final class DefaultUserUseCase: UserUseCase {
         try await service.createUser(newUser)
     }
     
-    func fetchUser(userID: String) async throws -> MolioUser {
-        let userDTO = try await service.readUser(userID: userID)
-        
-        let user = MolioUser(
-            id: userDTO.id,
-            name: userDTO.name,
-            profileImageURL: userDTO.profileImageURL != nil ? URL(string: userDTO.profileImageURL!) : nil,
-            description: userDTO.description
-        )
-        
-        return user
+func fetchUser(userID: String) async throws -> MolioUser {
+    let userDTO = try await service.readUser(userID: userID)
+
+    let profileImageURL: URL?
+    if let urlString = userDTO.profileImageURL {
+        profileImageURL = URL(string: urlString)
+    } else {
+        profileImageURL = nil
     }
+
+    let user = MolioUser(
+        id: userDTO.id,
+        name: userDTO.name,
+        profileImageURL: profileImageURL,
+        description: userDTO.description
+    )
+
+    return user
+}
     
     func updateUserName(userID: String, newName: String) async throws {
         let user = try await service.readUser(userID: userID)
