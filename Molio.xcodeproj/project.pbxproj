@@ -47,6 +47,10 @@
 		205E6A4F2CF572B9005E9150 /* FirebaseStorageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205E6A4E2CF572B9005E9150 /* FirebaseStorageManagerTests.swift */; };
 		205E6A5D2CF5D7EB005E9150 /* AuthLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205E6A5A2CF5D7EB005E9150 /* AuthLocalStorage.swift */; };
 		205E6A5E2CF5D7EB005E9150 /* PlaylistLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205E6A5B2CF5D7EB005E9150 /* PlaylistLocalStorage.swift */; };
+		206148E52CF6E8F100FDE96D /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206148E42CF6E8F100FDE96D /* UserService.swift */; };
+		206148E72CF6E93600FDE96D /* MolioUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206148E62CF6E93600FDE96D /* MolioUserDTO.swift */; };
+		206148E92CF6ED1800FDE96D /* FirebaseUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206148E82CF6ED1800FDE96D /* FirebaseUserService.swift */; };
+		206148ED2CF6F70000FDE96D /* FirebaseUserServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206148EC2CF6F70000FDE96D /* FirebaseUserServiceTests.swift */; };
 		2075FEC12CECDDC0009834BE /* CreatePlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC02CECDDC0009834BE /* CreatePlaylistViewModel.swift */; };
 		2075FEC42CECDE29009834BE /* ChangeCurrentPlaylistIUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC32CECDE29009834BE /* ChangeCurrentPlaylistIUseCase.swift */; };
 		2075FEC62CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC52CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift */; };
@@ -244,6 +248,10 @@
 		205E6A4E2CF572B9005E9150 /* FirebaseStorageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManagerTests.swift; sourceTree = "<group>"; };
 		205E6A5A2CF5D7EB005E9150 /* AuthLocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthLocalStorage.swift; sourceTree = "<group>"; };
 		205E6A5B2CF5D7EB005E9150 /* PlaylistLocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistLocalStorage.swift; sourceTree = "<group>"; };
+		206148E42CF6E8F100FDE96D /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		206148E62CF6E93600FDE96D /* MolioUserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MolioUserDTO.swift; sourceTree = "<group>"; };
+		206148E82CF6ED1800FDE96D /* FirebaseUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUserService.swift; sourceTree = "<group>"; };
+		206148EC2CF6F70000FDE96D /* FirebaseUserServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUserServiceTests.swift; sourceTree = "<group>"; };
 		2075FEC02CECDDC0009834BE /* CreatePlaylistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaylistViewModel.swift; sourceTree = "<group>"; };
 		2075FEC32CECDE29009834BE /* ChangeCurrentPlaylistIUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCurrentPlaylistIUseCase.swift; sourceTree = "<group>"; };
 		2075FEC52CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChangeCurrentPlaylistIUseCase.swift; sourceTree = "<group>"; };
@@ -581,6 +589,15 @@
 			children = (
 				205E6A5A2CF5D7EB005E9150 /* AuthLocalStorage.swift */,
 				205E6A5B2CF5D7EB005E9150 /* PlaylistLocalStorage.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		206148E32CF6E8DF00FDE96D /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				F1E405AB2CECA31D00533701 /* AuthService.swift */,
+				206148E42CF6E8F100FDE96D /* UserService.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -934,6 +951,7 @@
 				881BBCBA2CDCF95600010A61 /* TrackDTO.swift */,
 				B8D553F82CDFE8FE007CCD6D /* SpotifyAccessTokenResponseDTO.swift */,
 				B8046A4A2CEA629E00933704 /* SpotifyAvailableGenreSeedsDTO.swift */,
+				206148E62CF6E93600FDE96D /* MolioUserDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1218,6 +1236,7 @@
 				20397E7F2CE5FD0A004ED9CE /* CoreDataPlaylistStorageTests.swift */,
 				205E6A4E2CF572B9005E9150 /* FirebaseStorageManagerTests.swift */,
 				B82B288D2CEF7E6D00D67725 /* MusicFilterViewModelTests.swift */,
+				206148EC2CF6F70000FDE96D /* FirebaseUserServiceTests.swift */,
 			);
 			path = MolioTests;
 			sourceTree = "<group>";
@@ -1405,10 +1424,11 @@
 		F1E405AA2CECA30200533701 /* FirebaseService */ = {
 			isa = PBXGroup;
 			children = (
+				206148E32CF6E8DF00FDE96D /* Protocol */,
 				205E6A4D2CF570C3005E9150 /* Manager */,
 				205E6A4A2CF57099005E9150 /* Error */,
-				F1E405AB2CECA31D00533701 /* AuthService.swift */,
 				F1E405AD2CECA35E00533701 /* DefaultFirebaseAuthService.swift */,
+				206148E82CF6ED1800FDE96D /* FirebaseUserService.swift */,
 			);
 			path = FirebaseService;
 			sourceTree = "<group>";
@@ -1562,6 +1582,7 @@
 				F135BCFE2CF4BDE3006C6C4F /* MolioTabBarController.swift in Sources */,
 				2009183E2CEC9C5B0058D8C7 /* DefaultCurrentPlaylistRepository.swift in Sources */,
 				F17369572CDFB03E00F6242C /* DefaultMusicKitService.swift in Sources */,
+				206148E52CF6E8F100FDE96D /* UserService.swift in Sources */,
 				88F6E4A72CEC852C00739648 /* DefaultPublishCurrentPlaylistUseCase.swift in Sources */,
 				2003BA222CDCB31B002CAB3E /* SwipeMusicViewModel.swift in Sources */,
 				F173694B2CDF265900F6242C /* DefaultRecommendedMusicRepository.swift in Sources */,
@@ -1572,6 +1593,7 @@
 				F173693D2CDF191800F6242C /* MolioMusic.swift in Sources */,
 				B81086F02CF5E35D00403E88 /* DefaultAddMusicToPlaylistUseCase.swift in Sources */,
 				20397E702CE5DE56004ED9CE /* PersistenceManager.swift in Sources */,
+				206148E92CF6ED1800FDE96D /* FirebaseUserService.swift in Sources */,
 				88C8B5ED2CEF1E240079ACB5 /* DefaultPublishAllMusicInCurrentPlaylistUseCase.swift in Sources */,
 				F173691F2CDB995100F6242C /* SwipeMusicViewController.swift in Sources */,
 				2003BA1C2CDB8EE5002CAB3E /* UILabel+Extension.swift in Sources */,
@@ -1667,6 +1689,7 @@
 				885D1B612CF4D27800F532E0 /* FirestoreEntity.swift in Sources */,
 				881BBCB42CDCF91B00010A61 /* SpotifyTokenProvider.swift in Sources */,
 				881BBCB52CDCF91B00010A61 /* MockSpotifyTokenProvider.swift in Sources */,
+				206148E72CF6E93600FDE96D /* MolioUserDTO.swift in Sources */,
 				F1E405A72CECA22900533701 /* SignAppleRepository.swift in Sources */,
 				F1A3BB792CF0E0BF0062C79C /* ExportPlaylistViewModel.swift in Sources */,
 				20397E722CE5DFC6004ED9CE /* CoreDataPlaylistStorage.swift in Sources */,
@@ -1705,6 +1728,7 @@
 				B82B288E2CEF7E6D00D67725 /* MusicFilterViewModelTests.swift in Sources */,
 				B8D554802CE0F152007CCD6D /* RecommendationsResponseDTODummy.swift in Sources */,
 				B876E6532CEF78710048CAF9 /* MockCurrentPlaylistRepository.swift in Sources */,
+				206148ED2CF6F70000FDE96D /* FirebaseUserServiceTests.swift in Sources */,
 				B8D554C22CE32B9A007CCD6D /* SpotifyTokenProviderTests.swift in Sources */,
 				B8D554C42CE33979007CCD6D /* MockNetworkProvider.swift in Sources */,
 				B8046A4D2CEA62D100933704 /* SpotifyAvailableGenreSeedsDTODummy.swift in Sources */,
