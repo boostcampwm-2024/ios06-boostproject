@@ -27,7 +27,7 @@ struct MyInfoView: View {
                                     image
                                         .resizable()
                                 } else {
-                                    Image(uiImage: UIImage(resource: .personCircle))
+                                    Image(ImageResource.personCircle)
                                         .resizable()
                                 }
                             }
