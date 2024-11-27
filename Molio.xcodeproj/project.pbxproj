@@ -110,6 +110,7 @@
 		B82EB4222CEE0AF10023210A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B82EB4212CEE0AF10023210A /* GoogleService-Info.plist */; };
 		B8378BC22CF6DD0200737125 /* ExportPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8378BC12CF6DD0200737125 /* ExportPlatform.swift */; };
 		B8378BC42CF6E00700737125 /* PlatformSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8378BC32CF6E00700737125 /* PlatformSelectionView.swift */; };
+		B867AE602CF71CF600ACCEDC /* MusicKitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867AE5F2CF71CF600ACCEDC /* MusicKitError.swift */; };
 		B876E6402CEF69480048CAF9 /* MockPublishCurrentPlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B876E63F2CEF69480048CAF9 /* MockPublishCurrentPlaylistUseCase.swift */; };
 		B876E6432CEF6B0D0048CAF9 /* UpdatePlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B876E6422CEF6B0D0048CAF9 /* UpdatePlaylistUseCase.swift */; };
 		B876E6452CEF6B320048CAF9 /* DefaultUpdatePlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B876E6442CEF6B320048CAF9 /* DefaultUpdatePlaylistUseCase.swift */; };
@@ -314,6 +315,7 @@
 		B82EB4212CEE0AF10023210A /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B8378BC12CF6DD0200737125 /* ExportPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPlatform.swift; sourceTree = "<group>"; };
 		B8378BC32CF6E00700737125 /* PlatformSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformSelectionView.swift; sourceTree = "<group>"; };
+		B867AE5F2CF71CF600ACCEDC /* MusicKitError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicKitError.swift; sourceTree = "<group>"; };
 		B876E63F2CEF69480048CAF9 /* MockPublishCurrentPlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPublishCurrentPlaylistUseCase.swift; sourceTree = "<group>"; };
 		B876E6422CEF6B0D0048CAF9 /* UpdatePlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePlaylistUseCase.swift; sourceTree = "<group>"; };
 		B876E6442CEF6B320048CAF9 /* DefaultUpdatePlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUpdatePlaylistUseCase.swift; sourceTree = "<group>"; };
@@ -1303,6 +1305,7 @@
 			children = (
 				B809709D2CDB640B007BC3C4 /* MusicKitService.swift */,
 				F17369562CDFB03E00F6242C /* DefaultMusicKitService.swift */,
+				B867AE5F2CF71CF600ACCEDC /* MusicKitError.swift */,
 			);
 			path = MusicKitService;
 			sourceTree = "<group>";
@@ -1650,6 +1653,7 @@
 				F1770B2E2CEF0F4B00C81272 /* PlaylistImagePage.swift in Sources */,
 				F17369662CE36E2900F6242C /* ImageRepository.swift in Sources */,
 				201048542CEA280E0015E800 /* presentCustomSheet.swift in Sources */,
+				B867AE602CF71CF600ACCEDC /* MusicKitError.swift in Sources */,
 				88E4834E2CEDDD66003D624E /* MolioMusic+sample.swift in Sources */,
 				20150EC52CEA36B700FC8883 /* Playlist+CoreDataClass.swift in Sources */,
 				20150EC62CEA36B700FC8883 /* Playlist+CoreDataProperties.swift in Sources */,
