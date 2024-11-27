@@ -254,7 +254,7 @@ final class FirestorePlaylistServiceTests: XCTestCase {
     }
 }
 
-extension MolioPlaylistDTO: @retroactive Equatable {
+extension MolioPlaylistDTO: Swift.Equatable {
     public static func == (lhs: MolioPlaylistDTO, rhs: MolioPlaylistDTO) -> Bool {
         return lhs.id == rhs.id &&
             lhs.authorID == rhs.authorID &&
