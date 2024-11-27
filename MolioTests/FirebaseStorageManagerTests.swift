@@ -25,7 +25,6 @@ final class FirebaseStorageManagerTests: XCTestCase {
             case .success(let downloadURL):
                 XCTAssertNotNil(downloadURL, "Download URL should not be nil")
                 XCTAssertTrue(downloadURL.contains("https://"), "Download URL should be valid")
-                print("Download URL: \(downloadURL)")
             case .failure(let error):
                 XCTFail("Image upload failed with error: \(error)")
             }
@@ -45,7 +44,6 @@ final class FirebaseStorageManagerTests: XCTestCase {
                 XCTFail("Upload should not succeed with invalid data, but returned URL: \(downloadURL)")
             case .failure(let error):
                 XCTAssertEqual(error as? FirebaseStorageError, FirebaseStorageError.invalidImageData)
-                print("Expected failure with error: \(error)")
             }
             expectation.fulfill()
         }

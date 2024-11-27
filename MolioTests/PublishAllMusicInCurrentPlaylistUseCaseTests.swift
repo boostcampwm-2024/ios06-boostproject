@@ -52,8 +52,6 @@ final class PublishAllMusicInCurrentPlaylistUseCaseTests: XCTestCase {
         // Wait for all expectations to be fulfilled within a timeout
         wait(for: [expectation1, expectation2], timeout: 2.0)
         
-        print(emittedMusicISRCs)
-        
         // Now perform your assertions
         XCTAssertNotEqual(emittedMusicISRCs[0], emittedMusicISRCs[1], "First and second playlists should have different music ISRCs.")
     }

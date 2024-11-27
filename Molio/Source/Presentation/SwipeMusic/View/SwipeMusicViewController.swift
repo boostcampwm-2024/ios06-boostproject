@@ -133,6 +133,11 @@ final class SwipeMusicViewController: UIViewController {
         addPanGestureToMusicTrack()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        musicPlayer.play()
+    }
+    
     private func setupBindings() {
         output.selectedPlaylist
             .receive(on: RunLoop.main)
@@ -285,24 +290,14 @@ final class SwipeMusicViewController: UIViewController {
     
     @objc func didTapPlaylistSelectButton() {
         let selectplaylistView = SelectPlaylistView(viewModel: SelectPlaylistViewModel())
-        self.presentCustomSheet(
-            content: selectplaylistView
-        )
+        self.presentCustomSheet(content: selectplaylistView)
     }
     
     @objc private func didTapMyMolioButton() {
         musicPlayer.stop()
-        let viewModel = PlaylistDetailViewModel(
-            publishCurrentPlaylistUseCase: DefaultPublishCurrentPlaylistUseCase(
-                playlistRepository: MockPlaylistRepository(),
-                currentPlaylistRepository: DefaultCurrentPlaylistRepository()
-            ),
-            musicKitService: DefaultMusicKitService()
-        )
-        let playlistDetailView = PlaylistDetailView(viewModel: viewModel)
-        let hostingController = UIHostingController(rootView: playlistDetailView)
-        hostingController.view.backgroundColor = .clear
-        self.navigationController?.pushViewController(hostingController, animated: true)
+        let viewModel = PlaylistDetailViewModel()
+        let playlistDetailVC = PlaylistDetailViewController(viewModel: viewModel)
+        self.navigationController?.pushViewController(playlistDetailVC, animated: true)
     }
     
     @objc private func didTapFilterButton() {
@@ -326,16 +321,13 @@ final class SwipeMusicViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            selectedPlaylistTitleLabel.leadingAnchor.constraint(
-                equalTo: playlistSelectButton.leadingAnchor, constant: 15),
+            selectedPlaylistTitleLabel.leadingAnchor.constraint(equalTo: playlistSelectButton.leadingAnchor, constant: 15),
             selectedPlaylistTitleLabel.centerYAnchor.constraint(equalTo: playlistSelectButton.centerYAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            playlistSelectArrowImageView.leadingAnchor.constraint(
-                equalTo: selectedPlaylistTitleLabel.trailingAnchor, constant: 10),
-            playlistSelectArrowImageView.trailingAnchor.constraint(
-                equalTo: playlistSelectButton.trailingAnchor, constant: -15),
+            playlistSelectArrowImageView.leadingAnchor.constraint(equalTo: selectedPlaylistTitleLabel.trailingAnchor, constant: 10),
+            playlistSelectArrowImageView.trailingAnchor.constraint(equalTo: playlistSelectButton.trailingAnchor, constant: -15),
             playlistSelectArrowImageView.centerYAnchor.constraint(equalTo: playlistSelectButton.centerYAnchor),
             playlistSelectArrowImageView.widthAnchor.constraint(equalToConstant: 18),
             playlistSelectArrowImageView.heightAnchor.constraint(equalToConstant: 19)
@@ -351,8 +343,7 @@ final class SwipeMusicViewController: UIViewController {
             currentCardView.topAnchor.constraint(equalTo: playlistSelectButton.bottomAnchor, constant: 12),
             currentCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
             currentCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
-            currentCardView.bottomAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -107)
+            currentCardView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -107)
         ])
     }
     
@@ -363,8 +354,7 @@ final class SwipeMusicViewController: UIViewController {
             nextCardView.topAnchor.constraint(equalTo: playlistSelectButton.bottomAnchor, constant: 12),
             nextCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
             nextCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
-            nextCardView.bottomAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -107)
+            nextCardView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -107)
         ])
         
         // MARK: 현재 노래 카드
@@ -373,8 +363,7 @@ final class SwipeMusicViewController: UIViewController {
             currentCardView.topAnchor.constraint(equalTo: playlistSelectButton.bottomAnchor, constant: 12),
             currentCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
             currentCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
-            currentCardView.bottomAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -107)
+            currentCardView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -107)
         ])
     }
     

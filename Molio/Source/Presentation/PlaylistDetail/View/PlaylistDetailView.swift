@@ -2,73 +2,61 @@ import SwiftUI
 import Combine
 
 struct PlaylistDetailView: View {
-    @State private var isPlaylistChangeSheetPresented: Bool = false
     @State private var selectedIndex: Int?
     @ObservedObject private var viewModel: PlaylistDetailViewModel
+    
+    var didPlaylistButtonTapped: (() -> Void)?
 
     init(viewModel: PlaylistDetailViewModel) {
         self.viewModel = viewModel
     }
 
     var body: some View {
-        MusicListView(musics: $viewModel.currentPlaylistMusics, selectedIndex: $selectedIndex)
-            .foregroundStyle(.white)
-            .listStyle(.plain)
-            .background(Color.background)
-            .scrollContentBackground(.hidden)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        isPlaylistChangeSheetPresented.toggle()
-                    } label: {
-                        HStack(spacing: 10) {
-                            Text(viewModel.currentPlaylist?.name ?? "제목 없음")
-                                .font(.pretendardBold(size: 34))
-
-                            Image(systemName: "chevron.down")
-                        }
-                        .bold()
-                        .foregroundStyle(.white)
-                        .padding()
-                        .padding(.bottom, 5)
-
-                    }
+        VStack(alignment: .leading, spacing: 16) {
+            Button {
+                didPlaylistButtonTapped?()
+            } label: {
+                HStack(spacing: 10) {
+                    Text.molioBold(viewModel.currentPlaylist?.name ?? "제목 없음", size: 34)
+                    Image.molioMedium(systemName: "chevron.down", size: 16, color: .white)
                 }
+                .foregroundStyle(.white)
             }
-            .toolbarBackground(
-                Color.background,
-                for: .navigationBar
+            .padding(.leading, 22)
+            
+            // TODO: - 하이라이트 리믹스 & 전체 재생 버튼
+
+            MusicListView(
+                musics: $viewModel.currentPlaylistMusics,
+                selectedIndex: $selectedIndex
             )
-            .safeAreaInset(edge: .bottom) {
-                HStack {
-                    Spacer(minLength: 20)
-
-                    AudioPlayerControlView(musics: $viewModel.currentPlaylistMusics, selectedIndex: $selectedIndex)
-                        .layoutPriority(1)
-
-                    Spacer(minLength: 10)
-
-                    Button {
-                    } label: {
-                        Image.molioExtraBold(systemName: "square.and.arrow.up", size: 20, color: .main)
-                    }
-                    .frame(width: 66, height: 66) 
-                    .background(Color.gray)
-                    .clipShape(Circle())
-                    .shadow(radius: 5)
-                    Spacer(minLength: 20)
+        }
+        .background(Color.background)
+        .safeAreaInset(edge: .bottom) {
+            HStack(spacing: 11) {
+                AudioPlayerControlView(musics: $viewModel.currentPlaylistMusics, selectedIndex: $selectedIndex)
+                    .layoutPriority(1)
+                
+                Button {
+                    // TODO: - 플레이리스트 내보내기
+                } label: {
+                    Image.molioSemiBold(systemName: "square.and.arrow.up", size: 20, color: .main)
                 }
-                .font(.title)
-                .tint(Color.main)
-                .frame(maxWidth: .infinity, maxHeight: 66)
-                .padding(.bottom)
+                .frame(width: 66, height: 66)
+                .background(Color.gray)
+                .clipShape(Circle())
             }
-            .sheet(isPresented: $isPlaylistChangeSheetPresented) {
-                Text("Playlist Change Sheet")
-            }
+            .frame(maxWidth: .infinity, maxHeight: 66)
+            .padding(.horizontal, 22)
+            .padding(.bottom, 23)
+        }
     }
 }
 
 #Preview {
-    PlaylistDetailView(viewModel: PlaylistDetailViewModel(publishCurrentPlaylistUseCase: DefaultPublishCurrentPlaylistUseCase(playlistRepository: MockPlaylistRepository(), currentPlaylistRepository: DefaultCurrentPlaylistRepository()), musicKitService: DefaultMusicKitService()))
+    PlaylistDetailView(
+        viewModel: PlaylistDetailViewModel(
+            publishCurrentPlaylistUseCase: MockPublishCurrentPlaylistUseCase(playlistToPublish: MolioPlaylist.mock)
+        )
+    )
 }
