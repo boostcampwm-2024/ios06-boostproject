@@ -7,7 +7,6 @@ final class FirestorePlaylistService: PlaylistService {
     
     init(
         db: Firestore = Firestore.firestore()
-        
     ) {
         self.db = db
         
