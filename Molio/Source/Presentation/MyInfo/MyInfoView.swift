@@ -3,7 +3,14 @@ import SwiftUI
 struct MyInfoView: View {
     @ObservedObject private var viewModel: MyInfoViewModel
     @Environment(\.dismiss) private var dismiss
-    @FocusState private var isFocused: Bool
+    @FocusState private var focusedField: Field?
+    @Namespace private var topID
+    @Namespace private var descriptionID
+    
+    enum Field: Hashable {
+        case nickname
+        case description
+    }
     
     init(viewModel: MyInfoViewModel) {
         self.viewModel = viewModel
@@ -11,61 +18,86 @@ struct MyInfoView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                ZStack(alignment: .bottomTrailing) {
-                    AsyncImage(url: viewModel.userImageURL) { phase in
-                        if let image = phase.image {
-                            image
-                                .resizable()
-                                .frame(width: 110, height: 110)
-                                .clipShape(Circle())
-                        } else {
-                            Image(uiImage: UIImage(resource: .personCircle))
-                                .resizable()
-                                .frame(width: 110, height: 110)
-                                .clipShape(Circle())
-                        }
-                    }
-                    
-                    Button(action: {
-                        // TODO: 이미지 선택 액션
-                    }) {
-                        ZStack {
-                            Circle()
-                                .fill(.white)
-                                .frame(width: 22, height: 22)
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack(spacing: 0) {
+                        ZStack(alignment: .bottomTrailing) {
+                            AsyncImage(url: viewModel.userImageURL) { phase in
+                                if let image = phase.image {
+                                    image
+                                        .resizable()
+                                        .frame(width: 110, height: 110)
+                                        .clipShape(Circle())
+                                } else {
+                                    Image(uiImage: UIImage(resource: .personCircle))
+                                        .resizable()
+                                        .frame(width: 110, height: 110)
+                                        .clipShape(Circle())
+                                }
+                            }
                             
-                            Image(systemName: "plus")
-                                .font(.system(size: 15, weight: .bold))
-                                .foregroundStyle(.black)
+                            Button(action: {
+                                // TODO: 이미지 선택 액션
+                            }) {
+                                ZStack {
+                                    Circle()
+                                        .fill(.white)
+                                        .frame(width: 22, height: 22)
+                                    
+                                    Image(systemName: "plus")
+                                        .font(.system(size: 15, weight: .bold))
+                                        .foregroundStyle(.black)
+                                }
+                            }
+                            .offset(x: -4, y: -4)
+                        }
+                        .padding(.top, 22)
+                        .id(topID)
+                        
+                        Spacer()
+                            .frame(height: 15)
+                        
+                        NickNameTextFieldView(
+                            characterLimit: viewModel.nickNameCharacterLimit,
+                            isPossibleInput: viewModel.isPossibleNickName,
+                            text: $viewModel.userNickName
+                        )
+                        .focused($focusedField, equals: .nickname)
+                        
+                        Spacer()
+                            .frame(height: 22)
+                        
+                        DescriptionTextFieldView(
+                            characterLimit: viewModel.descriptionCharacterLimit,
+                            isPossibleInput: viewModel.isPossibleDescription,
+                            text: $viewModel.userDescription
+                        )
+                        .frame(maxHeight: 105)
+                        .focused($focusedField, equals: .description)
+                        .id(descriptionID)
+                        
+                        Spacer(minLength: 115)
+                    }
+                }
+                .scrollDisabled(true)
+                .onChange(of: focusedField) { field in
+                    switch field {
+                    case .description:
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.22) {
+                            withAnimation {
+                                proxy.scrollTo(descriptionID, anchor: .top)
+                            }
+                        }
+                    default:
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.22) {
+                            withAnimation {
+                                proxy.scrollTo(topID, anchor: .top)
+                            }
                         }
                     }
-                    .offset(x: -4, y: -4)
                 }
-                
-                Spacer()
-                    .frame(height: 15)
-                
-                NickNameTextFieldView(
-                    characterLimit: viewModel.nickNameCharacterLimit,
-                    isPossibleInput: viewModel.isPossibleNickName,
-                    text: $viewModel.userNickName
-                )
-                .focused($isFocused)
-                
-                Spacer()
-                    .frame(height: 22)
-                
-                DescriptionTextFieldView(
-                    characterLimit: viewModel.descriptionCharacterLimit,
-                    isPossibleInput: viewModel.isPossibleDescription,
-                    text: $viewModel.userDescription
-                )
-                .focused($isFocused)
-                
-                Spacer()
             }
-            .background(Color(uiColor: UIColor(resource: .background)))
+            .background(Color.background)
             .navigationTitle("내 정보")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
@@ -94,7 +126,7 @@ struct MyInfoView: View {
                 .padding(.bottom, 34)
             }
             .onTapGesture {
-                isFocused = false
+                focusedField = .none
             }
         }
     }
