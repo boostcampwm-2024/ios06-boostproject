@@ -12,7 +12,7 @@ struct ExportAppleMusicCompletionView: View {
     var body: some View {
         VStack {
             Spacer()
-            Image("appleMusicLogo")
+            ExportPlatform.appleMusic.image
                 .resizable()
                 .frame(width: 112, height: 112, alignment: .center)
                 .padding(41)
