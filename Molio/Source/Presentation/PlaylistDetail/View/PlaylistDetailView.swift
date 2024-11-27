@@ -6,6 +6,7 @@ struct PlaylistDetailView: View {
     @ObservedObject private var viewModel: PlaylistDetailViewModel
     
     var didPlaylistButtonTapped: (() -> Void)?
+    var didExportButtonTapped: (() -> Void)?
 
     init(viewModel: PlaylistDetailViewModel) {
         self.viewModel = viewModel
@@ -38,7 +39,7 @@ struct PlaylistDetailView: View {
                     .layoutPriority(1)
                 
                 Button {
-                    // TODO: - 플레이리스트 내보내기
+                    didExportButtonTapped?()
                 } label: {
                     Image.molioSemiBold(systemName: "square.and.arrow.up", size: 20, color: .main)
                 }

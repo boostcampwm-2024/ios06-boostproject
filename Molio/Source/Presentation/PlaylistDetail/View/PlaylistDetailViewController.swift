@@ -9,6 +9,9 @@ final class PlaylistDetailViewController: UIHostingController<PlaylistDetailView
         rootView.didPlaylistButtonTapped = { [weak self] in
             self?.presentPlaylistChangeSheet()
         }
+        rootView.didExportButtonTapped = { [weak self] in
+            self?.presentPlaylistExportSheet()
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -38,5 +41,10 @@ final class PlaylistDetailViewController: UIHostingController<PlaylistDetailView
     private func presentPlaylistChangeSheet() {
         let selectPlaylistView = SelectPlaylistView(viewModel: SelectPlaylistViewModel(), isCreatable: false)
         self.presentCustomSheet(content: selectPlaylistView)
+    }
+    
+    private func presentPlaylistExportSheet() {
+        let platformSelectionView = PlatformSelectionView()
+        self.presentCustomSheet(content: platformSelectionView)
     }
 }
