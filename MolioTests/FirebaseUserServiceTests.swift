@@ -51,6 +51,9 @@ final class FirebaseUserServiceTests: XCTestCase {
             XCTAssertEqual(fetchedUser.name, testUser.name)
             XCTAssertEqual(fetchedUser.profileImageURL, testUser.profileImageURL)
             XCTAssertEqual(fetchedUser.description, testUser.description)
+            
+            try await userService.deleteUser(userID: fetchedUser.id)
+
         } catch {
             XCTFail("Failed to create user: \(error)")
         }
@@ -74,6 +77,8 @@ final class FirebaseUserServiceTests: XCTestCase {
             XCTAssertEqual(fetchedUser.name, testUser.name)
             XCTAssertEqual(fetchedUser.profileImageURL, testUser.profileImageURL)
             XCTAssertEqual(fetchedUser.description, testUser.description)
+            
+            try await userService.deleteUser(userID: fetchedUser.id)
         } catch {
             XCTFail("Failed to read user: \(error)")
         }
@@ -105,6 +110,9 @@ final class FirebaseUserServiceTests: XCTestCase {
             XCTAssertEqual(fetchedUser.name, updatedUser.name)
             XCTAssertEqual(fetchedUser.profileImageURL, updatedUser.profileImageURL)
             XCTAssertEqual(fetchedUser.description, updatedUser.description)
+            
+            try await userService.deleteUser(userID: fetchedUser.id)
+
         } catch {
             XCTFail("Failed to update user: \(error)")
         }
