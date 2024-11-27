@@ -15,18 +15,10 @@ final class DefaultPlaylistRepository: RealPlaylistRepository {
     }
 
     func addMusic(userID: String?, isrc: String, to playlistID: UUID) async throws {
-        if let userID = userID {
+        if let _ = userID {
             let playlistDTO = try await playlistService.readPlaylist(playlistID: playlistID)
             
-            let updatedPlaylist = MolioPlaylistDTO(
-                id: playlistDTO.id,
-                authorID: playlistDTO.authorID,
-                title: playlistDTO.title,
-                createdAt: playlistDTO.createdAt,
-                filters: playlistDTO.filters,
-                musicISRCs: playlistDTO.musicISRCs + [isrc],
-                likes: playlistDTO.likes
-            )
+            let updatedPlaylist = playlistDTO.copy(musicISRCs: playlistDTO.musicISRCs + [isrc])
             
             try await playlistService.updatePlaylist(newPlaylist: updatedPlaylist)
         } else {
@@ -43,21 +35,14 @@ final class DefaultPlaylistRepository: RealPlaylistRepository {
     }
 
     func deleteMusic(userID: String?, isrc: String, in playlistID: UUID) async throws {
-        if let userID = userID {
+        if let _ = userID {
             // Firestore에서 플레이리스트 읽기
             let playlistDTO = try await playlistService.readPlaylist(playlistID: playlistID)
 
             // 음악 ISRC 제거
             let updatedMusicISRCs = playlistDTO.musicISRCs.filter { $0 != isrc }
-            let updatedPlaylist = MolioPlaylistDTO(
-                id: playlistDTO.id,
-                authorID: playlistDTO.authorID,
-                title: playlistDTO.title,
-                createdAt: playlistDTO.createdAt,
-                filters: playlistDTO.filters,
-                musicISRCs: updatedMusicISRCs,
-                likes: playlistDTO.likes
-            )
+            
+            let updatedPlaylist = playlistDTO.copy(musicISRCs: updatedMusicISRCs)
 
             // Firestore에 업데이트된 플레이리스트 저장
             try await playlistService.updatePlaylist(newPlaylist: updatedPlaylist)
@@ -84,8 +69,8 @@ final class DefaultPlaylistRepository: RealPlaylistRepository {
 
     func createNewPlaylist(userID: String?, playlistID: UUID, _ playlistName: String) async throws {
         if let userID = userID {
-            // TODO: Implement Firestore logic for creating a new playlist
             // 새로운 플레이리스트 DTO 생성
+            
             let newPlaylistDTO = MolioPlaylistDTO(
                 id: playlistID.uuidString,
                 authorID: userID,
@@ -106,12 +91,13 @@ final class DefaultPlaylistRepository: RealPlaylistRepository {
                 musicISRCs: [],
                 filter: MusicFilter(genres: [])
             )
+            
             try await playlistStorage.create(newPlaylist)
         }
     }
 
     func deletePlaylist(userID: String?, _ playlistID: UUID) async throws {
-        if let userID = userID {
+        if let _ = userID {
             try await playlistService.deletePlaylist(playlistID: playlistID)
         } else {
             try await playlistStorage.delete(by: playlistID.uuidString)
@@ -123,22 +109,7 @@ final class DefaultPlaylistRepository: RealPlaylistRepository {
             let molioPlaylistDTOs = try await playlistService.readAllPlaylist(userID: userID)
             
             let molioPlaylists: [MolioPlaylist] = molioPlaylistDTOs.compactMap { molioPlaylistDTO in
-                guard let uuid = UUID(uuidString: molioPlaylistDTO.id) else {
-                    return nil
-                }
-                
-                let genres = molioPlaylistDTO.filters.compactMap { MusicGenre(rawValue: $0)}
-                let filter = MusicFilter(genres: genres)
-                
-                
-                return MolioPlaylist(
-                    id: uuid,
-                    name: molioPlaylistDTO.title,
-                    createdAt: molioPlaylistDTO.createdAt.dateValue(),
-                    musicISRCs: molioPlaylistDTO.musicISRCs,
-                    filter: filter,
-                    like: molioPlaylistDTO.likes
-                )
+                MolioPlaylistMapper.map(from: molioPlaylistDTO)
             }
             
             return molioPlaylists
@@ -148,7 +119,7 @@ final class DefaultPlaylistRepository: RealPlaylistRepository {
     }
 
     func fetchPlaylist(userID: String?, for playlistID: UUID) async throws -> MolioPlaylist? {
-        if let userID = userID {
+        if let _ = userID {
             // TODO: Implement Firestore logic for fetching a single playlist
             
             let playlistDTO = try await playlistService.readPlaylist(playlistID: playlistID)
@@ -157,17 +128,7 @@ final class DefaultPlaylistRepository: RealPlaylistRepository {
                 return nil
             }
             
-            let genres = playlistDTO.filters.compactMap { MusicGenre(rawValue: $0)}
-            let filter = MusicFilter(genres: genres)
-            
-            return MolioPlaylist(
-                id: uuid,
-                name: playlistDTO.title,
-                createdAt: playlistDTO.createdAt.dateValue(),
-                musicISRCs: playlistDTO.musicISRCs,
-                filter: filter,
-                like: playlistDTO.likes
-            )
+            return MolioPlaylistMapper.map(from: playlistDTO)
 
         } else {
             return try await playlistStorage.read(by: playlistID.uuidString)
@@ -175,16 +136,8 @@ final class DefaultPlaylistRepository: RealPlaylistRepository {
     }
 
     func updatePlaylist(userID: String?, newPlaylist: MolioPlaylist) async throws {
-        if let userID = userID {
-            let newPlaylistDTO = MolioPlaylistDTO(
-                id: newPlaylist.id.uuidString,
-                authorID: userID, // TODO: 이거 author name으로 바꿔야함
-                title: newPlaylist.name,
-                createdAt: Timestamp(date: Date.now),
-                filters: [],
-                musicISRCs: [],
-                likes: []
-            )
+        if let _ = userID {
+            let newPlaylistDTO = MolioPlaylistMapper.map(from: newPlaylist)
             
             try await playlistService.updatePlaylist(newPlaylist: newPlaylistDTO)
             
