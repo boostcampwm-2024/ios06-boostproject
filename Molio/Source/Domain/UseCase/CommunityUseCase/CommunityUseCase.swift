@@ -4,6 +4,8 @@ protocol CommunityUseCase {
     func refuseFollowing(relationID: String) async throws
     func unFollow(relationID: String) async throws
     
-    func fetchFollowList(userID: String) async throws -> [MolioFollowRelation]
     func fetchFollowingList(userID: String) async throws -> [MolioFollowRelation]
+    func fetchMyFollowerList(userID: String) async throws -> [MolioFollowRelation]
+    func fetchFriendFollowerList(userID: String) async throws -> [MolioFollowRelation]
+
 }

@@ -1,3 +1,5 @@
+import Foundation
+
 struct MolioFollowRelation: Identifiable {
     let id: String            // 팔로우 관계 고유 ID
     let date: Date            // 팔로잉한 시점
