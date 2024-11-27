@@ -76,6 +76,8 @@
 		884529482CF6EC6D007FD074 /* FirestorePlaylistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884529472CF6EC6D007FD074 /* FirestorePlaylistService.swift */; };
 		8845294A2CF6ECDD007FD074 /* MolioPlaylistDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884529492CF6ECDD007FD074 /* MolioPlaylistDTO.swift */; };
 		8845294C2CF702EF007FD074 /* FirestorePlaylistServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8845294B2CF702EF007FD074 /* FirestorePlaylistServiceTests.swift */; };
+		8845294F2CF7158D007FD074 /* BidirectionalMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8845294E2CF7158D007FD074 /* BidirectionalMapper.swift */; };
+		884529512CF715C6007FD074 /* MolioPlaylistMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884529502CF715C6007FD074 /* MolioPlaylistMapper.swift */; };
 		885D1B592CF4C7E400F532E0 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D1B582CF4C7E400F532E0 /* FirestoreManager.swift */; };
 		885D1B5E2CF4CF3A00F532E0 /* FirestoreManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D1B5D2CF4CF3900F532E0 /* FirestoreManagerTests.swift */; };
 		885D1B612CF4D27800F532E0 /* FirestoreEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D1B602CF4D27800F532E0 /* FirestoreEntity.swift */; };
@@ -284,6 +286,8 @@
 		884529472CF6EC6D007FD074 /* FirestorePlaylistService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestorePlaylistService.swift; sourceTree = "<group>"; };
 		884529492CF6ECDD007FD074 /* MolioPlaylistDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MolioPlaylistDTO.swift; sourceTree = "<group>"; };
 		8845294B2CF702EF007FD074 /* FirestorePlaylistServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestorePlaylistServiceTests.swift; sourceTree = "<group>"; };
+		8845294E2CF7158D007FD074 /* BidirectionalMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidirectionalMapper.swift; sourceTree = "<group>"; };
+		884529502CF715C6007FD074 /* MolioPlaylistMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MolioPlaylistMapper.swift; sourceTree = "<group>"; };
 		885D1B582CF4C7E400F532E0 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		885D1B5D2CF4CF3900F532E0 /* FirestoreManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManagerTests.swift; sourceTree = "<group>"; };
 		885D1B602CF4D27800F532E0 /* FirestoreEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreEntity.swift; sourceTree = "<group>"; };
@@ -1340,6 +1344,7 @@
 			isa = PBXGroup;
 			children = (
 				F17369532CDFA9FD00F6242C /* CGColorMapper.swift */,
+				884529502CF715C6007FD074 /* MolioPlaylistMapper.swift */,
 			);
 			path = Mapper;
 			sourceTree = "<group>";
@@ -1391,6 +1396,7 @@
 			isa = PBXGroup;
 			children = (
 				F173697A2CE4AAC600F6242C /* AudioPlayer.swift */,
+				8845294E2CF7158D007FD074 /* BidirectionalMapper.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1676,6 +1682,7 @@
 				20150EC62CEA36B700FC8883 /* Playlist+CoreDataProperties.swift in Sources */,
 				B8D553EE2CDFE2C0007CCD6D /* HTTPResponseStatusCode.swift in Sources */,
 				88F6E4AB2CEC8B5A00739648 /* PublishCurrentPlaylistUseCase.swift in Sources */,
+				884529512CF715C6007FD074 /* MolioPlaylistMapper.swift in Sources */,
 				B8046A542CEB93F900933704 /* FetchAvailableGenresUseCase.swift in Sources */,
 				2075FEC12CECDDC0009834BE /* CreatePlaylistViewModel.swift in Sources */,
 				884529462CF6EBC4007FD074 /* PlaylistService.swift in Sources */,
@@ -1750,6 +1757,7 @@
 				F17369592CDFB73000F6242C /* RGBAColor.swift in Sources */,
 				B8046A3E2CE8780000933704 /* MusicFilterViewController.swift in Sources */,
 				2009183C2CEC9C0E0058D8C7 /* CurrentPlaylistRepository.swift in Sources */,
+				8845294F2CF7158D007FD074 /* BidirectionalMapper.swift in Sources */,
 				B82B28922CF255C900D67725 /* showAlert.swift in Sources */,
 				F135BCF82CF45E39006C6C4F /* SplashViewController.swift in Sources */,
 				F17368FB2CD86B1100F6242C /* SceneDelegate.swift in Sources */,
