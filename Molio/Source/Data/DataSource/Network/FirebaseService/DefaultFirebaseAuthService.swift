@@ -9,6 +9,10 @@ struct DefaultFirebaseAuthService: AuthService {
         return currentUser
     }
     
+    func getCurrentID() throws -> String {
+        return try getCurrentUser().uid
+    }
+    
     func signInApple(info: AppleAuthInfo) async throws {
         let credential = OAuthProvider.appleCredential(
             withIDToken: info.idToken,
