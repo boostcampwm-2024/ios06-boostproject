@@ -684,6 +684,15 @@
 			path = SpotifyAPIService;
 			sourceTree = "<group>";
 		};
+		8845294D2CF7128D007FD074 /* PlaylistService */ = {
+			isa = PBXGroup;
+			children = (
+				884529452CF6EBC4007FD074 /* PlaylistService.swift */,
+				884529472CF6EC6D007FD074 /* FirestorePlaylistService.swift */,
+			);
+			path = PlaylistService;
+			sourceTree = "<group>";
+		};
 		885D1B5A2CF4C8C900F532E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -961,6 +970,7 @@
 			children = (
 				881BBCB72CDCF95600010A61 /* ExternalIDsDTO.swift */,
 				881BBCB82CDCF95600010A61 /* RecommendationsRequestDTO.swift */,
+				884529492CF6ECDD007FD074 /* MolioPlaylistDTO.swift */,
 				881BBCB92CDCF95600010A61 /* RecommendationsResponseDTO.swift */,
 				881BBCBA2CDCF95600010A61 /* TrackDTO.swift */,
 				B8D553F82CDFE8FE007CCD6D /* SpotifyAccessTokenResponseDTO.swift */,
@@ -980,9 +990,7 @@
 				881BBCAE2CDCF91B00010A61 /* SpotifyTokenProvider */,
 				881BBCB12CDCF91B00010A61 /* SpotifyAPIService */,
 				885D1B5F2CF4D24700F532E0 /* FirestoreManager */,
-				884529452CF6EBC4007FD074 /* PlaylistService.swift */,
-				884529492CF6ECDD007FD074 /* MolioPlaylistDTO.swift */,
-				884529472CF6EC6D007FD074 /* FirestorePlaylistService.swift */,
+				8845294D2CF7128D007FD074 /* PlaylistService */,
 			);
 			path = Network;
 			sourceTree = "<group>";
