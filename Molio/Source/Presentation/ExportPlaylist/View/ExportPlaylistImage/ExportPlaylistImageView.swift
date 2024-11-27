@@ -1,9 +1,9 @@
 import SwiftUI
 
-struct ExportPlaylistView: View {
-    @ObservedObject private var viewModel: ExportPlaylistViewModel
+struct ExportPlaylistImageView: View {
+    @ObservedObject private var viewModel: ExportPlaylistImageViewModel
     
-    init(viewModel: ExportPlaylistViewModel) {
+    init(viewModel: ExportPlaylistImageViewModel) {
         self.viewModel = viewModel
     }
     
@@ -35,7 +35,7 @@ struct ExportPlaylistView: View {
                                         .scaleEffect(1.0, anchor: .center)
                                 }
                                 GeometryReader { geometry in
-                                    ExportPlaylistPageView(
+                                    PlaylistImagePage(
                                         musicItems: viewModel.paginatedMusicItems.isEmpty ? [] : viewModel.paginatedMusicItems[pageIndex]
                                     )
                                     .cornerRadius(22)
@@ -107,7 +107,7 @@ struct ExportPlaylistView: View {
         var saveImageCount: Int = 0
         for page in 0..<viewModel.numberOfPages {
             let render = ImageRenderer(
-                content: ExportPlaylistPageView(musicItems: viewModel.paginatedMusicItems[page])
+                content: PlaylistImagePage(musicItems: viewModel.paginatedMusicItems[page])
                     .frame(width: UIScreen.main.bounds.width - 44)
             )
             render.scale = 3.0
@@ -128,7 +128,7 @@ struct ExportPlaylistView: View {
     }
 }
 
-extension ExportPlaylistView {
+extension ExportPlaylistImageView {
     enum StringLiterals {
         static let navigationTitle: String = "molio 내보내기"
     }
