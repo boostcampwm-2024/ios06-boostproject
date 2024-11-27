@@ -25,22 +25,4 @@ final class MockAuthService: AuthService {
     func deleteAccount() async throws {
         
     }
-    
-    func getMockCurrentUser() async throws -> MockUser {
-        return MockUser(
-            uid: currentUserID,
-            email: "test@example.com",
-            displayName: "Test User",
-            photoURL: nil
-        )
-    }
-}
-
-
-
-struct MockUser {
-    let uid: String
-    let email: String?
-    let displayName: String?
-    let photoURL: URL?
 }

@@ -1,4 +1,4 @@
-final class DefaultCommunityUseCase: CommunityUseCase {
+struct DefaultCommunityUseCase: CommunityUseCase {
     private let service: FollowRelationService
     private let authService: AuthService
     
@@ -10,7 +10,7 @@ final class DefaultCommunityUseCase: CommunityUseCase {
         self.authService = authService
     }
     
-    func following(from userID: String, to targetID: String) async throws {
+    func requestFollowing(from userID: String, to targetID: String) async throws {
         try await service.createFollowRelation(from: userID, to: targetID)
     }
     
