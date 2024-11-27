@@ -1,6 +1,6 @@
 import Photos
 
-final class ExportPlaylistViewModel: ObservableObject {
+final class ExportPlaylistImageViewModel: ObservableObject {
     let itemHeight: CGFloat = 54.0
     let exportMusicListPageTopPadding: CGFloat = 50.0
     let exportMusicListPageBottomPadding: CGFloat = 72.0

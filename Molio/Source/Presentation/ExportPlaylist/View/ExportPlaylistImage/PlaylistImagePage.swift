@@ -1,12 +1,12 @@
 import SwiftUI
 
-struct ExportPlaylistPageView: View {
+struct PlaylistImagePage: View {
     let musicItems: [ExportMusicItem]
     
     var body: some View {
         VStack(spacing: 0) {
             ForEach(musicItems, id: \.uuid) { item in
-                ExportPlaylistItemView(musicItems: item)
+                PlaylistImageMusicItem(musicItems: item)
                     .background(Color.white)
                     .foregroundStyle(.black)
                 Divider()
