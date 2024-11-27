@@ -26,16 +26,13 @@ struct MyInfoView: View {
                                 if let image = phase.image {
                                     image
                                         .resizable()
-                                        .frame(width: 110, height: 110)
-                                        .clipShape(Circle())
                                 } else {
                                     Image(uiImage: UIImage(resource: .personCircle))
                                         .resizable()
-                                        .frame(width: 110, height: 110)
-                                        .clipShape(Circle())
                                 }
                             }
-                            
+                            .frame(width: 110, height: 110)
+                            .clipShape(Circle())
                             Button(action: {
                                 // TODO: 이미지 선택 액션
                             }) {
