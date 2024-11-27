@@ -33,18 +33,10 @@ final class FirebaseUserService: UserService {
     }
     
     func updateUser(_ user: MolioUserDTO) async throws {
-        guard let updateUserData = user.toDictionary() else { return }
+        guard let updateUserData = user.toDictionary() else { return } // TODO: 딕셔너리 반환 에러 throw
         let docRef = getDocumentReference(documentName: user.id)
 
-        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-            docRef.updateData(updateUserData) { error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else {
-                    continuation.resume(returning: ())
-                }
-            }
-        }
+        try await docRef.updateData(updateUserData)
     }
     
     func deleteUser(userID: String) async throws {
