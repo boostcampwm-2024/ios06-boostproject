@@ -59,6 +59,11 @@ struct SettingView: View {
             Spacer()
         }
         .background(Color.background)
+        .animation(.spring(duration: 0.3), value: viewModel.authMode)
+        .alert(
+            viewModel.alertState.title,
+            isPresented: $viewModel.showAlert) {
+                Button("확인") { }
+            }
     }
-    
 }
