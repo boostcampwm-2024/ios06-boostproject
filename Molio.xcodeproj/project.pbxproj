@@ -157,6 +157,7 @@
 		F12054EE2CF80B880040A69C /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12054ED2CF80B880040A69C /* MyInfoViewController.swift */; };
 		F12054F02CF8419B0040A69C /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12054EF2CF8419B0040A69C /* SettingViewModel.swift */; };
 		F12054F22CF84E5E0040A69C /* TermsAndConditionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12054F12CF84E5E0040A69C /* TermsAndConditionView.swift */; };
+		F12054F42CF855F30040A69C /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12054F32CF855F30040A69C /* PrivacyPolicyView.swift */; };
 		F135BCE62CF43BE6006C6C4F /* ManageAuthenticationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCE52CF43BE6006C6C4F /* ManageAuthenticationUseCase.swift */; };
 		F135BCE82CF43E13006C6C4F /* AuthMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCE72CF43E13006C6C4F /* AuthMode.swift */; };
 		F135BCEA2CF43E56006C6C4F /* AuthSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCE92CF43E56006C6C4F /* AuthSelection.swift */; };
@@ -382,6 +383,7 @@
 		F12054ED2CF80B880040A69C /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
 		F12054EF2CF8419B0040A69C /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		F12054F12CF84E5E0040A69C /* TermsAndConditionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionView.swift; sourceTree = "<group>"; };
+		F12054F32CF855F30040A69C /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		F135BCE52CF43BE6006C6C4F /* ManageAuthenticationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageAuthenticationUseCase.swift; sourceTree = "<group>"; };
 		F135BCE72CF43E13006C6C4F /* AuthMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMode.swift; sourceTree = "<group>"; };
 		F135BCE92CF43E56006C6C4F /* AuthSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSelection.swift; sourceTree = "<group>"; };
@@ -1293,6 +1295,7 @@
 				F135BD092CF5C671006C6C4F /* ProfileItemView.swift */,
 				F135BD0B2CF5C68C006C6C4F /* SettingTextItemView.swift */,
 				F12054F12CF84E5E0040A69C /* TermsAndConditionView.swift */,
+				F12054F32CF855F30040A69C /* PrivacyPolicyView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -1806,6 +1809,7 @@
 				206149042CF7218100FDE96D /* CommunityUseCase.swift in Sources */,
 				B8046A5A2CEC56C900933704 /* DIContainer.swift in Sources */,
 				205E6A5E2CF5D7EB005E9150 /* PlaylistLocalStorage.swift in Sources */,
+				F12054F42CF855F30040A69C /* PrivacyPolicyView.swift in Sources */,
 				206149062CF7219B00FDE96D /* MolioFollowRelation.swift in Sources */,
 				B8D554892CE10A3A007CCD6D /* DefaultSpotifyAPIService.swift in Sources */,
 				B81086EE2CF5E34D00403E88 /* AddMusicToPlaylistUseCase.swift in Sources */,

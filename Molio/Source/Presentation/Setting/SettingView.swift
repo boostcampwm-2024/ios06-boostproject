@@ -4,6 +4,7 @@ struct SettingView: View {
     private let viewModel: SettingViewModel
     var didTapMyInfoView: (() -> Void)?
     var didTapTermsAndConditionView: (() -> Void)?
+    var didTapPrivacyPolicyView: (() -> Void)?
     
     init(viewModel: SettingViewModel) {
         self.viewModel = viewModel
@@ -27,7 +28,7 @@ struct SettingView: View {
                 SettingTextItemView(itemType: .termsAndCondition)
             }
             Button {
-                // TODO: 개인정보 처리방침 페이지 연결
+                didTapPrivacyPolicyView?()
             } label: {
                 SettingTextItemView(itemType: .privacyPolicy)
             }

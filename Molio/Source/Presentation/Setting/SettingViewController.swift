@@ -35,5 +35,11 @@ final class SettingViewController: UIHostingController<SettingView> {
             termsAndConditionViewController.title = "약관 및 개인 정보 처리 동의"
             self?.navigationController?.pushViewController(termsAndConditionViewController, animated: true)
         }
+        
+        rootView.didTapPrivacyPolicyView = { [weak self] in
+            let privacyPolicyViewController = UIHostingController(rootView: PrivacyPolicyView())
+            privacyPolicyViewController.title = "개인정보 처리방침"
+            self?.navigationController?.pushViewController(privacyPolicyViewController, animated: true)
+        }
     }
 }
