@@ -50,7 +50,7 @@ struct TermsAndConditionView: View {
                     )
                 }
             }
-            .padding()
+            .frame(maxWidth: .infinity)
         }
         .background(Color.background)
     }
@@ -67,6 +67,7 @@ struct TermsAndConditionView: View {
             Spacer()
                 .frame(height: 20)
         }
+        .padding()
     }
 }
 
