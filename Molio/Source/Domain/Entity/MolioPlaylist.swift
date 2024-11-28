@@ -2,6 +2,7 @@ import Foundation
 
 struct MolioPlaylist: Identifiable {
     let id: UUID
+    let authorID: String?
     let name: String
     let createdAt: Date
     let musicISRCs: [String]
@@ -10,6 +11,7 @@ struct MolioPlaylist: Identifiable {
 
     init(
         id: UUID,
+        authorID: String? = nil,
         name: String,
         createdAt: Date,
         musicISRCs: [String],
@@ -17,6 +19,7 @@ struct MolioPlaylist: Identifiable {
         like: [String]? = []
     ) {
         self.id = id
+        self.authorID = authorID
         self.name = name
         self.createdAt = createdAt
         self.musicISRCs = musicISRCs
@@ -36,6 +39,7 @@ extension MolioPlaylist {
     
     func copy(
         id: UUID? = nil,
+        authorID: String? = nil,
         name: String? = nil,
         createdAt: Date? = nil,
         musicISRCs: [String]? = nil,
@@ -44,6 +48,7 @@ extension MolioPlaylist {
     ) -> MolioPlaylist {
         return MolioPlaylist(
             id: id ?? self.id,
+            authorID: authorID ?? self.authorID,
             name: name ?? self.name,
             createdAt: createdAt ?? self.createdAt,
             musicISRCs: musicISRCs ?? self.musicISRCs,

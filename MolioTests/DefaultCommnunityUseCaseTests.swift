@@ -3,106 +3,100 @@ import XCTest
 
 final class DefaultCommunityUseCaseTests: XCTestCase {
     var useCase: DefaultCommunityUseCase!
-    var mockService: MockFollowRelationService!
-    var mockAuthService: MockAuthService!
+    var mockRepository: MockPlaylistRepository!
+    var mockCurrentUserIdUseCase: MockCurrentUserIdUseCase!
     
     override func setUp() {
         super.setUp()
-        mockService = MockFollowRelationService()
-        mockAuthService = MockAuthService()
-        
-        useCase = DefaultCommunityUseCase(service: mockService, authService: mockAuthService)
+        mockRepository = MockPlaylistRepository()
+        mockCurrentUserIdUseCase = MockCurrentUserIdUseCase()
+        useCase = DefaultCommunityUseCase(
+            currentUserIdUseCase: mockCurrentUserIdUseCase,
+            repository: mockRepository
+        )
     }
     
     override func tearDown() {
-        mockService = nil
         useCase = nil
+        mockRepository = nil
+        mockCurrentUserIdUseCase = nil
         super.tearDown()
     }
     
-    func testFollowing() async throws {
-        let followerID = "user1"
-        let followingID = "user2"
+    func testLikePlaylist() async throws {
+        // Given
+        let userID = "testUser"
+        let playlistID = UUID()
+        let initialLikes: [String] = []
+        let playlist = MolioPlaylist(
+            id: playlistID,
+            authorID: userID,
+            name: "Test Playlist",
+            createdAt: Date(),
+            musicISRCs: [],
+            filter: MusicFilter(genres: []),
+            like: initialLikes
+        )
         
-        try await useCase.requestFollowing(from: followerID, to: followingID)
+        mockCurrentUserIdUseCase.currentUserID = userID
+        mockRepository.stubbedPlaylist = playlist
         
-        XCTAssertEqual(mockService.createdRelations.count, 1)
-        XCTAssertEqual(mockService.createdRelations.first?.follower, followerID)
-        XCTAssertEqual(mockService.createdRelations.first?.following, followingID)
-        XCTAssertFalse(mockService.createdRelations.first?.state ?? true)
+        // When
+        try await useCase.likePlaylist(playlistID: playlistID)
+        
+        // Then
+        XCTAssertTrue(mockRepository.didUpdatePlaylist)
+        XCTAssertEqual(mockRepository.updatedPlaylist?.like?.contains(userID), true)
     }
     
-    func testApproveFollowing() async throws {
-        let relationID = "relation1"
+    func testUnlikePlaylist() async throws {
+        // Given
+        let userID = "testUser"
+        let playlistID = UUID()
+        let initialLikes: [String] = [userID]
+        let playlist = MolioPlaylist(
+            id: playlistID,
+            authorID: userID,
+            name: "Test Playlist",
+            createdAt: Date(),
+            musicISRCs: [],
+            filter: MusicFilter(genres: []),
+            like: initialLikes
+        )
         
-        try await useCase.approveFollowing(relationID: relationID)
+        mockCurrentUserIdUseCase.currentUserID = userID
+        mockRepository.stubbedPlaylist = playlist
         
-        XCTAssertEqual(mockService.updatedRelations[relationID], true)
+        // When
+        try await useCase.unlikePlaylist(playlistID: playlistID)
+        
+        // Then
+        XCTAssertTrue(mockRepository.didUpdatePlaylist)
+        XCTAssertEqual(mockRepository.updatedPlaylist?.like?.contains(userID), false)
+    }
+}
+
+final class MockPlaylistRepository: RealPlaylistRepository {
+    var stubbedPlaylist: MolioPlaylist?
+    var didUpdatePlaylist = false
+    var updatedPlaylist: MolioPlaylist?
+    
+    func addMusic(userID: String?, isrc: String, to playlistID: UUID) async throws {}
+    func deleteMusic(userID: String?, isrc: String, in playlistID: UUID) async throws {}
+    func moveMusic(userID: String?, isrc: String, in playlistID: UUID, fromIndex: Int, toIndex: Int) async throws {}
+    func createNewPlaylist(userID: String?, playlistID: UUID, _ playlistName: String) async throws {}
+    func deletePlaylist(userID: String?, _ playlistID: UUID) async throws {}
+    
+    func fetchPlaylists(userID: String?) async throws -> [MolioPlaylist]? {
+        return [stubbedPlaylist].compactMap { $0 }
     }
     
-    func testRefuseFollowing() async throws {
-        let relationID = "relation2"
-        
-        try await useCase.refuseFollowing(relationID: relationID)
-        
-        XCTAssertTrue(mockService.deletedRelations.contains(relationID))
+    func fetchPlaylist(userID: String?, for playlistID: UUID) async throws -> MolioPlaylist? {
+        return stubbedPlaylist
     }
     
-    func testUnFollow() async throws {
-        let relationID = "relation3"
-        
-        try await useCase.unFollow(relationID: relationID)
-        
-        XCTAssertTrue(mockService.deletedRelations.contains(relationID))
-    }
-    
-    func testFetchMyFollowingList() async throws {
-        let userID = "myUserID"
-        mockService.fetchedRelations = [
-            FollowRelationDTO(id: userID, date: Date(), following: userID, follower: "user2", state: true),
-            FollowRelationDTO(id: userID, date: Date(), following: userID, follower: "user3", state: true)
-        ]
-        
-        let results = try await useCase.fetchMyFollowingList()
-        
-        XCTAssertEqual(results.count, 2)
-        XCTAssertTrue(results.allSatisfy { $0.following == userID })
-    }
-    func testFetchFriendFollowingList() async throws {
-        let userID = "user1"
-        mockService.fetchedRelations = [
-            FollowRelationDTO(id: "relation1", date: Date(), following: userID, follower: "user2", state: true),
-            FollowRelationDTO(id: "relation2", date: Date(), following: userID, follower: "user3", state: true)
-        ]
-        
-        let results = try await useCase.fetchFreindFollowingList(userID: userID )
-        
-        XCTAssertEqual(results.count, 2)
-        XCTAssertTrue(results.allSatisfy { $0.following == userID })
-    }
-    func testFetchMyFollowerList() async throws {
-        let userID = "myUserID"
-        mockService.fetchedRelations = [
-            FollowRelationDTO(id: userID, date: Date(), following: "user2", follower: userID, state: false),
-            FollowRelationDTO(id: userID, date: Date(), following: "user3", follower: userID, state: false)
-        ]
-        
-        let results = try await useCase.fetchMyFollowerList()
-        
-        XCTAssertEqual(results.count, 2)
-        XCTAssertTrue(results.allSatisfy { $0.follower == userID })
-    }
-    
-    func testFetchFriendFollowerList() async throws {
-        let userID = "user1"
-        mockService.fetchedRelations = [
-            FollowRelationDTO(id: "relation1", date: Date(), following: "user2", follower: userID, state: true),
-            FollowRelationDTO(id: "relation2", date: Date(), following: "user3", follower: userID, state: true)
-        ]
-        
-        let results = try await useCase.fetchFriendFollowerList(userID: userID)
-        
-        XCTAssertEqual(results.count, 2)
-        XCTAssertTrue(results.allSatisfy { $0.follower == userID && $0.state == true })
+    func updatePlaylist(userID: String?, newPlaylist: MolioPlaylist) async throws {
+        didUpdatePlaylist = true
+        updatedPlaylist = newPlaylist
     }
 }
