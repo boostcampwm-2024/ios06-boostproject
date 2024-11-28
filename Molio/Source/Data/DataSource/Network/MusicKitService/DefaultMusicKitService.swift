@@ -16,16 +16,8 @@ struct DefaultMusicKitService: MusicKitService {
     func getMusic(with isrc: String) async -> MolioMusic? {
         guard checkAuthorizationStatus() else { return nil }
         
-        let request = MusicCatalogResourceRequest<Song>(matching: \.isrc, equalTo: isrc)
-        do {
-            let response = try await request.response()
-            guard let searchedMusic = response.items.first else {
-                return nil
-            }
-            return SongMapper.toDomain(searchedMusic)
-        } catch {
-            return nil
-        }
+        guard let searchedSong = await searchSong(with: isrc) else { return nil }
+        return SongMapper.toDomain(searchedSong)
     }
     
     func getMusic(with isrcs: [String]) async -> [MolioMusic] {
@@ -98,7 +90,6 @@ struct DefaultMusicKitService: MusicKitService {
     /// 플레이리스트에 노래 추가
     private func addSong(_ song: Song, to playlist: MusicKit.Playlist) async throws {
         try await MusicLibrary.shared.add(song, to: playlist)
-        print("\(song.title)를 \(playlist.name)에 추가함")
     }
     
     /// 애플 뮤직에서 isrc 값으로 검색한 노래를 `MusicKit.Song` 타입으로 반환
