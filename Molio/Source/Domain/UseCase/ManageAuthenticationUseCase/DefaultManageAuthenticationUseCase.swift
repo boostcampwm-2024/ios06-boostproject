@@ -14,6 +14,15 @@ struct DefaultManageAuthenticationUseCase: ManageAuthenticationUseCase {
         setAuthSelection(.selected)
     }
     
+    func isLogin() -> Bool {
+        switch authStateRepository.authMode {
+        case .authenticated:
+            return true
+        case .guest:
+            return false
+        }
+    }
+    
     private func setAuthSelection(_ selection: AuthSelection) {
         authStateRepository.setAuthSelection(selection)
     }
