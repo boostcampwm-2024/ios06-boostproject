@@ -13,12 +13,25 @@ struct DefaultManageAuthenticationUseCase: ManageAuthenticationUseCase {
         return authStateRepository.authMode
     }
     
-    func setAuthMode(_ mode: AuthMode) {
-        authStateRepository.setAuthMode(mode)
-        setAuthSelection(.selected)
+    func singInApple(info: AppleAuthInfo) async throws {
+        try await authStateRepository.signInApple(info: info)
+        authStateRepository.setAuthMode(.authenticated)
+        authStateRepository.setAuthSelection(.selected)
     }
     
-    private func setAuthSelection(_ selection: AuthSelection) {
-        authStateRepository.setAuthSelection(selection)
+    func loginGuest() {
+        authStateRepository.setAuthMode(.guest)
+        authStateRepository.setAuthSelection(.selected)
+    }
+    
+    func logout() throws {
+        try authStateRepository.logout()
+        authStateRepository.setAuthMode(.guest)
+    }
+    
+    func deleteAuth() async throws {
+        try await authStateRepository.deleteAuth()
+        authStateRepository.setAuthSelection(.unselected)
+        authStateRepository.setAuthMode(.guest)
     }
 }
