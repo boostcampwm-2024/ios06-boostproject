@@ -7,7 +7,7 @@ final class PlatformSelectionViewController: UIHostingController<PlatformSelecti
         let platformSelectionView = PlatformSelectionView(viewModel: viewModel)
         super.init(rootView: platformSelectionView)
         
-        rootView.exportButtonTapAction =  { [weak self] platform in
+        rootView.exportButtonTapAction = { [weak self] platform in
             self?.delegate?.didSelectPlatform(with: platform)
         }
     }
