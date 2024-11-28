@@ -55,8 +55,7 @@ final class PlaylistDetailViewController: UIHostingController<PlaylistDetailView
     }
     
     private func presentExportAppleMusicPlaylistView() {
-        print(#function)
-        let exportAppleMusicPlaylistVC = UIHostingController(rootView: ExportAppleMusicCompletionView(playlistName: "sdf"))
+        let exportAppleMusicPlaylistVC = ExportAppleMusicPlaylistViewController(viewModel: viewModel)
         self.presentCustomSheet(exportAppleMusicPlaylistVC, isOverFullScreen: true)
     }
     
