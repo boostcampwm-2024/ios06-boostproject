@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SettingView: View {
-    private let viewModel: SettingViewModel
+    @ObservedObject private var viewModel: SettingViewModel
     var didTapMyInfoView: (() -> Void)?
     var didTapTermsAndConditionView: (() -> Void)?
     var didTapPrivacyPolicyView: (() -> Void)?
@@ -39,7 +39,7 @@ struct SettingView: View {
             switch viewModel.authMode {
             case .authenticated:
                 Button {
-                    // TODO: 로그 아웃 처리
+                    viewModel.logout()
                 } label: {
                     SettingTextItemView(itemType: .logout)
                 }
