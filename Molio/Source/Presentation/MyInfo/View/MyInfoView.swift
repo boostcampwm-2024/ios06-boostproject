@@ -95,22 +95,6 @@ struct MyInfoView: View {
                 }
             }
             .background(Color.background)
-            .navigationTitle("내 정보")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        HStack {
-                            Image(systemName: "chevron.left")
-                            Text("설정")
-                        }
-                        .foregroundStyle(.main)
-                    }
-                }
-            }
             .safeAreaInset(edge: .bottom) {
                 BasicButton(
                     type: .confirm,
@@ -127,11 +111,4 @@ struct MyInfoView: View {
             }
         }
     }
-}
-
-#Preview {
-    MyInfoView(viewModel: MyInfoViewModel(
-        userNickName: "몰리오 올리오",
-        userDescription: "안녕하세요 오늘은 어떤 음악을 들어볼까요?")
-    )
 }
