@@ -1,4 +1,4 @@
-protocol CommunityUseCase {
+protocol FollowRelationUseCase {
     func requestFollowing(from userID: String, to targetID: String) async throws
     func approveFollowing(relationID: String) async throws
     func refuseFollowing(relationID: String) async throws

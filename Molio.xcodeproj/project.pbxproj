@@ -55,9 +55,9 @@
 		206148F12CF704D800FDE96D /* FollowRelationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206148F02CF704D800FDE96D /* FollowRelationDTO.swift */; };
 		206148F32CF70E0C00FDE96D /* FirebaseFollowRelationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206148F22CF70E0C00FDE96D /* FirebaseFollowRelationService.swift */; };
 		206148F72CF7107300FDE96D /* FirebaseFollowRelationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206148F62CF7107300FDE96D /* FirebaseFollowRelationServiceTests.swift */; };
-		206149042CF7218100FDE96D /* CommunityUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206149032CF7218100FDE96D /* CommunityUseCase.swift */; };
+		206149042CF7218100FDE96D /* FollowRelationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206149032CF7218100FDE96D /* FollowRelationUseCase.swift */; };
 		206149062CF7219B00FDE96D /* MolioFollowRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206149052CF7219B00FDE96D /* MolioFollowRelation.swift */; };
-		206149082CF721F800FDE96D /* DefaultCommunityUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206149072CF721F800FDE96D /* DefaultCommunityUseCase.swift */; };
+		206149082CF721F800FDE96D /* DefaultFollowRelationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206149072CF721F800FDE96D /* DefaultFollowRelationUseCase.swift */; };
 		2061490A2CF724EC00FDE96D /* DefaultCommnunityUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206149092CF724EC00FDE96D /* DefaultCommnunityUseCaseTests.swift */; };
 		2061490C2CF7258700FDE96D /* MockFollowRelationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2061490B2CF7258700FDE96D /* MockFollowRelationService.swift */; };
 		2061490E2CF7294700FDE96D /* MockAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2061490D2CF7294700FDE96D /* MockAuthService.swift */; };
@@ -296,9 +296,9 @@
 		206148F02CF704D800FDE96D /* FollowRelationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowRelationDTO.swift; sourceTree = "<group>"; };
 		206148F22CF70E0C00FDE96D /* FirebaseFollowRelationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFollowRelationService.swift; sourceTree = "<group>"; };
 		206148F62CF7107300FDE96D /* FirebaseFollowRelationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFollowRelationServiceTests.swift; sourceTree = "<group>"; };
-		206149032CF7218100FDE96D /* CommunityUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityUseCase.swift; sourceTree = "<group>"; };
+		206149032CF7218100FDE96D /* FollowRelationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowRelationUseCase.swift; sourceTree = "<group>"; };
 		206149052CF7219B00FDE96D /* MolioFollowRelation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MolioFollowRelation.swift; sourceTree = "<group>"; };
-		206149072CF721F800FDE96D /* DefaultCommunityUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCommunityUseCase.swift; sourceTree = "<group>"; };
+		206149072CF721F800FDE96D /* DefaultFollowRelationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFollowRelationUseCase.swift; sourceTree = "<group>"; };
 		206149092CF724EC00FDE96D /* DefaultCommnunityUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCommnunityUseCaseTests.swift; sourceTree = "<group>"; };
 		2061490B2CF7258700FDE96D /* MockFollowRelationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFollowRelationService.swift; sourceTree = "<group>"; };
 		2061490D2CF7294700FDE96D /* MockAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthService.swift; sourceTree = "<group>"; };
@@ -683,13 +683,13 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
-		206149022CF7216800FDE96D /* CommunityUseCase */ = {
+		206149022CF7216800FDE96D /* FollowRelationUseCase */ = {
 			isa = PBXGroup;
 			children = (
-				206149032CF7218100FDE96D /* CommunityUseCase.swift */,
-				206149072CF721F800FDE96D /* DefaultCommunityUseCase.swift */,
+				206149032CF7218100FDE96D /* FollowRelationUseCase.swift */,
+				206149072CF721F800FDE96D /* DefaultFollowRelationUseCase.swift */,
 			);
-			path = CommunityUseCase;
+			path = FollowRelationUseCase;
 			sourceTree = "<group>";
 		};
 		206149162CF845CA00FDE96D /* CurrentUserIdUseCase */ = {
@@ -997,7 +997,7 @@
 				2061491D2CF84A1300FDE96D /* ManageMyPlaylistUseCase */,
 				206149162CF845CA00FDE96D /* CurrentUserIdUseCase */,
 				B867AE642CF7266200ACCEDC /* CheckAppleMusicSubscriptionUseCase */,
-				206149022CF7216800FDE96D /* CommunityUseCase */,
+				206149022CF7216800FDE96D /* FollowRelationUseCase */,
 				B81086EC2CF5E33200403E88 /* AddMusicToPlaylistUseCase */,
 				B876E6412CEF6AF50048CAF9 /* UpdatePlaylistUseCase */,
 				20C6558E2CEF48BA00C60B9C /* FetchAllPlaylistsUseCase */,
@@ -1813,7 +1813,7 @@
 				88C8B5ED2CEF1E240079ACB5 /* DefaultPublishAllMusicInCurrentPlaylistUseCase.swift in Sources */,
 				F173691F2CDB995100F6242C /* SwipeMusicViewController.swift in Sources */,
 				206148F32CF70E0C00FDE96D /* FirebaseFollowRelationService.swift in Sources */,
-				206149082CF721F800FDE96D /* DefaultCommunityUseCase.swift in Sources */,
+				206149082CF721F800FDE96D /* DefaultFollowRelationUseCase.swift in Sources */,
 				2003BA1C2CDB8EE5002CAB3E /* UILabel+Extension.swift in Sources */,
 				F17369682CE36E8F00F6242C /* DefaultImageRepository.swift in Sources */,
 				B876E6402CEF69480048CAF9 /* MockPublishCurrentPlaylistUseCase.swift in Sources */,
@@ -1879,7 +1879,7 @@
 				B81086EB2CF5AEFD00403E88 /* PlaylistDetailViewController.swift in Sources */,
 				881BBCBC2CDCF95600010A61 /* RecommendationsResponseDTO.swift in Sources */,
 				881BBCBD2CDCF95600010A61 /* ExternalIDsDTO.swift in Sources */,
-				206149042CF7218100FDE96D /* CommunityUseCase.swift in Sources */,
+				206149042CF7218100FDE96D /* FollowRelationUseCase.swift in Sources */,
 				B8046A5A2CEC56C900933704 /* DIContainer.swift in Sources */,
 				205E6A5E2CF5D7EB005E9150 /* PlaylistLocalStorage.swift in Sources */,
 				206149062CF7219B00FDE96D /* MolioFollowRelation.swift in Sources */,

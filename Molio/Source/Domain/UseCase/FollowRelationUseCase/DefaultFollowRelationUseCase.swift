@@ -1,4 +1,4 @@
-struct DefaultCommunityUseCase: CommunityUseCase {
+struct DefaultFollowRelationUseCase: FollowRelationUseCase {
     private let service: FollowRelationService
     private let authService: AuthService
     
