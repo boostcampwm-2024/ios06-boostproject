@@ -2,6 +2,7 @@ import Foundation
 
 struct MolioPlaylist: Identifiable {
     let id: UUID
+    let authorID: String?
     let name: String
     let createdAt: Date
     let musicISRCs: [String]
@@ -10,6 +11,7 @@ struct MolioPlaylist: Identifiable {
 
     init(
         id: UUID,
+        authorID: String? = nil,
         name: String,
         createdAt: Date,
         musicISRCs: [String],
@@ -17,6 +19,7 @@ struct MolioPlaylist: Identifiable {
         like: [String]? = []
     ) {
         self.id = id
+        self.authorID = nil
         self.name = name
         self.createdAt = createdAt
         self.musicISRCs = musicISRCs
