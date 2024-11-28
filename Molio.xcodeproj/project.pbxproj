@@ -69,7 +69,7 @@
 		206149232CF855D800FDE96D /* DefaultManageMyPlaylistUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206149222CF855D800FDE96D /* DefaultManageMyPlaylistUseCaseTests.swift */; };
 		206149372CF8675400FDE96D /* CommunityUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206149362CF8675400FDE96D /* CommunityUseCase.swift */; };
 		206149392CF8677D00FDE96D /* DefaultCommunityUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206149382CF8677D00FDE96D /* DefaultCommunityUseCase.swift */; };
-		2061493B2CF868ED00FDE96D /* DefaultCommunityUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2061493A2CF868ED00FDE96D /* DefaultCommunityUseCaseTests.swift */; };
+		2061493B2CF868ED00FDE96D /* DefaultCommnunityUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2061493A2CF868ED00FDE96D /* DefaultCommnunityUseCaseTests.swift */; };
 		2075FEC12CECDDC0009834BE /* CreatePlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC02CECDDC0009834BE /* CreatePlaylistViewModel.swift */; };
 		2075FEC42CECDE29009834BE /* ChangeCurrentPlaylistIUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC32CECDE29009834BE /* ChangeCurrentPlaylistIUseCase.swift */; };
 		2075FEC62CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC52CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift */; };
@@ -313,7 +313,7 @@
 		206149222CF855D800FDE96D /* DefaultManageMyPlaylistUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultManageMyPlaylistUseCaseTests.swift; sourceTree = "<group>"; };
 		206149362CF8675400FDE96D /* CommunityUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityUseCase.swift; sourceTree = "<group>"; };
 		206149382CF8677D00FDE96D /* DefaultCommunityUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCommunityUseCase.swift; sourceTree = "<group>"; };
-		2061493A2CF868ED00FDE96D /* DefaultCommunityUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCommunityUseCaseTests.swift; sourceTree = "<group>"; };
+		2061493A2CF868ED00FDE96D /* DefaultCommnunityUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCommnunityUseCaseTests.swift; sourceTree = "<group>"; };
 		2075FEC02CECDDC0009834BE /* CreatePlaylistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaylistViewModel.swift; sourceTree = "<group>"; };
 		2075FEC32CECDE29009834BE /* ChangeCurrentPlaylistIUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCurrentPlaylistIUseCase.swift; sourceTree = "<group>"; };
 		2075FEC52CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChangeCurrentPlaylistIUseCase.swift; sourceTree = "<group>"; };
@@ -1447,7 +1447,7 @@
 				206149092CF724EC00FDE96D /* DefaultFollowRelationUseCaseTests.swift */,
 				2061491B2CF846B400FDE96D /* DefaultCurrentUserIdUseCaseTests.swift */,
 				206149222CF855D800FDE96D /* DefaultManageMyPlaylistUseCaseTests.swift */,
-				2061493A2CF868ED00FDE96D /* DefaultCommunityUseCaseTests.swift */,
+				2061493A2CF868ED00FDE96D /* DefaultCommnunityUseCaseTests.swift */,
 			);
 			path = MolioTests;
 			sourceTree = "<group>";
@@ -1989,7 +1989,7 @@
 				B8D554802CE0F152007CCD6D /* RecommendationsResponseDTODummy.swift in Sources */,
 				B876E6532CEF78710048CAF9 /* MockCurrentPlaylistRepository.swift in Sources */,
 				206148ED2CF6F70000FDE96D /* FirebaseUserServiceTests.swift in Sources */,
-				2061493B2CF868ED00FDE96D /* DefaultCommunityUseCaseTests.swift in Sources */,
+				2061493B2CF868ED00FDE96D /* DefaultCommnunityUseCaseTests.swift in Sources */,
 				206148F72CF7107300FDE96D /* FirebaseFollowRelationServiceTests.swift in Sources */,
 				B8D554C22CE32B9A007CCD6D /* SpotifyTokenProviderTests.swift in Sources */,
 				B8D554C42CE33979007CCD6D /* MockNetworkProvider.swift in Sources */,
