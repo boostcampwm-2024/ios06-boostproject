@@ -3,6 +3,7 @@ import SwiftUI
 struct SettingView: View {
     private let viewModel: SettingViewModel
     var didTapMyInfoView: (() -> Void)?
+    var didTapTermsAndConditionView: (() -> Void)?
     
     init(viewModel: SettingViewModel) {
         self.viewModel = viewModel
@@ -21,7 +22,7 @@ struct SettingView: View {
             }
             SettingTextItemView(itemType: .appVersion(viewModel.appVersion))
             Button {
-                // TODO: 약관 및 개인 정보 처리 동의 페이지 연결
+                didTapTermsAndConditionView?()
             } label: {
                 SettingTextItemView(itemType: .termsAndCondition)
             }
