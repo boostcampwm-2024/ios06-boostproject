@@ -4,6 +4,8 @@ struct PlatformSelectionView: View {
     @ObservedObject var viewModel: PlaylistDetailViewModel
     @State private var selectedPlatform: ExportPlatform?
     
+    var exportButtonTapAction: ((ExportPlatform) -> Void)?
+    
     var body: some View {
         VStack(alignment: .center, spacing: 40) {
             Text.molioBold("플랫폼 선택", size: 32) // TODO: - 네이밍 수정 (ex - 내보내기 방식 선택)
@@ -52,14 +54,14 @@ struct PlatformSelectionView: View {
         if selectedPlatform == .appleMusic {
             if viewModel.isAppleMusicSubscriber {
                 return BasicButton(type: .exportToAppleMusic) {
-                    // TODO: - 애플 뮤직 내보내기
+                    exportButtonTapAction?(.appleMusic)
                 }
             } else {
                 return BasicButton(type: .needAppleMusicSubcription, isEnabled: false)
             }
         } else {
             return BasicButton(type: .exportToImage) {
-                // TODO: - 이미지로 내보내기
+                exportButtonTapAction?(.image)
             }
         }
     }
@@ -68,6 +70,6 @@ struct PlatformSelectionView: View {
 #Preview {
     ZStack {
         Color.background
-        PlatformSelectionView(viewModel: PlaylistDetailViewModel())
+        PlatformSelectionView(viewModel: PlaylistDetailViewModel()) { _ in }
     }
 }
