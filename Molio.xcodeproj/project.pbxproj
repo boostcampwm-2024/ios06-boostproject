@@ -94,6 +94,9 @@
 		88E4834B2CEDDD4A003D624E /* MusicListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E483482CEDDD4A003D624E /* MusicListView.swift */; };
 		88E4834C2CEDDD4A003D624E /* MusicCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E483452CEDDD4A003D624E /* MusicCellView.swift */; };
 		88E4834E2CEDDD66003D624E /* MolioMusic+sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E4834D2CEDDD66003D624E /* MolioMusic+sample.swift */; };
+		88E81E2B2CF82B8E00105755 /* MockPlaylistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E81E2A2CF82B8E00105755 /* MockPlaylistService.swift */; };
+		88E81E2D2CF82C8100105755 /* MockPlaylistStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E81E2C2CF82C8100105755 /* MockPlaylistStorage.swift */; };
+		88E81E2F2CF82D5F00105755 /* DefaultPlaylistRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E81E2E2CF82D5F00105755 /* DefaultPlaylistRepositoryTests.swift */; };
 		88F6E4A72CEC852C00739648 /* DefaultPublishCurrentPlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F6E4A62CEC852C00739648 /* DefaultPublishCurrentPlaylistUseCase.swift */; };
 		88F6E4A92CEC88C700739648 /* PublishCurrentPlaylistUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F6E4A82CEC88C700739648 /* PublishCurrentPlaylistUseCaseTests.swift */; };
 		88F6E4AB2CEC8B5A00739648 /* PublishCurrentPlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F6E4AA2CEC8B5A00739648 /* PublishCurrentPlaylistUseCase.swift */; };
@@ -306,6 +309,9 @@
 		88E483472CEDDD4A003D624E /* AudioPlayerControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerControlView.swift; sourceTree = "<group>"; };
 		88E483482CEDDD4A003D624E /* MusicListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicListView.swift; sourceTree = "<group>"; };
 		88E4834D2CEDDD66003D624E /* MolioMusic+sample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MolioMusic+sample.swift"; sourceTree = "<group>"; };
+		88E81E2A2CF82B8E00105755 /* MockPlaylistService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPlaylistService.swift; sourceTree = "<group>"; };
+		88E81E2C2CF82C8100105755 /* MockPlaylistStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPlaylistStorage.swift; sourceTree = "<group>"; };
+		88E81E2E2CF82D5F00105755 /* DefaultPlaylistRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPlaylistRepositoryTests.swift; sourceTree = "<group>"; };
 		88F6E4A62CEC852C00739648 /* DefaultPublishCurrentPlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPublishCurrentPlaylistUseCase.swift; sourceTree = "<group>"; };
 		88F6E4A82CEC88C700739648 /* PublishCurrentPlaylistUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishCurrentPlaylistUseCaseTests.swift; sourceTree = "<group>"; };
 		88F6E4AA2CEC8B5A00739648 /* PublishCurrentPlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishCurrentPlaylistUseCase.swift; sourceTree = "<group>"; };
@@ -1067,6 +1073,7 @@
 			children = (
 				B876E64D2CEF77C20048CAF9 /* MockPlaylistRepository.swift */,
 				B876E6522CEF78710048CAF9 /* MockCurrentPlaylistRepository.swift */,
+				88E81E2E2CF82D5F00105755 /* DefaultPlaylistRepositoryTests.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -1075,7 +1082,9 @@
 			isa = PBXGroup;
 			children = (
 				B8D553F42CDFE5F0007CCD6D /* MockURLProtocol.swift */,
+				88E81E2C2CF82C8100105755 /* MockPlaylistStorage.swift */,
 				B8D554C32CE33979007CCD6D /* MockNetworkProvider.swift */,
+				88E81E2A2CF82B8E00105755 /* MockPlaylistService.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -1799,10 +1808,13 @@
 				206148ED2CF6F70000FDE96D /* FirebaseUserServiceTests.swift in Sources */,
 				B8D554C22CE32B9A007CCD6D /* SpotifyTokenProviderTests.swift in Sources */,
 				B8D554C42CE33979007CCD6D /* MockNetworkProvider.swift in Sources */,
+				88E81E2B2CF82B8E00105755 /* MockPlaylistService.swift in Sources */,
+				88E81E2D2CF82C8100105755 /* MockPlaylistStorage.swift in Sources */,
 				B8046A4D2CEA62D100933704 /* SpotifyAvailableGenreSeedsDTODummy.swift in Sources */,
 				88C8B5F32CEF296A0079ACB5 /* PublishAllMusicInCurrentPlaylistUseCaseTests.swift in Sources */,
 				88F6E4A92CEC88C700739648 /* PublishCurrentPlaylistUseCaseTests.swift in Sources */,
 				B82B28902CEF846C00D67725 /* MockUpdatePlaylistUseCase.swift in Sources */,
+				88E81E2F2CF82D5F00105755 /* DefaultPlaylistRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

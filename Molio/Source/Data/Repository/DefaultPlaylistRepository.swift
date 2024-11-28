@@ -3,11 +3,11 @@ import Foundation
 import FirebaseCore
 
 final class DefaultPlaylistRepository: RealPlaylistRepository {
-    private let playlistService: FirestorePlaylistService
+    private let playlistService: PlaylistService
     private let playlistStorage: PlaylistLocalStorage
 
     init(
-        playlistService: FirestorePlaylistService = FirestorePlaylistService(),
+        playlistService: PlaylistService = FirestorePlaylistService(),
         playlistStorage: PlaylistLocalStorage
     ) {
         self.playlistService = playlistService
