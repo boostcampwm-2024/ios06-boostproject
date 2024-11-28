@@ -1,12 +1,16 @@
 import SwiftUI
 
 struct SettingView: View {
-    let authMode: AuthMode = .authenticated
+    private let viewModel: SettingViewModel
     var didTapMyInfoView: (() -> Void)?
+    
+    init(viewModel: SettingViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         VStack(spacing: 0) {
-            if authMode == .authenticated {
+            if viewModel.authMode == .authenticated {
                 Button {
                     didTapMyInfoView?()
                 } label: {
@@ -38,7 +42,7 @@ struct SettingView: View {
             Color(UIColor(resource: .spacingBackground))
                 .frame(height: 24)
             
-            switch authMode {
+            switch viewModel.authMode {
             case .authenticated:
                 Button {
                     // TODO: 로그 아웃 처리
@@ -63,8 +67,4 @@ struct SettingView: View {
         .background(Color.background)
     }
     
-}
-
-#Preview {
-    SettingView()
 }
