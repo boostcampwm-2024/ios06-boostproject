@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(ImageRepository.self, dependency: DefaultImageRepository())
         container.register(CurrentPlaylistRepository.self, dependency: DefaultCurrentPlaylistRepository())
         container.register(PlaylistRepository.self, dependency: MockPlaylistRepository())
-        container.register(SignAppleRepository.self, dependency: DefaultSignAppleRepository())
         container.register(AuthStateRepository.self, dependency: DefaultAuthStateRepository())
         
         // UseCase
@@ -32,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(PublishAllMusicInCurrentPlaylistUseCase.self, dependency: DefaultPublishAllMusicInCurrentPlaylistUseCase())
         container.register(UpdatePlaylistUseCase.self, dependency: DefaultUpdatePlaylistUseCase())
         container.register(AudioPlayer.self, dependency: SwipeMusicPlayer())
-        container.register(SignInAppleUseCase.self, dependency: DefaultSignInAppleUseCase())
         container.register(ManageAuthenticationUseCase.self, dependency: DefaultManageAuthenticationUseCase())
         container.register(AddMusicToPlaylistUseCase.self, dependency: DefaultAddMusicToPlaylistUseCase())
         container.register(CheckAppleMusicSubscriptionUseCase.self, dependency: DefaultCheckAppleMusicSubscriptionUseCase())
