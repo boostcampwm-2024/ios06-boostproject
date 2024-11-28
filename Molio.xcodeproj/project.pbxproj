@@ -1073,7 +1073,6 @@
 			children = (
 				B876E64D2CEF77C20048CAF9 /* MockPlaylistRepository.swift */,
 				B876E6522CEF78710048CAF9 /* MockCurrentPlaylistRepository.swift */,
-				88E81E2E2CF82D5F00105755 /* DefaultPlaylistRepositoryTests.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -1291,6 +1290,7 @@
 				B8D553F32CDFE5E6007CCD6D /* Test Double */,
 				B8D553F62CDFE623007CCD6D /* NetworkProviderTests.swift */,
 				8845294B2CF702EF007FD074 /* FirestorePlaylistServiceTests.swift */,
+				88E81E2E2CF82D5F00105755 /* DefaultPlaylistRepositoryTests.swift */,
 				8816226A2CE3838B00E81EA0 /* MusicDeckTests.swift */,
 				885D1B5D2CF4CF3900F532E0 /* FirestoreManagerTests.swift */,
 				B8D554C12CE32B9A007CCD6D /* SpotifyTokenProviderTests.swift */,
