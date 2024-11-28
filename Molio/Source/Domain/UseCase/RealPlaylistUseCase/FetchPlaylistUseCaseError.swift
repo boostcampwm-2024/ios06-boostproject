@@ -1,6 +1,6 @@
 import Foundation
 
-enum RealPlaylistRepositoryError: LocalizedError {
+enum FetchPlaylistUseCaseError: LocalizedError {
     case playlistNotFoundWithID
     
     var errorDescription: String? {

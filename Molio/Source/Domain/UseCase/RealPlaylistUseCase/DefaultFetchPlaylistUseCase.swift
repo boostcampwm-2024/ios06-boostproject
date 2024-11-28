@@ -1,6 +1,6 @@
 import Foundation
 
-final class DefaultRealPlaylistUseCase: RealPlaylistUseCase {
+final class DefaultFetchPlaylistUseCase: FetchPlaylistUseCase {
     
     let playlistRepisitory: RealPlaylistRepository
     let musicKitService: MusicKitService
@@ -29,7 +29,7 @@ final class DefaultRealPlaylistUseCase: RealPlaylistUseCase {
         let playlist = try await playlistRepisitory.fetchPlaylist(userID: currentUserID, for: playlistID)
         
         guard let playlist else {
-            throw RealPlaylistRepositoryError.playlistNotFoundWithID
+            throw FetchPlaylistUseCaseError.playlistNotFoundWithID
         }
         
         return playlist
@@ -51,7 +51,7 @@ final class DefaultRealPlaylistUseCase: RealPlaylistUseCase {
         let playlist = try await playlistRepisitory.fetchPlaylist(userID: friendUserID, for: playlistID)
         
         guard let playlist else {
-            throw RealPlaylistRepositoryError.playlistNotFoundWithID
+            throw FetchPlaylistUseCaseError.playlistNotFoundWithID
         }
         
         return playlist
@@ -61,7 +61,7 @@ final class DefaultRealPlaylistUseCase: RealPlaylistUseCase {
         let playlist = try await playlistRepisitory.fetchPlaylist(userID: friendUserID, for: playlistID)
         
         guard let playlist else {
-            throw RealPlaylistRepositoryError.playlistNotFoundWithID
+            throw FetchPlaylistUseCaseError.playlistNotFoundWithID
         }
         
         let musicsInPlaylist = await musicKitService.getMusic(with: playlist.musicISRCs)

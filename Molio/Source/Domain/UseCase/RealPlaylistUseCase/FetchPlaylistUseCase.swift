@@ -1,6 +1,6 @@
 import Foundation
 
-protocol RealPlaylistUseCase {
+protocol FetchPlaylistUseCase {
     func fetchMyAllPlaylists() async throws -> [MolioPlaylist]
     func fetchMyPlaylist(playlistID: UUID) async throws -> MolioPlaylist
     func fetchAllMusicIn(playlistID: UUID) async throws -> [MolioMusic]

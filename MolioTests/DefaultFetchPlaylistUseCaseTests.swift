@@ -1,12 +1,12 @@
 import XCTest
 @testable import Molio
 
-final class DefaultRealPlaylistRepositoryTests: XCTestCase {
+final class DefaultFetchPlaylistUseCaseTests: XCTestCase {
     
     var playlistRepository: RealPlaylistRepository!
     var musicKitService: MusicKitService!
     var currentUserIdUseCase: MockCurrentUserIdUseCase!
-    var realPlaylistUseCase: DefaultRealPlaylistUseCase!
+    var fetchPlaylistUseCase: DefaultFetchPlaylistUseCase!
     var playlistService: FirestorePlaylistService!
     
     var createdPlaylistIDs: [UUID] = []
@@ -18,7 +18,7 @@ final class DefaultRealPlaylistRepositoryTests: XCTestCase {
         musicKitService = DefaultMusicKitService()
         currentUserIdUseCase = MockCurrentUserIdUseCase()
         
-        realPlaylistUseCase = DefaultRealPlaylistUseCase(
+        fetchPlaylistUseCase = DefaultFetchPlaylistUseCase(
             playlistRepisitory: playlistRepository,
             musicKitService: musicKitService,
             currentUserIDUseCase: currentUserIdUseCase
@@ -31,7 +31,7 @@ final class DefaultRealPlaylistRepositoryTests: XCTestCase {
         playlistRepository = nil
         musicKitService = nil
         currentUserIdUseCase = nil
-        realPlaylistUseCase = nil
+        fetchPlaylistUseCase = nil
         
         for playlistID in createdPlaylistIDs {
             try? await playlistService.deletePlaylist(playlistID: playlistID)
@@ -64,7 +64,7 @@ final class DefaultRealPlaylistRepositoryTests: XCTestCase {
         try await service.createPlaylist(playlist: MolioPlaylistMapper.map(from: playlist))
         
         // When
-        let playlists = try await realPlaylistUseCase.fetchMyAllPlaylists()
+        let playlists = try await fetchPlaylistUseCase.fetchMyAllPlaylists()
         
         // Then
         // 결과 검증
@@ -92,7 +92,7 @@ final class DefaultRealPlaylistRepositoryTests: XCTestCase {
         try await service.createPlaylist(playlist: MolioPlaylistMapper.map(from: playlist))
         createdPlaylistIDs.append(playlistID)
         // When
-        let fetchedPlaylist = try await realPlaylistUseCase.fetchMyPlaylist(playlistID: playlistID)
+        let fetchedPlaylist = try await fetchPlaylistUseCase.fetchMyPlaylist(playlistID: playlistID)
         
         // Then
         XCTAssertNotNil(fetchedPlaylist, "플레이리스트는 nil이 아니어야 합니다.")
@@ -114,7 +114,7 @@ final class DefaultRealPlaylistRepositoryTests: XCTestCase {
         // Given
         
         // When
-        let fetchedMusics = try await realPlaylistUseCase.fetchAllMusicIn(playlistID: mockID)
+        let fetchedMusics = try await fetchPlaylistUseCase.fetchAllMusicIn(playlistID: mockID)
         
         // Then
         XCTAssertEqual(mockPlaylist.musicISRCs, fetchedMusics.map { $0.isrc })
@@ -160,7 +160,7 @@ final class DefaultRealPlaylistRepositoryTests: XCTestCase {
         createdPlaylistIDs.append(playlist2.id)
 
         // When
-        let playlists = try await realPlaylistUseCase.fetchFriendAllPlaylists(friendUserID: friendUserID)
+        let playlists = try await fetchPlaylistUseCase.fetchFriendAllPlaylists(friendUserID: friendUserID)
         
         // Then
         print(playlists)
@@ -189,7 +189,7 @@ final class DefaultRealPlaylistRepositoryTests: XCTestCase {
         createdPlaylistIDs.append(playlist.id)
 
         // When
-        let fetchedPlaylist = try await realPlaylistUseCase.fetchFriendPlaylist(friendUserID: friendUserID, playlistID: playlistID)
+        let fetchedPlaylist = try await fetchPlaylistUseCase.fetchFriendPlaylist(friendUserID: friendUserID, playlistID: playlistID)
         
         // Then
         XCTAssertNotNil(fetchedPlaylist, "친구의 특정 플레이리스트는 nil이 아니어야 합니다.")
@@ -219,7 +219,7 @@ final class DefaultRealPlaylistRepositoryTests: XCTestCase {
         createdPlaylistIDs.append(playlist.id)
 
         // When
-        let musics = try await realPlaylistUseCase.fetchAllFriendMusics(friendUserID: friendUserID, playlistID: playlistID)
+        let musics = try await fetchPlaylistUseCase.fetchAllFriendMusics(friendUserID: friendUserID, playlistID: playlistID)
         
         // Then
         XCTAssertNotNil(musics, "친구의 음악 목록은 nil이 아니어야 합니다.")
