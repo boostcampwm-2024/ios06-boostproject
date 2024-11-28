@@ -2,7 +2,7 @@ import FirebaseCore
 
 struct MolioPlaylistDTO: Codable {
     let id: String      // 플레이리스트 고유 ID
-    let authorID: String        // 플레이리스트 작성자 ID
+    let authorID: String?        // 플레이리스트 작성자 ID
     var title: String  // 플레이리스트 이름
     let createdAt: Timestamp       // 생성일
     var filters: [String]     // 필터
