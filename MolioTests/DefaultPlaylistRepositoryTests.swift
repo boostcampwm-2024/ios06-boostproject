@@ -88,7 +88,7 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
         try await mockService.createPlaylist(playlist: originalPlaylistDTO)
         
         // When
-        var updatedPlaylist = MolioPlaylist(
+        let updatedPlaylist = MolioPlaylist(
             id: playlistID,
             name: "Workout Mix Updated",
             createdAt: originalPlaylistDTO.createdAt.dateValue(),
@@ -190,7 +190,7 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
         try await mockStorage.create(originalPlaylist)
         
         // When
-        var updatedPlaylist = MolioPlaylist(
+        let updatedPlaylist = MolioPlaylist(
             id: playlistID,
             name: "Morning Boost Updated",
             createdAt: originalPlaylist.createdAt,

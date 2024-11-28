@@ -15,7 +15,7 @@ final class DefaultPlaylistRepository: RealPlaylistRepository {
     }
 
     func addMusic(userID: String?, isrc: String, to playlistID: UUID) async throws {
-        if let _ = userID {
+        if userID != nil {
             let playlistDTO = try await playlistService.readPlaylist(playlistID: playlistID)
             
             let updatedPlaylist = playlistDTO.copy(musicISRCs: playlistDTO.musicISRCs + [isrc])
@@ -35,7 +35,7 @@ final class DefaultPlaylistRepository: RealPlaylistRepository {
     }
 
     func deleteMusic(userID: String?, isrc: String, in playlistID: UUID) async throws {
-        if let _ = userID {
+        if userID != nil {
             // Firestore에서 플레이리스트 읽기
             let playlistDTO = try await playlistService.readPlaylist(playlistID: playlistID)
 
@@ -60,7 +60,7 @@ final class DefaultPlaylistRepository: RealPlaylistRepository {
     }
 
     func moveMusic(userID: String?, isrc: String, in playlistID: UUID, fromIndex: Int, toIndex: Int) async throws {
-        if let userID = userID {
+        if userID != nil {
             // TODO: Implement Firestore logic for moving music
             guard let playlist = try await playlistStorage.read(by: playlistID.uuidString) else { return }
             var newMusicISRCs = playlist.musicISRCs
@@ -109,7 +109,7 @@ final class DefaultPlaylistRepository: RealPlaylistRepository {
     }
 
     func deletePlaylist(userID: String?, _ playlistID: UUID) async throws {
-        if let _ = userID {
+        if userID != nil {
             try await playlistService.deletePlaylist(playlistID: playlistID)
         } else {
             try await playlistStorage.delete(by: playlistID.uuidString)
@@ -131,7 +131,7 @@ final class DefaultPlaylistRepository: RealPlaylistRepository {
     }
 
     func fetchPlaylist(userID: String?, for playlistID: UUID) async throws -> MolioPlaylist? {
-        if let _ = userID {
+        if userID != nil {
             // TODO: Implement Firestore logic for fetching a single playlist
             
             let playlistDTO = try await playlistService.readPlaylist(playlistID: playlistID)
@@ -148,7 +148,7 @@ final class DefaultPlaylistRepository: RealPlaylistRepository {
     }
 
     func updatePlaylist(userID: String?, newPlaylist: MolioPlaylist) async throws {
-        if let _ = userID {
+        if userID != nil {
             let newPlaylistDTO = MolioPlaylistMapper.map(from: newPlaylist)
             
             try await playlistService.updatePlaylist(newPlaylist: newPlaylistDTO)

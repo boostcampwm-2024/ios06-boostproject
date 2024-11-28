@@ -37,6 +37,6 @@ final class DefaultCommunityUseCase:
     }
 }
 
-enum PlaylistLikeError : Error {
+enum PlaylistLikeError: Error {
     case likeNotFound
 }

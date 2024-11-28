@@ -92,7 +92,6 @@ final class DefaultManageMyPlaylistUseCase:
     }
 }
 
-
-enum PlaylistMusicISRCsError : Error {
+enum PlaylistMusicISRCsError: Error {
     case invalidIndex
 }
