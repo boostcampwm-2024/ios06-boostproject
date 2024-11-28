@@ -2,14 +2,16 @@ import Foundation
 
 struct MolioPlaylist: Identifiable {
     let id: UUID
+    let authorID: String?
     let name: String
     let createdAt: Date
     let musicISRCs: [String]
-    let filter: MusicFilter
-    let like: [String]? // TODO
+    let filters: MusicFilter
+    let likes: [String]?
 
     init(
         id: UUID,
+        authorID: String? = nil,
         name: String,
         createdAt: Date,
         musicISRCs: [String],
@@ -17,11 +19,24 @@ struct MolioPlaylist: Identifiable {
         like: [String]? = []
     ) {
         self.id = id
+        self.authorID = nil
         self.name = name
         self.createdAt = createdAt
         self.musicISRCs = musicISRCs
         self.filter = filter
         self.like = like
+    }
+    
+    func toDTO() -> MockMolioPlaylistDTO? {
+        return MockMolioPlaylistDTO(
+            id: id.uuidString,
+            authorID: authorID ?? "",
+            title: name,
+            createdAt: Timestamp(date: createdAt),
+            filters: filters,
+            musicISRCs: musicISRCs,
+            likes: likes ?? []
+        )
     }
 }
 

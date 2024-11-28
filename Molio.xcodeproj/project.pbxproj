@@ -61,6 +61,12 @@
 		2061490A2CF724EC00FDE96D /* DefaultCommnunityUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206149092CF724EC00FDE96D /* DefaultCommnunityUseCaseTests.swift */; };
 		2061490C2CF7258700FDE96D /* MockFollowRelationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2061490B2CF7258700FDE96D /* MockFollowRelationService.swift */; };
 		2061490E2CF7294700FDE96D /* MockAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2061490D2CF7294700FDE96D /* MockAuthService.swift */; };
+		206148FA2CF71C4900FDE96D /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206148F92CF71C4900FDE96D /* UserUseCase.swift */; };
+		206148FD2CF71CAE00FDE96D /* MolioUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206148FC2CF71CAE00FDE96D /* MolioUser.swift */; };
+		206148FF2CF71CEB00FDE96D /* DefaultUserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206148FE2CF71CEB00FDE96D /* DefaultUserUseCase.swift */; };
+		206149012CF71F4200FDE96D /* DefaultUserUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206149002CF71F4200FDE96D /* DefaultUserUseCaseTests.swift */; };
+		206149132CF76DE400FDE96D /* PlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206149122CF76DE400FDE96D /* PlaylistUseCase.swift */; };
+		206149152CF76FAA00FDE96D /* DefaultPlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206149142CF76FAA00FDE96D /* DefaultPlaylistUseCase.swift */; };
 		2075FEC12CECDDC0009834BE /* CreatePlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC02CECDDC0009834BE /* CreatePlaylistViewModel.swift */; };
 		2075FEC42CECDE29009834BE /* ChangeCurrentPlaylistIUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC32CECDE29009834BE /* ChangeCurrentPlaylistIUseCase.swift */; };
 		2075FEC62CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC52CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift */; };
@@ -279,6 +285,12 @@
 		206149092CF724EC00FDE96D /* DefaultCommnunityUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCommnunityUseCaseTests.swift; sourceTree = "<group>"; };
 		2061490B2CF7258700FDE96D /* MockFollowRelationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFollowRelationService.swift; sourceTree = "<group>"; };
 		2061490D2CF7294700FDE96D /* MockAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthService.swift; sourceTree = "<group>"; };
+		206148F92CF71C4900FDE96D /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
+		206148FC2CF71CAE00FDE96D /* MolioUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MolioUser.swift; sourceTree = "<group>"; };
+		206148FE2CF71CEB00FDE96D /* DefaultUserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserUseCase.swift; sourceTree = "<group>"; };
+		206149002CF71F4200FDE96D /* DefaultUserUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserUseCaseTests.swift; sourceTree = "<group>"; };
+		206149122CF76DE400FDE96D /* PlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistUseCase.swift; sourceTree = "<group>"; };
+		206149142CF76FAA00FDE96D /* DefaultPlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPlaylistUseCase.swift; sourceTree = "<group>"; };
 		2075FEC02CECDDC0009834BE /* CreatePlaylistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaylistViewModel.swift; sourceTree = "<group>"; };
 		2075FEC32CECDE29009834BE /* ChangeCurrentPlaylistIUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCurrentPlaylistIUseCase.swift; sourceTree = "<group>"; };
 		2075FEC52CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChangeCurrentPlaylistIUseCase.swift; sourceTree = "<group>"; };
@@ -646,6 +658,15 @@
 			path = CommunityUseCase;
 			sourceTree = "<group>";
 		};
+		206149112CF76DD200FDE96D /* PlaylistUseCase */ = {
+			isa = PBXGroup;
+			children = (
+				206149122CF76DE400FDE96D /* PlaylistUseCase.swift */,
+				206149142CF76FAA00FDE96D /* DefaultPlaylistUseCase.swift */,
+			);
+			path = PlaylistUseCase;
+			sourceTree = "<group>";
+		};
 		2075FEBF2CECDDA0009834BE /* CreatePlaylist */ = {
 			isa = PBXGroup;
 			children = (
@@ -922,6 +943,8 @@
 			isa = PBXGroup;
 			children = (
 				206149022CF7216800FDE96D /* CommunityUseCase */,
+				206149112CF76DD200FDE96D /* PlaylistUseCase */,
+				206148F82CF71C3500FDE96D /* UserUseCase */,
 				B81086EC2CF5E33200403E88 /* AddMusicToPlaylistUseCase */,
 				B876E6412CEF6AF50048CAF9 /* UpdatePlaylistUseCase */,
 				20C6558E2CEF48BA00C60B9C /* FetchAllPlaylistsUseCase */,
@@ -1695,6 +1718,7 @@
 				B81086F02CF5E35D00403E88 /* DefaultAddMusicToPlaylistUseCase.swift in Sources */,
 				20397E702CE5DE56004ED9CE /* PersistenceManager.swift in Sources */,
 				206148E92CF6ED1800FDE96D /* FirebaseUserService.swift in Sources */,
+				206149152CF76FAA00FDE96D /* DefaultPlaylistUseCase.swift in Sources */,
 				88C8B5ED2CEF1E240079ACB5 /* DefaultPublishAllMusicInCurrentPlaylistUseCase.swift in Sources */,
 				F173691F2CDB995100F6242C /* SwipeMusicViewController.swift in Sources */,
 				206148F32CF70E0C00FDE96D /* FirebaseFollowRelationService.swift in Sources */,
@@ -1792,6 +1816,7 @@
 				F17369702CE3710A00F6242C /* ImageFetchService.swift in Sources */,
 				2010484F2CEA0B300015E800 /* BasicButton.swift in Sources */,
 				881BBCB22CDCF91B00010A61 /* MockSpotifyAPIService.swift in Sources */,
+				206149132CF76DE400FDE96D /* PlaylistUseCase.swift in Sources */,
 				206148EF2CF704C400FDE96D /* FollowRelationService.swift in Sources */,
 				F17369522CDFA7DC00F6242C /* SongMapper.swift in Sources */,
 				F17369742CE3733300F6242C /* ImageFecthError.swift in Sources */,

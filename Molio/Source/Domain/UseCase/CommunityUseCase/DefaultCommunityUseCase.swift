@@ -81,6 +81,7 @@ struct DefaultCommunityUseCase: CommunityUseCase {
     }
     
     // MARK: - Private Method
+    
     private func fetchMyUserID() async throws -> String {
         return try authService.getCurrentID()
     }

@@ -53,7 +53,7 @@ final class MusicFilterViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] playlist in
                 self?.currentPlaylist = playlist
-                self?.selectedGenres = Set<MusicGenre>(playlist?.filter.genres ?? [])
+                self?.selectedGenres = Set<MusicGenre>(playlist?.filters.genres ?? [])
             }
             .store(in: &subscriptions)
     }

@@ -75,7 +75,7 @@ final class RandomMusicDeck {
         publishCurrentPlaylistUseCase.execute()
             .sink { [weak self] currentPlaylist in
                 self?.currentPlaylist = currentPlaylist
-                self?.currentMusicFilter = currentPlaylist?.filter
+                self?.currentMusicFilter = currentPlaylist?.filters
             }
             .store(in: &cancellables)
     }
