@@ -5,6 +5,7 @@ struct SettingView: View {
     var didTapMyInfoView: (() -> Void)?
     var didTapTermsAndConditionView: (() -> Void)?
     var didTapPrivacyPolicyView: (() -> Void)?
+    var didTapLoginView: (() -> Void)?
     
     init(viewModel: SettingViewModel) {
         self.viewModel = viewModel
@@ -50,7 +51,7 @@ struct SettingView: View {
                 }
             case .guest:
                 Button {
-                    // TODO: 로그인 처리
+                    didTapLoginView?()
                 } label: {
                     SettingTextItemView(itemType: .login)
                 }

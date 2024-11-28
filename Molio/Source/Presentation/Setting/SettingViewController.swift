@@ -41,5 +41,11 @@ final class SettingViewController: UIHostingController<SettingView> {
             privacyPolicyViewController.title = "개인정보 처리방침"
             self?.navigationController?.pushViewController(privacyPolicyViewController, animated: true)
         }
+        
+        rootView.didTapLoginView = { [weak self] in
+            let loginViewModel = LoginViewModel()
+            let loginViewController = LoginViewController(viewModel: loginViewModel)
+            self?.navigationController?.pushViewController(loginViewController, animated: true)
+        }
     }
 }
