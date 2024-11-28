@@ -5,7 +5,7 @@ final class DefaultFetchPlaylistUseCaseTests: XCTestCase {
     
     var playlistRepository: RealPlaylistRepository!
     var musicKitService: MusicKitService!
-    var currentUserIdUseCase: MockCurrentUserIdUseCase!
+    var currentUserIdUseCase: MockCurrentUserIdUseCase2!
     var fetchPlaylistUseCase: DefaultFetchPlaylistUseCase!
     var playlistService: FirestorePlaylistService!
     
@@ -16,7 +16,7 @@ final class DefaultFetchPlaylistUseCaseTests: XCTestCase {
         playlistRepository = DefaultPlaylistRepository(playlistStorage: MockPlaylistLocalStorage())
         
         musicKitService = DefaultMusicKitService()
-        currentUserIdUseCase = MockCurrentUserIdUseCase()
+        currentUserIdUseCase = MockCurrentUserIdUseCase2()
         
         fetchPlaylistUseCase = DefaultFetchPlaylistUseCase(
             playlistRepisitory: playlistRepository,
@@ -231,7 +231,7 @@ final class DefaultFetchPlaylistUseCaseTests: XCTestCase {
 
 // MARK: - Mock Classes
 
-class MockCurrentUserIdUseCase: CurrentUserIdUseCase {
+class MockCurrentUserIdUseCase2: CurrentUserIdUseCase {
     func execute() throws -> String? {
         return "창우"
     }
