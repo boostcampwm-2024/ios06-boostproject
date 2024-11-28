@@ -147,6 +147,8 @@
 		B8D554C42CE33979007CCD6D /* MockNetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D554C32CE33979007CCD6D /* MockNetworkProvider.swift */; };
 		B8D554C62CE339BC007CCD6D /* DefaultSpotifyTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D554C52CE339BC007CCD6D /* DefaultSpotifyTokenProvider.swift */; };
 		B8D554C82CE34A47007CCD6D /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D554C72CE34A47007CCD6D /* String+Extension.swift */; };
+		F12054EC2CF802B80040A69C /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12054EB2CF802B80040A69C /* SettingViewController.swift */; };
+		F12054EE2CF80B880040A69C /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12054ED2CF80B880040A69C /* MyInfoViewController.swift */; };
 		F135BCE62CF43BE6006C6C4F /* ManageAuthenticationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCE52CF43BE6006C6C4F /* ManageAuthenticationUseCase.swift */; };
 		F135BCE82CF43E13006C6C4F /* AuthMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCE72CF43E13006C6C4F /* AuthMode.swift */; };
 		F135BCEA2CF43E56006C6C4F /* AuthSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCE92CF43E56006C6C4F /* AuthSelection.swift */; };
@@ -362,6 +364,8 @@
 		B8D554C32CE33979007CCD6D /* MockNetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkProvider.swift; sourceTree = "<group>"; };
 		B8D554C52CE339BC007CCD6D /* DefaultSpotifyTokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSpotifyTokenProvider.swift; sourceTree = "<group>"; };
 		B8D554C72CE34A47007CCD6D /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		F12054EB2CF802B80040A69C /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		F12054ED2CF80B880040A69C /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
 		F135BCE52CF43BE6006C6C4F /* ManageAuthenticationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageAuthenticationUseCase.swift; sourceTree = "<group>"; };
 		F135BCE72CF43E13006C6C4F /* AuthMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMode.swift; sourceTree = "<group>"; };
 		F135BCE92CF43E56006C6C4F /* AuthSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSelection.swift; sourceTree = "<group>"; };
@@ -1175,6 +1179,7 @@
 		F12054E92CF7FF960040A69C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F12054ED2CF80B880040A69C /* MyInfoViewController.swift */,
 				F1865ED52CF618B7007C1E5A /* MyInfoView.swift */,
 				F1865ED92CF63959007C1E5A /* NickNameTextFieldView.swift */,
 				F1865EDB2CF6397B007C1E5A /* DescriptionTextFieldView.swift */,
@@ -1253,6 +1258,7 @@
 		F135BD062CF5A6AB006C6C4F /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				F12054EB2CF802B80040A69C /* SettingViewController.swift */,
 				F135BD072CF5A6C4006C6C4F /* SettingView.swift */,
 				F135BD092CF5C671006C6C4F /* ProfileItemView.swift */,
 				F135BD0B2CF5C68C006C6C4F /* SettingTextItemView.swift */,
@@ -1672,6 +1678,7 @@
 				205E6A442CF563BC005E9150 /* FirebaseStorageManager.swift in Sources */,
 				88E4834B2CEDDD4A003D624E /* MusicListView.swift in Sources */,
 				88E4834C2CEDDD4A003D624E /* MusicCellView.swift in Sources */,
+				F12054EC2CF802B80040A69C /* SettingViewController.swift in Sources */,
 				F173692D2CDC9CF300F6242C /* UIColor+Extension.swift in Sources */,
 				2003BA162CDB8D69002CAB3E /* Font+Extension.swift in Sources */,
 				F135BD0A2CF5C671006C6C4F /* ProfileItemView.swift in Sources */,
@@ -1723,6 +1730,7 @@
 				F135BCF02CF441B7006C6C4F /* DefaultAuthStateRepository.swift in Sources */,
 				200918482CECAB4D0058D8C7 /* UserDefaultsKey.swift in Sources */,
 				888352EE2CF4DC7B00C48F68 /* MolioPlaylist+Decodable.swift in Sources */,
+				F12054EE2CF80B880040A69C /* MyInfoViewController.swift in Sources */,
 				B8D554C62CE339BC007CCD6D /* DefaultSpotifyTokenProvider.swift in Sources */,
 				B8046A3C2CE755DB00933704 /* Image+Extension.swift in Sources */,
 				B8046A582CEBC08300933704 /* MockDefaultFetchAvailableGenresUseCase.swift in Sources */,
