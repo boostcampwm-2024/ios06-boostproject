@@ -2,36 +2,43 @@ import Combine
 import Foundation
 @testable import Molio
 
-final class MockPlaylistRepository: PlaylistRepository {
-    var mockPlaylist: [MolioPlaylist] = []
-    var willThrowError: Bool = false
-    
-    var playlistsPublisher: AnyPublisher<[MolioPlaylist], Never> {
-        return Just(mockPlaylist).eraseToAnyPublisher()
+final class MockRealPlaylistRepository: RealPlaylistRepository {
+    var createPlaylistCalled = false
+    var createdPlaylistName: String?
+    var createdUserID: String?
+    var mockPlaylist: MolioPlaylist?
+    var updatePlaylistCalled = false
+    var updatedPlaylist: MolioPlaylist?
+    var deletePlaylistCalled = false
+    var deletedPlaylistID: UUID?
+
+    func addMusic(userID: String?, isrc: String, to playlistID: UUID) async throws {}
+
+    func deleteMusic(userID: String?, isrc: String, in playlistID: UUID) async throws {}
+
+    func moveMusic(userID: String?, isrc: String, in playlistID: UUID, fromIndex: Int, toIndex: Int) async throws {}
+
+    func createNewPlaylist(userID: String?, playlistID: UUID, _ playlistName: String) async throws {
+        createPlaylistCalled = true
+        createdUserID = userID
+        createdPlaylistName = playlistName
     }
-    
-    func addMusic(isrc: String, to playlistID: UUID) async throws {}
-    
-    func deleteMusic(isrc: String, in playlistName: String) {}
-    
-    func moveMusic(isrc: String, in playlistName: String, fromIndex: Int, toIndex: Int) {}
-    
-    func saveNewPlaylist(_ playlistName: String) async throws -> UUID {
-        guard !willThrowError else { throw CoreDataError.saveFailed }
-        return UUID()
+
+    func deletePlaylist(userID: String?, _ playlistID: UUID) async throws {
+        deletePlaylistCalled = true
+        deletedPlaylistID = playlistID
     }
-    
-    func deletePlaylist(_ playlistName: String) {}
-    
-    func fetchPlaylists() -> [MolioPlaylist]? {
-        []
+
+    func fetchPlaylists(userID: String?) async throws -> [MolioPlaylist]? {
+        return nil
     }
-    
-    func fetchPlaylist(for name: String) -> MolioPlaylist? {
-        MolioPlaylist(id: UUID(), name: name, createdAt: Date.now, musicISRCs: [], filter: MusicFilter(genres: []))
+
+    func fetchPlaylist(userID: String?, for playlistID: UUID) async throws -> MolioPlaylist? {
+        return mockPlaylist
     }
-    
-    func updatePlaylist(of id: UUID, name: String?, filter: MusicFilter?, musicISRCs: [String]?, like: [String]?) async throws {
-        guard !willThrowError else { throw CoreDataError.updateFailed }
+
+    func updatePlaylist(userID: String?, newPlaylist: MolioPlaylist) async throws {
+        updatePlaylistCalled = true
+        updatedPlaylist = newPlaylist
     }
 }
