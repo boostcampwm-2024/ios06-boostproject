@@ -3,6 +3,9 @@ import Foundation
 
 final class SettingViewModel: ObservableObject {
     let authMode: AuthMode
+    var appVersion: String {
+        return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "버전 정보 없음"
+    }
     
     private let manageAuthenticationUseCase: ManageAuthenticationUseCase
     

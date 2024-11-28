@@ -16,29 +16,20 @@ struct SettingView: View {
                 } label: {
                     ProfileItemView()
                 }
-                
                 Color(UIColor(resource: .spacingBackground))
                     .frame(height: 24)
             }
-            
-            Button {
-                // TODO: 앱 버전 페이지 연결
-            } label: {
-                SettingTextItemView(titleText: "앱 버전")
-            }
-            
+            SettingTextItemView(itemType: .appVersion(viewModel.appVersion))
             Button {
                 // TODO: 약관 및 개인 정보 처리 동의 페이지 연결
             } label: {
-                SettingTextItemView(titleText: "약관 및 개인 정보 처리 동의")
+                SettingTextItemView(itemType: .termsAndCondition)
             }
-            
             Button {
                 // TODO: 개인정보 처리방침 페이지 연결
             } label: {
-                SettingTextItemView(titleText: "개인정보 처리방침")
+                SettingTextItemView(itemType: .privacyPolicy)
             }
-            
             Color(UIColor(resource: .spacingBackground))
                 .frame(height: 24)
             
@@ -47,19 +38,19 @@ struct SettingView: View {
                 Button {
                     // TODO: 로그 아웃 처리
                 } label: {
-                    SettingTextItemView(titleText: "로그 아웃")
+                    SettingTextItemView(itemType: .logout)
                 }
                 
                 Button {
                     // TODO: 회원 탈퇴 처리
                 } label: {
-                    SettingTextItemView(titleText: "회원 탈퇴")
+                    SettingTextItemView(itemType: .deleteAccount)
                 }
             case .guest:
                 Button {
                     // TODO: 로그인 처리
                 } label: {
-                    SettingTextItemView(titleText: "로그인")
+                    SettingTextItemView(itemType: .login)
                 }
             }
             Spacer()
