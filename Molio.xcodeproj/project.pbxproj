@@ -120,6 +120,10 @@
 		B82EB4222CEE0AF10023210A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B82EB4212CEE0AF10023210A /* GoogleService-Info.plist */; };
 		B8378BC22CF6DD0200737125 /* ExportPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8378BC12CF6DD0200737125 /* ExportPlatform.swift */; };
 		B8378BC42CF6E00700737125 /* PlatformSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8378BC32CF6E00700737125 /* PlatformSelectionView.swift */; };
+		B867AE602CF71CF600ACCEDC /* MusicKitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867AE5F2CF71CF600ACCEDC /* MusicKitError.swift */; };
+		B867AE632CF7240900ACCEDC /* PlatformSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867AE622CF7240900ACCEDC /* PlatformSelectionViewController.swift */; };
+		B867AE662CF7267400ACCEDC /* CheckAppleMusicSubscriptionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867AE652CF7267400ACCEDC /* CheckAppleMusicSubscriptionUseCase.swift */; };
+		B867AE682CF726B300ACCEDC /* DefaultCheckAppleMusicSubscriptionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867AE672CF726B300ACCEDC /* DefaultCheckAppleMusicSubscriptionUseCase.swift */; };
 		B876E6402CEF69480048CAF9 /* MockPublishCurrentPlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B876E63F2CEF69480048CAF9 /* MockPublishCurrentPlaylistUseCase.swift */; };
 		B876E6432CEF6B0D0048CAF9 /* UpdatePlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B876E6422CEF6B0D0048CAF9 /* UpdatePlaylistUseCase.swift */; };
 		B876E6452CEF6B320048CAF9 /* DefaultUpdatePlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B876E6442CEF6B320048CAF9 /* DefaultUpdatePlaylistUseCase.swift */; };
@@ -340,6 +344,10 @@
 		B82EB4212CEE0AF10023210A /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B8378BC12CF6DD0200737125 /* ExportPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPlatform.swift; sourceTree = "<group>"; };
 		B8378BC32CF6E00700737125 /* PlatformSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformSelectionView.swift; sourceTree = "<group>"; };
+		B867AE5F2CF71CF600ACCEDC /* MusicKitError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicKitError.swift; sourceTree = "<group>"; };
+		B867AE622CF7240900ACCEDC /* PlatformSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformSelectionViewController.swift; sourceTree = "<group>"; };
+		B867AE652CF7267400ACCEDC /* CheckAppleMusicSubscriptionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckAppleMusicSubscriptionUseCase.swift; sourceTree = "<group>"; };
+		B867AE672CF726B300ACCEDC /* DefaultCheckAppleMusicSubscriptionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCheckAppleMusicSubscriptionUseCase.swift; sourceTree = "<group>"; };
 		B876E63F2CEF69480048CAF9 /* MockPublishCurrentPlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPublishCurrentPlaylistUseCase.swift; sourceTree = "<group>"; };
 		B876E6422CEF6B0D0048CAF9 /* UpdatePlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePlaylistUseCase.swift; sourceTree = "<group>"; };
 		B876E6442CEF6B320048CAF9 /* DefaultUpdatePlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUpdatePlaylistUseCase.swift; sourceTree = "<group>"; };
@@ -925,6 +933,8 @@
 		B80970812CDB4472007BC3C4 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				B867AE642CF7266200ACCEDC /* CheckAppleMusicSubscriptionUseCase */,
+				206148F82CF71C3500FDE96D /* UserUseCase */,
 				206149022CF7216800FDE96D /* CommunityUseCase */,
 				B81086EC2CF5E33200403E88 /* AddMusicToPlaylistUseCase */,
 				B876E6412CEF6AF50048CAF9 /* UpdatePlaylistUseCase */,
@@ -1070,6 +1080,24 @@
 			path = ExportPlaylistImage;
 			sourceTree = "<group>";
 		};
+		B867AE612CF723F200ACCEDC /* PlatformSelection */ = {
+			isa = PBXGroup;
+			children = (
+				B8378BC32CF6E00700737125 /* PlatformSelectionView.swift */,
+				B867AE622CF7240900ACCEDC /* PlatformSelectionViewController.swift */,
+			);
+			path = PlatformSelection;
+			sourceTree = "<group>";
+		};
+		B867AE642CF7266200ACCEDC /* CheckAppleMusicSubscriptionUseCase */ = {
+			isa = PBXGroup;
+			children = (
+				B867AE652CF7267400ACCEDC /* CheckAppleMusicSubscriptionUseCase.swift */,
+				B867AE672CF726B300ACCEDC /* DefaultCheckAppleMusicSubscriptionUseCase.swift */,
+			);
+			path = CheckAppleMusicSubscriptionUseCase;
+			sourceTree = "<group>";
+		};
 		B876E6412CEF6AF50048CAF9 /* UpdatePlaylistUseCase */ = {
 			isa = PBXGroup;
 			children = (
@@ -1196,9 +1224,9 @@
 		F135BCE32CF1DB01006C6C4F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B867AE612CF723F200ACCEDC /* PlatformSelection */,
 				B88557662CF6E40E0063B0BF /* ExportAppleMusicPlaylist */,
 				B8378BC02CF6D97D00737125 /* ExportPlaylistImage */,
-				B8378BC32CF6E00700737125 /* PlatformSelectionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1373,6 +1401,7 @@
 			children = (
 				B809709D2CDB640B007BC3C4 /* MusicKitService.swift */,
 				F17369562CDFB03E00F6242C /* DefaultMusicKitService.swift */,
+				B867AE5F2CF71CF600ACCEDC /* MusicKitError.swift */,
 			);
 			path = MusicKitService;
 			sourceTree = "<group>";
@@ -1676,6 +1705,7 @@
 				205E6A442CF563BC005E9150 /* FirebaseStorageManager.swift in Sources */,
 				88E4834B2CEDDD4A003D624E /* MusicListView.swift in Sources */,
 				88E4834C2CEDDD4A003D624E /* MusicCellView.swift in Sources */,
+				B867AE632CF7240900ACCEDC /* PlatformSelectionViewController.swift in Sources */,
 				F12054EC2CF802B80040A69C /* SettingViewController.swift in Sources */,
 				F173692D2CDC9CF300F6242C /* UIColor+Extension.swift in Sources */,
 				2003BA162CDB8D69002CAB3E /* Font+Extension.swift in Sources */,
@@ -1700,6 +1730,7 @@
 				F1770B2A2CEE455800C81272 /* ExportPlaylistImageView.swift in Sources */,
 				F173693D2CDF191800F6242C /* MolioMusic.swift in Sources */,
 				B81086F02CF5E35D00403E88 /* DefaultAddMusicToPlaylistUseCase.swift in Sources */,
+				B867AE662CF7267400ACCEDC /* CheckAppleMusicSubscriptionUseCase.swift in Sources */,
 				20397E702CE5DE56004ED9CE /* PersistenceManager.swift in Sources */,
 				206148E92CF6ED1800FDE96D /* FirebaseUserService.swift in Sources */,
 				88C8B5ED2CEF1E240079ACB5 /* DefaultPublishAllMusicInCurrentPlaylistUseCase.swift in Sources */,
@@ -1736,6 +1767,7 @@
 				F1770B2E2CEF0F4B00C81272 /* PlaylistImagePage.swift in Sources */,
 				F17369662CE36E2900F6242C /* ImageRepository.swift in Sources */,
 				201048542CEA280E0015E800 /* presentCustomSheet.swift in Sources */,
+				B867AE602CF71CF600ACCEDC /* MusicKitError.swift in Sources */,
 				88E4834E2CEDDD66003D624E /* MolioMusic+sample.swift in Sources */,
 				20150EC52CEA36B700FC8883 /* Playlist+CoreDataClass.swift in Sources */,
 				20150EC62CEA36B700FC8883 /* Playlist+CoreDataProperties.swift in Sources */,
@@ -1816,6 +1848,7 @@
 				200918422CECA79A0058D8C7 /* UserDefaultsError.swift in Sources */,
 				888352EC2CF4D2B500C48F68 /* FirestoreError.swift in Sources */,
 				F17369592CDFB73000F6242C /* RGBAColor.swift in Sources */,
+				B867AE682CF726B300ACCEDC /* DefaultCheckAppleMusicSubscriptionUseCase.swift in Sources */,
 				B8046A3E2CE8780000933704 /* MusicFilterViewController.swift in Sources */,
 				2009183C2CEC9C0E0058D8C7 /* CurrentPlaylistRepository.swift in Sources */,
 				B82B28922CF255C900D67725 /* showAlert.swift in Sources */,

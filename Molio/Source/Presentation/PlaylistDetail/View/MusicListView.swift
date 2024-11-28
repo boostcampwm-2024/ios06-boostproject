@@ -1,17 +1,17 @@
 import SwiftUI
 
 struct MusicListView: View {
-    @Binding private var musics: [MolioMusic]
+    private let musics: [MolioMusic]
     @Binding private var selectedIndex: Int?
 
     @State private var isAlertPresenting: Bool = false
     @State private var removeTargetMusic: MolioMusic?
 
     init(
-        musics: Binding<[MolioMusic]>,
+        musics: [MolioMusic],
         selectedIndex: Binding<Int?>
     ) {
-        self._musics = musics
+        self.musics = musics
         self._selectedIndex = selectedIndex
     }
 
@@ -63,7 +63,7 @@ struct MusicListView: View {
     ZStack {
         Color.black
         MusicListView(
-            musics: .constant(MolioMusic.all),
+            musics: MolioMusic.all,
             selectedIndex: .constant(0)
         )
         .foregroundStyle(.white)

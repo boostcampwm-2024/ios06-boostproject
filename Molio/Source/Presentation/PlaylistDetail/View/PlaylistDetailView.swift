@@ -28,7 +28,7 @@ struct PlaylistDetailView: View {
             // TODO: - 하이라이트 리믹스 & 전체 재생 버튼
 
             MusicListView(
-                musics: $viewModel.currentPlaylistMusics,
+                musics: viewModel.currentPlaylistMusics,
                 selectedIndex: $selectedIndex
             )
         }
