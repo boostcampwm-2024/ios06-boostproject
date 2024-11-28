@@ -3,8 +3,8 @@ import SwiftUI
 final class SettingViewController: UIHostingController<SettingView> {
     // MARK: - Initializer
     
-    init() {
-        let settingView = SettingView()
+    init(viewModel: SettingViewModel) {
+        let settingView = SettingView(viewModel: viewModel)
         super.init(rootView: settingView)
         
         setupButtonAction()
