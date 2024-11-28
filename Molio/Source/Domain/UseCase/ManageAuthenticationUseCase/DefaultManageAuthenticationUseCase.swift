@@ -9,6 +9,10 @@ struct DefaultManageAuthenticationUseCase: ManageAuthenticationUseCase {
         return authStateRepository.authSelection == .selected
     }
     
+    func getAuthMode() -> AuthMode {
+        return authStateRepository.authMode
+    }
+    
     func setAuthMode(_ mode: AuthMode) {
         authStateRepository.setAuthMode(mode)
         setAuthSelection(.selected)
