@@ -189,11 +189,11 @@
 		F1770B2A2CEE455800C81272 /* ExportPlaylistImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1770B292CEE455800C81272 /* ExportPlaylistImageView.swift */; };
 		F1770B2C2CEEFF2200C81272 /* PlaylistImageMusicItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1770B2B2CEEFF2200C81272 /* PlaylistImageMusicItem.swift */; };
 		F1770B2E2CEF0F4B00C81272 /* PlaylistImagePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1770B2D2CEF0F4B00C81272 /* PlaylistImagePage.swift */; };
-		F1A3BB792CF0E0BF0062C79C /* ExportPlaylistImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A3BB782CF0E0BF0062C79C /* ExportPlaylistImageViewModel.swift */; };
 		F1865ED62CF618B7007C1E5A /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1865ED52CF618B7007C1E5A /* MyInfoView.swift */; };
 		F1865ED82CF62BBB007C1E5A /* MyInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1865ED72CF62BBB007C1E5A /* MyInfoViewModel.swift */; };
 		F1865EDA2CF63959007C1E5A /* NickNameTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1865ED92CF63959007C1E5A /* NickNameTextFieldView.swift */; };
 		F1865EDC2CF6397B007C1E5A /* DescriptionTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1865EDB2CF6397B007C1E5A /* DescriptionTextFieldView.swift */; };
+		F1A3BB792CF0E0BF0062C79C /* ExportPlaylistImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A3BB782CF0E0BF0062C79C /* ExportPlaylistImageViewModel.swift */; };
 		F1A3BB7C2CF0E5070062C79C /* ExportMusicItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A3BB7B2CF0E5070062C79C /* ExportMusicItem.swift */; };
 		F1E4058C2CEB8FC500533701 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E4058B2CEB8FC500533701 /* LoginViewController.swift */; };
 		F1E405962CEC678800533701 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F1E405952CEC678800533701 /* FirebaseAnalytics */; };
@@ -403,11 +403,11 @@
 		F1770B292CEE455800C81272 /* ExportPlaylistImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPlaylistImageView.swift; sourceTree = "<group>"; };
 		F1770B2B2CEEFF2200C81272 /* PlaylistImageMusicItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistImageMusicItem.swift; sourceTree = "<group>"; };
 		F1770B2D2CEF0F4B00C81272 /* PlaylistImagePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistImagePage.swift; sourceTree = "<group>"; };
-		F1A3BB782CF0E0BF0062C79C /* ExportPlaylistImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPlaylistImageViewModel.swift; sourceTree = "<group>"; };
 		F1865ED52CF618B7007C1E5A /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
 		F1865ED72CF62BBB007C1E5A /* MyInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewModel.swift; sourceTree = "<group>"; };
 		F1865ED92CF63959007C1E5A /* NickNameTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameTextFieldView.swift; sourceTree = "<group>"; };
 		F1865EDB2CF6397B007C1E5A /* DescriptionTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTextFieldView.swift; sourceTree = "<group>"; };
+		F1A3BB782CF0E0BF0062C79C /* ExportPlaylistImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPlaylistImageViewModel.swift; sourceTree = "<group>"; };
 		F1A3BB7B2CF0E5070062C79C /* ExportMusicItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportMusicItem.swift; sourceTree = "<group>"; };
 		F1E4058B2CEB8FC500533701 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F1E4058D2CEC232900533701 /* Molio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Molio.entitlements; sourceTree = "<group>"; };
@@ -1145,6 +1145,24 @@
 			path = Foundation;
 			sourceTree = "<group>";
 		};
+		F12054E92CF7FF960040A69C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F1865ED52CF618B7007C1E5A /* MyInfoView.swift */,
+				F1865ED92CF63959007C1E5A /* NickNameTextFieldView.swift */,
+				F1865EDB2CF6397B007C1E5A /* DescriptionTextFieldView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F12054EA2CF7FFA30040A69C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F1865ED72CF62BBB007C1E5A /* MyInfoViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		F135BCE32CF1DB01006C6C4F /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1408,10 +1426,8 @@
 		F1865ED42CF6188E007C1E5A /* MyInfo */ = {
 			isa = PBXGroup;
 			children = (
-				F1865ED72CF62BBB007C1E5A /* MyInfoViewModel.swift */,
-				F1865ED52CF618B7007C1E5A /* MyInfoView.swift */,
-				F1865ED92CF63959007C1E5A /* NickNameTextFieldView.swift */,
-				F1865EDB2CF6397B007C1E5A /* DescriptionTextFieldView.swift */,
+				F12054EA2CF7FFA30040A69C /* ViewModel */,
+				F12054E92CF7FF960040A69C /* View */,
 			);
 			path = MyInfo;
 			sourceTree = "<group>";
