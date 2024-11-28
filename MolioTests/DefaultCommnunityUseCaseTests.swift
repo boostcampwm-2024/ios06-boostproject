@@ -24,7 +24,7 @@ final class DefaultCommunityUseCaseTests: XCTestCase {
         let followerID = "user1"
         let followingID = "user2"
         
-        try await useCase.following(from: followerID, to: followingID)
+        try await useCase.requestFollowing(from: followerID, to: followingID)
         
         XCTAssertEqual(mockService.createdRelations.count, 1)
         XCTAssertEqual(mockService.createdRelations.first?.follower, followerID)
