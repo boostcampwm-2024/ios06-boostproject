@@ -1,6 +1,15 @@
 import MusicKit
 
 struct DefaultMusicKitService: MusicKitService {
+    /// 애플 뮤직 구독 상태를 확인
+    func checkSubscriptionStatus() async throws -> Bool {
+        do {
+            return try await MusicSubscription.current.canPlayCatalogContent
+        } catch {
+            throw MusicKitError.failedSubscriptionCheck
+        }
+    }
+    
     /// ISRC 코드로 애플 뮤직 카탈로그 음악을 검색
     ///  - Parameters: 검색할 isrc 문자열
     ///  - Returns: 응답 데이터 (RandomMusic)
