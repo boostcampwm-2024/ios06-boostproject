@@ -7,7 +7,12 @@ struct SettingView: View {
         NavigationStack {
             VStack(spacing: 0) {
                 if authMode == .authenticated {
-                    NavigationLink(destination: Text("Profile Detail")) {
+                    NavigationLink(destination: MyInfoView(
+                        viewModel: MyInfoViewModel(
+                            userNickName: "몰리오 올리오", //TODO: 현재 화면의 닉네임 넘겨주기
+                            userDescription: "안녕하세요 올리오몰리오입니다.") //TODO: 현재 화면의 설명 넘겨주기
+                        )
+                    ) {
                         ProfileItemView()
                     }
                     
