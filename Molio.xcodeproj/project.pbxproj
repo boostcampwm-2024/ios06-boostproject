@@ -124,6 +124,8 @@
 		B867AE632CF7240900ACCEDC /* PlatformSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867AE622CF7240900ACCEDC /* PlatformSelectionViewController.swift */; };
 		B867AE662CF7267400ACCEDC /* CheckAppleMusicSubscriptionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867AE652CF7267400ACCEDC /* CheckAppleMusicSubscriptionUseCase.swift */; };
 		B867AE682CF726B300ACCEDC /* DefaultCheckAppleMusicSubscriptionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867AE672CF726B300ACCEDC /* DefaultCheckAppleMusicSubscriptionUseCase.swift */; };
+		B867AE6B2CF8623E00ACCEDC /* ExportAppleMusicPlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867AE6A2CF8623E00ACCEDC /* ExportAppleMusicPlaylistUseCase.swift */; };
+		B867AE6D2CF86D9800ACCEDC /* DefaultExportAppleMusicPlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867AE6C2CF86D9800ACCEDC /* DefaultExportAppleMusicPlaylistUseCase.swift */; };
 		B876E6402CEF69480048CAF9 /* MockPublishCurrentPlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B876E63F2CEF69480048CAF9 /* MockPublishCurrentPlaylistUseCase.swift */; };
 		B876E6432CEF6B0D0048CAF9 /* UpdatePlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B876E6422CEF6B0D0048CAF9 /* UpdatePlaylistUseCase.swift */; };
 		B876E6452CEF6B320048CAF9 /* DefaultUpdatePlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B876E6442CEF6B320048CAF9 /* DefaultUpdatePlaylistUseCase.swift */; };
@@ -348,6 +350,8 @@
 		B867AE622CF7240900ACCEDC /* PlatformSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformSelectionViewController.swift; sourceTree = "<group>"; };
 		B867AE652CF7267400ACCEDC /* CheckAppleMusicSubscriptionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckAppleMusicSubscriptionUseCase.swift; sourceTree = "<group>"; };
 		B867AE672CF726B300ACCEDC /* DefaultCheckAppleMusicSubscriptionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCheckAppleMusicSubscriptionUseCase.swift; sourceTree = "<group>"; };
+		B867AE6A2CF8623E00ACCEDC /* ExportAppleMusicPlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportAppleMusicPlaylistUseCase.swift; sourceTree = "<group>"; };
+		B867AE6C2CF86D9800ACCEDC /* DefaultExportAppleMusicPlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultExportAppleMusicPlaylistUseCase.swift; sourceTree = "<group>"; };
 		B876E63F2CEF69480048CAF9 /* MockPublishCurrentPlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPublishCurrentPlaylistUseCase.swift; sourceTree = "<group>"; };
 		B876E6422CEF6B0D0048CAF9 /* UpdatePlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePlaylistUseCase.swift; sourceTree = "<group>"; };
 		B876E6442CEF6B320048CAF9 /* DefaultUpdatePlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUpdatePlaylistUseCase.swift; sourceTree = "<group>"; };
@@ -933,8 +937,8 @@
 		B80970812CDB4472007BC3C4 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				B867AE692CF8622300ACCEDC /* ExportAppleMusicPlaylistUseCase */,
 				B867AE642CF7266200ACCEDC /* CheckAppleMusicSubscriptionUseCase */,
-				206148F82CF71C3500FDE96D /* UserUseCase */,
 				206149022CF7216800FDE96D /* CommunityUseCase */,
 				B81086EC2CF5E33200403E88 /* AddMusicToPlaylistUseCase */,
 				B876E6412CEF6AF50048CAF9 /* UpdatePlaylistUseCase */,
@@ -1096,6 +1100,15 @@
 				B867AE672CF726B300ACCEDC /* DefaultCheckAppleMusicSubscriptionUseCase.swift */,
 			);
 			path = CheckAppleMusicSubscriptionUseCase;
+			sourceTree = "<group>";
+		};
+		B867AE692CF8622300ACCEDC /* ExportAppleMusicPlaylistUseCase */ = {
+			isa = PBXGroup;
+			children = (
+				B867AE6A2CF8623E00ACCEDC /* ExportAppleMusicPlaylistUseCase.swift */,
+				B867AE6C2CF86D9800ACCEDC /* DefaultExportAppleMusicPlaylistUseCase.swift */,
+			);
+			path = ExportAppleMusicPlaylistUseCase;
 			sourceTree = "<group>";
 		};
 		B876E6412CEF6AF50048CAF9 /* UpdatePlaylistUseCase */ = {
@@ -1786,6 +1799,7 @@
 				F1E405AC2CECA31D00533701 /* AuthService.swift in Sources */,
 				F1E405B02CECA3F500533701 /* FirebaseAuthError.swift in Sources */,
 				20397E6A2CE5DCDD004ED9CE /* MolioModel.xcdatamodeld in Sources */,
+				B867AE6B2CF8623E00ACCEDC /* ExportAppleMusicPlaylistUseCase.swift in Sources */,
 				F17369722CE3716100F6242C /* DefaultImageFetchService.swift in Sources */,
 				2003BA012CDB7498002CAB3E /* PretendardFontName.swift in Sources */,
 				F135BCF42CF445D7006C6C4F /* DefaultAuthLocalStorage.swift in Sources */,
@@ -1819,6 +1833,7 @@
 				F173695D2CE31CBA00F6242C /* InputOutputViewModel.swift in Sources */,
 				B876E6432CEF6B0D0048CAF9 /* UpdatePlaylistUseCase.swift in Sources */,
 				B8046A492CEA1AF500933704 /* MusicFilterViewModel.swift in Sources */,
+				B867AE6D2CF86D9800ACCEDC /* DefaultExportAppleMusicPlaylistUseCase.swift in Sources */,
 				F17369462CDF24A100F6242C /* FetchRecommendedMusicUseCase.swift in Sources */,
 				F17369612CE36D8000F6242C /* FetchImageUseCase.swift in Sources */,
 				F1865EDA2CF63959007C1E5A /* NickNameTextFieldView.swift in Sources */,
