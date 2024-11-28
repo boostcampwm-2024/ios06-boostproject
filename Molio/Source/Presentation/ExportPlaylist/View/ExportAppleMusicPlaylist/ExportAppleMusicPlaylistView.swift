@@ -3,8 +3,13 @@ import SwiftUI
 struct ExportAppleMusicPlaylistView: View {
     private let playlistLabelRadius: CGFloat = 13
     private let playlistLabelBlur: CGFloat = 85
-    
     @ObservedObject private var viewModel: PlaylistDetailViewModel
+    
+    private var isProgressing: Bool {
+        viewModel.exportStatus != .finished
+    }
+    
+    var confirmButtonTapAction: (() -> Void)?
     
     init(viewModel: PlaylistDetailViewModel) {
         self.viewModel = viewModel
@@ -28,19 +33,28 @@ struct ExportAppleMusicPlaylistView: View {
                         Color.white.opacity(0.8).blur(radius: playlistLabelBlur)
                             .cornerRadius(playlistLabelRadius)
                     }
-                Text.molioSemiBold("플레이리스트 생성 완료!", size: 21)
+                HStack {
+                    Text.molioSemiBold(viewModel.exportStatus.displayText, size: 21)
                     .foregroundStyle(.white)
+                    
+                    if isProgressing {
+                        ProgressView()
+                    }
+                }
             }
             
             Spacer()
             
-            BasicButton(type: .confirm) {
-                
+            BasicButton(type: .confirm, isEnabled: !isProgressing) {
+                confirmButtonTapAction?()
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.horizontal, 22)
         .padding(.bottom, 45)
+        .onAppear {
+            viewModel.exportMolioPlaylistToAppleMusic()
+        }
     }
 }
 

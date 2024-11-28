@@ -2,6 +2,20 @@ import Combine
 import SwiftUI
 
 final class PlaylistDetailViewModel: ObservableObject {
+    enum ExportStatus {
+        case preparing
+        case inProgress
+        case finished
+        
+        var displayText: String {
+            switch self {
+            case .preparing: "플레이리스트 내보내기 준비 중..."
+            case .inProgress: "플레이리스트 생성 중..."
+            case .finished: "플레이리스트 생성 완료!"
+            }
+        }
+    }
+    
     private let publishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase
     private let checkAppleMusicSubscriptionUseCase: CheckAppleMusicSubscriptionUseCase
     private let exportAppleMusicPlaylistUseCase: ExportAppleMusicPlaylistUseCase
@@ -10,7 +24,7 @@ final class PlaylistDetailViewModel: ObservableObject {
     @Published private(set) var isAppleMusicSubscriber: Bool = false
     @Published var currentPlaylist: MolioPlaylist?
     @Published var currentPlaylistMusics: [MolioMusic] = []
-    @Published var isExporting: Bool = false
+    @Published var exportStatus: ExportStatus = .preparing
     
     private var subscriptions: Set<AnyCancellable> = []
     
@@ -50,16 +64,16 @@ final class PlaylistDetailViewModel: ObservableObject {
     }
     
     func exportMolioPlaylistToAppleMusic() {
-        isExporting = true
         guard let currentPlaylist = currentPlaylist else { return }
         Task { @MainActor [weak self] in
             do {
+                self?.exportStatus = .inProgress
                 try await self?.exportAppleMusicPlaylistUseCase.execute(currentPlaylist)
             } catch {
                 print(error.localizedDescription)
-                self?.isExporting = false
+                self?.exportStatus = .finished
             }
-            self?.isExporting = false
+            self?.exportStatus = .finished
         }
     }
 }
