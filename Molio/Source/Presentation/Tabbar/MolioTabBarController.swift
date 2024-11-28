@@ -33,7 +33,7 @@ final class MolioTabBarController: UITabBarController {
     private func createSwipeMusicViewController() -> UINavigationController {
         let swipeMusicViewModel = SwipeMusicViewModel()
         let swipeMusicViewController = SwipeMusicViewController(viewModel: swipeMusicViewModel)
-        let swipeMusicViewNavigationController = UINavigationController(rootViewController: swipeMusicViewController)
+        let navigationController = UINavigationController(rootViewController: swipeMusicViewController)
         
         swipeMusicViewController.tabBarItem = UITabBarItem(
             title: "",
@@ -41,17 +41,18 @@ final class MolioTabBarController: UITabBarController {
             selectedImage: UIImage(systemName: "house.fill")
         )
         
-        return swipeMusicViewNavigationController
+        return navigationController
     }
     
-    private func createCommunityViewController() -> UIViewController {
+    private func createCommunityViewController() -> UINavigationController {
         let communityViewController = CommunityViewController()
+        let navigationController = UINavigationController(rootViewController: communityViewController)
         communityViewController.tabBarItem = UITabBarItem(
             title: "",
             image: UIImage(resource: .personCircle).withRenderingMode(.alwaysOriginal),
             selectedImage: UIImage(resource: .personCircle).withRenderingMode(.alwaysOriginal)
         )
         
-        return communityViewController
+        return navigationController
     }
 }
