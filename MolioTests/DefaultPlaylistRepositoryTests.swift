@@ -25,6 +25,9 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
         super.tearDown()
     }
     
+    // MARK: - 로그인 상태 테스트
+
+    /// 로그인이 된 상태에서 플레이리스트 만들기
     func testAuthenticatedCreatePlaylist() async throws {
         // Given
         let userID = "user123"
@@ -42,6 +45,7 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
         XCTAssertTrue(fetchedPlaylistDTO.musicISRCs.isEmpty)
     }
     
+    /// 로그인이 된 상태에서 플레이리스트 가져오기
     func testAuthenticatedReadPlaylist() async throws {
         // Given
         let userID = "user123"
@@ -67,6 +71,7 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
         XCTAssertEqual(fetchedPlaylist?.musicISRCs, ["ISRC001", "ISRC002"])
     }
     
+    /// 로그인이 된 상태에서 플레이리스트 업데이트
     func testAuthenticatedUpdatePlaylist() async throws {
         // Given
         let userID = "user123"
@@ -125,8 +130,9 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
         }
     }
     
-    // MARK: - Unauthenticated (Logged-Out) State Tests
-    
+    // MARK: - 로그아웃인 상태 테스트
+
+    /// 로그아웃된 플레이리스트 만들기
     func testUnauthenticatedCreatePlaylist() async throws {
         // Given
         let userID: String? = nil
@@ -144,6 +150,8 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
         XCTAssertTrue(fetchedPlaylist?.musicISRCs.isEmpty ?? false)
     }
     
+    /// 로그아웃 된 상태에서 플레이리스트 읽는 테스트
+
     func testUnauthenticatedReadPlaylist() async throws {
         // Given
         let userID: String? = nil
@@ -167,6 +175,7 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
         XCTAssertEqual(fetchedPlaylist?.musicISRCs, ["ISRC006", "ISRC007"])
     }
     
+    /// 로그아웃 된 상태에서 플레이리스트 업데이트 하는 테스트
     func testUnauthenticatedUpdatePlaylist() async throws {
         // Given
         let userID: String? = nil
@@ -197,6 +206,7 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
         XCTAssertEqual(fetchedPlaylist?.musicISRCs, ["ISRC008", "ISRC009"])
     }
     
+    /// 로그아웃 된 상태에서 플레이리스트 삭제하는 테스트
     func testUnauthenticatedDeletePlaylist() async throws {
         // Given
         let userID: String? = nil
