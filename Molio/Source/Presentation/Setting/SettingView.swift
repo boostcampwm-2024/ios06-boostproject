@@ -17,7 +17,7 @@ struct SettingView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            if viewModel.authMode == .authenticated {
+            if viewModel.isLogin {
                 Button {
                     didTapMyInfoView?()
                 } label: {
@@ -40,8 +40,7 @@ struct SettingView: View {
             Color(UIColor(resource: .spacingBackground))
                 .frame(height: 24)
             
-            switch viewModel.authMode {
-            case .authenticated:
+            if viewModel.isLogin {
                 Button {
                     showLogoutAlert = true
                 } label: {
@@ -68,7 +67,7 @@ struct SettingView: View {
                 } message: {
                     Text("정말 계정탈퇴 하시겠습니까?")
                 }
-            case .guest:
+            } else {
                 Button {
                     didTapLoginView?()
                 } label: {
@@ -78,7 +77,7 @@ struct SettingView: View {
             Spacer()
         }
         .background(Color.background)
-        .animation(.spring(duration: 0.3), value: viewModel.authMode)
+        .animation(.spring(duration: 0.3), value: viewModel.isLogin)
         .alert(
             viewModel.alertState.title,
             isPresented: $viewModel.showAlert) {

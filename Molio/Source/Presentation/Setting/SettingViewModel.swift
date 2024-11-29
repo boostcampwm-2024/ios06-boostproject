@@ -8,7 +8,7 @@ protocol SettingViewModelDelegate: AnyObject {
 }
 
 final class SettingViewModel: ObservableObject {
-    @Published var authMode: AuthMode
+    @Published var isLogin: Bool
     @Published var showAlert = false
     
     private let manageAuthenticationUseCase: ManageAuthenticationUseCase
@@ -21,13 +21,13 @@ final class SettingViewModel: ObservableObject {
     init(manageAuthenticationUseCase: ManageAuthenticationUseCase = DIContainer.shared.resolve()) {
         self.manageAuthenticationUseCase = manageAuthenticationUseCase
         
-        self.authMode = manageAuthenticationUseCase.getAuthMode()
+        self.isLogin = manageAuthenticationUseCase.isLogin()
     }
     
     func logout() {
         do {
             try manageAuthenticationUseCase.logout()
-            authMode = manageAuthenticationUseCase.getAuthMode()
+            isLogin = manageAuthenticationUseCase.isLogin()
             alertState = .successLogout
             showAlert = true
         } catch {
@@ -48,7 +48,7 @@ final class SettingViewModel: ObservableObject {
                         authorizationCode: authCode
                     )
                     await MainActor.run {
-                        self.authMode = self.manageAuthenticationUseCase.getAuthMode()
+                        self.isLogin = self.manageAuthenticationUseCase.isLogin()
                         self.alertState = .successDeleteAccount
                         self.showAlert = true
                     }
