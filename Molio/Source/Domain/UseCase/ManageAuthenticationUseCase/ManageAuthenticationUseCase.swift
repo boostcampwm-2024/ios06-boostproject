@@ -4,5 +4,5 @@ protocol ManageAuthenticationUseCase {
     func singInApple(info: AppleAuthInfo) async throws
     func loginGuest()
     func logout() throws
-    func deleteAuth() async throws
+    func deleteAuth(idToken: String, nonce: String, authorizationCode: String) async throws
 }

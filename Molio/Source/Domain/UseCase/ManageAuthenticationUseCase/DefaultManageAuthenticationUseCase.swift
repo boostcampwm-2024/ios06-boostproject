@@ -29,8 +29,9 @@ struct DefaultManageAuthenticationUseCase: ManageAuthenticationUseCase {
         authStateRepository.setAuthMode(.guest)
     }
     
-    func deleteAuth() async throws {
-        try await authStateRepository.deleteAuth()
+    func deleteAuth(idToken: String, nonce: String, authorizationCode: String) async throws {
+        try await authStateRepository.reauthenticateApple(idToken: idToken, nonce: nonce)
+        try await authStateRepository.deleteAuth(authorizationCode: authorizationCode)
         authStateRepository.setAuthSelection(.unselected)
         authStateRepository.setAuthMode(.guest)
     }
