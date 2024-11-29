@@ -114,7 +114,7 @@ final class DefaultFetchPlaylistUseCaseTests: XCTestCase {
         // Given
         
         // When
-        let fetchedMusics = try await fetchPlaylistUseCase.fetchAllMusicIn(playlistID: mockID)
+        let fetchedMusics = try await fetchPlaylistUseCase.fetchAllMyMusicIn(playlistID: mockID)
         
         // Then
         XCTAssertEqual(mockPlaylist.musicISRCs, fetchedMusics.map { $0.isrc })
