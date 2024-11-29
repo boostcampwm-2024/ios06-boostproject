@@ -1,8 +1,9 @@
 import SwiftUI
 
 final class PlaylistDetailViewController: UIHostingController<PlaylistDetailView> {
-    // MARK: - Initializer
     private let viewModel: PlaylistDetailViewModel
+    
+    // MARK: - Initializer
     
     init(viewModel: PlaylistDetailViewModel) {
         self.viewModel = viewModel
@@ -49,6 +50,32 @@ final class PlaylistDetailViewController: UIHostingController<PlaylistDetailView
     
     private func presentPlaylistExportSheet() {
         let platformSelectionVC = PlatformSelectionViewController(viewModel: viewModel)
+        platformSelectionVC.delegate = self
         self.presentCustomSheet(platformSelectionVC)
+    }
+    
+    private func presentExportAppleMusicPlaylistView() {
+        let exportAppleMusicPlaylistVC = ExportAppleMusicPlaylistViewController(viewModel: viewModel)
+        self.presentCustomSheet(exportAppleMusicPlaylistVC, isOverFullScreen: true)
+    }
+    
+    private func presentExportPlaylistImageView() {
+        // TODO: - 이미지로 내보내기 화면 연결
+        print(#function)
+    }
+}
+
+extension PlaylistDetailViewController: PlatformSelectionViewControllerDelegate {
+    /// PlatformSelectionView에서 내보내기 버튼 탭 시 호출
+    /// - 플랫폼 선택 화면 시트를 내리고 다음 화면을 present
+    func didSelectPlatform(with platform: ExportPlatform) {
+        dismiss(animated: true) { [weak self] in
+            switch platform {
+            case .appleMusic:
+                self?.presentExportAppleMusicPlaylistView()
+            case .image:
+                self?.presentExportPlaylistImageView()
+            }
+        }
     }
 }

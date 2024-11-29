@@ -11,6 +11,7 @@ extension UIViewController {
         detentIdentifier: String = "fixedHeight",
         animated: Bool = true,
         isNavigationController: Bool = false,
+        isOverFullScreen: Bool = false,
         completion: (() -> Void)? = nil
     ) {
         // 1. UIViewController 생성
@@ -23,11 +24,11 @@ extension UIViewController {
         // 3. sheet 띄우기
         if isNavigationController {
             let navigationController = UINavigationController(rootViewController: viewController)
-            navigationController.modalPresentationStyle = .pageSheet
+            navigationController.modalPresentationStyle = isOverFullScreen ? .overFullScreen : .pageSheet
             setupDynamicHeight(navigationController, hostingController, sheetHeight: sheetHeight, detentIdentifier: detentIdentifier)
             self.present(navigationController, animated: animated, completion: completion)
         } else {
-            viewController.modalPresentationStyle = .pageSheet
+            viewController.modalPresentationStyle = isOverFullScreen ? .overFullScreen : .pageSheet
             setupDynamicHeight(viewController, hostingController, sheetHeight: sheetHeight, detentIdentifier: detentIdentifier)
             self.present(viewController, animated: animated, completion: completion)
         }
@@ -42,6 +43,7 @@ extension UIViewController {
         detentIdentifier: String = "fixedHeight",
         animated: Bool = true,
         isNavigationController: Bool = false,
+        isOverFullScreen: Bool = false,
         completion: (() -> Void)? = nil
     ) {
         // 1. UIViewController 생성
@@ -53,11 +55,11 @@ extension UIViewController {
         // 3. sheet 띄우기
         if isNavigationController {
             let navigationController = UINavigationController(rootViewController: viewController)
-            navigationController.modalPresentationStyle = .pageSheet
+            navigationController.modalPresentationStyle = isOverFullScreen ? .overFullScreen : .pageSheet
             setupDynamicHeight(navigationController, hostingController, sheetHeight: sheetHeight, detentIdentifier: detentIdentifier)
             self.present(navigationController, animated: animated, completion: completion)
         } else {
-            viewController.modalPresentationStyle = .pageSheet
+            viewController.modalPresentationStyle = isOverFullScreen ? .overFullScreen : .pageSheet
             setupDynamicHeight(viewController, hostingController, sheetHeight: sheetHeight, detentIdentifier: detentIdentifier)
             self.present(viewController, animated: animated, completion: completion)
         }

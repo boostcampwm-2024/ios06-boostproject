@@ -46,13 +46,13 @@ final class MolioTabBarController: UITabBarController {
     
     private func createCommunityViewController() -> UINavigationController {
         let communityViewController = CommunityViewController()
-        let navigationController = UINavigationController(rootViewController: communityViewController)
+        let communityViewNavigationController = UINavigationController(rootViewController: communityViewController)
         communityViewController.tabBarItem = UITabBarItem(
             title: "",
             image: UIImage(resource: .personCircle).withRenderingMode(.alwaysOriginal),
             selectedImage: UIImage(resource: .personCircle).withRenderingMode(.alwaysOriginal)
         )
         
-        return navigationController
+        return communityViewNavigationController
     }
 }

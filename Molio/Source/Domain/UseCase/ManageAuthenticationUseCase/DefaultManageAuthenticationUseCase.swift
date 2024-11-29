@@ -9,8 +9,13 @@ struct DefaultManageAuthenticationUseCase: ManageAuthenticationUseCase {
         return authStateRepository.authSelection == .selected
     }
     
-    func getAuthMode() -> AuthMode {
-        return authStateRepository.authMode
+    func isLogin() -> Bool {
+        switch authStateRepository.authMode {
+        case .authenticated:
+            return true
+        case .guest:
+            return false
+        }
     }
     
     func singInApple(info: AppleAuthInfo) async throws {
