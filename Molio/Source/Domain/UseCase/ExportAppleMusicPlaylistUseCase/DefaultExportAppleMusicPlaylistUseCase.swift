@@ -7,7 +7,7 @@ struct DefaultExportAppleMusicPlaylistUseCase: ExportAppleMusicPlaylistUseCase {
         self.musicKitService = musicKitService
     }
     
-    func execute(_ playlist: MolioPlaylist) async throws {
-        try await musicKitService.exportAppleMusicPlaylist(name: playlist.name, isrcs: playlist.musicISRCs)
+    func execute(_ playlist: MolioPlaylist) async throws -> String? {
+        return try await musicKitService.exportAppleMusicPlaylist(name: playlist.name, isrcs: playlist.musicISRCs)
     }
 }

@@ -25,6 +25,7 @@ final class PlaylistDetailViewModel: ObservableObject {
     @Published var currentPlaylist: MolioPlaylist?
     @Published var currentPlaylistMusics: [MolioMusic] = []
     @Published var exportStatus: ExportStatus = .preparing
+    @Published var createdPlaylistURL: String?
     
     private var subscriptions: Set<AnyCancellable> = []
     
@@ -68,12 +69,22 @@ final class PlaylistDetailViewModel: ObservableObject {
         Task { @MainActor [weak self] in
             do {
                 self?.exportStatus = .inProgress
-                try await self?.exportAppleMusicPlaylistUseCase.execute(currentPlaylist)
+                self?.createdPlaylistURL = try await self?.exportAppleMusicPlaylistUseCase.execute(currentPlaylist)
             } catch {
                 print(error.localizedDescription)
                 self?.exportStatus = .finished
             }
             self?.exportStatus = .finished
+        }
+    }
+    
+    func openPlaylistWithAppleMusic() {
+        guard let createdPlaylistURL = createdPlaylistURL,
+              let url = URL(string: createdPlaylistURL) else {
+            return
+        }
+        Task { @MainActor in
+            await UIApplication.shared.open(url)
         }
     }
 }

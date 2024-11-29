@@ -10,6 +10,7 @@ struct ExportAppleMusicPlaylistView: View {
     }
     
     var confirmButtonTapAction: (() -> Void)?
+    var goToAppleMusicButtonTapAction: ((String) -> Void)?
     
     init(viewModel: PlaylistDetailViewModel) {
         self.viewModel = viewModel
@@ -45,6 +46,11 @@ struct ExportAppleMusicPlaylistView: View {
             
             Spacer()
             
+            if !isProgressing {
+                BasicButton(type: .goToAppleMusic, isEnabled: !isProgressing) {
+                    viewModel.openPlaylistWithAppleMusic()
+                }
+            }
             BasicButton(type: .confirm, isEnabled: !isProgressing) {
                 confirmButtonTapAction?()
             }

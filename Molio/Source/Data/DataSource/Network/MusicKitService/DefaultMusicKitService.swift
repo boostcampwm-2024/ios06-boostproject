@@ -41,8 +41,8 @@ struct DefaultMusicKitService: MusicKitService {
     }
     
     /// 애플 뮤직 플레이리스트 내보내기
-    func exportAppleMusicPlaylist(name: String, isrcs: [String]) async throws {
-        guard checkAuthorizationStatus() else { return }
+    func exportAppleMusicPlaylist(name: String, isrcs: [String]) async throws -> String? {
+        guard checkAuthorizationStatus() else { throw MusicKitError.deniedPermission }
         
         let playlist = try await createPlaylist(name: name)
         for isrc in isrcs {
@@ -53,6 +53,7 @@ struct DefaultMusicKitService: MusicKitService {
                 continue
             }
         }
+        return playlist.url?.absoluteString
     }
     
     /// 애플 뮤직 접근 권한 상태를 확인
