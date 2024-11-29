@@ -45,7 +45,16 @@ final class SettingViewController: UIHostingController<SettingView> {
         rootView.didTapLoginView = { [weak self] in
             let loginViewModel = LoginViewModel()
             let loginViewController = LoginViewController(viewModel: loginViewModel)
-            self?.navigationController?.pushViewController(loginViewController, animated: true)
+            
+            guard let window = self?.view.window else { return }
+            
+            UIView.transition(with: window, duration: 0.5) {
+                loginViewController.view.alpha = 0.0
+                window.rootViewController = loginViewController
+                loginViewController.view.alpha = 1.0
+            }
+            
+            window.makeKeyAndVisible()
         }
     }
 }
