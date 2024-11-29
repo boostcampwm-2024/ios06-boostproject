@@ -73,7 +73,7 @@ final class UserProfileViewModel: ObservableObject {
             return try await followRelationUseCase.fetchMyFollowerList()
         } else {
             guard let friendUserID else { return [] }
-            return try await followRelationUseCase.fetchFriendFollowerList(userID: friendUserID)
+            return try await followRelationUseCase.fetchFriendFollowerList(friendID: friendUserID)
         }
     }
     
@@ -82,7 +82,7 @@ final class UserProfileViewModel: ObservableObject {
             return try await followRelationUseCase.fetchMyFollowingList()
         } else {
             guard let friendUserID else { return [] }
-            return try await followRelationUseCase.fetchFreindFollowingList(userID: friendUserID)
+            return try await followRelationUseCase.fetchFriendFollowingList(friendID: friendUserID)
         }
     }
 }
