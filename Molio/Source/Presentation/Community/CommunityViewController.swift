@@ -1,5 +1,5 @@
-import SwiftUI
 import UIKit
+import SwiftUI
 
 final class CommunityViewController: UIViewController {
     override func viewDidLoad() {
@@ -30,24 +30,39 @@ final class CommunityViewController: UIViewController {
             ),
             followRelationUseCase: DefaultFollowRelationUseCase(
                 service: FirebaseFollowRelationService(),
-                authService: DefaultFirebaseAuthService()
+                authService: DefaultFirebaseAuthService(), userUseCase: DefaultUserUseCase(service: FirebaseUserService())
             ), userUseCase: DefaultUserUseCase(service: FirebaseUserService())
         )
-        let userProfileView = UserProfileView(isMyProfile: true, viewModel: viewModelForMyProfile)
+        let followRelationViewModel = FollowRelationViewModel(
+            followRelationUseCase: DefaultFollowRelationUseCase(
+                service: FirebaseFollowRelationService(),
+                authService: DefaultFirebaseAuthService(),
+                userUseCase: DefaultUserUseCase(
+                    service: FirebaseUserService())
+            ),
+            userUseCase: DefaultUserUseCase(
+                service: FirebaseUserService())
+        )
         
-        let hostingController = UIHostingController(rootView: userProfileView)
+        let userProfileViewController = UserProfileViewController(
+            viewModel: viewModelForMyProfile, 
+            followRelationViewModel: followRelationViewModel,
+            isMyProfile: true,
+            followRelation: nil,
+            friendUserID: nil
+        )
         
-        addChild(hostingController)
-        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(hostingController.view)
+        addChild(userProfileViewController)
+        view.addSubview(userProfileViewController.view)
         
+        userProfileViewController.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            hostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
-            hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            userProfileViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            userProfileViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            userProfileViewController.view.topAnchor.constraint(equalTo: view.topAnchor),
+            userProfileViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-        hostingController.didMove(toParent: self)
+        userProfileViewController.didMove(toParent: self)
     }
 }

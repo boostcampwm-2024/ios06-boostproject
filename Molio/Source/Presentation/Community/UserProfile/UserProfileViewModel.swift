@@ -1,10 +1,10 @@
 import Combine
 import SwiftUI
 
-class UserProfileViewModel: ObservableObject {
+final class UserProfileViewModel: ObservableObject {
     @Published var playlists: [MolioPlaylist] = []
-    @Published var followings: [MolioFollowRelation] = []
-    @Published var followers: [MolioFollowRelation] = []
+    @Published var followings: [MolioUser] = []
+    @Published var followers: [MolioFollower] = []
     @Published var user: MolioUser?
     @Published var isLoading: Bool = false
     @Published var currentID: String?
@@ -68,21 +68,21 @@ class UserProfileViewModel: ObservableObject {
         }
     }
     
-    private func fetchFollowers(isMyProfile: Bool, friendUserID: String?) async throws -> [MolioFollowRelation] {
+    private func fetchFollowers(isMyProfile: Bool, friendUserID: String?) async throws -> [MolioFollower] {
         if isMyProfile {
             return try await followRelationUseCase.fetchMyFollowerList()
         } else {
             guard let friendUserID else { return [] }
-            return try await followRelationUseCase.fetchFriendFollowerList(userID: friendUserID)
+            return try await followRelationUseCase.fetchFriendFollowerList(friendID: friendUserID)
         }
     }
     
-    private func fetchFollowings(isMyProfile: Bool, friendUserID: String?) async throws -> [MolioFollowRelation] {
+    private func fetchFollowings(isMyProfile: Bool, friendUserID: String?) async throws -> [MolioUser] {
         if isMyProfile {
             return try await followRelationUseCase.fetchMyFollowingList()
         } else {
             guard let friendUserID else { return [] }
-            return try await followRelationUseCase.fetchFreindFollowingList(userID: friendUserID)
+            return try await followRelationUseCase.fetchFriendFollowingList(friendID: friendUserID)
         }
     }
 }
