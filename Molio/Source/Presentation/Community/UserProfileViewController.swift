@@ -69,13 +69,22 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
     }
     
     // MARK: - Present Sheet
-
-    private func presentPlaylistList() {
-        print("플레이리스트 목록 클릭 시 이동") // TODO: 플레이리스트 목록 뷰으로 이동하는 코드 추가
-    }
     
     private func navigateToSettingViewController() {
         let settingsViewController = SettingViewController()
         navigationController?.pushViewController(settingsViewController, animated: true)
     }
+    
+    private func navigationToFollowingList() {
+        
+    }
+    
+    private func navigationToFollowerList() {
+        
+    }
+    
+    private func presentPlaylistList() {
+        print("플레이리스트 목록 클릭 시 이동") // TODO: 플레이리스트 목록 뷰으로 이동하는 코드 추가
+    }
+
 }

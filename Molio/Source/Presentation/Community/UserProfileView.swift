@@ -73,8 +73,8 @@ struct UserProfileView: View {
                     
                     // MARK: - 유저 description
                     
-                    if viewModel.currentID != nil {
-                        Text("몰리 덕후입니다. 플리 공유해요!")
+                    if viewModel.currentID != nil, let description = viewModel.user?.description {
+                        Text(description)
                             .font(.system(size: 14, weight: .regular))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity, alignment: .leading)

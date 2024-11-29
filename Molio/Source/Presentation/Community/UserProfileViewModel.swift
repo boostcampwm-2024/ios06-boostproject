@@ -1,7 +1,7 @@
 import Combine
 import SwiftUI
 
-class UserProfileViewModel: ObservableObject {
+final class UserProfileViewModel: ObservableObject {
     @Published var playlists: [MolioPlaylist] = []
     @Published var followings: [MolioFollowRelation] = []
     @Published var followers: [MolioFollowRelation] = []
