@@ -1,4 +1,5 @@
 import Photos
+import SwiftUI
 
 final class ExportPlaylistImageViewModel: ObservableObject {
     private let itemHeight: CGFloat = 54.0
@@ -49,6 +50,38 @@ final class ExportPlaylistImageViewModel: ObservableObject {
         }
     }
     
+    /// 플레이리스트를 사진 앨범에 내보내는 메서드
+    @MainActor func exportPlaylistToAlbum() async {
+        guard await !isPhotoLibraryAccessDenied() else {
+            showAlert(of: .deniedPhotoLibrary)
+            return
+        }
+        guard !paginatedMusicItems.isEmpty else {
+            showAlert(of: .emptyMusicItems)
+            return
+        }
+        
+        var saveImageCount: Int = 0
+        for page in 0..<numberOfPages {
+            let render = ImageRenderer(
+                content: PlaylistImagePage(musicItems: paginatedMusicItems[page])
+                    .frame(width: UIScreen.main.bounds.width - 44)
+            )
+            render.scale = 3.0
+            
+            if let image = render.uiImage {
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                saveImageCount += 1
+            }
+        }
+        
+        if saveImageCount == numberOfPages {
+            showAlert(of: .successSaveImage)
+        } else {
+            showAlert(of: .failureSaveImage)
+        }
+    }
+    
     /// MolioMusic 타입을 ExportMusicItem타입으로 변경하는 메서드
     private func convertToExportMusicItem(molioMusics: [MolioMusic]) async throws -> [ExportMusicItem] {
         try await withThrowingTaskGroup(of: ExportMusicItem.self) { group in
@@ -87,7 +120,7 @@ final class ExportPlaylistImageViewModel: ObservableObject {
     }
     
     /// 앨범에 저장할 수 있는 권환을 확인하는 메서드
-    func isPhotoLibraryDenied() async -> Bool {
+    private func isPhotoLibraryAccessDenied() async -> Bool {
         var isAuthorized = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         
         if isAuthorized == .notDetermined {
@@ -95,6 +128,11 @@ final class ExportPlaylistImageViewModel: ObservableObject {
         }
         
         return isAuthorized == .denied
+    }
+    
+    private func showAlert(of type: AlertType) {
+        alertState = type
+        showAlert = true
     }
     
     enum AlertType {

@@ -73,7 +73,7 @@ struct ExportPlaylistImageView: View {
             HStack(spacing: 15) {
                 BasicButton(type: .saveImage) {
                     Task {
-                        await exportPlaylistToAlbum()
+                        await viewModel.exportPlaylistToAlbum()
                     }
                 }
                 BasicButton(type: .shareInstagram) { }
@@ -81,43 +81,16 @@ struct ExportPlaylistImageView: View {
             .padding(.horizontal, 22)
             .padding(.bottom, 30)
         }
-    }
-    
-    /// 플레이리스트를 사진 앨범에 내보내는 메서드
-    @MainActor private func exportPlaylistToAlbum() async {
-        guard await !viewModel.isPhotoLibraryDenied() else {
-            viewModel.alertState = .deniedPhotoLibrary
-            viewModel.showAlert = true
-            return
-        }
-        
-        guard !viewModel.paginatedMusicItems.isEmpty else {
-            viewModel.alertState = .emptyMusicItems
-            viewModel.showAlert = true
-            return
-        }
-        
-        var saveImageCount: Int = 0
-        for page in 0..<viewModel.numberOfPages {
-            let render = ImageRenderer(
-                content: PlaylistImagePage(musicItems: viewModel.paginatedMusicItems[page])
-                    .frame(width: UIScreen.main.bounds.width - 44)
-            )
-            render.scale = 3.0
-            
-            if let image = render.uiImage {
-                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-                saveImageCount += 1
-            }
-        }
-        
-        if saveImageCount == viewModel.numberOfPages {
-            viewModel.alertState = .successSaveImage
-            viewModel.showAlert = true
-        } else {
-            viewModel.alertState = .failureSaveImage
-            viewModel.showAlert = true
-        }
+        .alert(
+            viewModel.alertState.title,
+            isPresented: $viewModel.showAlert,
+            actions: {
+                Button("확인") {
+                    print("버튼")
+                }
+            }, message: {
+                Text(viewModel.alertState.message)
+            })
     }
 }
 
