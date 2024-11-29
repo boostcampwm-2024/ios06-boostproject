@@ -7,8 +7,8 @@ final class FirebaseUserService: UserService {
     private let db: Firestore
     private let collectionName: String = "users"
     init(
-        storageManager: FirebaseStorageManager,
-        db: Firestore
+        storageManager: FirebaseStorageManager = FirebaseStorageManager(),
+        db: Firestore = Firestore.firestore()
     ) {
         self.storageManager = storageManager
         self.db = db
