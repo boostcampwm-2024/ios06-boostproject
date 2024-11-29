@@ -1,11 +1,15 @@
+import AuthenticationServices
 import SwiftUI
 
 final class SettingViewController: UIHostingController<SettingView> {
+    private var credentialCompletion: ((String, String) -> Void)?
+    
     // MARK: - Initializer
     
     init(viewModel: SettingViewModel) {
         let settingView = SettingView(viewModel: viewModel)
         super.init(rootView: settingView)
+        viewModel.delegate = self
         
         setupButtonAction()
     }
@@ -43,18 +47,65 @@ final class SettingViewController: UIHostingController<SettingView> {
         }
         
         rootView.didTapLoginView = { [weak self] in
-            let loginViewModel = LoginViewModel()
-            let loginViewController = LoginViewController(viewModel: loginViewModel)
-            
-            guard let window = self?.view.window else { return }
-            
-            UIView.transition(with: window, duration: 0.5) {
-                loginViewController.view.alpha = 0.0
-                window.rootViewController = loginViewController
-                loginViewController.view.alpha = 1.0
-            }
-            
-            window.makeKeyAndVisible()
+            self?.switchToLoginViewController()
         }
+        
+        rootView.didTapDeleteAccountView = { [weak self] in
+            self?.switchToLoginViewController()
+        }
+    }
+    
+    private func switchToLoginViewController() {
+        let loginViewModel = LoginViewModel()
+        let loginViewController = LoginViewController(viewModel: loginViewModel)
+        
+        guard let window = self.view.window else { return }
+        
+        UIView.transition(with: window, duration: 0.5) {
+            loginViewController.view.alpha = 0.0
+            window.rootViewController = loginViewController
+            loginViewController.view.alpha = 1.0
+        }
+        
+        window.makeKeyAndVisible()
+    }
+}
+
+extension SettingViewController: SettingViewModelDelegate {
+    func requestAppleCredentials(completion: @escaping (String, String) -> Void) {
+        self.credentialCompletion = completion
+        setupAppleAuth()
+    }
+    
+    private func setupAppleAuth() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+}
+
+extension SettingViewController: ASAuthorizationControllerDelegate {
+    func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithAuthorization authorization: ASAuthorization
+    ) {
+        guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential,
+              let identityToken = appleIDCredential.identityToken,
+              let identityTokenString = String(data: identityToken, encoding: .utf8),
+              let authorizationCode = appleIDCredential.authorizationCode,
+              let authorizationCodeString = String(data: authorizationCode, encoding: .utf8) else { return }
+        
+        credentialCompletion?(identityTokenString, authorizationCodeString)
+    }
+}
+
+extension SettingViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window ?? ASPresentationAnchor()
     }
 }
