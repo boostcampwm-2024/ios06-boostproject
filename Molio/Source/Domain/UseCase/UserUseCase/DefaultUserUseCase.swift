@@ -19,25 +19,45 @@ final class DefaultUserUseCase: UserUseCase {
         try await service.createUser(newUser)
     }
     
-func fetchUser(userID: String) async throws -> MolioUser {
-    let userDTO = try await service.readUser(userID: userID)
-
-    let profileImageURL: URL?
-    if let urlString = userDTO.profileImageURL {
-        profileImageURL = URL(string: urlString)
-    } else {
-        profileImageURL = nil
+    func fetchUser(userID: String) async throws -> MolioUser {
+        let userDTO = try await service.readUser(userID: userID)
+        
+        let profileImageURL: URL?
+        if let urlString = userDTO.profileImageURL {
+            profileImageURL = URL(string: urlString)
+        } else {
+            profileImageURL = nil
+        }
+        
+        let user = MolioUser(
+            id: userDTO.id,
+            name: userDTO.name,
+            profileImageURL: profileImageURL,
+            description: userDTO.description
+        )
+        
+        return user
     }
-
-    let user = MolioUser(
-        id: userDTO.id,
-        name: userDTO.name,
-        profileImageURL: profileImageURL,
-        description: userDTO.description
-    )
-
-    return user
-}
+    
+    func fetchFollower(userID: String, state: Bool) async throws -> MolioFollower {
+        let userDTO = try await service.readUser(userID: userID)
+        
+        let profileImageURL: URL?
+        if let urlString = userDTO.profileImageURL {
+            profileImageURL = URL(string: urlString)
+        } else {
+            profileImageURL = nil
+        }
+        
+        let user = MolioFollower(
+            id: userDTO.id,
+            name: userDTO.name,
+            profileImageURL: profileImageURL,
+            description: userDTO.description,
+            state: state
+        )
+        return user
+    }
     
     func updateUserName(userID: String, newName: String) async throws {
         let user = try await service.readUser(userID: userID)

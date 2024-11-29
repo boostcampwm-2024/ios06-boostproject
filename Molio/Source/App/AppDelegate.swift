@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(ManageAuthenticationUseCase.self, dependency: DefaultManageAuthenticationUseCase())
         container.register(AddMusicToPlaylistUseCase.self, dependency: DefaultAddMusicToPlaylistUseCase())
         container.register(CheckAppleMusicSubscriptionUseCase.self, dependency: DefaultCheckAppleMusicSubscriptionUseCase())
+        container.register(ExportAppleMusicPlaylistUseCase.self, dependency: DefaultExportAppleMusicPlaylistUseCase())
         
         FirebaseApp.configure()
         return true

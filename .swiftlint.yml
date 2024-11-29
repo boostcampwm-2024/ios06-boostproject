@@ -45,3 +45,4 @@ identifier_name:
   excluded: # 규칙에서 제외할 식별자
     - id
     - ok
+    - db

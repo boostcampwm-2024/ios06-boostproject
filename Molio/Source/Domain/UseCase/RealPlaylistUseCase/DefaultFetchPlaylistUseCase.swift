@@ -16,7 +16,6 @@ final class DefaultFetchPlaylistUseCase: FetchPlaylistUseCase {
         self.currentUserIDUseCase = currentUserIDUseCase
     }
     
-    
     func fetchMyAllPlaylists() async throws -> [MolioPlaylist] {
         let currentUserID = try? currentUserIDUseCase.execute()
         

@@ -1,21 +1,22 @@
 import SwiftUI
 
 final class PlatformSelectionViewController: UIHostingController<PlatformSelectionView> {
+    weak var delegate: PlatformSelectionViewControllerDelegate?
+    
     init(viewModel: PlaylistDetailViewModel) {
         let platformSelectionView = PlatformSelectionView(viewModel: viewModel)
         super.init(rootView: platformSelectionView)
+        
+        rootView.exportButtonTapAction = { [weak self] platform in
+            self?.delegate?.didSelectPlatform(with: platform)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
-    private func continuePlaylistExport(to platform: ExportPlatform) {
-        switch platform {
-        case .appleMusic:
-            print("애플뮤직 내보내기 화면 전환")
-        case .image:
-            print("이미지로 내보내기 화면 전환")
-        }
-    }
+}
+
+protocol PlatformSelectionViewControllerDelegate: AnyObject {
+    func didSelectPlatform(with platform: ExportPlatform)
 }
