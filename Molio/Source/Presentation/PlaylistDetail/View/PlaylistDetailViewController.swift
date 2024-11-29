@@ -10,7 +10,7 @@ final class PlaylistDetailViewController: UIHostingController<PlaylistDetailView
         let playlistDetailView = PlaylistDetailView(viewModel: viewModel)
         super.init(rootView: playlistDetailView)
         
-        rootView.didPlaylistButtonTapped = presentPlaylistExportSheet
+        rootView.didPlaylistButtonTapped = presentPlaylistChangeSheet
         rootView.didExportButtonTapped = presentPlaylistExportSheet
     }
 
