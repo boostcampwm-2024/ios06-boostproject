@@ -4,7 +4,7 @@ final class DefaultUserUseCase: UserUseCase {
     private let service: UserService
     
     init(
-        service: UserService
+        service: UserService = FirebaseUserService()
     ) {
         self.service = service
     }

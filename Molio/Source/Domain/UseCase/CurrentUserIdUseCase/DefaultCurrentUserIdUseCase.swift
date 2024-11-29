@@ -3,8 +3,8 @@ struct DefaultCurrentUserIdUseCase: CurrentUserIdUseCase {
     private let usecase: ManageAuthenticationUseCase
     
     init(
-        authService: AuthService,
-        usecase: ManageAuthenticationUseCase
+        authService: AuthService = DefaultFirebaseAuthService(),
+        usecase: ManageAuthenticationUseCase = DefaultManageAuthenticationUseCase()
     ) {
         self.authService = authService
         self.usecase = usecase

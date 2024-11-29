@@ -8,7 +8,7 @@ final class DefaultPlaylistRepository: RealPlaylistRepository {
 
     init(
         playlistService: PlaylistService = FirestorePlaylistService(),
-        playlistStorage: PlaylistLocalStorage
+        playlistStorage: PlaylistLocalStorage = CoreDataPlaylistStorage()
     ) {
         self.playlistService = playlistService
         self.playlistStorage = playlistStorage
