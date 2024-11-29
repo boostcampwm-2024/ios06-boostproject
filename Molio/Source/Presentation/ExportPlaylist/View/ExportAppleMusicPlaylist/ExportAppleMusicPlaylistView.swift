@@ -1,12 +1,18 @@
 import SwiftUI
 
-struct ExportAppleMusicCompletionView: View {
-    private let playlistName: String
+struct ExportAppleMusicPlaylistView: View {
     private let playlistLabelRadius: CGFloat = 13
     private let playlistLabelBlur: CGFloat = 85
+    @ObservedObject private var viewModel: PlaylistDetailViewModel
     
-    init(playlistName: String) {
-        self.playlistName = playlistName
+    private var isProgressing: Bool {
+        viewModel.exportStatus != .finished
+    }
+    
+    var confirmButtonTapAction: (() -> Void)?
+    
+    init(viewModel: PlaylistDetailViewModel) {
+        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -18,7 +24,7 @@ struct ExportAppleMusicCompletionView: View {
                 .padding(41)
             
             VStack(spacing: 5) {
-                Text.molioMedium(playlistName, size: 16)
+                Text.molioMedium(viewModel.currentPlaylist?.name ?? "molio 플레이리스트", size: 16)
                     .foregroundStyle(.white)
                     .padding(.vertical, 8)
                     .padding(.horizontal, 10)
@@ -27,23 +33,31 @@ struct ExportAppleMusicCompletionView: View {
                         Color.white.opacity(0.8).blur(radius: playlistLabelBlur)
                             .cornerRadius(playlistLabelRadius)
                     }
-                Text.molioSemiBold("플레이 리스트 생성 완료!", size: 21)
+                HStack {
+                    Text.molioSemiBold(viewModel.exportStatus.displayText, size: 21)
                     .foregroundStyle(.white)
+                    
+                    if isProgressing {
+                        ProgressView()
+                    }
+                }
             }
             
             Spacer()
             
-            BasicButton(type: .goToAppleMusic) {
-                // TODO: - 애플 뮤직 이동
+            BasicButton(type: .confirm, isEnabled: !isProgressing) {
+                confirmButtonTapAction?()
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.horizontal, 22)
         .padding(.bottom, 45)
-        .background(Color.background)
+        .onAppear {
+            viewModel.exportMolioPlaylistToAppleMusic()
+        }
     }
 }
 
 #Preview {
-    ExportAppleMusicCompletionView(playlistName: "🎧 카공할 때 듣는 플리")
+    ExportAppleMusicPlaylistView(viewModel: PlaylistDetailViewModel())
 }

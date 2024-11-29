@@ -117,7 +117,6 @@ final class FirebaseFollowRelationService: FollowRelationService {
         }
     }
     
-    
     func deleteFollowRelation(relationID: String) async throws {
         let docRef = getDocumentReference(documentName: relationID)
         
@@ -131,7 +130,6 @@ final class FirebaseFollowRelationService: FollowRelationService {
             }
         }
     }
-    
     
     // MARK: - Private Method
     
