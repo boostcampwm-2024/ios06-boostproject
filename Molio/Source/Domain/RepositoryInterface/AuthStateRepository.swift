@@ -5,5 +5,6 @@ protocol AuthStateRepository {
     func setAuthSelection(_ selection: AuthSelection)
     func signInApple(info: AppleAuthInfo) async throws
     func logout() throws
-    func deleteAuth() async throws
+    func reauthenticateApple(idToken: String, nonce: String) async throws
+    func deleteAuth(authorizationCode: String) async throws
 }

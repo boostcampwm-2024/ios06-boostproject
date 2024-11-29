@@ -36,7 +36,11 @@ final class DefaultAuthStateRepository: AuthStateRepository {
         try firebaseService.logout()
     }
     
-    func deleteAuth() async throws {
-        try await firebaseService.deleteAccount()
+    func reauthenticateApple(idToken: String, nonce: String) async throws {
+        try await firebaseService.reauthenticateApple(idToken: idToken, nonce: nonce)
+    }
+    
+    func deleteAuth(authorizationCode: String) async throws {
+        try await firebaseService.deleteAccount(authorizationCode: authorizationCode)
     }
 }
