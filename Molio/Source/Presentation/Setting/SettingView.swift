@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingView: View {
     @ObservedObject private var viewModel: SettingViewModel
+    @State private var showLogoutAlert = false
     var didTapMyInfoView: (() -> Void)?
     var didTapTermsAndConditionView: (() -> Void)?
     var didTapPrivacyPolicyView: (() -> Void)?
@@ -39,11 +40,18 @@ struct SettingView: View {
             switch viewModel.authMode {
             case .authenticated:
                 Button {
-                    viewModel.logout()
+                    showLogoutAlert = true
                 } label: {
                     SettingTextItemView(itemType: .logout)
                 }
-                
+                .alert("로그아웃", isPresented: $showLogoutAlert) {
+                    Button("취소", role: .cancel) { }
+                    Button("확인", role: .destructive) {
+                        viewModel.logout()
+                    }
+                } message: {
+                    Text("정말 로그아웃 하시겠습니까?")
+                }
                 Button {
                     // TODO: 회원 탈퇴 처리
                 } label: {
