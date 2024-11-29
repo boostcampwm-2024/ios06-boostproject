@@ -4,6 +4,7 @@ enum FirebaseAuthError: Error {
     case requiresReauthentication
     case userNotFound
     case deleteAccountFailed
+    case reauthenticateFailed
     
     var errorDescription: String? {
         switch self {
@@ -17,6 +18,8 @@ enum FirebaseAuthError: Error {
             return "사용자를 찾을 수 없음"
         case .deleteAccountFailed:
             return "계정 탈퇴 실패"
+        case .reauthenticateFailed:
+            return "재인증 실패"
         }
     }
 }
