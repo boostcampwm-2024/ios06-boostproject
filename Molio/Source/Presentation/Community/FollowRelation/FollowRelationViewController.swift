@@ -8,13 +8,13 @@ final class FollowRelationViewController: UIHostingController<FollowRelationList
     
     // MARK: - Initializer
     
-    init(viewModel: FollowRelationViewModel, isMyProfile:Bool, followRelation: FollowRelationType, friendUserID: String?) {
+    init(viewModel: FollowRelationViewModel, isMyProfile: Bool, followRelation: FollowRelationType, friendUserID: String?) {
         self.viewModel = viewModel
         self.isMyProfile = isMyProfile
         self.followRelation = followRelation
         self.friendUserID = friendUserID
         
-        let followRelationListView = FollowRelationListView(viewModel: viewModel, followRelationType: followRelation)
+        let followRelationListView = FollowRelationListView(viewModel: viewModel, followRelationType: followRelation, friendUserID: friendUserID)
         super.init(rootView: followRelationListView)
         
     }

@@ -3,13 +3,16 @@ import SwiftUI
 struct FollowRelationListView: View {
     private let viewModel: FollowRelationViewModel
     private let followRelationType: FollowRelationType
-    
+    private let friendUserID: String?
+
     init(
         viewModel: FollowRelationViewModel,
-        followRelationType: FollowRelationType
+        followRelationType: FollowRelationType,
+        friendUserID: String?
     ) {
         self.viewModel = viewModel
         self.followRelationType = followRelationType
+        self.friendUserID = friendUserID
     }
     var body: some View {
         VStack {
@@ -100,6 +103,17 @@ struct FollowRelationListView: View {
         }
         .frame(height: 50)
         .padding(.horizontal, 22)
+        .onAppear {
+            Task {
+                guard let friendUserID else {
+                    try await viewModel.fecthMydData(followRelationType: followRelationType)
+                    return
+                }
+                
+                try await viewModel.fecthFreindData(followRelationType: followRelationType, friendUserID: friendUserID)
+                
+            }
+        }
     }
 
 }
