@@ -79,6 +79,7 @@
 		2075FEC42CECDE29009834BE /* ChangeCurrentPlaylistIUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC32CECDE29009834BE /* ChangeCurrentPlaylistIUseCase.swift */; };
 		2075FEC62CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC52CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift */; };
 		2075FEC82CECDF4D009834BE /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC72CECDF4D009834BE /* CoreDataError.swift */; };
+		2082A09E2CF9B13800E8F2D9 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2082A09D2CF9B13800E8F2D9 /* UserProfileViewController.swift */; };
 		20883BC72CF8EC5B00C10549 /* FollowRelationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20883BC62CF8EC5B00C10549 /* FollowRelationButton.swift */; };
 		20883BC92CF95F0900C10549 /* FollowRelationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20883BC82CF95F0900C10549 /* FollowRelationType.swift */; };
 		20883BCB2CF9658300C10549 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20883BCA2CF9658300C10549 /* UserProfileViewModel.swift */; };
@@ -337,6 +338,7 @@
 		2075FEC32CECDE29009834BE /* ChangeCurrentPlaylistIUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCurrentPlaylistIUseCase.swift; sourceTree = "<group>"; };
 		2075FEC52CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChangeCurrentPlaylistIUseCase.swift; sourceTree = "<group>"; };
 		2075FEC72CECDF4D009834BE /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
+		2082A09D2CF9B13800E8F2D9 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		20883BC62CF8EC5B00C10549 /* FollowRelationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowRelationButton.swift; sourceTree = "<group>"; };
 		20883BC82CF95F0900C10549 /* FollowRelationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowRelationType.swift; sourceTree = "<group>"; };
 		20883BCA2CF9658300C10549 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
@@ -1427,6 +1429,7 @@
 				20883BC62CF8EC5B00C10549 /* FollowRelationButton.swift */,
 				20883BC82CF95F0900C10549 /* FollowRelationType.swift */,
 				20883BCA2CF9658300C10549 /* UserProfileViewModel.swift */,
+				2082A09D2CF9B13800E8F2D9 /* UserProfileViewController.swift */,
 			);
 			path = Community;
 			sourceTree = "<group>";
@@ -1946,6 +1949,7 @@
 				20150EC62CEA36B700FC8883 /* Playlist+CoreDataProperties.swift in Sources */,
 				B8D553EE2CDFE2C0007CCD6D /* HTTPResponseStatusCode.swift in Sources */,
 				88F6E4AB2CEC8B5A00739648 /* PublishCurrentPlaylistUseCase.swift in Sources */,
+				2082A09E2CF9B13800E8F2D9 /* UserProfileViewController.swift in Sources */,
 				884529512CF715C6007FD074 /* MolioPlaylistMapper.swift in Sources */,
 				B8046A542CEB93F900933704 /* FetchAvailableGenresUseCase.swift in Sources */,
 				2075FEC12CECDDC0009834BE /* CreatePlaylistViewModel.swift in Sources */,

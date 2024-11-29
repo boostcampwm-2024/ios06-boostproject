@@ -4,18 +4,20 @@ struct UserProfileView: View {
     @StateObject var viewModel: UserProfileViewModel
     let isMyProfile: Bool
     let followRelationType: FollowRelationType?
-    let freindUserID: String?
+    let friendUserID: String?
+    
+    var didSettingButtonTapped: (() -> Void)?
     
     init(
         isMyProfile: Bool,
         followRelationType: FollowRelationType? = nil,
         viewModel: UserProfileViewModel,
-        freindUserID: String? = nil
+        friendUserID: String? = nil
     ) {
         self.isMyProfile = isMyProfile
         self.followRelationType = followRelationType
         _viewModel = StateObject(wrappedValue: viewModel)
-        self.freindUserID = freindUserID
+        self.friendUserID = friendUserID
     }
     
     var body: some View {
@@ -35,7 +37,7 @@ struct UserProfileView: View {
                         
                         if isMyProfile {
                             Button(action: {
-                                print("설정 버튼 클릭")
+                                didSettingButtonTapped?()
                             }) {
                                 Image(systemName: "gearshape.fill")
                                     .foregroundStyle(.main)
