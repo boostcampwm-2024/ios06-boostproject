@@ -44,7 +44,7 @@ final class MolioTabBarController: UITabBarController {
         return swipeMusicViewNavigationController
     }
     
-    private func createCommunityViewController() -> UIViewController {
+    private func createCommunityViewController() -> UINavigationController {
         let communityViewController = CommunityViewController()
         let communityViewNavigationController = UINavigationController(rootViewController: communityViewController)
         communityViewController.tabBarItem = UITabBarItem(

@@ -20,15 +20,10 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
         let userProfileView = UserProfileView(isMyProfile: isMyProfile, followRelationType: followRelation, viewModel: viewModel, friendUserID: friendUserID)
         super.init(rootView: userProfileView)
         
-        rootView.didSettingButtonTapped = { [weak self] in
-            self?.navigateToSettingViewController()
-        }
-        rootView.didFollowingButtonTapped = { [weak self] in
-            self?.navigationToFollowingListView()
-        }
-        rootView.didFollowerButtonTapped = { [weak self] in
-            self?.navigationToFollowerListView()
-        }
+        rootView.didSettingButtonTapped = navigateToSettingViewController
+        rootView.didFollowerButtonTapped = navigationToFollowerListView
+        rootView.didFollowingButtonTapped = navigationToFollowingListView
+        rootView.didFollowerButtonTapped = navigationToFollowerListView
     }
     
     required init?(coder aDecoder: NSCoder) {

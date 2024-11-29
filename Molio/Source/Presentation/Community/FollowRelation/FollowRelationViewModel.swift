@@ -35,7 +35,7 @@ final class FollowRelationViewModel: ObservableObject {
         self.userUseCase = userUseCase
     }
     
-    func fecthMydData(followRelationType: FollowRelationType) async throws{
+    func fecthMydData(followRelationType: FollowRelationType) async throws {
         switch followRelationType {
             case .unfollowing: // 팔로워
                 let users = try await followRelationUseCase.fetchMyFollowerList()
@@ -50,15 +50,15 @@ final class FollowRelationViewModel: ObservableObject {
             }
     }
     
-    func fecthFreindData(followRelationType: FollowRelationType, friendUserID: String) async throws{
+    func fecthFreindData(followRelationType: FollowRelationType, friendUserID: String) async throws {
         switch followRelationType {
             case .unfollowing: // 팔로워
-                let users = try await followRelationUseCase.fetchFriendFollowerList(userID: friendUserID)
+                let users = try await followRelationUseCase.fetchFriendFollowerList(friendID: friendUserID)
                 DispatchQueue.main.async {
                     self.followerUsers = users
                 }
             case .following:  // 팔로잉
-            let users = try await followRelationUseCase.fetchFreindFollowingList(userID: friendUserID)
+            let users = try await followRelationUseCase.fetchFriendFollowingList(friendID: friendUserID)
                 DispatchQueue.main.async {
                     self.followingUsers = users
                 }

@@ -37,8 +37,8 @@ struct DefaultFollowRelationUseCase: FollowRelationUseCase {
         return try await fetchUsers(from: followingRelations.map { $0.follower })
     }
     
-    func fetchFreindFollowingList(userID: String) async throws -> [MolioUser] {
-        let followerRelations = try await service.readFollowRelation(followingID: userID, followerID: nil, state: true)
+    func fetchFriendFollowingList(friendID: String) async throws -> [MolioUser] {
+        let followerRelations = try await service.readFollowRelation(followingID: friendID, followerID: nil, state: true)
         
         return try await fetchUsers(from: followerRelations.map { $0.follower })
     }
@@ -53,8 +53,8 @@ struct DefaultFollowRelationUseCase: FollowRelationUseCase {
         )
     }
     
-    func fetchFriendFollowerList(userID: String) async throws -> [MolioFollower] {
-        let relations = try await service.readFollowRelation(followingID: nil, followerID: userID, state: true)
+    func fetchFriendFollowerList(friendID: String) async throws -> [MolioFollower] {
+        let relations = try await service.readFollowRelation(followingID: nil, followerID: friendID, state: true)
         
         return try await fetchFollowers(
             userIDs: relations.map { $0.following },
