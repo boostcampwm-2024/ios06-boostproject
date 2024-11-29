@@ -1,7 +1,7 @@
 import Photos
 
 final class ExportPlaylistImageViewModel: ObservableObject {
-    let itemHeight: CGFloat = 54.0
+    private let itemHeight: CGFloat = 54.0
     let exportMusicListPageTopPadding: CGFloat = 50.0
     let exportMusicListPageBottomPadding: CGFloat = 72.0
     
@@ -19,7 +19,10 @@ final class ExportPlaylistImageViewModel: ObservableObject {
         return max(1, paginatedMusicItems.count)
     }
     
-    init(musics: [MolioMusic], fetchImageUseCase: FetchImageUseCase) {
+    init(
+        musics: [MolioMusic],
+        fetchImageUseCase: FetchImageUseCase = DIContainer.shared.resolve()
+    ) {
         self.musics = musics
         self.fetchImageUseCase = fetchImageUseCase
     }

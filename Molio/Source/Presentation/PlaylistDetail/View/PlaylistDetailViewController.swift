@@ -59,9 +59,10 @@ final class PlaylistDetailViewController: UIHostingController<PlaylistDetailView
         self.presentCustomSheet(exportAppleMusicPlaylistVC, isOverFullScreen: true)
     }
     
-    private func presentExportPlaylistImageView() {
-        // TODO: - 이미지로 내보내기 화면 연결
-        print(#function)
+    private func presentExportPlaylistImageView(with musics: [MolioMusic]) {
+        let exportPlaylistViewModel = ExportPlaylistImageViewModel(musics: musics)
+        let exportPlaylistImageVC = ExportPlaylistImageViewController(viewModel: exportPlaylistViewModel)
+        self.presentCustomSheet(exportPlaylistImageVC, isOverFullScreen: true)
     }
 }
 
@@ -74,7 +75,8 @@ extension PlaylistDetailViewController: PlatformSelectionViewControllerDelegate 
             case .appleMusic:
                 self?.presentExportAppleMusicPlaylistView()
             case .image:
-                self?.presentExportPlaylistImageView()
+                guard let musics = self?.viewModel.currentPlaylistMusics else { return }
+                self?.presentExportPlaylistImageView(with: musics)
             }
         }
     }
