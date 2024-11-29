@@ -10,12 +10,8 @@ final class PlaylistDetailViewController: UIHostingController<PlaylistDetailView
         let playlistDetailView = PlaylistDetailView(viewModel: viewModel)
         super.init(rootView: playlistDetailView)
         
-        rootView.didPlaylistButtonTapped = { [weak self] in
-            self?.presentPlaylistChangeSheet()
-        }
-        rootView.didExportButtonTapped = { [weak self] in
-            self?.presentPlaylistExportSheet()
-        }
+        rootView.didPlaylistButtonTapped = presentPlaylistExportSheet
+        rootView.didExportButtonTapped = presentPlaylistExportSheet
     }
 
     required init?(coder aDecoder: NSCoder) {
