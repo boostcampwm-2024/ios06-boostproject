@@ -80,6 +80,9 @@
 		2075FEC62CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC52CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift */; };
 		2075FEC82CECDF4D009834BE /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC72CECDF4D009834BE /* CoreDataError.swift */; };
 		2082A09E2CF9B13800E8F2D9 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2082A09D2CF9B13800E8F2D9 /* UserProfileViewController.swift */; };
+		2082A0A22CF9C41800E8F2D9 /* FollowRealtionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2082A0A12CF9C41800E8F2D9 /* FollowRealtionListView.swift */; };
+		2082A0A42CF9C42600E8F2D9 /* FollowRelationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2082A0A32CF9C42600E8F2D9 /* FollowRelationViewModel.swift */; };
+		2082A0A62CF9D87D00E8F2D9 /* MolioFollower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2082A0A52CF9D87D00E8F2D9 /* MolioFollower.swift */; };
 		20883BC72CF8EC5B00C10549 /* FollowRelationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20883BC62CF8EC5B00C10549 /* FollowRelationButton.swift */; };
 		20883BC92CF95F0900C10549 /* FollowRelationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20883BC82CF95F0900C10549 /* FollowRelationType.swift */; };
 		20883BCB2CF9658300C10549 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20883BCA2CF9658300C10549 /* UserProfileViewModel.swift */; };
@@ -339,6 +342,9 @@
 		2075FEC52CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChangeCurrentPlaylistIUseCase.swift; sourceTree = "<group>"; };
 		2075FEC72CECDF4D009834BE /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		2082A09D2CF9B13800E8F2D9 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		2082A0A12CF9C41800E8F2D9 /* FollowRealtionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowRealtionListView.swift; sourceTree = "<group>"; };
+		2082A0A32CF9C42600E8F2D9 /* FollowRelationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowRelationViewModel.swift; sourceTree = "<group>"; };
+		2082A0A52CF9D87D00E8F2D9 /* MolioFollower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MolioFollower.swift; sourceTree = "<group>"; };
 		20883BC62CF8EC5B00C10549 /* FollowRelationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowRelationButton.swift; sourceTree = "<group>"; };
 		20883BC82CF95F0900C10549 /* FollowRelationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowRelationType.swift; sourceTree = "<group>"; };
 		20883BCA2CF9658300C10549 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
@@ -783,6 +789,25 @@
 			path = ChangeCurrentPlaylistIUseCase;
 			sourceTree = "<group>";
 		};
+		2082A09F2CF9C3DC00E8F2D9 /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				206149492CF8E31500FDE96D /* UserProfileView.swift */,
+				20883BCA2CF9658300C10549 /* UserProfileViewModel.swift */,
+				2082A09D2CF9B13800E8F2D9 /* UserProfileViewController.swift */,
+			);
+			path = UserProfile;
+			sourceTree = "<group>";
+		};
+		2082A0A02CF9C3EF00E8F2D9 /* FollowRelation */ = {
+			isa = PBXGroup;
+			children = (
+				2082A0A12CF9C41800E8F2D9 /* FollowRealtionListView.swift */,
+				2082A0A32CF9C42600E8F2D9 /* FollowRelationViewModel.swift */,
+			);
+			path = FollowRelation;
+			sourceTree = "<group>";
+		};
 		20A500672CEF117A00E13440 /* SelectPlaylist */ = {
 			isa = PBXGroup;
 			children = (
@@ -1111,6 +1136,7 @@
 				F17369582CDFB73000F6242C /* RGBAColor.swift */,
 				B8046A432CE9250B00933704 /* MusicGenre.swift */,
 				206149052CF7219B00FDE96D /* MolioFollowRelation.swift */,
+				2082A0A52CF9D87D00E8F2D9 /* MolioFollower.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1424,12 +1450,11 @@
 		F135BCFF2CF4C358006C6C4F /* Community */ = {
 			isa = PBXGroup;
 			children = (
-				F135BD022CF4C382006C6C4F /* CommunityViewController.swift */,
-				206149492CF8E31500FDE96D /* UserProfileView.swift */,
 				20883BC62CF8EC5B00C10549 /* FollowRelationButton.swift */,
 				20883BC82CF95F0900C10549 /* FollowRelationType.swift */,
-				20883BCA2CF9658300C10549 /* UserProfileViewModel.swift */,
-				2082A09D2CF9B13800E8F2D9 /* UserProfileViewController.swift */,
+				2082A0A02CF9C3EF00E8F2D9 /* FollowRelation */,
+				2082A09F2CF9C3DC00E8F2D9 /* UserProfile */,
+				F135BD022CF4C382006C6C4F /* CommunityViewController.swift */,
 			);
 			path = Community;
 			sourceTree = "<group>";
@@ -1949,6 +1974,7 @@
 				20150EC62CEA36B700FC8883 /* Playlist+CoreDataProperties.swift in Sources */,
 				B8D553EE2CDFE2C0007CCD6D /* HTTPResponseStatusCode.swift in Sources */,
 				88F6E4AB2CEC8B5A00739648 /* PublishCurrentPlaylistUseCase.swift in Sources */,
+				2082A0A22CF9C41800E8F2D9 /* FollowRealtionListView.swift in Sources */,
 				2082A09E2CF9B13800E8F2D9 /* UserProfileViewController.swift in Sources */,
 				884529512CF715C6007FD074 /* MolioPlaylistMapper.swift in Sources */,
 				B8046A542CEB93F900933704 /* FetchAvailableGenresUseCase.swift in Sources */,
@@ -1968,6 +1994,7 @@
 				F1E405B02CECA3F500533701 /* FirebaseAuthError.swift in Sources */,
 				20397E6A2CE5DCDD004ED9CE /* MolioModel.xcdatamodeld in Sources */,
 				B867AE6B2CF8623E00ACCEDC /* ExportAppleMusicPlaylistUseCase.swift in Sources */,
+				2082A0A42CF9C42600E8F2D9 /* FollowRelationViewModel.swift in Sources */,
 				F17369722CE3716100F6242C /* DefaultImageFetchService.swift in Sources */,
 				2003BA012CDB7498002CAB3E /* PretendardFontName.swift in Sources */,
 				F135BCF42CF445D7006C6C4F /* DefaultAuthLocalStorage.swift in Sources */,
@@ -1989,6 +2016,7 @@
 				F1E405AE2CECA35E00533701 /* DefaultFirebaseAuthService.swift in Sources */,
 				F1E4059E2CEC936700533701 /* AppleAuthInfo.swift in Sources */,
 				F17369292CDC79E100F6242C /* MusicCardView.swift in Sources */,
+				2082A0A62CF9D87D00E8F2D9 /* MolioFollower.swift in Sources */,
 				F173693F2CDF21BC00F6242C /* RecommendedMusicRepository.swift in Sources */,
 				B88557682CF6E4280063B0BF /* ExportAppleMusicPlaylistView.swift in Sources */,
 				B876E6452CEF6B320048CAF9 /* DefaultUpdatePlaylistUseCase.swift in Sources */,
