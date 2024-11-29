@@ -1,12 +1,15 @@
+import AuthenticationServices
 import SwiftUI
 
 struct SettingView: View {
     @ObservedObject private var viewModel: SettingViewModel
     @State private var showLogoutAlert = false
+    @State private var showDeleteAccountAlert = false
     var didTapMyInfoView: (() -> Void)?
     var didTapTermsAndConditionView: (() -> Void)?
     var didTapPrivacyPolicyView: (() -> Void)?
     var didTapLoginView: (() -> Void)?
+    var didTapDeleteAccountView: (() -> Void)?
     
     init(viewModel: SettingViewModel) {
         self.viewModel = viewModel
@@ -53,9 +56,17 @@ struct SettingView: View {
                     Text("정말 로그아웃 하시겠습니까?")
                 }
                 Button {
-                    // TODO: 회원 탈퇴 처리
+                    showDeleteAccountAlert = true
                 } label: {
                     SettingTextItemView(itemType: .deleteAccount)
+                }
+                .alert("계정탈퇴", isPresented: $showDeleteAccountAlert) {
+                    Button("취소", role: .cancel) { }
+                    Button("확인", role: .destructive) {
+                        viewModel.deleteAccount()
+                    }
+                } message: {
+                    Text("정말 계정탈퇴 하시겠습니까?")
                 }
             case .guest:
                 Button {
@@ -71,7 +82,11 @@ struct SettingView: View {
         .alert(
             viewModel.alertState.title,
             isPresented: $viewModel.showAlert) {
-                Button("확인") { }
+                Button("확인") { 
+                    if viewModel.alertState == .successDeleteAccount {
+                        didTapDeleteAccountView?()
+                    }
+                }
             }
     }
 }
