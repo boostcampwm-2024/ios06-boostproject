@@ -20,6 +20,12 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
         rootView.didSettingButtonTapped = { [weak self] in
             self?.navigateToSettingViewController()
         }
+        rootView.didFollowingButtonTapped = { [weak self] in
+            self?.navigationToFollowingListView()
+        }
+        rootView.didFollowerButtonTapped = { [weak self] in
+            self?.navigationToFollowerListView()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -68,19 +74,21 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
         navigationController?.navigationBar.isHidden = false
     }
     
-    // MARK: - Present Sheet
+    // MARK: - Present Sheet or Navigation
     
     private func navigateToSettingViewController() {
         let settingsViewController = SettingViewController()
         navigationController?.pushViewController(settingsViewController, animated: true)
     }
     
-    private func navigationToFollowingList() {
-        
+    private func navigationToFollowingListView() {
+        let followingListViewController = SettingViewController()
+        navigationController?.pushViewController(followingListViewController, animated: true)
     }
     
-    private func navigationToFollowerList() {
-        
+    private func navigationToFollowerListView() {
+        let followerListViewController = SettingViewController()
+        navigationController?.pushViewController(followerListViewController, animated: true)
     }
     
     private func presentPlaylistList() {

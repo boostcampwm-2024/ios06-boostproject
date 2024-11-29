@@ -7,6 +7,8 @@ struct UserProfileView: View {
     let friendUserID: String?
     
     var didSettingButtonTapped: (() -> Void)?
+    var didFollowingButtonTapped: (() -> Void)?
+    var didFollowerButtonTapped: (() -> Void)?
     
     init(
         isMyProfile: Bool,
@@ -59,8 +61,19 @@ struct UserProfileView: View {
                                     height: proxy.size.height
                                 )
                                 userInfoView(type: .playlist, value: viewModel.playlists.count, size: size)
-                                userInfoView(type: .following, value: viewModel.followings.count, size: size)
-                                userInfoView(type: .follower, value: viewModel.followers.count, size: size)
+                                
+                                
+                                Button(action: {
+                                    didFollowingButtonTapped?()
+                                }) {
+                                    userInfoView(type: .following, value: viewModel.followings.count, size: size)
+                                }
+                                
+                                Button(action: {
+                                    didFollowerButtonTapped?()
+                                }) {
+                                    userInfoView(type: .follower, value: viewModel.followers.count, size: size)
+                                }
                             }
                         }
                         .frame(maxWidth: .infinity)
@@ -80,7 +93,7 @@ struct UserProfileView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 22)
                     }
-                
+                    
                     Spacer().frame(height: 13)
                     
                     // MARK: - 팔로우 버튼
