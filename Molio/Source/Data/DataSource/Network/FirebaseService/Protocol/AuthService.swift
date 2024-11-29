@@ -5,5 +5,6 @@ protocol AuthService {
     func getCurrentID() throws -> String    
     func signInApple(info: AppleAuthInfo) async throws
     func logout() throws
-    func deleteAccount() async throws
+    func reauthenticateApple(idToken: String, nonce: String) async throws
+    func deleteAccount(authorizationCode: String) async throws
 }
