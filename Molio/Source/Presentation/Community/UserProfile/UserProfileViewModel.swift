@@ -3,8 +3,8 @@ import SwiftUI
 
 final class UserProfileViewModel: ObservableObject {
     @Published var playlists: [MolioPlaylist] = []
-    @Published var followings: [MolioFollowRelation] = []
-    @Published var followers: [MolioFollowRelation] = []
+    @Published var followings: [MolioUser] = []
+    @Published var followers: [MolioFollower] = []
     @Published var user: MolioUser?
     @Published var isLoading: Bool = false
     @Published var currentID: String?
@@ -68,7 +68,7 @@ final class UserProfileViewModel: ObservableObject {
         }
     }
     
-    private func fetchFollowers(isMyProfile: Bool, friendUserID: String?) async throws -> [MolioFollowRelation] {
+    private func fetchFollowers(isMyProfile: Bool, friendUserID: String?) async throws -> [MolioFollower] {
         if isMyProfile {
             return try await followRelationUseCase.fetchMyFollowerList()
         } else {
@@ -77,7 +77,7 @@ final class UserProfileViewModel: ObservableObject {
         }
     }
     
-    private func fetchFollowings(isMyProfile: Bool, friendUserID: String?) async throws -> [MolioFollowRelation] {
+    private func fetchFollowings(isMyProfile: Bool, friendUserID: String?) async throws -> [MolioUser] {
         if isMyProfile {
             return try await followRelationUseCase.fetchMyFollowingList()
         } else {

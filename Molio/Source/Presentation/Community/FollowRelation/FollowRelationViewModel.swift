@@ -3,7 +3,9 @@ import SwiftUI
 
 
 final class FollowRelationViewModel: ObservableObject {
-    @Published var users: [MolioUser] = []
+    @Published var followerUsers: [MolioFollower] = []
+    @Published var followingUsers: [MolioUser] = []
+
     private let followRelationUseCase: FollowRelationUseCase
     private let userUseCase: UserUseCase
     
@@ -18,13 +20,14 @@ final class FollowRelationViewModel: ObservableObject {
     func fecthData(followRelationType: FollowRelationType) async throws{
         switch followRelationType {
         case .unfollowing: // 팔로워
-            let followerRelations = try await followRelationUseCase.fetchMyFollowerList()
-        case .following:  // 팔로잉
-            let followginRelations = try await followRelationUseCase.fetchMyFollowingList()
-            
-            let users = try await userUseCase.fetchUser(userID: <#T##String#>)
+            let users = try await followRelationUseCase.fetchMyFollowerList()
             DispatchQueue.main.async {
-                self.users = users
+                self.followerUsers = users
+            }
+        case .following:  // 팔로잉
+            let users = try await followRelationUseCase.fetchMyFollowingList()
+            DispatchQueue.main.async {
+                self.followingUsers = users
             }
         }
     }

@@ -7,8 +7,7 @@ struct DefaultFollowRelationUseCase: FollowRelationUseCase {
     init(
         service: FollowRelationService,
         authService: AuthService,
-        userUseCase: UserUseCase,
-
+        userUseCase: UserUseCase
     ) {
         self.service = service
         self.authService = authService

@@ -1,11 +1,11 @@
 import SwiftUI
 
-struct FollowRealtionListView: View {
-    private let viewModel: MockFollowRelationViewModel
+struct FollowRelationListView: View {
+    private let viewModel: FollowRelationViewModel
     private let followRelationType: FollowRelationType
     
     init(
-        viewModel: MockFollowRelationViewModel,
+        viewModel: FollowRelationViewModel,
         followRelationType: FollowRelationType
     ) {
         self.viewModel = viewModel
@@ -14,10 +14,19 @@ struct FollowRealtionListView: View {
     var body: some View {
         VStack {
             ScrollView(.vertical, showsIndicators: true) {
-                ForEach(viewModel.users) { user in
-                    userIntfoRowView(userName: user.name, description: user.description, imageURL: user.profileImageURL)
-                        .padding(.vertical, 4)
+                switch followRelationType {
+                case .unfollowing:
+                    ForEach(viewModel.followerUsers) { user in
+                        userIntfoRowView(userName: user.name, description: user.description, imageURL: user.profileImageURL)
+                            .padding(.vertical, 4)
+                    }
+                case .following:
+                    ForEach(viewModel.followerUsers) { user in
+                        userIntfoRowView(userName: user.name, description: user.description, imageURL: user.profileImageURL)
+                            .padding(.vertical, 4)
+                    }
                 }
+              
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -95,12 +104,7 @@ struct FollowRealtionListView: View {
 
 }
 
-#Preview {
-    FollowRealtionListView(viewModel: MockFollowRelationViewModel(), followRelationType: .following)
-}
-#Preview {
-    FollowRealtionListView(viewModel: MockFollowRelationViewModel(), followRelationType: .unfollowing)
-}
+// Preview에서 활용 가능
 final class MockFollowRelationViewModel: ObservableObject {
     @Published var users: [MolioUser] = [
         MolioUser(id: UUID().uuidString, name: "김철수", description: "클래식 음악과 재즈를 사랑하는 사람입니다."),

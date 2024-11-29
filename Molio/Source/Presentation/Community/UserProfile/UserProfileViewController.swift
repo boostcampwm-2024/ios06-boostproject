@@ -2,14 +2,17 @@ import SwiftUI
 
 final class UserProfileViewController: UIHostingController<UserProfileView> {
     private let viewModel: UserProfileViewModel
+    private let followRelationViewModel: FollowRelationViewModel
+    
     private let isMyProfile: Bool
     private let followRelation: FollowRelationType?
     private let friendUserID: String?
     
     // MARK: - Initializer
     
-    init(viewModel: UserProfileViewModel, isMyProfile:Bool, followRelation: FollowRelationType?, friendUserID: String?) {
+    init(viewModel: UserProfileViewModel, followRelationViewModel: FollowRelationViewModel, isMyProfile: Bool, followRelation: FollowRelationType?, friendUserID: String?) {
         self.viewModel = viewModel
+        self.followRelationViewModel = followRelationViewModel
         self.isMyProfile = isMyProfile
         self.followRelation = followRelation
         self.friendUserID = friendUserID
@@ -56,8 +59,19 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
             ),
             followRelationUseCase: DefaultFollowRelationUseCase(
                 service: FirebaseFollowRelationService(),
-                authService: DefaultFirebaseAuthService()
+                authService: DefaultFirebaseAuthService(), userUseCase: DefaultUserUseCase(service: FirebaseUserService())
             ), userUseCase: DefaultUserUseCase(service: FirebaseUserService())
+        )
+        
+        self.followRelationViewModel = FollowRelationViewModel(
+            followRelationUseCase: DefaultFollowRelationUseCase(
+                service: FirebaseFollowRelationService(),
+                authService: DefaultFirebaseAuthService(),
+                userUseCase: DefaultUserUseCase(
+                    service: FirebaseUserService())
+            ),
+            userUseCase: DefaultUserUseCase(
+                service: FirebaseUserService())
         )
         super.init(coder: aDecoder)
     }    
@@ -82,12 +96,13 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
     }
     
     private func navigationToFollowingListView() {
-        let followingListViewController = SettingViewController()
+       
+        let followingListViewController = FollowRelationViewController(viewModel: followRelationViewModel, isMyProfile: true, followRelation: .following, friendUserID: nil)
         navigationController?.pushViewController(followingListViewController, animated: true)
     }
     
     private func navigationToFollowerListView() {
-        let followerListViewController = SettingViewController()
+        let followerListViewController = FollowRelationViewController(viewModel: followRelationViewModel, isMyProfile: true, followRelation: .unfollowing, friendUserID: nil)
         navigationController?.pushViewController(followerListViewController, animated: true)
     }
     

@@ -30,12 +30,23 @@ final class CommunityViewController: UIViewController {
             ),
             followRelationUseCase: DefaultFollowRelationUseCase(
                 service: FirebaseFollowRelationService(),
-                authService: DefaultFirebaseAuthService()
+                authService: DefaultFirebaseAuthService(), userUseCase: DefaultUserUseCase(service: FirebaseUserService())
             ), userUseCase: DefaultUserUseCase(service: FirebaseUserService())
+        )
+        let followRelationViewModel = FollowRelationViewModel(
+            followRelationUseCase: DefaultFollowRelationUseCase(
+                service: FirebaseFollowRelationService(),
+                authService: DefaultFirebaseAuthService(),
+                userUseCase: DefaultUserUseCase(
+                    service: FirebaseUserService())
+            ),
+            userUseCase: DefaultUserUseCase(
+                service: FirebaseUserService())
         )
         
         let userProfileViewController = UserProfileViewController(
-            viewModel: viewModelForMyProfile,
+            viewModel: viewModelForMyProfile, 
+            followRelationViewModel: followRelationViewModel,
             isMyProfile: true,
             followRelation: nil,
             friendUserID: nil
