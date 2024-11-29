@@ -158,6 +158,8 @@
 		B867AE6B2CF8623E00ACCEDC /* ExportAppleMusicPlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867AE6A2CF8623E00ACCEDC /* ExportAppleMusicPlaylistUseCase.swift */; };
 		B867AE6D2CF86D9800ACCEDC /* DefaultExportAppleMusicPlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867AE6C2CF86D9800ACCEDC /* DefaultExportAppleMusicPlaylistUseCase.swift */; };
 		B867AE6F2CF8E5FC00ACCEDC /* ExportAppleMusicPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867AE6E2CF8E5FC00ACCEDC /* ExportAppleMusicPlaylistViewController.swift */; };
+		B867AE712CF9C05700ACCEDC /* ExportPlaylistImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867AE702CF9C05700ACCEDC /* ExportPlaylistImageViewController.swift */; };
+		B867AE732CF9D09300ACCEDC /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867AE722CF9D09300ACCEDC /* UIButton+Extension.swift */; };
 		B876E6402CEF69480048CAF9 /* MockPublishCurrentPlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B876E63F2CEF69480048CAF9 /* MockPublishCurrentPlaylistUseCase.swift */; };
 		B876E6432CEF6B0D0048CAF9 /* UpdatePlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B876E6422CEF6B0D0048CAF9 /* UpdatePlaylistUseCase.swift */; };
 		B876E6452CEF6B320048CAF9 /* DefaultUpdatePlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B876E6442CEF6B320048CAF9 /* DefaultUpdatePlaylistUseCase.swift */; };
@@ -417,6 +419,8 @@
 		B867AE6A2CF8623E00ACCEDC /* ExportAppleMusicPlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportAppleMusicPlaylistUseCase.swift; sourceTree = "<group>"; };
 		B867AE6C2CF86D9800ACCEDC /* DefaultExportAppleMusicPlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultExportAppleMusicPlaylistUseCase.swift; sourceTree = "<group>"; };
 		B867AE6E2CF8E5FC00ACCEDC /* ExportAppleMusicPlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportAppleMusicPlaylistViewController.swift; sourceTree = "<group>"; };
+		B867AE702CF9C05700ACCEDC /* ExportPlaylistImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPlaylistImageViewController.swift; sourceTree = "<group>"; };
+		B867AE722CF9D09300ACCEDC /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		B876E63F2CEF69480048CAF9 /* MockPublishCurrentPlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPublishCurrentPlaylistUseCase.swift; sourceTree = "<group>"; };
 		B876E6422CEF6B0D0048CAF9 /* UpdatePlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePlaylistUseCase.swift; sourceTree = "<group>"; };
 		B876E6442CEF6B320048CAF9 /* DefaultUpdatePlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUpdatePlaylistUseCase.swift; sourceTree = "<group>"; };
@@ -578,6 +582,7 @@
 				2003BA1B2CDB8EE5002CAB3E /* UILabel+Extension.swift */,
 				F173692C2CDC9CF300F6242C /* UIColor+Extension.swift */,
 				201048502CEA23190015E800 /* addGradientBackground.swift */,
+				B867AE722CF9D09300ACCEDC /* UIButton+Extension.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1210,6 +1215,7 @@
 				F1770B292CEE455800C81272 /* ExportPlaylistImageView.swift */,
 				F1770B2D2CEF0F4B00C81272 /* PlaylistImagePage.swift */,
 				F1770B2B2CEEFF2200C81272 /* PlaylistImageMusicItem.swift */,
+				B867AE702CF9C05700ACCEDC /* ExportPlaylistImageViewController.swift */,
 			);
 			path = ExportPlaylistImage;
 			sourceTree = "<group>";
@@ -1945,6 +1951,7 @@
 				206149212CF84A9700FDE96D /* DefaultManageMyPlaylistUseCase.swift in Sources */,
 				20150EC62CEA36B700FC8883 /* Playlist+CoreDataProperties.swift in Sources */,
 				B8D553EE2CDFE2C0007CCD6D /* HTTPResponseStatusCode.swift in Sources */,
+				B867AE712CF9C05700ACCEDC /* ExportPlaylistImageViewController.swift in Sources */,
 				88F6E4AB2CEC8B5A00739648 /* PublishCurrentPlaylistUseCase.swift in Sources */,
 				884529512CF715C6007FD074 /* MolioPlaylistMapper.swift in Sources */,
 				B8046A542CEB93F900933704 /* FetchAvailableGenresUseCase.swift in Sources */,
@@ -1986,6 +1993,7 @@
 				F1E4059E2CEC936700533701 /* AppleAuthInfo.swift in Sources */,
 				F17369292CDC79E100F6242C /* MusicCardView.swift in Sources */,
 				F173693F2CDF21BC00F6242C /* RecommendedMusicRepository.swift in Sources */,
+				B867AE732CF9D09300ACCEDC /* UIButton+Extension.swift in Sources */,
 				B88557682CF6E4280063B0BF /* ExportAppleMusicPlaylistView.swift in Sources */,
 				B876E6452CEF6B320048CAF9 /* DefaultUpdatePlaylistUseCase.swift in Sources */,
 				F135BCE62CF43BE6006C6C4F /* ManageAuthenticationUseCase.swift in Sources */,
