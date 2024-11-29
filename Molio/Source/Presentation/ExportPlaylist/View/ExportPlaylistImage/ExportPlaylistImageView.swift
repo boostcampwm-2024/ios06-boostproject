@@ -13,15 +13,18 @@ struct ExportPlaylistImageView: View {
         VStack {
             HStack {
                 Spacer()
+                    .frame(maxWidth: .infinity)
                 Text.molioSemiBold(StringLiterals.navigationTitle, size: 17)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
+                    .fixedSize(horizontal: true, vertical: false)
                     .multilineTextAlignment(.center)
                 Button {
                     doneButtonTapAction?()
                 } label: {
                     Text.molioSemiBold("완료", size: 17)
                         .foregroundColor(.main)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
                 }
             }
             .frame(height: 44)
