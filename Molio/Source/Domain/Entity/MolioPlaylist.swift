@@ -1,6 +1,6 @@
 import Foundation
 
-struct MolioPlaylist: Identifiable {
+struct MolioPlaylist: Identifiable, Hashable {
     let id: UUID
     let authorID: String?
     let name: String
