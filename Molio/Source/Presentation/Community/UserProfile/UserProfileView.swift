@@ -4,18 +4,22 @@ struct UserProfileView: View {
     @StateObject var viewModel: UserProfileViewModel
     let isMyProfile: Bool
     let followRelationType: FollowRelationType?
-    let freindUserID: String?
+    let friendUserID: String?
+    
+    var didSettingButtonTapped: (() -> Void)?
+    var didFollowingButtonTapped: (() -> Void)?
+    var didFollowerButtonTapped: (() -> Void)?
     
     init(
         isMyProfile: Bool,
         followRelationType: FollowRelationType? = nil,
         viewModel: UserProfileViewModel,
-        freindUserID: String? = nil
+        friendUserID: String? = nil
     ) {
         self.isMyProfile = isMyProfile
         self.followRelationType = followRelationType
         _viewModel = StateObject(wrappedValue: viewModel)
-        self.freindUserID = freindUserID
+        self.friendUserID = friendUserID
     }
     
     var body: some View {
@@ -35,7 +39,7 @@ struct UserProfileView: View {
                         
                         if isMyProfile {
                             Button(action: {
-                                print("설정 버튼 클릭")
+                                didSettingButtonTapped?()
                             }) {
                                 Image(systemName: "gearshape.fill")
                                     .foregroundStyle(.main)
@@ -57,8 +61,19 @@ struct UserProfileView: View {
                                     height: proxy.size.height
                                 )
                                 userInfoView(type: .playlist, value: viewModel.playlists.count, size: size)
-                                userInfoView(type: .following, value: viewModel.followings.count, size: size)
-                                userInfoView(type: .follower, value: viewModel.followers.count, size: size)
+                                
+                                
+                                Button(action: {
+                                    didFollowingButtonTapped?()
+                                }) {
+                                    userInfoView(type: .following, value: viewModel.followings.count, size: size)
+                                }
+                                
+                                Button(action: {
+                                    didFollowerButtonTapped?()
+                                }) {
+                                    userInfoView(type: .follower, value: viewModel.followers.count, size: size)
+                                }
                             }
                         }
                         .frame(maxWidth: .infinity)
@@ -71,14 +86,14 @@ struct UserProfileView: View {
                     
                     // MARK: - 유저 description
                     
-                    if viewModel.currentID != nil {
-                        Text("몰리 덕후입니다. 플리 공유해요!")
+                    if viewModel.currentID != nil, let description = viewModel.user?.description {
+                        Text(description)
                             .font(.system(size: 14, weight: .regular))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 22)
                     }
-                
+                    
                     Spacer().frame(height: 13)
                     
                     // MARK: - 팔로우 버튼
