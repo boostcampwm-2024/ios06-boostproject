@@ -3,22 +3,16 @@ import SwiftUI
 struct FriendPlaylistDetailView: View {
     @ObservedObject var viewModel: FriendPlaylistDetailViewModel
 
-    weak var exportFriendsMusicToMyPlaylistDelegate: ExportFriendsMusicToMyPlaylistDelegate?
-    
     init(
         viewModel: FriendPlaylistDetailViewModel
     ) {
         self._viewModel = ObservedObject(initialValue: viewModel)
     }
     
-    mutating func setDelegate(_ delegate: ExportFriendsMusicToMyPlaylistDelegate) {
-        self.exportFriendsMusicToMyPlaylistDelegate = delegate
-    }
-    
     var body: some View {
         VStack {
             Text.molioBold(viewModel.friendPlaylist?.name ?? "제목 없음", size: 34)
-                .tint(.white)
+                .foregroundStyle(.white)
                 .padding(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -34,8 +28,7 @@ struct FriendPlaylistDetailView: View {
                         .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 0))
                         .swipeActions {
                             Button {
-                                exportFriendsMusicToMyPlaylistDelegate?.exportFriendsMusicToMyPlaylist(molioMusic: molioMusic)
-                                //
+                                viewModel.exportFriendsMusicToMyPlaylist(molioMusic: molioMusic)
                             } label: {
                                 Image
                                     .molioSemiBold(
@@ -46,7 +39,6 @@ struct FriendPlaylistDetailView: View {
                             }
                             .tint(.mainLighter)
                         }
-                    
                 }
             }
             .listStyle(.plain)
@@ -59,32 +51,17 @@ struct FriendPlaylistDetailView: View {
             maxHeight: .infinity
         )
         .background(Color.background)
+        .safeAreaInset(edge: .bottom) {
+            HStack(spacing: 11) {
+                AudioPlayerControlView(
+                    musics: $viewModel.friendPlaylistMusics,
+                    selectedIndex: $viewModel.selectedIndex
+                )
+                    .layoutPriority(1)
+            }
+            .frame(maxWidth: .infinity, maxHeight: 66)
+            .padding(.horizontal, 22)
+            .padding(.bottom, 23)
+        }
     }
 }
-
-#Preview {
-    VStack {
-        Button {
-            let usecase = DefaultUserUseCase()
-            
-            Task {
-                try? await usecase.createUser(userID: "창우", userName: "창우이름", imageURL: nil, description: nil)
-            }
-        } label: {
-            Text("유저 추가")
-        }
-        
-        Button {
-            let dto = MolioPlaylistMapper.map(from: .mock2)
-            let usecase = FirestorePlaylistService()
-            Task {
-                try? await usecase.createPlaylist(playlist: dto)
-            }
-        } label: {
-            Text("창우 플레이리스트 추가")
-        }
-
-    }
-}
-
-

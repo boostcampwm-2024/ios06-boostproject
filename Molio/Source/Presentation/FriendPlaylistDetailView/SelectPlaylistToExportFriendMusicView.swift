@@ -5,7 +5,7 @@ import SwiftUI
 struct SelectPlaylistToExportFriendMusicView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel: SelectPlaylistToExportFriendMusicViewModel
-    
+    @State private var showConfirmationAlert = false
     init(
         viewModel: SelectPlaylistToExportFriendMusicViewModel
     ) {
@@ -57,18 +57,34 @@ struct SelectPlaylistToExportFriendMusicView: View {
                 
                 Spacer()
                 
-                Button(action: {
-                    let selectedMusic = viewModel.selectedMusic
-                    
-                    viewModel.exportMusicToMyPlaylist(music: selectedMusic)
-                    
-                    dismiss()
-                }) {
-                    Text("확인")
+                Button{
+                    showConfirmationAlert.toggle()
+                } label: {
+                    Text("추가하기")
                         .font(.custom(PretendardFontName.Medium, size: 18))
-                        .tint(.white)
+                        .foregroundStyle(.black)
+                        .frame(minWidth: 0, maxWidth: .infinity)
                         .frame(height: 50)
+                        .background(.mainLighter, in: .rect(cornerRadius: 15))
                 }
+                .padding()
+                .alert("내 플레이리스트에 노래 추가", isPresented: $showConfirmationAlert) {
+                    Button("아니요", role: .cancel) {
+                        
+                    }
+
+                    Button("네", role: .destructive) {
+                        let selectedMusic = viewModel.selectedMusic
+                        viewModel.exportMusicToMyPlaylist(music: selectedMusic)
+                        dismiss()
+                    }
+                } message: {
+                    Text("몰리오올리오님의 노래를 내 플레이리스트에 추가할까요?")
+                }
+
+                
+                Spacer()
+                    .frame(height: 1)
             }
         }
     }
