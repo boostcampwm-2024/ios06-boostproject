@@ -289,7 +289,7 @@ final class SwipeMusicViewController: UIViewController {
     }
     
     @objc func didTapPlaylistSelectButton() {
-        let selectplaylistView = SelectPlaylistView(viewModel: SelectPlaylistViewModel())
+        let selectplaylistView = SelectPlaylistView(viewModel: ManagePlaylistViewModel())
         self.presentCustomSheet(content: selectplaylistView)
     }
     

@@ -2,11 +2,11 @@ import SwiftUI
 
 struct SelectPlaylistView: View {
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var viewModel: SelectPlaylistViewModel
+    @ObservedObject var viewModel: ManagePlaylistViewModel
     @State private var isModalPresented = false
     private let isCreatable: Bool
     
-    init(viewModel: SelectPlaylistViewModel, isCreatable: Bool = true) {
+    init(viewModel: ManagePlaylistViewModel, isCreatable: Bool = true) {
         self.viewModel = viewModel
         self.isCreatable = isCreatable
     }
@@ -27,7 +27,7 @@ struct SelectPlaylistView: View {
                 
                 List(viewModel.playlists, id: \.id) { playlist in
                     Button(action: {
-                        viewModel.selectPlaylist(playlist)
+                        viewModel.setCurrentPlaylist(playlist)
                     }) {
                         HStack {
                             Text.molioMedium(playlist.name, size: 18)
@@ -36,7 +36,7 @@ struct SelectPlaylistView: View {
                                 .frame(height: 50)
                             
                             Spacer()
-                            if viewModel.selectedPlaylist?.id == playlist.id {
+                            if viewModel.currentPlaylist?.id == playlist.id {
                                 Image(systemName: "checkmark")
                                     .foregroundStyle(.main)
                             }
@@ -66,7 +66,6 @@ struct SelectPlaylistView: View {
                                 .shadow(radius: 5)
                         }
                         .sheet(isPresented: $isModalPresented) {
-                            let viewModel = CreatePlaylistViewModel()
                             CreatePlaylistView(viewModel: viewModel)
                                 .presentationDetents([.fraction(0.5)])
                                 .presentationDragIndicator(.visible)
@@ -85,12 +84,12 @@ struct SelectPlaylistView: View {
                 Spacer()
             }
         }.onDisappear {
-            viewModel.savePlaylist()
+            viewModel.changeCurrentPlaylist()
         }
     }
 }
 
 #Preview {
-    SelectPlaylistView(viewModel: SelectPlaylistViewModel())
+    SelectPlaylistView(viewModel: ManagePlaylistViewModel())
         .background(Color.background)
 }

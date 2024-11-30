@@ -40,7 +40,7 @@ final class PlaylistDetailViewController: UIHostingController<PlaylistDetailView
     // MARK: - Present Sheet
     
     private func presentPlaylistChangeSheet() {
-        let selectPlaylistView = SelectPlaylistView(viewModel: SelectPlaylistViewModel(), isCreatable: false)
+        let selectPlaylistView = SelectPlaylistView(viewModel: ManagePlaylistViewModel(), isCreatable: false)
         self.presentCustomSheet(content: selectPlaylistView)
     }
     

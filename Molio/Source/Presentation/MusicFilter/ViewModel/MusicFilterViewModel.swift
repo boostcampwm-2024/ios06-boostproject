@@ -3,8 +3,7 @@ import SwiftUI
 
 final class MusicFilterViewModel: ObservableObject {
     private let fetchAvailableGenresUseCase: FetchAvailableGenresUseCase
-    private let publishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase
-    private let updatePlaylistUseCase: UpdatePlaylistUseCase
+    private let managePlaylistUseCase: ManageMyPlaylistUseCase
     
     @Published private(set) var allGenres: [MusicGenre]
     @Published private(set) var currentPlaylist: MolioPlaylist?
@@ -14,14 +13,12 @@ final class MusicFilterViewModel: ObservableObject {
     
     init(
         fetchAvailableGenresUseCase: FetchAvailableGenresUseCase = DIContainer.shared.resolve(),
-        publishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase = DIContainer.shared.resolve(),
-        updatePlaylistUseCase: UpdatePlaylistUseCase = DIContainer.shared.resolve(),
+        managePlaylistUseCase: ManageMyPlaylistUseCase = DefaultManageMyPlaylistUseCase(),
         allGenres: [MusicGenre] = MusicGenre.allCases,
         selectedGenres: Set<MusicGenre> = []
     ) {
         self.fetchAvailableGenresUseCase = fetchAvailableGenresUseCase
-        self.publishCurrentPlaylistUseCase = publishCurrentPlaylistUseCase
-        self.updatePlaylistUseCase = updatePlaylistUseCase
+        self.managePlaylistUseCase = managePlaylistUseCase
         self.allGenres = allGenres
         self.selectedGenres = selectedGenres
         
@@ -49,7 +46,7 @@ final class MusicFilterViewModel: ObservableObject {
     /// - 현재 플레이리스트
     /// - 현재 플레이리스트에서 선택된 장르들
     private func bindCurrentPlaylist() {
-        publishCurrentPlaylistUseCase.execute()
+        managePlaylistUseCase.currentPlaylistPublisher()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] playlist in
                 self?.currentPlaylist = playlist
@@ -62,13 +59,8 @@ final class MusicFilterViewModel: ObservableObject {
     private func updateFilterWithNewGenre() async throws {
         guard let currentPlaylist = currentPlaylist else { return }
         let newFilter = MusicFilter(genres: Array(selectedGenres))
-        try await updatePlaylistUseCase.execute(
-            of: currentPlaylist.id,
-            name: nil,
-            filter: newFilter,
-            musicISRCs: nil,
-            like: nil
-        )
+        try await managePlaylistUseCase.updatePlaylistFilter(playlistID: currentPlaylist.id, filter: newFilter)
+       
     }
 }
 
