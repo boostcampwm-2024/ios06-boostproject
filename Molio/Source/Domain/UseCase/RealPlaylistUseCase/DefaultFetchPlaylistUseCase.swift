@@ -7,9 +7,9 @@ final class DefaultFetchPlaylistUseCase: FetchPlaylistUseCase {
     let currentUserIDUseCase: CurrentUserIdUseCase
     
     init(
-        playlistRepisitory: RealPlaylistRepository,
-        musicKitService: MusicKitService,
-        currentUserIDUseCase: CurrentUserIdUseCase
+        playlistRepisitory: RealPlaylistRepository = DefaultPlaylistRepository(),
+        musicKitService: MusicKitService = DefaultMusicKitService(),
+        currentUserIDUseCase: CurrentUserIdUseCase = DefaultCurrentUserIdUseCase()
     ) {
         self.playlistRepisitory = playlistRepisitory
         self.musicKitService = musicKitService
@@ -34,7 +34,7 @@ final class DefaultFetchPlaylistUseCase: FetchPlaylistUseCase {
         return playlist
     }
     
-    func fetchAllMusicIn(playlistID: UUID) async throws -> [MolioMusic] {
+    func fetchAllMyMusicIn(playlistID: UUID) async throws -> [MolioMusic] {
         let playlist = try await fetchMyPlaylist(playlistID: playlistID)
         
         let musicsInPlaylist = await musicKitService.getMusic(with: playlist.musicISRCs)

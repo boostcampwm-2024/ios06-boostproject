@@ -9,7 +9,7 @@ struct UserProfileView: View {
     var didSettingButtonTapped: (() -> Void)?
     var didFollowingButtonTapped: (() -> Void)?
     var didFollowerButtonTapped: (() -> Void)?
-    
+    var didPlaylistCellTapped: ((MolioPlaylist) -> Void)?
     init(
         isMyProfile: Bool,
         followRelationType: FollowRelationType? = nil,
@@ -109,7 +109,11 @@ struct UserProfileView: View {
                     ScrollView(.vertical, showsIndicators: true) {
                         VStack {
                             ForEach(viewModel.playlists, id: \.self) { playlist in
-                                userPlaylistRowView(playlist: playlist)
+                                Button(action: {
+                                    didPlaylistCellTapped?(playlist)
+                                }){
+                                    userPlaylistRowView(playlist: playlist)
+                                }
                             }
                         }
                         .padding(.horizontal, 22)
