@@ -5,17 +5,17 @@ final class SelectPlaylistViewModel: ObservableObject {
     @Published var playlists: [MolioPlaylist] = []
     @Published var selectedPlaylist: MolioPlaylist?
     
-    private let fetchAllPlaylistsUseCase: FetchAllPlaylistsUseCase
+    private let fetchPlaylistUseCase: FetchPlaylistUseCase
     private let changeCurrentPlaylistUseCase: ChangeCurrentPlaylistUseCase
     private let publishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase
     private var cancellables = Set<AnyCancellable>()
     
     init(
-        fetchAllPlaylistsUseCase: FetchAllPlaylistsUseCase = DefaultFetchAllPlaylistsUseCase(),
+        fetchPlaylistUseCase: FetchPlaylistUseCase = DIContainer.shared.resolve(),
         changeCurrentPlaylistUseCase: ChangeCurrentPlaylistUseCase = DefaultChangeCurrentPlaylistUseCase(),
         publishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase = DIContainer.shared.resolve()
     ) {
-        self.fetchAllPlaylistsUseCase = fetchAllPlaylistsUseCase
+        self.fetchPlaylistUseCase = fetchPlaylistUseCase
         self.changeCurrentPlaylistUseCase = changeCurrentPlaylistUseCase
         self.publishCurrentPlaylistUseCase = publishCurrentPlaylistUseCase
         
@@ -25,8 +25,13 @@ final class SelectPlaylistViewModel: ObservableObject {
     
     func fetchPlaylists() {
         Task { @MainActor [weak self] in
-            guard let playlists = await self?.fetchAllPlaylistsUseCase.execute() else { return }
-            self?.playlists = playlists
+            do {
+                let playlists = try await self?.fetchPlaylistUseCase.fetchMyAllPlaylists()
+                guard let playlists = playlists else { return } // TODO: - nil 처리
+                self?.playlists = playlists
+            } catch {
+                print("플레이리스트 불러오기 실패")
+            }
         }
     }
     

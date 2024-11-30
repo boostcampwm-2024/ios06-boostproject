@@ -7,7 +7,11 @@ struct AudioPlayerControlView: View {
     @State private var isPlaying: Bool = false
     private var player: AudioPlayer
     
-    init(musics: Binding<[MolioMusic]>, selectedIndex: Binding<Int?>, player: AudioPlayer = DIContainer.shared.resolve()) {
+    init(
+        musics: Binding<[MolioMusic]>,
+        selectedIndex: Binding<Int?>,
+        player: AudioPlayer = DIContainer.shared.resolve()
+    ) {
         self._musics = musics
         self._selectedIndex = selectedIndex
         self.player = player
