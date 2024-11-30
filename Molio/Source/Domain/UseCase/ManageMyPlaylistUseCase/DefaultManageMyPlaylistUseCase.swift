@@ -7,8 +7,8 @@ final class DefaultManageMyPlaylistUseCase:
     private let repository: RealPlaylistRepository
     
     init(
-        currentUserIdUseCase: CurrentUserIdUseCase,
-        repository: RealPlaylistRepository
+        currentUserIdUseCase: CurrentUserIdUseCase = DefaultCurrentUserIdUseCase(),
+        repository: RealPlaylistRepository = DefaultPlaylistRepository()
     ) {
         self.currentUserIdUseCase = currentUserIdUseCase
         self.repository = repository
@@ -36,8 +36,11 @@ final class DefaultManageMyPlaylistUseCase:
     }
     
     func addMusic(musicISRC: String, to playlistID: UUID) async throws {
-        guard let userID = try currentUserIdUseCase.execute(),
-              let playlist = try await repository.fetchPlaylist(userID: userID, for: playlistID) else { return }
+        let userID = try currentUserIdUseCase.execute() 
+        guard let playlist = try await repository.fetchPlaylist(userID: userID, for: playlistID) else {
+            print("playlist 못 받아옴;;")
+            return
+        }
         
         let newMusicISRCs = playlist.musicISRCs + [musicISRC]
         let newPlaylist = playlist.copy(musicISRCs: newMusicISRCs)

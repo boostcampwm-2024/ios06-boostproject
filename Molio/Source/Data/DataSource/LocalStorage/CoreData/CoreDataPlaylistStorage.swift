@@ -71,7 +71,8 @@ final class CoreDataPlaylistStorage: PlaylistLocalStorage {
     }
     
     func readAll() async throws -> [Entity] {
-        try await context.perform {
+        fetchRequest.predicate = nil
+        return try await context.perform {
             let playlists = try self.context.fetch(self.fetchRequest)
             return playlists.map { playlist in
                 let filter = MusicFilter(genres: playlist.filters.compactMap { MusicGenre(rawValue: $0) })

@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(AuthService.self, dependency: DefaultFirebaseAuthService())
         container.register(AuthLocalStorage.self, dependency: DefaultAuthLocalStorage())
         container.register(UserService.self, dependency: FirebaseUserService())
+        container.register(PlaylistService.self, dependency: FirestorePlaylistService())
+        container.register(PlaylistLocalStorage.self, dependency: CoreDataPlaylistStorage())
         container.register(FirebaseStorageManager.self, dependency: FirebaseStorageManager())
         
         // Repository
@@ -23,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(CurrentPlaylistRepository.self, dependency: DefaultCurrentPlaylistRepository())
         container.register(PlaylistRepository.self, dependency: MockPlaylistRepository())
         container.register(AuthStateRepository.self, dependency: DefaultAuthStateRepository())
+        container.register(RealPlaylistRepository.self, dependency: DefaultPlaylistRepository())
         
         // UseCase
         container.register(FetchRecommendedMusicUseCase.self, dependency: DefaultFetchRecommendedMusicUseCase())
@@ -35,10 +38,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(UpdatePlaylistUseCase.self, dependency: DefaultUpdatePlaylistUseCase())
         container.register(AudioPlayer.self, dependency: SwipeMusicPlayer())
         container.register(ManageAuthenticationUseCase.self, dependency: DefaultManageAuthenticationUseCase())
-        container.register(AddMusicToPlaylistUseCase.self, dependency: DefaultAddMusicToPlaylistUseCase())
         container.register(AppleMusicUseCase.self, dependency: DefaultAppleMusicUseCase())
         container.register(CurrentUserIdUseCase.self, dependency: DefaultCurrentUserIdUseCase())
         container.register(UserUseCase.self, dependency: DefaultUserUseCase())
+        container.register(FetchPlaylistUseCase.self, dependency: DefaultFetchPlaylistUseCase())
         
         return true
     }
