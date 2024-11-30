@@ -7,8 +7,8 @@ final class DefaultPlaylistRepository: RealPlaylistRepository {
     private let playlistStorage: PlaylistLocalStorage
 
     init(
-        playlistService: PlaylistService = FirestorePlaylistService(),
-        playlistStorage: PlaylistLocalStorage = CoreDataPlaylistStorage()
+        playlistService: PlaylistService = DIContainer.shared.resolve(),
+        playlistStorage: PlaylistLocalStorage = DIContainer.shared.resolve()
     ) {
         self.playlistService = playlistService
         self.playlistStorage = playlistStorage

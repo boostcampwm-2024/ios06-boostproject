@@ -30,8 +30,7 @@ struct SelectPlaylistView: View {
                         viewModel.setCurrentPlaylist(playlist)
                     }) {
                         HStack {
-                            Text(playlist.name)
-                                .font(.custom(PretendardFontName.Medium, size: 18))
+                            Text.molioMedium(playlist.name, size: 18)
                                 .tint(.white)
                                 .opacity(0.8)
                                 .frame(height: 50)

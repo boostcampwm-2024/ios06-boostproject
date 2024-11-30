@@ -7,9 +7,9 @@ final class DefaultFetchPlaylistUseCase: FetchPlaylistUseCase {
     let currentUserIDUseCase: CurrentUserIdUseCase
     
     init(
-        playlistRepisitory: RealPlaylistRepository = DefaultPlaylistRepository(),
-        musicKitService: MusicKitService = DefaultMusicKitService(),
-        currentUserIDUseCase: CurrentUserIdUseCase = DefaultCurrentUserIdUseCase()
+        playlistRepisitory: RealPlaylistRepository = DIContainer.shared.resolve(),
+        musicKitService: MusicKitService = DIContainer.shared.resolve(),
+        currentUserIDUseCase: CurrentUserIdUseCase = DIContainer.shared.resolve()
     ) {
         self.playlistRepisitory = playlistRepisitory
         self.musicKitService = musicKitService
