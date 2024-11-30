@@ -8,6 +8,8 @@ struct MyInfoView: View {
     @FocusState private var focusedField: Field?
     @Namespace private var topID
     @Namespace private var descriptionID
+    @State private var isShowingActionSheet = false
+    @State private var isShowingPhotoPicker = false
     var didTapUpdateConfirmButton: (() -> Void)?
     
     enum Field: Hashable {
@@ -29,10 +31,9 @@ struct MyInfoView: View {
                                 selectedImageData: viewModel.userSelectedImageData,
                                 imageURL: viewModel.userImageURL
                             )
-                            PhotosPicker(
-                                selection: $selectedItem,
-                                matching: .images
-                            ) {
+                            Button {
+                                isShowingActionSheet = true
+                            } label: {
                                 ZStack {
                                     Circle()
                                         .fill(.white)
@@ -41,11 +42,6 @@ struct MyInfoView: View {
                                     Image(systemName: "plus")
                                         .font(.system(size: 15, weight: .bold))
                                         .foregroundStyle(.black)
-                                }
-                            }
-                            .onChange(of: selectedItem) { newItem in
-                                if let item = newItem {
-                                    viewModel.didSelectImage(item)
                                 }
                             }
                             .offset(x: -4, y: -4)
@@ -112,6 +108,25 @@ struct MyInfoView: View {
             }
             .onTapGesture {
                 focusedField = .none
+            }
+            .confirmationDialog("프로필 사진 설정", isPresented: $isShowingActionSheet) {
+                Button("앨범에서 사진 선택하기") {
+                    isShowingPhotoPicker = true
+                }
+                Button("기본 이미지 적용") {
+                    viewModel.resetDefaultImage()
+                }
+                Button("취소", role: .cancel) {}
+            }
+            .photosPicker(
+                isPresented: $isShowingPhotoPicker,
+                selection: $selectedItem,
+                matching: .images
+            )
+            .onChange(of: selectedItem) { newItem in
+                if let item = newItem {
+                    viewModel.didSelectImage(item)
+                }
             }
             .alert(
                 viewModel.alertState.title,

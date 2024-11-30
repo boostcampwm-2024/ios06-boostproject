@@ -50,6 +50,11 @@ final class MyInfoViewModel: ObservableObject {
         }
     }
     
+    func resetDefaultImage() {
+        userImageURL = nil
+        userSelectedImageData = nil
+    }
+    
     func updateUser() async throws {
         guard let userID = try currentUserIdUseCase.execute() else { return }
         
