@@ -53,7 +53,7 @@ struct FollowRelationListView: View {
                              .scaledToFill()
                              .frame(width: 50, height: 50)
                              .clipShape(Circle())
-                     case .failure(_):
+                     case .failure:
                          // 로드 실패 시 표시할 뷰
                          Circle()
                              .fill(Color.gray)
