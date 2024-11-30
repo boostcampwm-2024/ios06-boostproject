@@ -32,9 +32,26 @@ final class FirebaseUserService: UserService {
         return try await docRef.getDocument(as: MolioUserDTO.self)
     }
     
-    func updateUser(_ user: MolioUserDTO) async throws {
-        guard let updateUserData = user.toDictionary() else { return } // TODO: 딕셔너리 반환 에러 throw
-        let docRef = getDocumentReference(documentName: user.id)
+    func updateUser(
+        userID: String,
+        newName: String,
+        newDescription: String?,
+        newImageData: Data?
+    ) async throws {
+        let profileImageURL: String? = try await {
+            guard let newImageData = newImageData else { return nil }
+            return try await storageManager.uploadImage(imageData: newImageData, folder: .profileImage).absoluteString
+        }()
+        
+        let userDTO = MolioUserDTO(
+            id: userID,
+            name: newName,
+            profileImageURL: profileImageURL,
+            description: newDescription
+        )
+        
+        guard let updateUserData = userDTO.toDictionary() else { return } // TODO: 딕셔너리 반환 에러 throw
+        let docRef = getDocumentReference(documentName: userID)
 
         try await docRef.updateData(updateUserData)
     }
