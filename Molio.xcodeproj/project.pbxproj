@@ -194,6 +194,9 @@
 		B8D554C82CE34A47007CCD6D /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D554C72CE34A47007CCD6D /* String+Extension.swift */; };
 		F12054EC2CF802B80040A69C /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12054EB2CF802B80040A69C /* SettingViewController.swift */; };
 		F12054EE2CF80B880040A69C /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12054ED2CF80B880040A69C /* MyInfoViewController.swift */; };
+		F12054F02CF8419B0040A69C /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12054EF2CF8419B0040A69C /* SettingViewModel.swift */; };
+		F12054F22CF84E5E0040A69C /* TermsAndConditionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12054F12CF84E5E0040A69C /* TermsAndConditionView.swift */; };
+		F12054F42CF855F30040A69C /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12054F32CF855F30040A69C /* PrivacyPolicyView.swift */; };
 		F135BCE62CF43BE6006C6C4F /* ManageAuthenticationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCE52CF43BE6006C6C4F /* ManageAuthenticationUseCase.swift */; };
 		F135BCE82CF43E13006C6C4F /* AuthMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCE72CF43E13006C6C4F /* AuthMode.swift */; };
 		F135BCEA2CF43E56006C6C4F /* AuthSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCE92CF43E56006C6C4F /* AuthSelection.swift */; };
@@ -251,10 +254,6 @@
 		F1E405982CEC678800533701 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F1E405972CEC678800533701 /* FirebaseAuth */; };
 		F1E4059B2CEC6E9B00533701 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E4059A2CEC6E9B00533701 /* LoginViewModel.swift */; };
 		F1E4059E2CEC936700533701 /* AppleAuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E4059D2CEC936700533701 /* AppleAuthInfo.swift */; };
-		F1E405A32CEC9E9B00533701 /* SignInAppleUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405A22CEC9E9B00533701 /* SignInAppleUseCase.swift */; };
-		F1E405A52CECA19200533701 /* DefaultSignInAppleUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405A42CECA19200533701 /* DefaultSignInAppleUseCase.swift */; };
-		F1E405A72CECA22900533701 /* SignAppleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405A62CECA22900533701 /* SignAppleRepository.swift */; };
-		F1E405A92CECA2D000533701 /* DefaultSignAppleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405A82CECA2D000533701 /* DefaultSignAppleRepository.swift */; };
 		F1E405AC2CECA31D00533701 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405AB2CECA31D00533701 /* AuthService.swift */; };
 		F1E405AE2CECA35E00533701 /* DefaultFirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405AD2CECA35E00533701 /* DefaultFirebaseAuthService.swift */; };
 		F1E405B02CECA3F500533701 /* FirebaseAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E405AF2CECA3F500533701 /* FirebaseAuthError.swift */; };
@@ -457,6 +456,9 @@
 		B8D554C72CE34A47007CCD6D /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		F12054EB2CF802B80040A69C /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		F12054ED2CF80B880040A69C /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
+		F12054EF2CF8419B0040A69C /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		F12054F12CF84E5E0040A69C /* TermsAndConditionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionView.swift; sourceTree = "<group>"; };
+		F12054F32CF855F30040A69C /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		F135BCE52CF43BE6006C6C4F /* ManageAuthenticationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageAuthenticationUseCase.swift; sourceTree = "<group>"; };
 		F135BCE72CF43E13006C6C4F /* AuthMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMode.swift; sourceTree = "<group>"; };
 		F135BCE92CF43E56006C6C4F /* AuthSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSelection.swift; sourceTree = "<group>"; };
@@ -516,10 +518,6 @@
 		F1E4058D2CEC232900533701 /* Molio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Molio.entitlements; sourceTree = "<group>"; };
 		F1E4059A2CEC6E9B00533701 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		F1E4059D2CEC936700533701 /* AppleAuthInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthInfo.swift; sourceTree = "<group>"; };
-		F1E405A22CEC9E9B00533701 /* SignInAppleUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAppleUseCase.swift; sourceTree = "<group>"; };
-		F1E405A42CECA19200533701 /* DefaultSignInAppleUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSignInAppleUseCase.swift; sourceTree = "<group>"; };
-		F1E405A62CECA22900533701 /* SignAppleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignAppleRepository.swift; sourceTree = "<group>"; };
-		F1E405A82CECA2D000533701 /* DefaultSignAppleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSignAppleRepository.swift; sourceTree = "<group>"; };
 		F1E405AB2CECA31D00533701 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		F1E405AD2CECA35E00533701 /* DefaultFirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFirebaseAuthService.swift; sourceTree = "<group>"; };
 		F1E405AF2CECA3F500533701 /* FirebaseAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthError.swift; sourceTree = "<group>"; };
@@ -1100,7 +1098,6 @@
 				F135BCE42CF43BC2006C6C4F /* ManageAuthenticationUseCase */,
 				88C8B5E92CEF1DF60079ACB5 /* PublishAllMusicInCurrentPlaylistUseCase */,
 				2075FEC22CECDE0F009834BE /* ChangeCurrentPlaylistIUseCase */,
-				F1E4059F2CEC9E4100533701 /* SignInAppleUseCase */,
 				201048552CEA2ACD0015E800 /* CreatePlaylistUsecase */,
 				88F6E4A52CEC850400739648 /* PublishCurrentPlaylistUseCase */,
 				B8046A502CEB93C600933704 /* FetchAvailableGenresUseCase */,
@@ -1118,7 +1115,6 @@
 				F17369652CE36E2900F6242C /* ImageRepository.swift */,
 				20397E592CE5CB3C004ED9CE /* PlaylistRepository.swift */,
 				884529542CF71BBE007FD074 /* RealPlaylistRepository.swift */,
-				F1E405A62CECA22900533701 /* SignAppleRepository.swift */,
 				2009183B2CEC9C0E0058D8C7 /* CurrentPlaylistRepository.swift */,
 				F135BCED2CF440B5006C6C4F /* AuthStateRepository.swift */,
 			);
@@ -1150,7 +1146,6 @@
 				F173694A2CDF265900F6242C /* DefaultRecommendedMusicRepository.swift */,
 				884529522CF71AF4007FD074 /* DefaultPlaylistRepository.swift */,
 				F17369672CE36E8F00F6242C /* DefaultImageRepository.swift */,
-				F1E405A82CECA2D000533701 /* DefaultSignAppleRepository.swift */,
 				2009183D2CEC9C5B0058D8C7 /* DefaultCurrentPlaylistRepository.swift */,
 				F135BCEF2CF441B7006C6C4F /* DefaultAuthStateRepository.swift */,
 			);
@@ -1465,10 +1460,13 @@
 		F135BD062CF5A6AB006C6C4F /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				F12054EF2CF8419B0040A69C /* SettingViewModel.swift */,
 				F12054EB2CF802B80040A69C /* SettingViewController.swift */,
 				F135BD072CF5A6C4006C6C4F /* SettingView.swift */,
 				F135BD092CF5C671006C6C4F /* ProfileItemView.swift */,
 				F135BD0B2CF5C68C006C6C4F /* SettingTextItemView.swift */,
+				F12054F12CF84E5E0040A69C /* TermsAndConditionView.swift */,
+				F12054F32CF855F30040A69C /* PrivacyPolicyView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -1735,15 +1733,6 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
-		F1E4059F2CEC9E4100533701 /* SignInAppleUseCase */ = {
-			isa = PBXGroup;
-			children = (
-				F1E405A22CEC9E9B00533701 /* SignInAppleUseCase.swift */,
-				F1E405A42CECA19200533701 /* DefaultSignInAppleUseCase.swift */,
-			);
-			path = SignInAppleUseCase;
-			sourceTree = "<group>";
-		};
 		F1E405AA2CECA30200533701 /* FirebaseService */ = {
 			isa = PBXGroup;
 			children = (
@@ -1895,6 +1884,7 @@
 				88E483492CEDDD4A003D624E /* PlaylistDetailView.swift in Sources */,
 				2061491A2CF8460800FDE96D /* DefaultCurrentUserIdUseCase.swift in Sources */,
 				88E4834A2CEDDD4A003D624E /* AudioPlayerControlView.swift in Sources */,
+				F12054F22CF84E5E0040A69C /* TermsAndConditionView.swift in Sources */,
 				205E6A442CF563BC005E9150 /* FirebaseStorageManager.swift in Sources */,
 				88E4834B2CEDDD4A003D624E /* MusicListView.swift in Sources */,
 				206149432CF87FFA00FDE96D /* DefaultUserUseCase.swift in Sources */,
@@ -1905,7 +1895,6 @@
 				20883BC92CF95F0900C10549 /* FollowRelationType.swift in Sources */,
 				2003BA162CDB8D69002CAB3E /* Font+Extension.swift in Sources */,
 				F135BD0A2CF5C671006C6C4F /* ProfileItemView.swift in Sources */,
-				F1E405A92CECA2D000533701 /* DefaultSignAppleRepository.swift in Sources */,
 				B88F80BC2CE490CD000480E6 /* Text+Extension.swift in Sources */,
 				B88F80BB2CE48C59000480E6 /* MusicFilterView.swift in Sources */,
 				B8046A4B2CEA629E00933704 /* SpotifyAvailableGenreSeedsDTO.swift in Sources */,
@@ -1919,7 +1908,6 @@
 				2003BA222CDCB31B002CAB3E /* SwipeMusicViewModel.swift in Sources */,
 				F173694B2CDF265900F6242C /* DefaultRecommendedMusicRepository.swift in Sources */,
 				F135BCEE2CF440B5006C6C4F /* AuthStateRepository.swift in Sources */,
-				F1E405A52CECA19200533701 /* DefaultSignInAppleUseCase.swift in Sources */,
 				885D1B632CF4D28700F532E0 /* MolioPlaylist+FirestoreEntity.swift in Sources */,
 				B8378BC22CF6DD0200737125 /* ExportPlatform.swift in Sources */,
 				206149392CF8677D00FDE96D /* DefaultCommunityUseCase.swift in Sources */,
@@ -1929,6 +1917,7 @@
 				B867AE662CF7267400ACCEDC /* CheckAppleMusicSubscriptionUseCase.swift in Sources */,
 				20397E702CE5DE56004ED9CE /* PersistenceManager.swift in Sources */,
 				206148E92CF6ED1800FDE96D /* FirebaseUserService.swift in Sources */,
+				F12054F02CF8419B0040A69C /* SettingViewModel.swift in Sources */,
 				884529552CF71BBE007FD074 /* RealPlaylistRepository.swift in Sources */,
 				88C8B5ED2CEF1E240079ACB5 /* DefaultPublishAllMusicInCurrentPlaylistUseCase.swift in Sources */,
 				F173691F2CDB995100F6242C /* SwipeMusicViewController.swift in Sources */,
@@ -1952,7 +1941,6 @@
 				201048512CEA23190015E800 /* addGradientBackground.swift in Sources */,
 				205E6A5D2CF5D7EB005E9150 /* AuthLocalStorage.swift in Sources */,
 				20397E512CE33C03004ED9CE /* SwipeMusicPlayer.swift in Sources */,
-				F1E405A32CEC9E9B00533701 /* SignInAppleUseCase.swift in Sources */,
 				206149462CF8800500FDE96D /* MolioUser.swift in Sources */,
 				206149442CF87FFA00FDE96D /* UserUseCase.swift in Sources */,
 				B88F80C22CE4B23B000480E6 /* TagLayout.swift in Sources */,
@@ -2013,6 +2001,7 @@
 				206149042CF7218100FDE96D /* FollowRelationUseCase.swift in Sources */,
 				B8046A5A2CEC56C900933704 /* DIContainer.swift in Sources */,
 				205E6A5E2CF5D7EB005E9150 /* PlaylistLocalStorage.swift in Sources */,
+				F12054F42CF855F30040A69C /* PrivacyPolicyView.swift in Sources */,
 				206149062CF7219B00FDE96D /* MolioFollowRelation.swift in Sources */,
 				B8D554892CE10A3A007CCD6D /* DefaultSpotifyAPIService.swift in Sources */,
 				B81086EE2CF5E34D00403E88 /* AddMusicToPlaylistUseCase.swift in Sources */,
@@ -2059,7 +2048,6 @@
 				881BBCB42CDCF91B00010A61 /* SpotifyTokenProvider.swift in Sources */,
 				881BBCB52CDCF91B00010A61 /* MockSpotifyTokenProvider.swift in Sources */,
 				206148E72CF6E93600FDE96D /* MolioUserDTO.swift in Sources */,
-				F1E405A72CECA22900533701 /* SignAppleRepository.swift in Sources */,
 				F1A3BB792CF0E0BF0062C79C /* ExportPlaylistImageViewModel.swift in Sources */,
 				20397E722CE5DFC6004ED9CE /* CoreDataPlaylistStorage.swift in Sources */,
 				881BBCB62CDCF91B00010A61 /* SpotifyAPIService.swift in Sources */,

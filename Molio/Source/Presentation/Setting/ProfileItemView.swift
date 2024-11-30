@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct ProfileItemView: View {
-    var imageURL: URL?
+    @Binding var molioUser: MolioUser?
     
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 12) {
-                AsyncImage(url: imageURL) { phase in
+                AsyncImage(url: molioUser?.profileImageURL) { phase in
                     if let image = phase.image {
                         image
                             .resizable()
@@ -24,10 +24,10 @@ struct ProfileItemView: View {
                 .padding(.bottom, 4)
                 
                 VStack(alignment: .leading) {
-                    Text("몰리오 몰리오")
+                    Text(molioUser?.name ?? "")
                         .font(.pretendardRegular(size: 16))
                         .foregroundStyle(.white)
-                    Text("Subtitle")
+                    Text(molioUser?.description ?? "")
                         .font(.pretendardRegular(size: 15))
                         .foregroundStyle(.gray)
                 }
