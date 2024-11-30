@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(AuthService.self, dependency: DefaultFirebaseAuthService())
         container.register(AuthLocalStorage.self, dependency: DefaultAuthLocalStorage())
         container.register(UserService.self, dependency: FirebaseUserService())
+        container.register(FirebaseStorageManager.self, dependency: FirebaseStorageManager())
         
         // Repository
         container.register(RecommendedMusicRepository.self, dependency: DefaultRecommendedMusicRepository())
