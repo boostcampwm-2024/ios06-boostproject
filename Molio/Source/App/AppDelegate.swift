@@ -4,6 +4,7 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
         let container = DIContainer.shared
         
         container.register(NetworkProvider.self, dependency: DefaultNetworkProvider())
@@ -13,13 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(MusicKitService.self, dependency: DefaultMusicKitService())
         container.register(AuthService.self, dependency: DefaultFirebaseAuthService())
         container.register(AuthLocalStorage.self, dependency: DefaultAuthLocalStorage())
+        container.register(UserService.self, dependency: FirebaseUserService())
         
         // Repository
         container.register(RecommendedMusicRepository.self, dependency: DefaultRecommendedMusicRepository())
         container.register(ImageRepository.self, dependency: DefaultImageRepository())
         container.register(CurrentPlaylistRepository.self, dependency: DefaultCurrentPlaylistRepository())
         container.register(PlaylistRepository.self, dependency: MockPlaylistRepository())
-        container.register(SignAppleRepository.self, dependency: DefaultSignAppleRepository())
         container.register(AuthStateRepository.self, dependency: DefaultAuthStateRepository())
         
         // UseCase
@@ -32,12 +33,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(PublishAllMusicInCurrentPlaylistUseCase.self, dependency: DefaultPublishAllMusicInCurrentPlaylistUseCase())
         container.register(UpdatePlaylistUseCase.self, dependency: DefaultUpdatePlaylistUseCase())
         container.register(AudioPlayer.self, dependency: SwipeMusicPlayer())
-        container.register(SignInAppleUseCase.self, dependency: DefaultSignInAppleUseCase())
         container.register(ManageAuthenticationUseCase.self, dependency: DefaultManageAuthenticationUseCase())
         container.register(AddMusicToPlaylistUseCase.self, dependency: DefaultAddMusicToPlaylistUseCase())
         container.register(AppleMusicUseCase.self, dependency: DefaultAppleMusicUseCase())
+        container.register(CurrentUserIdUseCase.self, dependency: DefaultCurrentUserIdUseCase())
+        container.register(UserUseCase.self, dependency: DefaultUserUseCase())
         
-        FirebaseApp.configure()
         return true
     }
     

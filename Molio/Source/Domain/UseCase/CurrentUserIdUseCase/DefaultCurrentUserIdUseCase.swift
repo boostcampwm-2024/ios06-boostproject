@@ -3,8 +3,8 @@ struct DefaultCurrentUserIdUseCase: CurrentUserIdUseCase {
     private let usecase: ManageAuthenticationUseCase
     
     init(
-        authService: AuthService,
-        usecase: ManageAuthenticationUseCase
+        authService: AuthService = DIContainer.shared.resolve(),
+        usecase: ManageAuthenticationUseCase = DIContainer.shared.resolve()
     ) {
         self.authService = authService
         self.usecase = usecase

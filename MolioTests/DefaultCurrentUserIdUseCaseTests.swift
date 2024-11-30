@@ -17,7 +17,11 @@ final class DefaultCurrentUserIdUseCaseTests: XCTestCase {
             
         }
         
-        func deleteAccount() async throws {
+        func reauthenticateApple(idToken: String, nonce: String) async throws {
+            
+        }
+        
+        func deleteAccount(authorizationCode: String) async throws {
             
         }
         
@@ -33,14 +37,26 @@ final class DefaultCurrentUserIdUseCaseTests: XCTestCase {
             return true
         }
         
-        func setAuthMode(_ mode: Molio.AuthMode) {
-            
-        }
-        
         var isLoggedIn: Bool = false
         
         func isLogin() -> Bool {
             return isLoggedIn
+        }
+        
+        func singInApple(info: AppleAuthInfo) async throws {
+            
+        }
+        
+        func loginGuest() {
+            
+        }
+        
+        func logout() throws {
+            
+        }
+        
+        func deleteAuth(idToken: String, nonce: String, authorizationCode: String) async throws {
+            
         }
     }
     
