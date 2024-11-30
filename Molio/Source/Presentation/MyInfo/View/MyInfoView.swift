@@ -23,17 +23,10 @@ struct MyInfoView: View {
             ScrollView {
                 VStack(spacing: 0) {
                     ZStack(alignment: .bottomTrailing) {
-                        AsyncImage(url: viewModel.userImageURL) { phase in
-                            if let image = phase.image {
-                                image
-                                    .resizable()
-                            } else {
-                                Image(ImageResource.personCircle)
-                                    .resizable()
-                            }
-                        }
-                        .frame(width: 110, height: 110)
-                        .clipShape(Circle())
+                        ProfileImageView(
+                            selectedImageData: viewModel.userSelectedImageData,
+                            imageURL: viewModel.userImageURL
+                        )
                         PhotosPicker(
                             selection: $selectedItem,
                             matching: .images
