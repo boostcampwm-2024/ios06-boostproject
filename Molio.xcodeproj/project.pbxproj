@@ -877,13 +877,9 @@
 		88291CC12CFA3072007322B5 /* FriendPlaylistDetailView */ = {
 			isa = PBXGroup;
 			children = (
-				88A7A9912CF8CECF005EA318 /* FriendPlaylistDetailView.swift */,
-				88291CB92CFA2139007322B5 /* ExportFriendsMusicToMyPlaylistDelegate.swift */,
-				8818D8F42CFA03470069A7F3 /* FriendPlaylistDetailHostingViewController.swift */,
-				88291CBD2CFA2605007322B5 /* SelectPlaylistToExportFriendMusicViewModel.swift */,
-				88291CBB2CFA25F4007322B5 /* SelectPlaylistToExportFriendMusicView.swift */,
-				8818D8F62CFA07150069A7F3 /* FriendPlaylistDetailViewModel.swift */,
-				88291CC22CFB00D2007322B5 /* FriendPlaylistDetailHostingViewController+ExportFriendsMusicToMyPlaylistDelegate.swift */,
+				88BB232A2CFB443B00521BF6 /* View */,
+				88BB232C2CFB444A00521BF6 /* Delegate */,
+				88BB232B2CFB444300521BF6 /* ViewModel */,
 			);
 			path = FriendPlaylistDetailView;
 			sourceTree = "<group>";
@@ -924,6 +920,34 @@
 				88A7A9842CF85247005EA318 /* FetchPlaylistUseCaseError.swift */,
 			);
 			path = RealPlaylistUseCase;
+			sourceTree = "<group>";
+		};
+		88BB232A2CFB443B00521BF6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				88A7A9912CF8CECF005EA318 /* FriendPlaylistDetailView.swift */,
+				8818D8F42CFA03470069A7F3 /* FriendPlaylistDetailHostingViewController.swift */,
+				88291CBB2CFA25F4007322B5 /* SelectPlaylistToExportFriendMusicView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		88BB232B2CFB444300521BF6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				88291CBD2CFA2605007322B5 /* SelectPlaylistToExportFriendMusicViewModel.swift */,
+				8818D8F62CFA07150069A7F3 /* FriendPlaylistDetailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		88BB232C2CFB444A00521BF6 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				88291CB92CFA2139007322B5 /* ExportFriendsMusicToMyPlaylistDelegate.swift */,
+				88291CC22CFB00D2007322B5 /* FriendPlaylistDetailHostingViewController+ExportFriendsMusicToMyPlaylistDelegate.swift */,
+			);
+			path = Delegate;
 			sourceTree = "<group>";
 		};
 		88C8B5E92CEF1DF60079ACB5 /* PublishAllMusicInCurrentPlaylistUseCase */ = {
