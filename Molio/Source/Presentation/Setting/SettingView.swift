@@ -21,7 +21,7 @@ struct SettingView: View {
                 Button {
                     didTapMyInfoView?()
                 } label: {
-                    ProfileItemView()
+                    ProfileItemView(molioUser: $viewModel.molioUser)
                 }
                 Color(UIColor(resource: .spacingBackground))
                     .frame(height: 24)
@@ -78,6 +78,11 @@ struct SettingView: View {
         }
         .background(Color.background)
         .animation(.spring(duration: 0.3), value: viewModel.isLogin)
+        .onAppear {
+            Task {
+                try await viewModel.fetchProfile()
+            }
+        }
         .alert(
             viewModel.alertState.title,
             isPresented: $viewModel.showAlert) {

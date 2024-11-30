@@ -10,18 +10,35 @@ protocol SettingViewModelDelegate: AnyObject {
 final class SettingViewModel: ObservableObject {
     @Published var isLogin: Bool
     @Published var showAlert = false
+    @Published var molioUser: MolioUser?
     
     private let manageAuthenticationUseCase: ManageAuthenticationUseCase
+    private let currentUserIdUseCase: CurrentUserIdUseCase
+    private let userUseCase: UserUseCase
     weak var delegate: SettingViewModelDelegate?
     var alertState: AlertType = .successLogout
     var appVersion: String {
         return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "버전 정보 없음"
     }
     
-    init(manageAuthenticationUseCase: ManageAuthenticationUseCase = DIContainer.shared.resolve()) {
+    init(
+        manageAuthenticationUseCase: ManageAuthenticationUseCase = DIContainer.shared.resolve(),
+        currentUserIdUseCase: CurrentUserIdUseCase = DIContainer.shared.resolve(),
+        userUseCase: UserUseCase = DIContainer.shared.resolve()
+    ) {
         self.manageAuthenticationUseCase = manageAuthenticationUseCase
+        self.currentUserIdUseCase = currentUserIdUseCase
+        self.userUseCase = userUseCase
         
         self.isLogin = manageAuthenticationUseCase.isLogin()
+    }
+    
+    func fetchProfile() async throws {
+        guard let userID: String = try currentUserIdUseCase.execute() else { return }
+        let molioUser = try await userUseCase.fetchUser(userID: userID)
+        await MainActor.run {
+            self.molioUser = molioUser
+        }
     }
     
     func logout() {
