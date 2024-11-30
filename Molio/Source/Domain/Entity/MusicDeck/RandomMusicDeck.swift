@@ -15,10 +15,10 @@ extension RandomMusicDeck: MusicDeck {
         Task {
             if let currentMusic = randomMusics.value.first,
                let currentPlaylist = currentPlaylist {
-                try await addMusicToPlaylistUseCase.execute(isrc: currentMusic.isrc, to: currentPlaylist.id)
+                try await manageMyPlaylistUseCase.addMusic(musicISRC: currentMusic.isrc, to: currentPlaylist.id)
             }
-            removeCurrentMusic()
         }
+        removeCurrentMusic()
     }
     
     func dislikeCurrentMusic() {
@@ -38,7 +38,7 @@ extension RandomMusicDeck: MusicDeck {
 // MARK: 프로토콜 요구사항을 위한 구현체
 
 final class RandomMusicDeck {
-    private let addMusicToPlaylistUseCase: any AddMusicToPlaylistUseCase
+    private let manageMyPlaylistUseCase: any ManageMyPlaylistUseCase
     private let publishCurrentPlaylistUseCase: any PublishCurrentPlaylistUseCase
     private let fetchRecommendedMusicUseCase: any FetchRecommendedMusicUseCase
     
@@ -51,12 +51,18 @@ final class RandomMusicDeck {
     // MARK: 생성자
     
     init(
-        addMusicToPlaylistUseCase: any AddMusicToPlaylistUseCase = DIContainer.shared.resolve(),
+        manageMyPlaylistUseCase: any ManageMyPlaylistUseCase = DefaultManageMyPlaylistUseCase(
+            currentUserIdUseCase: DefaultCurrentUserIdUseCase(
+                authService: DefaultFirebaseAuthService(),
+                usecase: DefaultManageAuthenticationUseCase()),
+            repository: DefaultPlaylistRepository(
+                playlistService: FirestorePlaylistService(),
+                playlistStorage: CoreDataPlaylistStorage())),
         publishCurrentPlaylistUseCase: any PublishCurrentPlaylistUseCase = DIContainer.shared.resolve(),
         fetchRecommendedMusicUseCase: any FetchRecommendedMusicUseCase = DIContainer.shared.resolve()
     ) {
         // 의존성 주입
-        self.addMusicToPlaylistUseCase = addMusicToPlaylistUseCase
+        self.manageMyPlaylistUseCase = manageMyPlaylistUseCase
         self.publishCurrentPlaylistUseCase = publishCurrentPlaylistUseCase
         self.fetchRecommendedMusicUseCase = fetchRecommendedMusicUseCase
         
