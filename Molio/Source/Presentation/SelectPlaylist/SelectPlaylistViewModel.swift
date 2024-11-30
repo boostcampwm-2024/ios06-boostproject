@@ -28,7 +28,6 @@ final class SelectPlaylistViewModel: ObservableObject {
             do {
                 let playlists = try await self?.fetchPlaylistUseCase.fetchMyAllPlaylists()
                 guard let playlists = playlists else { return } // TODO: - nil 처리
-                print("\(playlists.count)개 불러옴")
                 self?.playlists = playlists
             } catch {
                 print("플레이리스트 불러오기 실패")
