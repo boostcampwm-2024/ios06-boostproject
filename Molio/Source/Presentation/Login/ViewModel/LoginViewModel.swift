@@ -52,12 +52,12 @@ final class LoginViewModel: InputOutputViewModel {
                 Task {
                     do {
                         try await self.manageAuthenticationUseCase.singInApple(info: appleAuthinfo)
-                        self.navigateToNextScreenPublisher.send()
                         let userName = [
                             appleAuthinfo.fullName?.familyName ?? "",
                             appleAuthinfo.fullName?.givenName ?? ""
                         ].joined()
                         try await self.userUseCase.createUser(userName: userName)
+                        self.navigateToNextScreenPublisher.send()
                     } catch {
                         self.errorPublisher.send(error.localizedDescription) // TODO: Error 메시지 지정
                     }
