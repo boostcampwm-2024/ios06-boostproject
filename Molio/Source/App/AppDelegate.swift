@@ -36,6 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(ManageAuthenticationUseCase.self, dependency: DefaultManageAuthenticationUseCase())
         container.register(CheckAppleMusicSubscriptionUseCase.self, dependency: DefaultCheckAppleMusicSubscriptionUseCase())
         container.register(ExportAppleMusicPlaylistUseCase.self, dependency: DefaultExportAppleMusicPlaylistUseCase())
+        container.register(AddMusicToPlaylistUseCase.self, dependency: DefaultAddMusicToPlaylistUseCase())
+        container.register(AppleMusicUseCase.self, dependency: DefaultAppleMusicUseCase())
         container.register(CurrentUserIdUseCase.self, dependency: DefaultCurrentUserIdUseCase())
         container.register(UserUseCase.self, dependency: DefaultUserUseCase())
         
