@@ -18,7 +18,7 @@ final class PlaylistDetailViewModel: ObservableObject {
     
     private let publishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase
     private let appleMusicUseCase: AppleMusicUseCase
-    private let musicKitService: MusicKitService // TODO: - 유즈케이스 분리
+    private let fetchPlaylistUseCase: FetchPlaylistUseCase
     
     @Published private(set) var isAppleMusicSubscriber: Bool = false
     @Published var currentPlaylist: MolioPlaylist?
@@ -31,11 +31,11 @@ final class PlaylistDetailViewModel: ObservableObject {
     init(
         publishCurrentPlaylistUseCase: any PublishCurrentPlaylistUseCase = DIContainer.shared.resolve(),
         appleMusicUseCase: any AppleMusicUseCase = DIContainer.shared.resolve(),
-        musicKitService: any MusicKitService = DIContainer.shared.resolve()
+        fetchPlaylistUseCase: any FetchPlaylistUseCase = DIContainer.shared.resolve()
     ) {
         self.publishCurrentPlaylistUseCase = publishCurrentPlaylistUseCase
         self.appleMusicUseCase = appleMusicUseCase
-        self.musicKitService = musicKitService
+        self.fetchPlaylistUseCase = fetchPlaylistUseCase
         
         bind()
     }
@@ -47,8 +47,8 @@ final class PlaylistDetailViewModel: ObservableObject {
                 guard let playlist = playlist else { return }
                 self.currentPlaylist = playlist
                 Task { @MainActor [weak self] in
-                    let playlistMusics = await self?.musicKitService.getMusic(with: playlist.musicISRCs) ?? []
-                    self?.currentPlaylistMusics = playlistMusics
+                    let playlistMusics = try await self?.fetchPlaylistUseCase.fetchAllMusicIn(playlistID: playlist.id)
+                    self?.currentPlaylistMusics = playlistMusics ?? []
                 }
             }
             .store(in: &subscriptions)
