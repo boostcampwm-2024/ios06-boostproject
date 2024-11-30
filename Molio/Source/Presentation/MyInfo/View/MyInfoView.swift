@@ -8,6 +8,7 @@ struct MyInfoView: View {
     @FocusState private var focusedField: Field?
     @Namespace private var topID
     @Namespace private var descriptionID
+    var didTapUpdateConfirmButton: (() -> Void)?
     
     enum Field: Hashable {
         case nickname
@@ -100,7 +101,9 @@ struct MyInfoView: View {
                 type: .confirm,
                 isEnabled: viewModel.isPossibleConfirmButton
             ) {
-                
+                Task {
+                    try await viewModel.updateUser()
+                }
             }
             .frame(maxWidth: .infinity, maxHeight: 66)
             .padding(.horizontal, 22)
@@ -109,5 +112,14 @@ struct MyInfoView: View {
         .onTapGesture {
             focusedField = .none
         }
+        .alert(
+            viewModel.alertState.title,
+            isPresented: $viewModel.showAlert) {
+                Button("확인") {
+                    if viewModel.alertState == .successUpdate {
+                        didTapUpdateConfirmButton?()
+                    }
+                }
+            }
     }
 }
