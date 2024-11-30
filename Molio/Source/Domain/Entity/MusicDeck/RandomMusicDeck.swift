@@ -39,7 +39,6 @@ extension RandomMusicDeck: MusicDeck {
 
 final class RandomMusicDeck {
     private let manageMyPlaylistUseCase: any ManageMyPlaylistUseCase
-    private let publishCurrentPlaylistUseCase: any PublishCurrentPlaylistUseCase
     private let fetchRecommendedMusicUseCase: any FetchRecommendedMusicUseCase
     
     private let randomMusics: CurrentValueSubject<[MolioMusic], Never>
@@ -55,15 +54,13 @@ final class RandomMusicDeck {
             currentUserIdUseCase: DefaultCurrentUserIdUseCase(
                 authService: DefaultFirebaseAuthService(),
                 usecase: DefaultManageAuthenticationUseCase()),
-            repository: DefaultPlaylistRepository(
+            playlistRepository: DefaultPlaylistRepository(
                 playlistService: FirestorePlaylistService(),
                 playlistStorage: CoreDataPlaylistStorage())),
-        publishCurrentPlaylistUseCase: any PublishCurrentPlaylistUseCase = DIContainer.shared.resolve(),
         fetchRecommendedMusicUseCase: any FetchRecommendedMusicUseCase = DIContainer.shared.resolve()
     ) {
         // 의존성 주입
         self.manageMyPlaylistUseCase = manageMyPlaylistUseCase
-        self.publishCurrentPlaylistUseCase = publishCurrentPlaylistUseCase
         self.fetchRecommendedMusicUseCase = fetchRecommendedMusicUseCase
         
         // 속성 초기화
@@ -78,7 +75,7 @@ final class RandomMusicDeck {
     
     /// 현재 플레이리스트의 필터 정보 불러오기
     private func setupCurrentPlaylistCancellable() {
-        publishCurrentPlaylistUseCase.execute()
+        manageMyPlaylistUseCase.currentPlaylistPublisher()
             .sink { [weak self] currentPlaylist in
                 self?.currentPlaylist = currentPlaylist
                 self?.currentMusicFilter = currentPlaylist?.filter

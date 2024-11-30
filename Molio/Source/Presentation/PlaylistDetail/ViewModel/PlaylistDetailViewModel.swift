@@ -15,8 +15,7 @@ final class PlaylistDetailViewModel: ObservableObject {
             }
         }
     }
-    
-    private let publishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase
+    private let managePlaylistUseCase: ManageMyPlaylistUseCase
     private let appleMusicUseCase: AppleMusicUseCase
     private let fetchPlaylistUseCase: FetchPlaylistUseCase
     
@@ -29,11 +28,11 @@ final class PlaylistDetailViewModel: ObservableObject {
     private var subscriptions: Set<AnyCancellable> = []
     
     init(
-        publishCurrentPlaylistUseCase: any PublishCurrentPlaylistUseCase = DIContainer.shared.resolve(),
+        managePlaylistUseCase: ManageMyPlaylistUseCase = DefaultManageMyPlaylistUseCase(),
         appleMusicUseCase: any AppleMusicUseCase = DIContainer.shared.resolve(),
         fetchPlaylistUseCase: any FetchPlaylistUseCase = DIContainer.shared.resolve()
     ) {
-        self.publishCurrentPlaylistUseCase = publishCurrentPlaylistUseCase
+        self.managePlaylistUseCase = managePlaylistUseCase
         self.appleMusicUseCase = appleMusicUseCase
         self.fetchPlaylistUseCase = fetchPlaylistUseCase
         
@@ -41,7 +40,7 @@ final class PlaylistDetailViewModel: ObservableObject {
     }
 
     private func bind() {
-        publishCurrentPlaylistUseCase.execute()
+        managePlaylistUseCase.currentPlaylistPublisher()
             .receive(on: DispatchQueue.main)
             .sink { playlist in
                 guard let playlist = playlist else { return }

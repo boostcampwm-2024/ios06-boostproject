@@ -4,7 +4,7 @@ struct CreatePlaylistView: View {
     @Environment(\.dismiss) var dismiss
     @FocusState private var isFocused: Bool
     @State private var text: String = ""
-    @ObservedObject var viewModel: CreatePlaylistViewModel
+    @ObservedObject var viewModel: ManagePlaylistViewModel
 
     var placeholder: String = "플레이리스트 이름을 입력해주세요"
 
@@ -51,7 +51,7 @@ struct CreatePlaylistView: View {
                     }
                     BasicButton(type: .confirm, isEnabled: !text.isEmpty) {
                         Task {
-                            await viewModel.createPlaylist(named: text)
+                            try await viewModel.createPlaylist(playlistName:text)
                             viewModel.changeCurrentPlaylist()
                             dismiss()
                         }
@@ -68,7 +68,7 @@ struct CreatePlaylistView: View {
 }
 
 #Preview {
-    CreatePlaylistView(viewModel: CreatePlaylistViewModel())
+    CreatePlaylistView(viewModel: ManagePlaylistViewModel())
         .background(Color.background)
 }
 
