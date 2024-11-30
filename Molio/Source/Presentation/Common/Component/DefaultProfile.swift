@@ -1,5 +1,6 @@
 import SwiftUI
 
+/// 기본 프로필 이미지 뷰
 struct DefaultProfile: View {
     let size: CGFloat
     

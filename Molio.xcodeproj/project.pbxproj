@@ -163,6 +163,7 @@
 		B88F80BE2CE4927B000480E6 /* FilterTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88F80BD2CE4927B000480E6 /* FilterTag.swift */; };
 		B88F80C22CE4B23B000480E6 /* TagLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88F80C12CE4B23B000480E6 /* TagLayout.swift */; };
 		B89FFA832CFB8A350072F92B /* DefaultProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89FFA822CFB8A350072F92B /* DefaultProfile.swift */; };
+		B89FFA862CFB8B1D0072F92B /* UserInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89FFA852CFB8B1D0072F92B /* UserInfoCell.swift */; };
 		B8D553E82CDFE25C007CCD6D /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D553E72CDFE25C007CCD6D /* NetworkProvider.swift */; };
 		B8D553EA2CDFE271007CCD6D /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D553E92CDFE271007CCD6D /* EndPoint.swift */; };
 		B8D553EC2CDFE29D007CCD6D /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D553EB2CDFE29D007CCD6D /* NetworkError.swift */; };
@@ -414,6 +415,7 @@
 		B88F80BD2CE4927B000480E6 /* FilterTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTag.swift; sourceTree = "<group>"; };
 		B88F80C12CE4B23B000480E6 /* TagLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLayout.swift; sourceTree = "<group>"; };
 		B89FFA822CFB8A350072F92B /* DefaultProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfile.swift; sourceTree = "<group>"; };
+		B89FFA852CFB8B1D0072F92B /* UserInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoCell.swift; sourceTree = "<group>"; };
 		B8D553E72CDFE25C007CCD6D /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		B8D553E92CDFE271007CCD6D /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		B8D553EB2CDFE29D007CCD6D /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -955,6 +957,7 @@
 		B80970762CDB43E2007BC3C4 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				B89FFA842CFB8B0B0072F92B /* SearchUser */,
 				F1865ED42CF6188E007C1E5A /* MyInfo */,
 				F135BD062CF5A6AB006C6C4F /* Setting */,
 				F135BCFF2CF4C358006C6C4F /* Community */,
@@ -1235,6 +1238,14 @@
 				B8046A3F2CE8950800933704 /* View */,
 			);
 			path = MusicFilter;
+			sourceTree = "<group>";
+		};
+		B89FFA842CFB8B0B0072F92B /* SearchUser */ = {
+			isa = PBXGroup;
+			children = (
+				B89FFA852CFB8B1D0072F92B /* UserInfoCell.swift */,
+			);
+			path = SearchUser;
 			sourceTree = "<group>";
 		};
 		B8D553E62CDFE245007CCD6D /* NetworkProvider */ = {
@@ -1964,6 +1975,7 @@
 				B82B28922CF255C900D67725 /* showAlert.swift in Sources */,
 				8818D8F72CFA07150069A7F3 /* FriendPlaylistDetailViewModel.swift in Sources */,
 				F135BCF82CF45E39006C6C4F /* SplashViewController.swift in Sources */,
+				B89FFA862CFB8B1D0072F92B /* UserInfoCell.swift in Sources */,
 				F17368FB2CD86B1100F6242C /* SceneDelegate.swift in Sources */,
 				206148F12CF704D800FDE96D /* FollowRelationDTO.swift in Sources */,
 				2008FCBB2CE8A1B90060F3B8 /* MolioPlaylist.swift in Sources */,
