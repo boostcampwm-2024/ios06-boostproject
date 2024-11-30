@@ -21,8 +21,11 @@ final class MockAuthService: AuthService {
     func logout() throws {
         
     }
+    func reauthenticateApple(idToken: String, nonce: String) async throws {
+        
+    }
     
-    func deleteAccount() async throws {
+    func deleteAccount(authorizationCode: String) async throws {
         
     }
 }
