@@ -34,16 +34,9 @@ final class MusicFilterViewController: UIHostingController<MusicFilterView> {
         return label
     }()
     
-    private let saveButton: UIButton = {
-        let button = UIButton(type: .system)
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: PretendardFontName.Regular, size: 17) ?? UIFont.systemFont(ofSize: 17),
-            .foregroundColor: UIColor.main
-        ]
-        let attributedTitle = NSAttributedString(string: "저장", attributes: attributes)
-        button.setAttributedTitle(attributedTitle, for: .normal)
-        return button
-    }()
+    private let saveButton = UIButton.molioRegular(text: "저장",
+                                                   size: 17,
+                                                   foregroundColor: .main)
     
     // MARK: - Life Cycle
     

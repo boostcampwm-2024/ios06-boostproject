@@ -86,7 +86,8 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
     // MARK: - Present Sheet or Navigation
     
     private func navigateToSettingViewController() {
-        let settingsViewController = SettingViewController()
+        let settingViewModel = SettingViewModel()
+        let settingsViewController = SettingViewController(viewModel: settingViewModel)
         navigationController?.pushViewController(settingsViewController, animated: true)
     }
     

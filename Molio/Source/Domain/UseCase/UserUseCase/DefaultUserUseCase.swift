@@ -4,7 +4,7 @@ final class DefaultUserUseCase: UserUseCase {
     private let service: UserService
     
     init(
-        service: UserService = FirebaseUserService()
+        service: UserService = DIContainer.shared.resolve()
     ) {
         self.service = service
     }

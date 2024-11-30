@@ -1,16 +1,16 @@
 import SwiftUI
 
 struct SettingTextItemView: View {
-    private let titleText: String
+    private let itemType: SettingItemType
     
-    init(titleText: String) {
-        self.titleText = titleText
+    init(itemType: SettingItemType) {
+        self.itemType = itemType
     }
     
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Text(titleText)
+                Text(itemType.text)
                     .font(.pretendardRegular(size: 16))
                     .foregroundStyle(.white)
                     .padding(.leading, 16)
@@ -19,9 +19,16 @@ struct SettingTextItemView: View {
                 
                 Spacer()
                 
-                Image(systemName: "chevron.right")
-                    .foregroundColor(.gray)
-                    .padding(.trailing, 16)
+                if case let .appVersion(version) = itemType {
+                    Text(version)
+                        .font(.pretendardRegular(size: 16))
+                        .foregroundStyle(.gray)
+                        .padding(.trailing, 16)
+                } else {
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(.gray)
+                        .padding(.trailing, 16)
+                }
             }
             Divider()
                 .background(Color(UIColor.darkGray))
@@ -29,5 +36,31 @@ struct SettingTextItemView: View {
                 .padding(.bottom, 1)
         }
         .background(Color(uiColor: UIColor(resource: .background)))
+    }
+    
+    enum SettingItemType {
+        case appVersion(String)
+        case termsAndCondition
+        case privacyPolicy
+        case logout
+        case login
+        case deleteAccount
+        
+        var text: String {
+            switch self {
+            case .appVersion:
+                "앱 버전"
+            case .termsAndCondition:
+                "약관 및 개인 정보 처리 동의"
+            case .privacyPolicy:
+                "개인정보 처리방침"
+            case .logout:
+                "로그 아웃"
+            case .login:
+                "로그인"
+            case .deleteAccount:
+                "회원 탈퇴"
+            }
+        }
     }
 }

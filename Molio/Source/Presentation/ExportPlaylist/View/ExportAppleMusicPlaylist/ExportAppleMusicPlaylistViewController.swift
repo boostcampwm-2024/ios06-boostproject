@@ -5,12 +5,14 @@ final class ExportAppleMusicPlaylistViewController: UIHostingController<ExportAp
         let exportAppleMusicPlaylistView = ExportAppleMusicPlaylistView(viewModel: viewModel)
         super.init(rootView: exportAppleMusicPlaylistView)
         
-        rootView.confirmButtonTapAction = { [weak self] in
-            self?.dismiss(animated: true)
-        }
+        rootView.confirmButtonTapAction = didTapConfirmButton
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    private func didTapConfirmButton() {
+        dismiss(animated: true)
     }
 }

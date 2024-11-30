@@ -1,7 +1,8 @@
 import Photos
+import SwiftUI
 
 final class ExportPlaylistImageViewModel: ObservableObject {
-    let itemHeight: CGFloat = 54.0
+    private let itemHeight: CGFloat = 54.0
     let exportMusicListPageTopPadding: CGFloat = 50.0
     let exportMusicListPageBottomPadding: CGFloat = 72.0
     
@@ -19,7 +20,10 @@ final class ExportPlaylistImageViewModel: ObservableObject {
         return max(1, paginatedMusicItems.count)
     }
     
-    init(musics: [MolioMusic], fetchImageUseCase: FetchImageUseCase) {
+    init(
+        musics: [MolioMusic],
+        fetchImageUseCase: FetchImageUseCase = DIContainer.shared.resolve()
+    ) {
         self.musics = musics
         self.fetchImageUseCase = fetchImageUseCase
     }
@@ -43,6 +47,38 @@ final class ExportPlaylistImageViewModel: ObservableObject {
         await MainActor.run {
             paginatedMusicItems = result
             isLoadingMusic = false
+        }
+    }
+    
+    /// 플레이리스트를 사진 앨범에 내보내는 메서드
+    @MainActor func exportPlaylistToAlbum() async {
+        guard await !isPhotoLibraryAccessDenied() else {
+            showAlert(of: .deniedPhotoLibrary)
+            return
+        }
+        guard !paginatedMusicItems.isEmpty else {
+            showAlert(of: .emptyMusicItems)
+            return
+        }
+        
+        var saveImageCount: Int = 0
+        for page in 0..<numberOfPages {
+            let render = ImageRenderer(
+                content: PlaylistImagePage(musicItems: paginatedMusicItems[page])
+                    .frame(width: UIScreen.main.bounds.width - 44)
+            )
+            render.scale = 3.0
+            
+            if let image = render.uiImage {
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                saveImageCount += 1
+            }
+        }
+        
+        if saveImageCount == numberOfPages {
+            showAlert(of: .successSaveImage)
+        } else {
+            showAlert(of: .failureSaveImage)
         }
     }
     
@@ -84,7 +120,7 @@ final class ExportPlaylistImageViewModel: ObservableObject {
     }
     
     /// 앨범에 저장할 수 있는 권환을 확인하는 메서드
-    func isPhotoLibraryDenied() async -> Bool {
+    private func isPhotoLibraryAccessDenied() async -> Bool {
         var isAuthorized = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         
         if isAuthorized == .notDetermined {
@@ -92,6 +128,11 @@ final class ExportPlaylistImageViewModel: ObservableObject {
         }
         
         return isAuthorized == .denied
+    }
+    
+    private func showAlert(of type: AlertType) {
+        alertState = type
+        showAlert = true
     }
     
     enum AlertType {
@@ -103,24 +144,24 @@ final class ExportPlaylistImageViewModel: ObservableObject {
         var title: String {
             switch self {
             case .deniedPhotoLibrary:
-                "사진 접근 권한이 필요합니다"
+                "사진 접근 권한 승인이 필요합니다."
             case .emptyMusicItems:
-                "플레이리스트가 비어 있습니다"
+                "플레이리스트가 비어 있습니다."
             case .successSaveImage:
-                "저장이 완료되었습니다"
+                "이미지 저장이 완료되었습니다."
             case .failureSaveImage:
-                "저장에 실패했습니다"
+                "이미지 저장에 실패했습니다."
             }
         }
         
         var message: String {
             switch self {
             case .deniedPhotoLibrary:
-                "사진을 저장하려면 사진 접근 권한이 필요합니다. 설정에서 접근 권한을 허용해 주세요. 설정 > Molio > 사진 접근 허용"
+                "사진을 저장하려면 사진 접근 권한이 필요합니다. 설정에서 접근 권한을 허용해 주세요. 설정 > molio > 사진 접근 허용"
             case .emptyMusicItems:
                 "사진에 저장할 음악이 없습니다.\n메인화면에서 취향에 맞는 음악을 추가해 주세요."
             case .successSaveImage:
-                "Molio 이미지가 사진에 성공적으로 저장되었습니다."
+                "molio 플레이리스트 이미지가 사진 앱에 성공적으로 저장되었습니다."
             case .failureSaveImage:
                 "이미지를 저장하는 중 오류가 발생했습니다. 다시 시도해 주세요."
             }
