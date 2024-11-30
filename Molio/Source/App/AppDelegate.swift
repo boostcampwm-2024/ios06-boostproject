@@ -4,6 +4,7 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
         let container = DIContainer.shared
         
         container.register(NetworkProvider.self, dependency: DefaultNetworkProvider())
@@ -13,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(MusicKitService.self, dependency: DefaultMusicKitService())
         container.register(AuthService.self, dependency: DefaultFirebaseAuthService())
         container.register(AuthLocalStorage.self, dependency: DefaultAuthLocalStorage())
+        container.register(UserService.self, dependency: FirebaseUserService())
         
         // Repository
         container.register(RecommendedMusicRepository.self, dependency: DefaultRecommendedMusicRepository())
@@ -35,8 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(AddMusicToPlaylistUseCase.self, dependency: DefaultAddMusicToPlaylistUseCase())
         container.register(CheckAppleMusicSubscriptionUseCase.self, dependency: DefaultCheckAppleMusicSubscriptionUseCase())
         container.register(ExportAppleMusicPlaylistUseCase.self, dependency: DefaultExportAppleMusicPlaylistUseCase())
+        container.register(CurrentUserIdUseCase.self, dependency: DefaultCurrentUserIdUseCase())
+        container.register(UserUseCase.self, dependency: DefaultUserUseCase())
         
-        FirebaseApp.configure()
         return true
     }
     
