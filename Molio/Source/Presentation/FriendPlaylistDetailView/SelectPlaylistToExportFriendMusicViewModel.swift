@@ -44,7 +44,6 @@ final class SelectPlaylistToExportFriendMusicViewModel: ObservableObject {
             do {
                 try await manageMyPlaylistUseCase.addMusic(musicISRC: music.isrc, to: selectedPlaylist.id)
             } catch {
-                print("내보내기 실패")
                 print(error.localizedDescription)
             }
         }

@@ -16,7 +16,7 @@ struct FriendPlaylistDetailView: View {
                 .padding(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-            // MARK: - 장르
+            // TODO: - 장르
 
             List { 
                 ForEach(viewModel.friendPlaylistMusics, id: \.isrc) { molioMusic in
