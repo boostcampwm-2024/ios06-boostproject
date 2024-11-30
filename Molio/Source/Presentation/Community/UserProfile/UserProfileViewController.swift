@@ -40,7 +40,7 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
         self.viewModel = UserProfileViewModel()
         self.followRelationViewModel = FollowRelationViewModel()
         super.init(coder: aDecoder)
-    }    
+    }
     
     // MARK: - Life Cycle
     

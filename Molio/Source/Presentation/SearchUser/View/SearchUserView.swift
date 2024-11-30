@@ -25,6 +25,7 @@ struct SearchUserView: View {
                 }
             }
         }
+        .background(Color.background)
     }
 }
 
