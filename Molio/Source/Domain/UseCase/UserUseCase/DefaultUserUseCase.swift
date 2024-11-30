@@ -2,19 +2,23 @@ import Foundation
 
 final class DefaultUserUseCase: UserUseCase {
     private let service: UserService
+    private let currentUserIdUseCase: CurrentUserIdUseCase
     
     init(
-        service: UserService = DIContainer.shared.resolve()
+        service: UserService = DIContainer.shared.resolve(),
+        currentUserIdUseCase: CurrentUserIdUseCase = DefaultCurrentUserIdUseCase()
     ) {
         self.service = service
+        self.currentUserIdUseCase = currentUserIdUseCase
     }
     
-    func createUser(userID: String, userName: String, imageURL: URL?, description: String?) async throws {
+    func createUser(userName: String?) async throws {
+        guard let userID = try currentUserIdUseCase.execute() else { return }
         let newUser = MolioUserDTO(
             id: userID,
-            name: userName,
-            profileImageURL: imageURL?.absoluteString,
-            description: description
+            name: userName ?? "닉네임 없음",
+            profileImageURL: "",
+            description: ""
         )
         try await service.createUser(newUser)
     }

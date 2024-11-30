@@ -6,13 +6,13 @@ final class FirestorePlaylistService: PlaylistService {
     private let collectionName = "playlists"
     
     init(
-        db: Firestore = Firestore.firestore()
     ) {
-        self.db = db
         
         if FirebaseApp.app() == nil {
             FirebaseApp.configure()
         }
+        self.db = Firestore.firestore()
+
     }
     
     func createPlaylist(playlist: MolioPlaylistDTO) async throws {
