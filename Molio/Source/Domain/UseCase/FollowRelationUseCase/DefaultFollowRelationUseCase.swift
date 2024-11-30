@@ -5,9 +5,9 @@ struct DefaultFollowRelationUseCase: FollowRelationUseCase {
     private let userUseCase: UserUseCase
     
     init(
-        service: FollowRelationService,
-        authService: AuthService,
-        userUseCase: UserUseCase
+        service: FollowRelationService = DIContainer.shared.resolve(),
+        authService: AuthService = DIContainer.shared.resolve(),
+        userUseCase: UserUseCase = DIContainer.shared.resolve()
     ) {
         self.service = service
         self.authService = authService
