@@ -17,8 +17,7 @@ final class PlaylistDetailViewModel: ObservableObject {
     }
     
     private let publishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase
-    private let checkAppleMusicSubscriptionUseCase: CheckAppleMusicSubscriptionUseCase
-    private let exportAppleMusicPlaylistUseCase: ExportAppleMusicPlaylistUseCase
+    private let appleMusicUseCase: AppleMusicUseCase
     private let musicKitService: MusicKitService // TODO: - 유즈케이스 분리
     
     @Published private(set) var isAppleMusicSubscriber: Bool = false
@@ -31,13 +30,11 @@ final class PlaylistDetailViewModel: ObservableObject {
     
     init(
         publishCurrentPlaylistUseCase: any PublishCurrentPlaylistUseCase = DIContainer.shared.resolve(),
-        checkAppleMusicSubscriptionUseCase: any CheckAppleMusicSubscriptionUseCase = DIContainer.shared.resolve(),
-        exportAppleMusicPlaylistUseCase: any ExportAppleMusicPlaylistUseCase = DIContainer.shared.resolve(),
+        appleMusicUseCase: any AppleMusicUseCase = DIContainer.shared.resolve(),
         musicKitService: any MusicKitService = DIContainer.shared.resolve()
     ) {
         self.publishCurrentPlaylistUseCase = publishCurrentPlaylistUseCase
-        self.checkAppleMusicSubscriptionUseCase = checkAppleMusicSubscriptionUseCase
-        self.exportAppleMusicPlaylistUseCase = exportAppleMusicPlaylistUseCase
+        self.appleMusicUseCase = appleMusicUseCase
         self.musicKitService = musicKitService
         
         bind()
@@ -59,7 +56,7 @@ final class PlaylistDetailViewModel: ObservableObject {
     
     func checkAppleMusicSubscription() {
         Task { @MainActor [weak self] in
-            let isSubscriber = try? await self?.checkAppleMusicSubscriptionUseCase.execute()
+            let isSubscriber = try? await self?.appleMusicUseCase.checkSubscription()
             self?.isAppleMusicSubscriber = isSubscriber ?? false
         }
     }
@@ -69,7 +66,7 @@ final class PlaylistDetailViewModel: ObservableObject {
         Task { @MainActor [weak self] in
             do {
                 self?.exportStatus = .inProgress
-                self?.createdPlaylistURL = try await self?.exportAppleMusicPlaylistUseCase.execute(currentPlaylist)
+                self?.createdPlaylistURL = try await self?.appleMusicUseCase.exportPlaylist(currentPlaylist)
             } catch {
                 print(error.localizedDescription)
                 self?.exportStatus = .finished
