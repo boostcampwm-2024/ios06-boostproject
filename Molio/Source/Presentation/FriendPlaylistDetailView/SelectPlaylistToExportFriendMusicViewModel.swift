@@ -1,24 +1,22 @@
 import Combine
-import Foundation
 import SwiftUI
 
 final class SelectPlaylistToExportFriendMusicViewModel: ObservableObject {
     @Published var playlists: [MolioPlaylist] = []
     @Published var selectedPlaylist: MolioPlaylist?
     
-    private let fetchAllPlaylistsUseCase: FetchAllPlaylistsUseCase
-    
+    let selectedMusic: MolioMusic
+
+    private let fetchPlaylistUseCase: FetchPlaylistUseCase
     private let manageMyPlaylistUseCase: ManageMyPlaylistUseCase
     
-    let selectedMusic: MolioMusic
-    
     init(
-        fetchAllPlaylistsUseCase: FetchAllPlaylistsUseCase = DefaultFetchAllPlaylistsUseCase(),
+        fetchPlaylistUseCase: FetchPlaylistUseCase = DefaultFetchPlaylistUseCase(),
         manageMyPlaylistUseCase: ManageMyPlaylistUseCase = DefaultManageMyPlaylistUseCase(),
         
         selectedMusic: MolioMusic
     ) {
-        self.fetchAllPlaylistsUseCase = fetchAllPlaylistsUseCase
+        self.fetchPlaylistUseCase = fetchPlaylistUseCase
         self.manageMyPlaylistUseCase = manageMyPlaylistUseCase
         self.selectedMusic = selectedMusic
         fetchPlaylists()
@@ -26,8 +24,12 @@ final class SelectPlaylistToExportFriendMusicViewModel: ObservableObject {
     
     func fetchPlaylists() {
         Task { @MainActor [weak self] in
-            guard let playlists = await self?.fetchAllPlaylistsUseCase.execute() else { return }
-            self?.playlists = playlists
+            guard let self else { return }
+            do {
+                self.playlists = try await self.fetchPlaylistUseCase.fetchMyAllPlaylists()
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
     
@@ -42,7 +44,11 @@ final class SelectPlaylistToExportFriendMusicViewModel: ObservableObject {
         
         Task {
             do {
-                try await manageMyPlaylistUseCase.addMusic(musicISRC: music.isrc, to: selectedPlaylist.id)
+                try await manageMyPlaylistUseCase
+                    .addMusic(
+                        musicISRC: music.isrc,
+                        to: selectedPlaylist.id
+                    )
             } catch {
                 print(error.localizedDescription)
             }

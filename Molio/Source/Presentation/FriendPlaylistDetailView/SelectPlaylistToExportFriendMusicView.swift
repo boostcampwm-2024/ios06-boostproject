@@ -1,14 +1,12 @@
 import Combine
-import Foundation
 import SwiftUI
 
 struct SelectPlaylistToExportFriendMusicView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel: SelectPlaylistToExportFriendMusicViewModel
     @State private var showConfirmationAlert = false
-    init(
-        viewModel: SelectPlaylistToExportFriendMusicViewModel
-    ) {
+    
+    init(viewModel: SelectPlaylistToExportFriendMusicViewModel) {
         self.viewModel = viewModel
     }
         

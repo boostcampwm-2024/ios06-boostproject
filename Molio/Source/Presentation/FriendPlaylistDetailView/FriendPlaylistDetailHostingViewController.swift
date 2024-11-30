@@ -1,11 +1,5 @@
-import UIKit
-import SwiftUI
 import Combine
-
-//func showFriendPlaylistDetail(friendUserID: String) {
-//    let viewController = FriendPlaylistDetailHostingViewController(friendUserID: friendUserID)
-//    navigationController?.pushViewController(viewController, animated: true)
-//}
+import SwiftUI
 
 final class FriendPlaylistDetailHostingViewController: UIHostingController<FriendPlaylistDetailView> {
     init(

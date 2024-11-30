@@ -3,9 +3,7 @@ import SwiftUI
 struct FriendPlaylistDetailView: View {
     @ObservedObject var viewModel: FriendPlaylistDetailViewModel
 
-    init(
-        viewModel: FriendPlaylistDetailViewModel
-    ) {
+    init(viewModel: FriendPlaylistDetailViewModel) {
         self._viewModel = ObservedObject(initialValue: viewModel)
     }
     
@@ -16,7 +14,7 @@ struct FriendPlaylistDetailView: View {
                 .padding(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-            // TODO: - 장르
+            // TODO: - 장르 태그 보여주기
 
             List { 
                 ForEach(viewModel.friendPlaylistMusics, id: \.isrc) { molioMusic in
