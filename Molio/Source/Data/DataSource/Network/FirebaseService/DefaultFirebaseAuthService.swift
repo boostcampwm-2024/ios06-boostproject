@@ -34,12 +34,28 @@ struct DefaultFirebaseAuthService: AuthService {
         }
     }
     
-    func deleteAccount() async throws {
+    func reauthenticateApple(idToken: String, nonce: String) async throws {
         guard let currentUser = Auth.auth().currentUser else {
             throw FirebaseAuthError.userNotFound
         }
-        
+        let credential = OAuthProvider.credential(
+            providerID: .apple,
+            idToken: idToken,
+            rawNonce: "nonce"
+        )
         do {
+            try await getCurrentUser().reauthenticate(with: credential)
+        } catch {
+            throw FirebaseAuthError.reauthenticateFailed
+        }
+    }
+    
+    func deleteAccount(authorizationCode: String) async throws {
+        guard let currentUser = Auth.auth().currentUser else {
+            throw FirebaseAuthError.userNotFound
+        }
+        do {
+            try await Auth.auth().revokeToken(withAuthorizationCode: authorizationCode)
             try await currentUser.delete()
         } catch let error as NSError {
             if error.code == AuthErrorCode.requiresRecentLogin.rawValue {

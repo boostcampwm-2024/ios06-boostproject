@@ -2,6 +2,8 @@ import UIKit
 import SwiftUI
 
 final class CommunityViewController: UIViewController {
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUserProfileView()

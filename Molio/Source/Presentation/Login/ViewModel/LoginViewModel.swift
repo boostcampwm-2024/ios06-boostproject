@@ -14,7 +14,6 @@ final class LoginViewModel: InputOutputViewModel {
         let error: AnyPublisher<String, Never> // TODO: Error에 따른 알림 UI 구현 및 연결
     }
     
-    private let signInAppleUseCase: SignInAppleUseCase
     private let manageAuthenticationUseCase: ManageAuthenticationUseCase
     private var currentNonce: String?
     private let navigateToNextScreenPublisher = PassthroughSubject<Void, Never>()
@@ -22,10 +21,8 @@ final class LoginViewModel: InputOutputViewModel {
     private var cancellables = Set<AnyCancellable>()
     
     init(
-        signInAppleUseCase: SignInAppleUseCase = DIContainer.shared.resolve(),
         manageAuthenticationUseCase: ManageAuthenticationUseCase = DIContainer.shared.resolve()
     ) {
-        self.signInAppleUseCase = signInAppleUseCase
         self.manageAuthenticationUseCase = manageAuthenticationUseCase
     }
     
@@ -48,8 +45,7 @@ final class LoginViewModel: InputOutputViewModel {
                 guard let self else { return }
                 Task {
                     do {
-                        try await self.signInAppleUseCase.excute(info: appleAuthinfo)
-                        self.manageAuthenticationUseCase.setAuthMode(.authenticated)
+                        try await self.manageAuthenticationUseCase.singInApple(info: appleAuthinfo)
                         self.navigateToNextScreenPublisher.send()
                     } catch {
                         self.errorPublisher.send(error.localizedDescription) // TODO: Error 메시지 지정
@@ -61,7 +57,7 @@ final class LoginViewModel: InputOutputViewModel {
         input.skipLoginButtonDidTap
             .sink { [weak self] _ in
                 guard let self else { return }
-                self.manageAuthenticationUseCase.setAuthMode(.guest)
+                self.manageAuthenticationUseCase.loginGuest()
                 self.navigateToNextScreenPublisher.send()
             }
             .store(in: &cancellables)

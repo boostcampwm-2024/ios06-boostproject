@@ -9,11 +9,6 @@ struct DefaultManageAuthenticationUseCase: ManageAuthenticationUseCase {
         return authStateRepository.authSelection == .selected
     }
     
-    func setAuthMode(_ mode: AuthMode) {
-        authStateRepository.setAuthMode(mode)
-        setAuthSelection(.selected)
-    }
-    
     func isLogin() -> Bool {
         switch authStateRepository.authMode {
         case .authenticated:
@@ -23,7 +18,26 @@ struct DefaultManageAuthenticationUseCase: ManageAuthenticationUseCase {
         }
     }
     
-    private func setAuthSelection(_ selection: AuthSelection) {
-        authStateRepository.setAuthSelection(selection)
+    func singInApple(info: AppleAuthInfo) async throws {
+        try await authStateRepository.signInApple(info: info)
+        authStateRepository.setAuthMode(.authenticated)
+        authStateRepository.setAuthSelection(.selected)
+    }
+    
+    func loginGuest() {
+        authStateRepository.setAuthMode(.guest)
+        authStateRepository.setAuthSelection(.selected)
+    }
+    
+    func logout() throws {
+        try authStateRepository.logout()
+        authStateRepository.setAuthMode(.guest)
+    }
+    
+    func deleteAuth(idToken: String, nonce: String, authorizationCode: String) async throws {
+        try await authStateRepository.reauthenticateApple(idToken: idToken, nonce: nonce)
+        try await authStateRepository.deleteAuth(authorizationCode: authorizationCode)
+        authStateRepository.setAuthSelection(.unselected)
+        authStateRepository.setAuthMode(.guest)
     }
 }

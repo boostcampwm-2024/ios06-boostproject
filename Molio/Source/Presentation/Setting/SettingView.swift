@@ -1,70 +1,96 @@
+import AuthenticationServices
 import SwiftUI
 
 struct SettingView: View {
-    let authMode: AuthMode = .authenticated
+    @ObservedObject private var viewModel: SettingViewModel
+    @State private var showLogoutAlert = false
+    @State private var showDeleteAccountAlert = false
     var didTapMyInfoView: (() -> Void)?
+    var didTapTermsAndConditionView: (() -> Void)?
+    var didTapPrivacyPolicyView: (() -> Void)?
+    var didTapLoginView: (() -> Void)?
+    var didTapDeleteAccountView: (() -> Void)?
+    
+    init(viewModel: SettingViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         VStack(spacing: 0) {
-            if authMode == .authenticated {
+            if viewModel.isLogin {
                 Button {
                     didTapMyInfoView?()
                 } label: {
-                    ProfileItemView()
+                    ProfileItemView(molioUser: $viewModel.molioUser)
                 }
-                
                 Color(UIColor(resource: .spacingBackground))
                     .frame(height: 24)
             }
-            
+            SettingTextItemView(itemType: .appVersion(viewModel.appVersion))
             Button {
-                // TODO: 앱 버전 페이지 연결
+                didTapTermsAndConditionView?()
             } label: {
-                SettingTextItemView(titleText: "앱 버전")
+                SettingTextItemView(itemType: .termsAndCondition)
             }
-            
             Button {
-                // TODO: 약관 및 개인 정보 처리 동의 페이지 연결
+                didTapPrivacyPolicyView?()
             } label: {
-                SettingTextItemView(titleText: "약관 및 개인 정보 처리 동의")
+                SettingTextItemView(itemType: .privacyPolicy)
             }
-            
-            Button {
-                // TODO: 개인정보 처리방침 페이지 연결
-            } label: {
-                SettingTextItemView(titleText: "개인정보 처리방침")
-            }
-            
             Color(UIColor(resource: .spacingBackground))
                 .frame(height: 24)
             
-            switch authMode {
-            case .authenticated:
+            if viewModel.isLogin {
                 Button {
-                    // TODO: 로그 아웃 처리
+                    showLogoutAlert = true
                 } label: {
-                    SettingTextItemView(titleText: "로그 아웃")
+                    SettingTextItemView(itemType: .logout)
                 }
-                
-                Button {
-                    // TODO: 회원 탈퇴 처리
-                } label: {
-                    SettingTextItemView(titleText: "회원 탈퇴")
+                .alert("로그아웃", isPresented: $showLogoutAlert) {
+                    Button("취소", role: .cancel) { }
+                    Button("확인", role: .destructive) {
+                        viewModel.logout()
+                    }
+                } message: {
+                    Text("정말 로그아웃 하시겠습니까?")
                 }
-            case .guest:
                 Button {
-                    // TODO: 로그인 처리
+                    showDeleteAccountAlert = true
                 } label: {
-                    SettingTextItemView(titleText: "로그인")
+                    SettingTextItemView(itemType: .deleteAccount)
+                }
+                .alert("계정탈퇴", isPresented: $showDeleteAccountAlert) {
+                    Button("취소", role: .cancel) { }
+                    Button("확인", role: .destructive) {
+                        viewModel.deleteAccount()
+                    }
+                } message: {
+                    Text("정말 계정탈퇴 하시겠습니까?")
+                }
+            } else {
+                Button {
+                    didTapLoginView?()
+                } label: {
+                    SettingTextItemView(itemType: .login)
                 }
             }
             Spacer()
         }
         .background(Color.background)
+        .animation(.spring(duration: 0.3), value: viewModel.isLogin)
+        .onAppear {
+            Task {
+                try await viewModel.fetchProfile()
+            }
+        }
+        .alert(
+            viewModel.alertState.title,
+            isPresented: $viewModel.showAlert) {
+                Button("확인") { 
+                    if viewModel.alertState == .successDeleteAccount {
+                        didTapDeleteAccountView?()
+                    }
+                }
+            }
     }
-    
-}
-
-#Preview {
-    SettingView()
 }
