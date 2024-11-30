@@ -1,7 +1,9 @@
 import SwiftUI
+import _PhotosUI_SwiftUI
 
 struct MyInfoView: View {
     @ObservedObject private var viewModel: MyInfoViewModel
+    @State private var selectedItem: PhotosPickerItem?
     @Environment(\.dismiss) private var dismiss
     @FocusState private var focusedField: Field?
     @Namespace private var topID
@@ -32,9 +34,10 @@ struct MyInfoView: View {
                         }
                         .frame(width: 110, height: 110)
                         .clipShape(Circle())
-                        Button(action: {
-                            // TODO: 이미지 선택 액션
-                        }) {
+                        PhotosPicker(
+                            selection: $selectedItem,
+                            matching: .images
+                        ) {
                             ZStack {
                                 Circle()
                                     .fill(.white)
@@ -43,6 +46,11 @@ struct MyInfoView: View {
                                 Image(systemName: "plus")
                                     .font(.system(size: 15, weight: .bold))
                                     .foregroundStyle(.black)
+                            }
+                        }
+                        .onChange(of: selectedItem) { newItem in
+                            if let item = newItem {
+                                viewModel.didSelectImage(item)
                             }
                         }
                         .offset(x: -4, y: -4)
