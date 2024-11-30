@@ -18,8 +18,8 @@ final class DefaultFetchPlaylistUseCase: FetchPlaylistUseCase {
     
     func fetchMyAllPlaylists() async throws -> [MolioPlaylist] {
         let currentUserID = try? currentUserIDUseCase.execute()
-        
-        return try await playlistRepisitory.fetchPlaylists(userID: currentUserID) ?? []
+        let playlists = try await playlistRepisitory.fetchPlaylists(userID: currentUserID) ?? []
+        return playlists
     }
     
     func fetchMyPlaylist(playlistID: UUID) async throws -> MolioPlaylist {

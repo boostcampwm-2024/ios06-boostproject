@@ -15,8 +15,7 @@ final class PlaylistDetailViewModel: ObservableObject {
             }
         }
     }
-    
-    private let publishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase
+    private let managePlaylistUseCase: ManageMyPlaylistUseCase
     private let appleMusicUseCase: AppleMusicUseCase
     private let musicKitService: MusicKitService // TODO: - 유즈케이스 분리
     
@@ -29,11 +28,11 @@ final class PlaylistDetailViewModel: ObservableObject {
     private var subscriptions: Set<AnyCancellable> = []
     
     init(
-        publishCurrentPlaylistUseCase: any PublishCurrentPlaylistUseCase = DIContainer.shared.resolve(),
+        managePlaylistUseCase: ManageMyPlaylistUseCase = DefaultManageMyPlaylistUseCase(),
         appleMusicUseCase: any AppleMusicUseCase = DIContainer.shared.resolve(),
         musicKitService: any MusicKitService = DIContainer.shared.resolve()
     ) {
-        self.publishCurrentPlaylistUseCase = publishCurrentPlaylistUseCase
+        self.managePlaylistUseCase = managePlaylistUseCase
         self.appleMusicUseCase = appleMusicUseCase
         self.musicKitService = musicKitService
         
@@ -41,7 +40,7 @@ final class PlaylistDetailViewModel: ObservableObject {
     }
 
     private func bind() {
-        publishCurrentPlaylistUseCase.execute()
+        managePlaylistUseCase.currentPlaylistPublisher()
             .receive(on: DispatchQueue.main)
             .sink { playlist in
                 guard let playlist = playlist else { return }

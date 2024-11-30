@@ -56,8 +56,6 @@ struct PlaylistDetailView: View {
 
 #Preview {
     PlaylistDetailView(
-        viewModel: PlaylistDetailViewModel(
-            publishCurrentPlaylistUseCase: MockPublishCurrentPlaylistUseCase(playlistToPublish: MolioPlaylist.mock)
-        )
+        viewModel: PlaylistDetailViewModel()
     )
 }
