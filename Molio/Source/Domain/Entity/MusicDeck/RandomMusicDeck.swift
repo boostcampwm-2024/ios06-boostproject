@@ -17,8 +17,8 @@ extension RandomMusicDeck: MusicDeck {
                let currentPlaylist = currentPlaylist {
                 try await manageMyPlaylistUseCase.addMusic(musicISRC: currentMusic.isrc, to: currentPlaylist.id)
             }
-            removeCurrentMusic()
         }
+        removeCurrentMusic()
     }
     
     func dislikeCurrentMusic() {
