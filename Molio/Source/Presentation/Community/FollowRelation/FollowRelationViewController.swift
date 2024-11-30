@@ -35,17 +35,7 @@ final class FollowRelationViewController: UIHostingController<FollowRelationList
         self.followRelation = .following
         self.friendUserID = nil
         
-        // TODO: 의존성 관리 - DIContainer
-        self.viewModel = FollowRelationViewModel(
-            followRelationUseCase: DefaultFollowRelationUseCase(
-                service: FirebaseFollowRelationService(),
-                authService: DefaultFirebaseAuthService(),
-                userUseCase: DefaultUserUseCase(
-                    service: FirebaseUserService())
-            ),
-            userUseCase: DefaultUserUseCase(
-                service: FirebaseUserService())
-        )
+        self.viewModel = FollowRelationViewModel()
         super.init(coder: aDecoder)
     }
     

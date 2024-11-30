@@ -11,16 +11,7 @@ final class CommunityViewController: UIViewController {
     
     private func setupUserProfileView() {
         let viewModelForMyProfile = UserProfileViewModel()
-        let followRelationViewModel = FollowRelationViewModel(
-            followRelationUseCase: DefaultFollowRelationUseCase(
-                service: FirebaseFollowRelationService(),
-                authService: DefaultFirebaseAuthService(),
-                userUseCase: DefaultUserUseCase(
-                    service: FirebaseUserService())
-            ),
-            userUseCase: DefaultUserUseCase(
-                service: FirebaseUserService())
-        )
+        let followRelationViewModel = FollowRelationViewModel()
         
         let userProfileViewController = UserProfileViewController(
             viewModel: viewModelForMyProfile, 

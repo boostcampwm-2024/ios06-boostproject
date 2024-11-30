@@ -10,7 +10,13 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
     
     // MARK: - Initializer
     
-    init(viewModel: UserProfileViewModel, followRelationViewModel: FollowRelationViewModel, isMyProfile: Bool, followRelation: FollowRelationType?, friendUserID: String?) {
+    init(
+        viewModel: UserProfileViewModel,
+        followRelationViewModel: FollowRelationViewModel,
+        isMyProfile: Bool,
+        followRelation: FollowRelationType?,
+        friendUserID: String?
+    ) {
         self.viewModel = viewModel
         self.followRelationViewModel = followRelationViewModel
         self.isMyProfile = isMyProfile
@@ -31,19 +37,8 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
         self.followRelation = nil
         self.friendUserID = nil
         
-        // TODO: 의존성 관리 - DIContainer
         self.viewModel = UserProfileViewModel()
-        
-        self.followRelationViewModel = FollowRelationViewModel(
-            followRelationUseCase: DefaultFollowRelationUseCase(
-                service: FirebaseFollowRelationService(),
-                authService: DefaultFirebaseAuthService(),
-                userUseCase: DefaultUserUseCase(
-                    service: FirebaseUserService())
-            ),
-            userUseCase: DefaultUserUseCase(
-                service: FirebaseUserService())
-        )
+        self.followRelationViewModel = FollowRelationViewModel()
         super.init(coder: aDecoder)
     }    
     
