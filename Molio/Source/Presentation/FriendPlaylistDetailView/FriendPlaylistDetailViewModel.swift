@@ -28,7 +28,6 @@ final class FriendPlaylistDetailViewModel: ExportFriendsMusicToMyPlaylistDelegat
 
                 // TODO: - 배포 때는 이 줄 바꾸기
                 self.friendPlaylistMusics = try await self.fetchPlaylistUseCase.fetchAllFriendMusics(friendUserID: "", playlistID: playlist.id)
-
                 debugPrint(self.friendPlaylistMusics)
             } catch {
                 debugPrint(error)
