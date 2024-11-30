@@ -91,6 +91,8 @@
 		20A5006B2CEF150F00E13440 /* SelectPlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A5006A2CEF150F00E13440 /* SelectPlaylistViewModel.swift */; };
 		881622692CE3671400E81EA0 /* RandomMusicDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881622682CE3671400E81EA0 /* RandomMusicDeck.swift */; };
 		8816226D2CE3B11C00E81EA0 /* MusicDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8816226C2CE3B11C00E81EA0 /* MusicDeck.swift */; };
+		8818D8F52CFA03470069A7F3 /* FriendPlaylistDetailHostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8818D8F42CFA03470069A7F3 /* FriendPlaylistDetailHostingViewController.swift */; };
+		8818D8F72CFA07150069A7F3 /* FriendPlaylistDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8818D8F62CFA07150069A7F3 /* FriendPlaylistDetailViewModel.swift */; };
 		881BBCB22CDCF91B00010A61 /* MockSpotifyAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881BBCAF2CDCF91B00010A61 /* MockSpotifyAPIService.swift */; };
 		881BBCB42CDCF91B00010A61 /* SpotifyTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881BBCAD2CDCF91B00010A61 /* SpotifyTokenProvider.swift */; };
 		881BBCB52CDCF91B00010A61 /* MockSpotifyTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881BBCAC2CDCF91B00010A61 /* MockSpotifyTokenProvider.swift */; };
@@ -101,6 +103,10 @@
 		881BBCBE2CDCF95600010A61 /* RecommendationsRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881BBCB82CDCF95600010A61 /* RecommendationsRequestDTO.swift */; };
 		881BBCC12CDCF97900010A61 /* MusicFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881BBCBF2CDCF97900010A61 /* MusicFilter.swift */; };
 		881BBCC22CDCF97900010A61 /* RecommendationRequestEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881BBCC02CDCF97900010A61 /* RecommendationRequestEntity.swift */; };
+		88291CBA2CFA2139007322B5 /* ExportFriendsMusicToMyPlaylistDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88291CB92CFA2139007322B5 /* ExportFriendsMusicToMyPlaylistDelegate.swift */; };
+		88291CBC2CFA25F4007322B5 /* SelectPlaylistToExportFriendMusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88291CBB2CFA25F4007322B5 /* SelectPlaylistToExportFriendMusicView.swift */; };
+		88291CBE2CFA2605007322B5 /* SelectPlaylistToExportFriendMusicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88291CBD2CFA2605007322B5 /* SelectPlaylistToExportFriendMusicViewModel.swift */; };
+		88291CC32CFB00D2007322B5 /* FriendPlaylistDetailHostingViewController+ExportFriendsMusicToMyPlaylistDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88291CC22CFB00D2007322B5 /* FriendPlaylistDetailHostingViewController+ExportFriendsMusicToMyPlaylistDelegate.swift */; };
 		884529462CF6EBC4007FD074 /* PlaylistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884529452CF6EBC4007FD074 /* PlaylistService.swift */; };
 		884529482CF6EC6D007FD074 /* FirestorePlaylistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884529472CF6EC6D007FD074 /* FirestorePlaylistService.swift */; };
 		8845294A2CF6ECDD007FD074 /* MolioPlaylistDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884529492CF6ECDD007FD074 /* MolioPlaylistDTO.swift */; };
@@ -119,6 +125,7 @@
 		88A7A9852CF85247005EA318 /* FetchPlaylistUseCaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7A9842CF85247005EA318 /* FetchPlaylistUseCaseError.swift */; };
 		88A7A9872CF85261005EA318 /* DefaultFetchPlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7A9862CF85261005EA318 /* DefaultFetchPlaylistUseCase.swift */; };
 		88A7A98A2CF852F9005EA318 /* DefaultFetchPlaylistUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7A9892CF852F9005EA318 /* DefaultFetchPlaylistUseCaseTests.swift */; };
+		88A7A9922CF8CECF005EA318 /* FriendPlaylistDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7A9912CF8CECF005EA318 /* FriendPlaylistDetailView.swift */; };
 		88C8B5EB2CEF1E130079ACB5 /* PublishAllMusicInCurrentPlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C8B5EA2CEF1E130079ACB5 /* PublishAllMusicInCurrentPlaylistUseCase.swift */; };
 		88C8B5ED2CEF1E240079ACB5 /* DefaultPublishAllMusicInCurrentPlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C8B5EC2CEF1E240079ACB5 /* DefaultPublishAllMusicInCurrentPlaylistUseCase.swift */; };
 		88C8B5F32CEF296A0079ACB5 /* PublishAllMusicInCurrentPlaylistUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C8B5F22CEF296A0079ACB5 /* PublishAllMusicInCurrentPlaylistUseCaseTests.swift */; };
@@ -352,6 +359,8 @@
 		881622682CE3671400E81EA0 /* RandomMusicDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomMusicDeck.swift; sourceTree = "<group>"; };
 		8816226A2CE3838B00E81EA0 /* MusicDeckTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicDeckTests.swift; sourceTree = "<group>"; };
 		8816226C2CE3B11C00E81EA0 /* MusicDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicDeck.swift; sourceTree = "<group>"; };
+		8818D8F42CFA03470069A7F3 /* FriendPlaylistDetailHostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendPlaylistDetailHostingViewController.swift; sourceTree = "<group>"; };
+		8818D8F62CFA07150069A7F3 /* FriendPlaylistDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendPlaylistDetailViewModel.swift; sourceTree = "<group>"; };
 		881BBCAC2CDCF91B00010A61 /* MockSpotifyTokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSpotifyTokenProvider.swift; sourceTree = "<group>"; };
 		881BBCAD2CDCF91B00010A61 /* SpotifyTokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyTokenProvider.swift; sourceTree = "<group>"; };
 		881BBCAF2CDCF91B00010A61 /* MockSpotifyAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSpotifyAPIService.swift; sourceTree = "<group>"; };
@@ -362,6 +371,10 @@
 		881BBCBA2CDCF95600010A61 /* TrackDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDTO.swift; sourceTree = "<group>"; };
 		881BBCBF2CDCF97900010A61 /* MusicFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicFilter.swift; sourceTree = "<group>"; };
 		881BBCC02CDCF97900010A61 /* RecommendationRequestEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationRequestEntity.swift; sourceTree = "<group>"; };
+		88291CB92CFA2139007322B5 /* ExportFriendsMusicToMyPlaylistDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportFriendsMusicToMyPlaylistDelegate.swift; sourceTree = "<group>"; };
+		88291CBB2CFA25F4007322B5 /* SelectPlaylistToExportFriendMusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPlaylistToExportFriendMusicView.swift; sourceTree = "<group>"; };
+		88291CBD2CFA2605007322B5 /* SelectPlaylistToExportFriendMusicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPlaylistToExportFriendMusicViewModel.swift; sourceTree = "<group>"; };
+		88291CC22CFB00D2007322B5 /* FriendPlaylistDetailHostingViewController+ExportFriendsMusicToMyPlaylistDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendPlaylistDetailHostingViewController+ExportFriendsMusicToMyPlaylistDelegate.swift"; sourceTree = "<group>"; };
 		884529452CF6EBC4007FD074 /* PlaylistService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistService.swift; sourceTree = "<group>"; };
 		884529472CF6EC6D007FD074 /* FirestorePlaylistService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestorePlaylistService.swift; sourceTree = "<group>"; };
 		884529492CF6ECDD007FD074 /* MolioPlaylistDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MolioPlaylistDTO.swift; sourceTree = "<group>"; };
@@ -380,6 +393,7 @@
 		88A7A9842CF85247005EA318 /* FetchPlaylistUseCaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPlaylistUseCaseError.swift; sourceTree = "<group>"; };
 		88A7A9862CF85261005EA318 /* DefaultFetchPlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFetchPlaylistUseCase.swift; sourceTree = "<group>"; };
 		88A7A9892CF852F9005EA318 /* DefaultFetchPlaylistUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFetchPlaylistUseCaseTests.swift; sourceTree = "<group>"; };
+		88A7A9912CF8CECF005EA318 /* FriendPlaylistDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendPlaylistDetailView.swift; sourceTree = "<group>"; };
 		88C8B5EA2CEF1E130079ACB5 /* PublishAllMusicInCurrentPlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishAllMusicInCurrentPlaylistUseCase.swift; sourceTree = "<group>"; };
 		88C8B5EC2CEF1E240079ACB5 /* DefaultPublishAllMusicInCurrentPlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPublishAllMusicInCurrentPlaylistUseCase.swift; sourceTree = "<group>"; };
 		88C8B5F22CEF296A0079ACB5 /* PublishAllMusicInCurrentPlaylistUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishAllMusicInCurrentPlaylistUseCaseTests.swift; sourceTree = "<group>"; };
@@ -847,6 +861,16 @@
 			path = SpotifyAPIService;
 			sourceTree = "<group>";
 		};
+		88291CC12CFA3072007322B5 /* FriendPlaylistDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				88BB232A2CFB443B00521BF6 /* View */,
+				88BB232C2CFB444A00521BF6 /* Delegate */,
+				88BB232B2CFB444300521BF6 /* ViewModel */,
+			);
+			path = FriendPlaylistDetailView;
+			sourceTree = "<group>";
+		};
 		8845294D2CF7128D007FD074 /* PlaylistService */ = {
 			isa = PBXGroup;
 			children = (
@@ -883,6 +907,34 @@
 				88A7A9842CF85247005EA318 /* FetchPlaylistUseCaseError.swift */,
 			);
 			path = RealPlaylistUseCase;
+			sourceTree = "<group>";
+		};
+		88BB232A2CFB443B00521BF6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				88A7A9912CF8CECF005EA318 /* FriendPlaylistDetailView.swift */,
+				8818D8F42CFA03470069A7F3 /* FriendPlaylistDetailHostingViewController.swift */,
+				88291CBB2CFA25F4007322B5 /* SelectPlaylistToExportFriendMusicView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		88BB232B2CFB444300521BF6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				88291CBD2CFA2605007322B5 /* SelectPlaylistToExportFriendMusicViewModel.swift */,
+				8818D8F62CFA07150069A7F3 /* FriendPlaylistDetailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		88BB232C2CFB444A00521BF6 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				88291CB92CFA2139007322B5 /* ExportFriendsMusicToMyPlaylistDelegate.swift */,
+				88291CC22CFB00D2007322B5 /* FriendPlaylistDetailHostingViewController+ExportFriendsMusicToMyPlaylistDelegate.swift */,
+			);
+			path = Delegate;
 			sourceTree = "<group>";
 		};
 		88C8B5E92CEF1DF60079ACB5 /* PublishAllMusicInCurrentPlaylistUseCase */ = {
@@ -1009,6 +1061,7 @@
 				F173691C2CDB991D00F6242C /* SwipeMusic */,
 				B88F80B72CE48906000480E6 /* MusicFilter */,
 				F1E405892CEB8FA400533701 /* Login */,
+				88291CC12CFA3072007322B5 /* FriendPlaylistDetailView */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -1942,6 +1995,7 @@
 				206149212CF84A9700FDE96D /* DefaultManageMyPlaylistUseCase.swift in Sources */,
 				20150EC62CEA36B700FC8883 /* Playlist+CoreDataProperties.swift in Sources */,
 				B8D553EE2CDFE2C0007CCD6D /* HTTPResponseStatusCode.swift in Sources */,
+				88A7A9922CF8CECF005EA318 /* FriendPlaylistDetailView.swift in Sources */,
 				B867AE712CF9C05700ACCEDC /* ExportPlaylistImageViewController.swift in Sources */,
 				88F6E4AB2CEC8B5A00739648 /* PublishCurrentPlaylistUseCase.swift in Sources */,
 				2082A0A22CF9C41800E8F2D9 /* FollowRelationListView.swift in Sources */,
@@ -2007,6 +2061,7 @@
 				F17369462CDF24A100F6242C /* FetchRecommendedMusicUseCase.swift in Sources */,
 				F17369612CE36D8000F6242C /* FetchImageUseCase.swift in Sources */,
 				F1865EDA2CF63959007C1E5A /* NickNameTextFieldView.swift in Sources */,
+				88291CBE2CFA2605007322B5 /* SelectPlaylistToExportFriendMusicViewModel.swift in Sources */,
 				F1865ED82CF62BBB007C1E5A /* MyInfoViewModel.swift in Sources */,
 				20A5006B2CEF150F00E13440 /* SelectPlaylistViewModel.swift in Sources */,
 				88F9B5FC2CEDDDAE002C1114 /* PlaylistDetailViewModel.swift in Sources */,
@@ -2017,7 +2072,9 @@
 				F17369702CE3710A00F6242C /* ImageFetchService.swift in Sources */,
 				2010484F2CEA0B300015E800 /* BasicButton.swift in Sources */,
 				881BBCB22CDCF91B00010A61 /* MockSpotifyAPIService.swift in Sources */,
+				88291CBA2CFA2139007322B5 /* ExportFriendsMusicToMyPlaylistDelegate.swift in Sources */,
 				206148EF2CF704C400FDE96D /* FollowRelationService.swift in Sources */,
+				8818D8F52CFA03470069A7F3 /* FriendPlaylistDetailHostingViewController.swift in Sources */,
 				F17369522CDFA7DC00F6242C /* SongMapper.swift in Sources */,
 				F17369742CE3733300F6242C /* ImageFecthError.swift in Sources */,
 				2075FEC62CECDE37009834BE /* DefaultChangeCurrentPlaylistIUseCase.swift in Sources */,
@@ -2037,6 +2094,7 @@
 				2009183C2CEC9C0E0058D8C7 /* CurrentPlaylistRepository.swift in Sources */,
 				8845294F2CF7158D007FD074 /* BidirectionalMapper.swift in Sources */,
 				B82B28922CF255C900D67725 /* showAlert.swift in Sources */,
+				8818D8F72CFA07150069A7F3 /* FriendPlaylistDetailViewModel.swift in Sources */,
 				F135BCF82CF45E39006C6C4F /* SplashViewController.swift in Sources */,
 				F17368FB2CD86B1100F6242C /* SceneDelegate.swift in Sources */,
 				206148F12CF704D800FDE96D /* FollowRelationDTO.swift in Sources */,
@@ -2045,6 +2103,8 @@
 				F17369232CDC5E5F00F6242C /* MusicTagView.swift in Sources */,
 				B867AE762CFAF1D100ACCEDC /* AppleMusicUseCase.swift in Sources */,
 				B8378BC42CF6E00700737125 /* PlatformSelectionView.swift in Sources */,
+				88291CBC2CFA25F4007322B5 /* SelectPlaylistToExportFriendMusicView.swift in Sources */,
+				88291CC32CFB00D2007322B5 /* FriendPlaylistDetailHostingViewController+ExportFriendsMusicToMyPlaylistDelegate.swift in Sources */,
 				20A500692CEF119000E13440 /* SelectPlaylistView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

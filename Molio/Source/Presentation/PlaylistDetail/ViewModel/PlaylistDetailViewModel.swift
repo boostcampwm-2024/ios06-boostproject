@@ -47,7 +47,7 @@ final class PlaylistDetailViewModel: ObservableObject {
                 guard let playlist = playlist else { return }
                 self.currentPlaylist = playlist
                 Task { @MainActor [weak self] in
-                    let playlistMusics = try await self?.fetchPlaylistUseCase.fetchAllMusicIn(playlistID: playlist.id)
+                    let playlistMusics = try await self?.fetchPlaylistUseCase.fetchAllMyMusicIn(playlistID: playlist.id)
                     self?.currentPlaylistMusics = playlistMusics ?? []
                 }
             }

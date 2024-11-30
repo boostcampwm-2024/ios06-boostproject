@@ -34,7 +34,7 @@ final class DefaultFetchPlaylistUseCase: FetchPlaylistUseCase {
         return playlist
     }
     
-    func fetchAllMusicIn(playlistID: UUID) async throws -> [MolioMusic] {
+    func fetchAllMyMusicIn(playlistID: UUID) async throws -> [MolioMusic] {
         let playlist = try await fetchMyPlaylist(playlistID: playlistID)
         
         let musicsInPlaylist = await musicKitService.getMusic(with: playlist.musicISRCs)

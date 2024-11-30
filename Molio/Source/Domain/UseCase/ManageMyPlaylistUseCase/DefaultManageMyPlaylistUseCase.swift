@@ -7,8 +7,8 @@ final class DefaultManageMyPlaylistUseCase:
     private let repository: RealPlaylistRepository
     
     init(
-        currentUserIdUseCase: CurrentUserIdUseCase,
-        repository: RealPlaylistRepository
+        currentUserIdUseCase: CurrentUserIdUseCase = DefaultCurrentUserIdUseCase(),
+        repository: RealPlaylistRepository = DefaultPlaylistRepository()
     ) {
         self.currentUserIdUseCase = currentUserIdUseCase
         self.repository = repository

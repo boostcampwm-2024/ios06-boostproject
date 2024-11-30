@@ -23,7 +23,7 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
         rootView.didSettingButtonTapped = navigateToSettingViewController
         rootView.didFollowerButtonTapped = navigationToFollowerListView
         rootView.didFollowingButtonTapped = navigationToFollowingListView
-        rootView.didFollowerButtonTapped = navigationToFollowerListView
+        rootView.didPlaylistCellTapped = navigationToFriendPlaylistListView
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -102,8 +102,8 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
         navigationController?.pushViewController(followerListViewController, animated: true)
     }
     
-    private func presentPlaylistList() {
-        print("플레이리스트 목록 클릭 시 이동") // TODO: 플레이리스트 목록 뷰으로 이동하는 코드 추가
+    private func navigationToFriendPlaylistListView(playlist: MolioPlaylist) {
+        let friendPlaylistListViewController = FriendPlaylistDetailHostingViewController(playlist: playlist)
+        navigationController?.pushViewController(friendPlaylistListViewController, animated: true)
     }
-
 }
