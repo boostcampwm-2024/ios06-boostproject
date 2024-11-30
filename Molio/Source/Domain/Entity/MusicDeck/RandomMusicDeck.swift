@@ -51,7 +51,13 @@ final class RandomMusicDeck {
     // MARK: 생성자
     
     init(
-        manageMyPlaylistUseCase: any ManageMyPlaylistUseCase = DIContainer.shared.resolve(),
+        manageMyPlaylistUseCase: any ManageMyPlaylistUseCase = DefaultManageMyPlaylistUseCase(
+            currentUserIdUseCase: DefaultCurrentUserIdUseCase(
+                authService: DefaultFirebaseAuthService(),
+                usecase: DefaultManageAuthenticationUseCase()),
+            repository: DefaultPlaylistRepository(
+                playlistService: FirestorePlaylistService(),
+                playlistStorage: CoreDataPlaylistStorage())),
         publishCurrentPlaylistUseCase: any PublishCurrentPlaylistUseCase = DIContainer.shared.resolve(),
         fetchRecommendedMusicUseCase: any FetchRecommendedMusicUseCase = DIContainer.shared.resolve()
     ) {
