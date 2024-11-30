@@ -1235,6 +1235,16 @@
 			path = ExportAppleMusicPlaylist;
 			sourceTree = "<group>";
 		};
+		B885DB732CFB9A2500719AA6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B89FFA852CFB8B1D0072F92B /* UserInfoCell.swift */,
+				B89FFA872CFB8FC50072F92B /* SearchBar.swift */,
+				B885DB712CFB93AE00719AA6 /* SearchUserView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		B88F80B72CE48906000480E6 /* MusicFilter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1247,9 +1257,7 @@
 		B89FFA842CFB8B0B0072F92B /* SearchUser */ = {
 			isa = PBXGroup;
 			children = (
-				B89FFA852CFB8B1D0072F92B /* UserInfoCell.swift */,
-				B89FFA872CFB8FC50072F92B /* SearchBar.swift */,
-				B885DB712CFB93AE00719AA6 /* SearchUserView.swift */,
+				B885DB732CFB9A2500719AA6 /* View */,
 			);
 			path = SearchUser;
 			sourceTree = "<group>";
