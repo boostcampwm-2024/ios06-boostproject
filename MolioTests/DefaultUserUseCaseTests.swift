@@ -23,12 +23,9 @@ final class DefaultUserUseCaseTests: XCTestCase {
         let imageURL = URL(string: "https://example.com/image.jpg")
         let description = "This is a test user."
 
-        try await userUseCase.createUser(userID: userID, userName: userName, imageURL: imageURL, description: description)
+        try await userUseCase.createUser(userName: userName)
         
-        XCTAssertEqual(mockService.createdUser?.id, userID)
         XCTAssertEqual(mockService.createdUser?.name, userName)
-        XCTAssertEqual(mockService.createdUser?.profileImageURL, imageURL?.absoluteString)
-        XCTAssertEqual(mockService.createdUser?.description, description)
     }
     
     func testFetchUser() async throws {
