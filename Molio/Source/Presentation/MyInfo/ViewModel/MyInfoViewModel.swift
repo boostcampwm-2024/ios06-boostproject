@@ -12,6 +12,7 @@ final class MyInfoViewModel: ObservableObject {
     @Published var userNickName: String
     @Published var userDescription: String
     @Published var showAlert = false
+    @Published var isLoading = false
     
     private let currentUserIdUseCase: CurrentUserIdUseCase
     private let userUseCase: UserUseCase
@@ -51,6 +52,11 @@ final class MyInfoViewModel: ObservableObject {
     
     func updateUser() async throws {
         guard let userID = try currentUserIdUseCase.execute() else { return }
+        
+        await MainActor.run {
+            self.isLoading = true
+        }
+        
         do {
             try await userUseCase.updateUser(
                 userID: userID,
@@ -61,10 +67,12 @@ final class MyInfoViewModel: ObservableObject {
             await MainActor.run {
                 self.alertState = .successUpdate
                 self.showAlert = true
+                self.isLoading = false
             }
         } catch {
             self.alertState = .failureUpdate
             self.showAlert = true
+            self.isLoading = false
         }
     }
     
