@@ -48,7 +48,7 @@ final class DefaultManageMyPlaylistUseCase:
     }
     
     func createPlaylist(playlistName: String) async throws {
-        guard let userID = try currentUserIdUseCase.execute() else { return }
+        let userID = try currentUserIdUseCase.execute()
         
         let newPlaylistID = UUID()
         try await playlistRepository.createNewPlaylist(userID: userID, playlistID: newPlaylistID, playlistName)
@@ -122,7 +122,6 @@ final class DefaultManageMyPlaylistUseCase:
     private func updatePlaylist(playlistID: UUID, name: String? = nil, musicISRCs: [String]? = nil, filter: MusicFilter? = nil, like: [String]? = nil) async throws {
         let userID = try currentUserIdUseCase.execute()
 
-        
         guard let playlist = try await playlistRepository.fetchPlaylist(userID: userID, for: playlistID) else { return }
         
         let newPlaylist = playlist.copy(name: name, musicISRCs: musicISRCs, filter: filter, like: like)
