@@ -6,14 +6,12 @@ final class FirebaseStorageManager {
     
     func uploadImage(
         imageData: Data,
-        folder: String,
-        fileName: String = UUID().uuidString,
-        completion: @escaping (Result <String, Error>) -> Void
-    ) {
+        folder: FolderType,
+        userID fileName: String
+    ) async throws -> URL {
         
         guard !imageData.isEmpty else {
-            completion(.failure(FirebaseStorageError.invalidImageData))
-            return
+            throw FirebaseStorageError.invalidImageData
         }
         
         // 1. Storage 경로 생성
@@ -21,22 +19,12 @@ final class FirebaseStorageManager {
         
         // 2. Storage에 업로드
         let storageRef = storage.reference().child(storagePath)
-        storageRef.putData(imageData, metadata: nil) { _, error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            // 3. 업로드 완료 후 다운로드 URL 가져오기
-            storageRef.downloadURL { url, error in
-                if let error = error {
-                    completion(.failure(error))
-                } else if let url = url {
-                    completion(.success(url.absoluteString))
-                } else {
-                    completion(.failure(FirebaseStorageError.notFound))
-                }
-            }
-        }
+        _ = try await storageRef.putDataAsync(imageData, metadata: nil)
+        
+        return try await storageRef.downloadURL()
+    }
+    
+    enum FolderType: String {
+        case profileImage
     }
 }

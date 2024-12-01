@@ -28,8 +28,9 @@ final class SettingViewController: UIHostingController<SettingView> {
     // MARK: - Private func
     
     private func setupButtonAction() {
-        rootView.didTapMyInfoView = { [weak self] in
-            let myInfoViewModel = MyInfoViewModel()
+        rootView.didTapMyInfoView = { [weak self] currentUserInfo  in
+            guard let currentUserInfo = currentUserInfo else { return }
+            let myInfoViewModel = MyInfoViewModel(currentUser: currentUserInfo)
             let myInfoViewController = MyInfoViewController(viewModel: myInfoViewModel)
             self?.navigationController?.pushViewController(myInfoViewController, animated: true)
         }

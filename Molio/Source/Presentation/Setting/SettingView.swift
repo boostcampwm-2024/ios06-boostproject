@@ -5,7 +5,7 @@ struct SettingView: View {
     @ObservedObject private var viewModel: SettingViewModel
     @State private var showLogoutAlert = false
     @State private var showDeleteAccountAlert = false
-    var didTapMyInfoView: (() -> Void)?
+    var didTapMyInfoView: ((_ currentUser: MolioUser?) -> Void)?
     var didTapTermsAndConditionView: (() -> Void)?
     var didTapPrivacyPolicyView: (() -> Void)?
     var didTapLoginView: (() -> Void)?
@@ -19,7 +19,7 @@ struct SettingView: View {
         VStack(spacing: 0) {
             if viewModel.isLogin {
                 Button {
-                    didTapMyInfoView?()
+                    didTapMyInfoView?(viewModel.molioUser)
                 } label: {
                     ProfileItemView(molioUser: $viewModel.molioUser)
                 }

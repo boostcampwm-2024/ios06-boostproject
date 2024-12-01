@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(PlaylistService.self, dependency: FirestorePlaylistService())
         container.register(PlaylistLocalStorage.self, dependency: CoreDataPlaylistStorage())
         container.register(FollowRelationService.self, dependency: FirebaseFollowRelationService())
+        container.register(FirebaseStorageManager.self, dependency: FirebaseStorageManager())
         
         // Repository
         container.register(RecommendedMusicRepository.self, dependency: DefaultRecommendedMusicRepository())
