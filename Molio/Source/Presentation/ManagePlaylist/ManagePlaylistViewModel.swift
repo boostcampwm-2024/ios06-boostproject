@@ -44,7 +44,9 @@ final class ManagePlaylistViewModel: ObservableObject {
     
     /// 현재 플레이리스트를 선택하는 함수
     func setCurrentPlaylist(_ playlist: MolioPlaylist) {
-        currentPlaylist = playlist
+        Task { @MainActor in
+            currentPlaylist = playlist
+        }
     }
     
     /// 현재플레이리스트를 저장하는 함수

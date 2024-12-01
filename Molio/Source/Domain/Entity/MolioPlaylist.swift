@@ -7,7 +7,7 @@ struct MolioPlaylist: Identifiable, Hashable {
     let createdAt: Date
     let musicISRCs: [String]
     let filter: MusicFilter
-    let like: [String]? // TODO
+    let like: [String]
 
     init(
         id: UUID,
@@ -16,7 +16,7 @@ struct MolioPlaylist: Identifiable, Hashable {
         createdAt: Date,
         musicISRCs: [String],
         filter: MusicFilter,
-        like: [String]? = []
+        like: [String] = []
     ) {
         self.id = id
         self.authorID = authorID
