@@ -28,7 +28,7 @@ struct DefaultFollowRelationUseCase: FollowRelationUseCase {
     }
     
     func fetchFollowRelation(for userID: String) async throws -> FollowRelationType {
-        let currentUserID = try authService.getCurrentID()
+        let currentUserID = try await fetchMyUserID()
         let relation = try await service.readFollowRelation(
             followingID: currentUserID,
             followerID: userID,
@@ -49,9 +49,14 @@ struct DefaultFollowRelationUseCase: FollowRelationUseCase {
         let followingRelations = try await service.readFollowRelation(
             followingID: currentUserID, // 내가 followingID로 등록된 관계
             followerID: nil,
-            state: nil // state는 더 이상 필요 없음
+            state: nil
         )
-        return try await convertToMolioFollowers(from: followingRelations.map { $0.follower })
+        
+        // 팔로잉 상태 포함하여 MolioFollower 변환
+        return try await convertToMolioFollowers(
+            from: followingRelations.map { $0.follower },
+            currentUserID: currentUserID
+        )
     }
 
     /// 나를 팔로잉한 사용자 목록
@@ -62,7 +67,12 @@ struct DefaultFollowRelationUseCase: FollowRelationUseCase {
             followerID: currentUserID, // 내가 followerID로 등록된 관계
             state: nil
         )
-        return try await convertToMolioFollowers(from: followerRelations.map { $0.following })
+        
+        // 팔로우 상태 포함하여 MolioFollower 변환
+        return try await convertToMolioFollowers(
+            from: followerRelations.map { $0.following },
+            currentUserID: currentUserID
+        )
     }
 
     /// 친구가 팔로잉한 사용자 목록
@@ -72,7 +82,12 @@ struct DefaultFollowRelationUseCase: FollowRelationUseCase {
             followerID: nil,
             state: nil
         )
-        return try await convertToMolioFollowers(from: followingRelations.map { $0.follower })
+        
+        // 친구의 팔로잉 상태 포함하여 MolioFollower 변환
+        return try await convertToMolioFollowers(
+            from: followingRelations.map { $0.follower },
+            currentUserID: friendID
+        )
     }
 
     /// 친구를 팔로잉한 사용자 목록
@@ -82,7 +97,12 @@ struct DefaultFollowRelationUseCase: FollowRelationUseCase {
             followerID: friendID, // 친구가 followerID로 등록된 관계
             state: nil
         )
-        return try await convertToMolioFollowers(from: followerRelations.map { $0.following })
+        
+        // 친구의 팔로워 상태 포함하여 MolioFollower 변환
+        return try await convertToMolioFollowers(
+            from: followerRelations.map { $0.following },
+            currentUserID: friendID
+        )
     }
     
     /// 팔로잉 여부를 포함한 모든 사용자의 목록 
@@ -114,6 +134,34 @@ struct DefaultFollowRelationUseCase: FollowRelationUseCase {
             )
         }
     }
+    
+    /// 팔로잉 여부를 포함한 사용자 불러오기
+    func fetchFollower(userID: String) async throws -> MolioFollower {
+        let user = try await userUseCase.fetchUser(userID: userID)
+        
+        // 현재 로그인한 사용자 ID
+        let currentUserID = try await fetchMyUserID()
+        
+        // 내가 팔로우한 사용자 목록 가져옴
+        let relations = try await service.readFollowRelation(
+            followingID: currentUserID, // 내가 followingID로 등록된 관계
+            followerID: nil,
+            state: nil
+        )
+        
+        // 내가 팔로우한 사용자 ID 목록
+        let followingIDs = Set(relations.map { $0.follower })
+        
+        // 모든 사용자 데이터를 MolioFollower로 변환하며 내가 팔로우했는지 여부를 설정
+        return MolioFollower(
+                id: user.id,
+                name: user.name,
+                profileImageURL: user.profileImageURL,
+                description: user.description,
+                followRelation: followingIDs.contains(user.id) ? .following : .unfollowing
+            )
+        
+    }
 
     // MARK: - Private Helpers
 
@@ -122,19 +170,33 @@ struct DefaultFollowRelationUseCase: FollowRelationUseCase {
     }
 
     /// 사용자 ID 목록을 기반으로 사용자 데이터를 가져와 MolioFollower로 변환
-    private func convertToMolioFollowers(from userIDs: [String]) async throws -> [MolioFollower] {
+    private func convertToMolioFollowers(
+        from userIDs: [String],
+        currentUserID: String
+    ) async throws -> [MolioFollower] {
+        // 현재 사용자가 팔로우 중인 사용자 ID를 가져옴
+        let followingRelations = try await service.readFollowRelation(
+            followingID: currentUserID,
+            followerID: nil,
+            state: nil
+        )
+        let followingIDs = Set(followingRelations.map { $0.follower })
+
+        // 사용자 데이터를 가져옴
         let users = try await fetchUsers(from: userIDs)
+
+        // 사용자 데이터를 MolioFollower로 변환하며 팔로우 상태 설정
         return users.map { user in
-            MolioFollower(
+            let isFollowing = followingIDs.contains(user.id)
+            return MolioFollower(
                 id: user.id,
                 name: user.name,
                 profileImageURL: user.profileImageURL,
                 description: user.description,
-                followRelation: .following // 모든 사용자는 true로 가정
+                followRelation: isFollowing ? .following : .unfollowing
             )
         }
     }
-
     /// 사용자 ID 목록을 기반으로 사용자 데이터를 가져옴
     private func fetchUsers(from userIDs: [String]) async throws -> [MolioUser] {
         return try await withThrowingTaskGroup(of: MolioUser?.self) { group in

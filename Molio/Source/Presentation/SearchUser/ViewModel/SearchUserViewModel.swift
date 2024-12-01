@@ -22,13 +22,14 @@ final class SearchUserViewModel: ObservableObject {
     }
     
     @MainActor
-    func fetchAllUsers() {
-        Task {
-            do {
-                allUsers = try await followRelationUseCase.fetchAllFollowers()
-            } catch {
-                print("검색 유저들을 불러오지 못함.")
+    func fetchAllUsers() async {
+        do {
+            let followers = try await followRelationUseCase.fetchAllFollowers()
+            DispatchQueue.main.async {
+                self.allUsers = followers
             }
+        } catch {
+            print("Error fetching followers: \(error.localizedDescription)")
         }
     }
     
@@ -70,7 +71,7 @@ final class SearchUserViewModel: ObservableObject {
             case .unfollowing:
                 try await followRelationUseCase.requestFollowing(to: user.id)
             }
-
+            
             await reloadUsers()
         } catch {
             print("Failed to update follow state: \(error.localizedDescription)")

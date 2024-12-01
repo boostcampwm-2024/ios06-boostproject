@@ -6,6 +6,8 @@ struct FollowRelationListView: View {
     private let friendUserID: String?
     @State private var showAlert: Bool = false
     @State private var selectedUser: MolioFollower?
+    
+    var didUserInfoCellTapped: ((MolioFollower) -> Void)?
 
     init(
         viewModel: FollowRelationViewModel,
@@ -26,17 +28,21 @@ struct FollowRelationListView: View {
             } else {
                 ScrollView(.vertical, showsIndicators: true) {
                     ForEach(viewModel.users, id: \.id) { user in
-                        UserInfoCell(
-                            user: user,
-                            followRelationType: followRelationType
-                        ) { followType in
-                            if followType == .following {
-                                // 언팔로우 시 Alert 표시
-                                selectedUser = user
-                                showAlert = true
-                            } else {
-                                Task {
-                                    await viewModel.updateFollowState(for: user, to: followType, friendUserID: friendUserID)
+                        Button(action: {
+                            didUserInfoCellTapped?(user)
+                        }) {
+                            UserInfoCell(
+                                user: user,
+                                followRelationType: user.followRelation
+                            ) { followType in
+                                if followType == .following {
+                                    // 언팔로우 시 Alert 표시
+                                    selectedUser = user
+                                    showAlert = true
+                                } else {
+                                    Task {
+                                        await viewModel.updateFollowState(for: user, to: followType, friendUserID: friendUserID)
+                                    }
                                 }
                             }
                         }
@@ -53,7 +59,7 @@ struct FollowRelationListView: View {
                 primaryButton: .destructive(Text("언팔로우")) {
                     if let user = selectedUser {
                         Task {
-                            await viewModel.updateFollowState(for: user, to: followRelationType, friendUserID: friendUserID)
+                            await viewModel.updateFollowState(for: user, to: user.followRelation, friendUserID: friendUserID)
                         }
                     }
                 },

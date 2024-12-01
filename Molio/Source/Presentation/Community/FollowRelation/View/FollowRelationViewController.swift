@@ -17,6 +17,11 @@ final class FollowRelationViewController: UIHostingController<FollowRelationList
             friendUserID: friendUserID
         )
         super.init(rootView: followRelationListView)
+        
+        rootView.didUserInfoCellTapped = { [weak self] selectedUser in
+            guard let self else { return }
+            self.navigateTofriendViewController(with: selectedUser)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,5 +40,15 @@ final class FollowRelationViewController: UIHostingController<FollowRelationList
     }
     
     // MARK: - Present Sheet or Navigation
+    
+    private func navigateTofriendViewController(with user: MolioFollower) {
+        let friendProfileViewController = FriendProfileViewController(
+            profileType: .friend (
+                userID: user.id,
+                isFollowing: user.followRelation
+            )
+        )
+        navigationController?.pushViewController(friendProfileViewController, animated: true)
+    }
 }
 

@@ -5,7 +5,7 @@ final class UserProfileViewModel: ObservableObject {
     @Published var playlists: [MolioPlaylist] = []
     @Published var followings: [MolioFollower] = []
     @Published var followers: [MolioFollower] = []
-    @Published var user: MolioUser?
+    @Published var user: MolioFollower?
     @Published var profileType: ProfileType
     @Published var isLoading: Bool = false
 
@@ -44,7 +44,7 @@ final class UserProfileViewModel: ObservableObject {
         playlists: [MolioPlaylist],
         followers: [MolioFollower],
         followings: [MolioFollower],
-        user: MolioUser?
+        user: MolioFollower?
     ) {
         async let playlists = fetchPlaylists()
         async let followers = fetchFollowers()
@@ -85,12 +85,13 @@ final class UserProfileViewModel: ObservableObject {
     }
     
     /// 사용자 정보 가져오기
-    private func fetchUser() async throws -> MolioUser? {
+    private func fetchUser() async throws -> MolioFollower? {
         switch profileType {
         case .me:
-            return try? await userUseCase.fetchCurrentUser()
+            let user = try? await userUseCase.fetchCurrentUser()
+            return user?.convertToFollower(followRelation: .following)
         case .friend(let userID, _):
-            return try? await userUseCase.fetchUser(userID: userID)
+            return try? await followRelationUseCase.fetchFollower(userID: userID)
         }
     }
     
@@ -100,7 +101,7 @@ final class UserProfileViewModel: ObservableObject {
         playlists: [MolioPlaylist],
         followers: [MolioFollower],
         followings: [MolioFollower],
-        user: MolioUser?
+        user: MolioFollower?
     ) {
         self.playlists = playlists
         self.followers = followers
@@ -121,22 +122,9 @@ final class UserProfileViewModel: ObservableObject {
                 try await followRelationUseCase.requestFollowing(to: user.id)
             }
 
-            await refreshFollowState()
-            try await fetchData()
+            await fetchData()
         } catch {
             print("Failed to update follow state: \(error.localizedDescription)")
-        }
-    }
-    
-    @MainActor
-    private func refreshFollowState() async {
-        guard let user else { return }
-        do {
-            let updatedFollowRelation = try await followRelationUseCase.fetchFollowRelation(for: user.id)
-            profileType = .friend(userID: user.id, isFollowing: updatedFollowRelation)
-
-        } catch {
-            print("Failed to refresh follow state: \(error.localizedDescription)")
         }
     }
 }

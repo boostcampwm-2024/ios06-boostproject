@@ -22,6 +22,7 @@ final class FollowRelationViewModel: ObservableObject {
         switch followRelationType {
         case .unfollowing: // 팔로워
             users = try await followRelationUseCase.fetchMyFollowerList()
+            print(users)
         case .following: // 팔로잉
             users = try await followRelationUseCase.fetchMyFollowingList()
         }
@@ -48,7 +49,7 @@ final class FollowRelationViewModel: ObservableObject {
             case .unfollowing:
                 try await followRelationUseCase.requestFollowing(to: user.id)
             }
-
+            
             try await fetchData(followRelationType: type, friendUserID: friendUserID)
         } catch {
             print("Failed to update follow state: \(error.localizedDescription)")

@@ -57,7 +57,9 @@ struct SearchUserView: View {
             )
         }
         .onAppear {
-            viewModel.fetchAllUsers()
+            Task {
+                await viewModel.fetchAllUsers()
+            }
         }
     }
 }

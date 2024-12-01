@@ -3,7 +3,6 @@ import SwiftUI
 struct UserProfileView: View {
     @StateObject var viewModel: UserProfileViewModel
     @State private var showAlert: Bool = false
-    @State private var selectedUser: MolioFollower?
     
     var didSettingButtonTapped: (() -> Void)?
     var didFollowingButtonTapped: (() -> Void)?
@@ -90,10 +89,14 @@ struct UserProfileView: View {
                     }
                     
                     // MARK: - 팔로우 버튼
-                    if case let .friend(_, isFollowing) = viewModel.profileType {
-                        FollowRelationButton(type: isFollowing){
-                            Task {
-                                await viewModel.updateFollowState(to: isFollowing)
+                    if let followRelation = viewModel.user?.followRelation {
+                        FollowRelationButton(type:followRelation) {
+                            if followRelation == .following {
+                                showAlert = true
+                            } else {
+                                Task {
+                                    await viewModel.updateFollowState(to: followRelation)
+                                }
                             }
                         }
                             .padding(.horizontal, 22)
@@ -128,11 +131,10 @@ struct UserProfileView: View {
                 title: Text("언팔로우 확인"),
                 message: Text("\(viewModel.user?.name ?? "")님을 언팔로우하시겠습니까?"),
                 primaryButton: .destructive(Text("언팔로우")) {
-                    if let user = selectedUser {
-                        Task {
-                            await viewModel.updateFollowState(to: .following)
-                        }
+                    Task {
+                        await viewModel.updateFollowState(to: .following)
                     }
+                    
                 },
                 secondaryButton: .cancel()
             )
