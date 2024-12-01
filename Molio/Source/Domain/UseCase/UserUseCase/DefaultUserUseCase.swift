@@ -28,6 +28,12 @@ final class DefaultUserUseCase: UserUseCase {
         return userDTO.toEntity
     }
     
+    func fetchCurrentUser() async throws -> MolioUser? {
+        guard let userID = try currentUserIdUseCase.execute() else { return nil }
+        let userDTO = try await service.readUser(userID: userID)
+        return userDTO.toEntity
+    }
+    
     func fetchFollower(userID: String, state: Bool) async throws -> MolioFollower {
         let userDTO = try await service.readUser(userID: userID)
         

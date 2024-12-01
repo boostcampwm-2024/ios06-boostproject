@@ -2,6 +2,7 @@ import Foundation
 
 protocol UserUseCase {
     func createUser(userName: String?) async throws
+    func fetchCurrentUser() async throws -> MolioUser? 
     func fetchUser(userID: String) async throws -> MolioUser
     func fetchFollower(userID: String, state: Bool) async throws -> MolioFollower
     func fetchAllUsers() async throws -> [MolioUser]
