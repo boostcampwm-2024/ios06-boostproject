@@ -127,7 +127,7 @@ struct UserProfileView: View {
         .background(Color.background)
         .onAppear {
             Task {
-                try await viewModel.fetchData(isMyProfile: isMyProfile, friendUserID: nil)
+                await viewModel.fetchData(isMyProfile: isMyProfile, friendUserID: nil)
             }
         }
     }

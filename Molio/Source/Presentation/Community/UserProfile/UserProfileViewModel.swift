@@ -26,63 +26,97 @@ final class UserProfileViewModel: ObservableObject {
         self.userUseCase = userUseCase
     }
     
-    func fetchData(isMyProfile: Bool, friendUserID: String?) async throws {
-        DispatchQueue.main.async {
-            self.isLoading = true
-        }
-        defer {
-            DispatchQueue.main.async {
-                self.isLoading = false
-            }
-        }
-        
-        guard let currentID = try currentUserIdUseCase.execute() else {
-            let fetchedPlaylists = try await fetchPlaylists(isMyProfile: isMyProfile, friendUserID: friendUserID)
-            DispatchQueue.main.async {
-                self.playlists = fetchedPlaylists
-            }
-            return
-        }
-        
-        let fetchedPlaylists = try await fetchPlaylists(isMyProfile: isMyProfile, friendUserID: friendUserID)
-        let fetchedFollowers = try await fetchFollowers(isMyProfile: isMyProfile, friendUserID: friendUserID)
-        let fetchedFollowings = try await fetchFollowings(isMyProfile: isMyProfile, friendUserID: friendUserID)
-        
-        guard let friendUserID else { return }
-        let fetchedUser = try await userUseCase.fetchUser(userID: isMyProfile ? currentID : friendUserID)
-        
-        DispatchQueue.main.async {
-            self.playlists = fetchedPlaylists
-            self.followers = fetchedFollowers
-            self.followings = fetchedFollowings
-            self.user = fetchedUser
+    /// 메인 데이터 가져오기
+    @MainActor
+    func fetchData(isMyProfile: Bool, friendUserID: String?) async {
+        updateLoadingState(true)
+        defer { updateLoadingState(false) }
+
+        do {
+            let (playlists, followers, followings, user) = try await fetchAllData(
+                isMyProfile: isMyProfile,
+                friendUserID: friendUserID
+            )
+            print(user ?? "", playlists, followings, followers)
+            await updateState(playlists: playlists, followers: followers, followings: followings, user: user)
+        } catch {
+            print("Error fetching data: \(error.localizedDescription)")
         }
     }
     
+    /// 데이터 병렬 처리 및 반환
+    private func fetchAllData(isMyProfile: Bool, friendUserID: String?) async throws -> (
+        playlists: [MolioPlaylist],
+        followers: [MolioFollower],
+        followings: [MolioUser],
+        user: MolioUser?
+    ) {
+        async let playlists = fetchPlaylists(isMyProfile: isMyProfile, friendUserID: friendUserID)
+        async let followers = fetchFollowers(isMyProfile: isMyProfile, friendUserID: friendUserID)
+        async let followings = fetchFollowings(isMyProfile: isMyProfile, friendUserID: friendUserID)
+        async let user = fetchUser(isMyProfile: isMyProfile, friendUserID: friendUserID)
+        return try await (playlists, followers, followings, user)
+    }
+    
+    /// 플레이리스트 가져오기
     private func fetchPlaylists(isMyProfile: Bool, friendUserID: String?) async throws -> [MolioPlaylist] {
         if isMyProfile {
             return try await fetchPlaylistUseCase.fetchMyAllPlaylists()
-        } else {
-            guard let friendUserID else { return [] }
+        } else if let friendUserID = friendUserID {
             return try await fetchPlaylistUseCase.fetchFriendAllPlaylists(friendUserID: friendUserID)
         }
+        return []
     }
     
+    /// 팔로워 목록 가져오기
     private func fetchFollowers(isMyProfile: Bool, friendUserID: String?) async throws -> [MolioFollower] {
         if isMyProfile {
             return try await followRelationUseCase.fetchMyFollowerList()
-        } else {
-            guard let friendUserID else { return [] }
+        } else if let friendUserID = friendUserID {
             return try await followRelationUseCase.fetchFriendFollowerList(friendID: friendUserID)
         }
+        return []
     }
     
+    /// 팔로잉 목록 가져오기
     private func fetchFollowings(isMyProfile: Bool, friendUserID: String?) async throws -> [MolioUser] {
         if isMyProfile {
             return try await followRelationUseCase.fetchMyFollowingList()
-        } else {
-            guard let friendUserID else { return [] }
+        } else if let friendUserID = friendUserID {
             return try await followRelationUseCase.fetchFriendFollowingList(friendID: friendUserID)
         }
+        return []
+    }
+    
+    /// 사용자 정보 가져오기
+    private func fetchUser(isMyProfile: Bool, friendUserID: String?) async throws -> MolioUser? {
+        if isMyProfile {
+            if let userID = try currentUserIdUseCase.execute() {
+                return try await userUseCase.fetchUser(userID: userID)
+            }
+        } else if let friendUserID = friendUserID {
+            return try await userUseCase.fetchUser(userID: friendUserID)
+        }
+        return nil
+    }
+    
+    /// 상태 업데이트 (메인 스레드)
+    @MainActor
+    private func updateState(
+        playlists: [MolioPlaylist],
+        followers: [MolioFollower],
+        followings: [MolioUser],
+        user: MolioUser?
+    ) {
+        self.playlists = playlists
+        self.followers = followers
+        self.followings = followings
+        self.user = user
+    }
+    
+    /// 로딩 상태 업데이트 (메인 스레드)
+    @MainActor
+    private func updateLoadingState(_ isLoading: Bool) {
+        self.isLoading = isLoading
     }
 }
