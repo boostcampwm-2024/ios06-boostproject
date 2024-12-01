@@ -37,9 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(CurrentUserIdUseCase.self, dependency: DefaultCurrentUserIdUseCase())
         container.register(UserUseCase.self, dependency: DefaultUserUseCase())
         container.register(FetchPlaylistUseCase.self, dependency: DefaultFetchPlaylistUseCase())
-        container.register(FollowRelationUseCase.self, dependency: DefaultFollowRelationUseCase())
         container.register(ManageMyPlaylistUseCase.self, dependency: DefaultManageMyPlaylistUseCase())
-        
+        container.register(FollowRelationUseCase.self, dependency: DefaultFollowRelationUseCase())
         return true
     }
     

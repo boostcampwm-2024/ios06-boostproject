@@ -36,7 +36,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
         return 170.0
     }
     
-    private let musicDeck: any MusicDeck
+    private let musicDeck: any RandomMusicDeck
     private let fetchImageUseCase: FetchImageUseCase
     private let managePlaylistUseCase: ManageMyPlaylistUseCase
 
@@ -54,7 +54,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
         fetchImageUseCase: FetchImageUseCase = DIContainer.shared.resolve(),
         managePlaylistUseCase: ManageMyPlaylistUseCase = DIContainer.shared.resolve()
     ) {
-        self.musicDeck = RandomMusicDeck(
+        self.musicDeck = DefaultRandomMusicDeck(
             fetchRecommendedMusicUseCase: fetchRecommendedMusicUseCase
         )
         self.fetchImageUseCase = fetchImageUseCase
@@ -73,6 +73,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
                                        isDislikeHighlighted: translation < -self.swipeThreshold
                 )
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] buttonHighlight in
                 self?.buttonHighlightPublisher.send(buttonHighlight)
             }
@@ -91,6 +92,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
                     return .none
                 }
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] swipeDirection in
                 guard let self else { return }
                 self.musicCardSwipeAnimationPublisher.send(swipeDirection)
@@ -102,7 +104,8 @@ final class SwipeMusicViewModel: InputOutputViewModel {
             .store(in: &cancellables)
         
         input.likeButtonDidTap
-            .throttle(for: .seconds(0.4), scheduler: RunLoop.main, latest: false)
+            .throttle(for: .seconds(0.4), scheduler: DispatchQueue.main, latest: false)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self else { return }
                 self.musicDeck.likeCurrentMusic()
@@ -111,7 +114,8 @@ final class SwipeMusicViewModel: InputOutputViewModel {
             .store(in: &cancellables)
         
         input.dislikeButtonDidTap
-            .throttle(for: .seconds(0.4), scheduler: RunLoop.main, latest: false)
+            .throttle(for: .seconds(0.4), scheduler: DispatchQueue.main, latest: false)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self else { return }
                 self.musicDeck.dislikeCurrentMusic()
@@ -120,8 +124,8 @@ final class SwipeMusicViewModel: InputOutputViewModel {
             .store(in: &cancellables)
         
         input.filterDidUpdate
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] newFilter in
-                print(#fileID, "\(newFilter.genres)로 필터 업데이트됨")
                 self?.musicDeck.reset(with: newFilter)
             }
             .store(in: &cancellables)
@@ -139,8 +143,9 @@ final class SwipeMusicViewModel: InputOutputViewModel {
     
     private func setupBindings() {
         // MARK: 현재 노래 관련
-        // currentMusicTrack이 변경되면 sink에 정의된 동작을 실행한다.
-        musicDeck.currentMusicTrackModelPublisher
+        musicDeck
+            .currentMusicTrackModelPublisher
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] currentMusic in
                 guard let currentMusic else {
                     // TODO: 현재 노래가 없는 경우 보여줄 카드 처리.
@@ -163,11 +168,13 @@ final class SwipeMusicViewModel: InputOutputViewModel {
         
         // MARK: 다음 노래 관련
         musicDeck.nextMusicTrackModelPublisher
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] nextMusic in
                 guard let nextMusic else {
                     // TODO: 다음 노래가 없는 경우 보여줄 카드 처리.
                     return
                 }
+                
                 Task { [weak self] in
                     guard let self else { return }
                     do {
@@ -185,6 +192,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
        
         // MARK: 현재 플레이리스트
         managePlaylistUseCase.currentPlaylistPublisher()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] playlist in
                 guard let self else { return }
                 if let playlist = playlist {

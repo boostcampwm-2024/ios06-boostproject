@@ -36,4 +36,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         appearance.tintColor = .main
         appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
+    
+    func switchToLoginViewController() {
+        let loginViewModel = LoginViewModel()
+        let loginViewController = LoginViewController(viewModel: loginViewModel)
+
+        guard let window = self.window else { return }
+        
+        UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            window.rootViewController = loginViewController
+        }, completion: nil)
+        
+        window.makeKeyAndVisible()
+    }
 }

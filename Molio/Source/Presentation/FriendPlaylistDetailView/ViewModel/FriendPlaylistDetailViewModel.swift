@@ -1,4 +1,5 @@
 import Combine
+import Foundation
 
 final class FriendPlaylistDetailViewModel: ObservableObject {
     @Published var friendPlaylist: MolioPlaylist?
@@ -18,7 +19,7 @@ final class FriendPlaylistDetailViewModel: ObservableObject {
     }
     
     private func fetchMusics(for playlist: MolioPlaylist) {
-        Task { [weak self] in
+        Task { @MainActor [weak self] in
             guard let self = self else { return }
             do {
                 // MARK: 친구 아이디가 아닌 경우에도 필요하게 되었다. 임시로 ""로 처리한다. 없어도 된다

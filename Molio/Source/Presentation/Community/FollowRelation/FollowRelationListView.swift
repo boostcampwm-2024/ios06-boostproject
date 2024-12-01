@@ -39,45 +39,7 @@ struct FollowRelationListView: View {
     
     func userIntfoRowView(userName: String, description: String?, imageURL: URL?) -> some View {
         HStack {
-            if let imageURL = imageURL {
-                 AsyncImage(url: imageURL) { phase in
-                     switch phase {
-                     case .empty:
-                         // 로딩 중일 때 표시할 뷰
-                         ProgressView()
-                             .frame(width: 50, height: 50)
-                     case .success(let image):
-                         // 이미지 로드 성공 시
-                         image
-                             .resizable()
-                             .scaledToFill()
-                             .frame(width: 50, height: 50)
-                             .clipShape(Circle())
-                     case .failure:
-                         // 로드 실패 시 표시할 뷰
-                         Circle()
-                             .fill(Color.gray)
-                             .frame(width: 50, height: 50)
-                             .overlay(
-                                 Image(systemName: "person.fill")
-                                     .foregroundColor(.white)
-                             )
-                     @unknown default:
-                         // 알 수 없는 상태 처리
-                         EmptyView()
-                     }
-                 }
-             } else {
-                 // URL이 없을 때 기본 뷰
-                 Circle()
-                     .fill(Color.gray)
-                     .frame(width: 50, height: 50)
-                     .overlay(
-                         Image(systemName: "person.fill")
-                             .foregroundColor(.white)
-                     )
-             }
-            
+            ProfileImageView(imageURL: imageURL)
             VStack(alignment: .leading, spacing: 2) {
                 Text.molioMedium(userName, size: 17)
                     .foregroundStyle(.white)

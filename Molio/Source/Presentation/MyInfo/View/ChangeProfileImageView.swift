@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ProfileImageView: View {
+struct ChangeProfileImageView: View {
     let selectedImageData: Data?
     let imageURL: URL?
     

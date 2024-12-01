@@ -27,7 +27,7 @@ struct MyInfoView: View {
                 ScrollView {
                     VStack(spacing: 0) {
                         ZStack(alignment: .bottomTrailing) {
-                            ProfileImageView(
+                            ChangeProfileImageView(
                                 selectedImageData: viewModel.userSelectedImageData,
                                 imageURL: viewModel.userImageURL
                             )
