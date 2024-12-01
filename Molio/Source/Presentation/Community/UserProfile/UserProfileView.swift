@@ -32,7 +32,7 @@ struct UserProfileView: View {
                 VStack {
                     // MARK: - 상단 제목 및 기어 버튼
                     HStack {
-                        Text("몰리오올리오")
+                        Text(viewModel.user?.name ?? "로그인해야 닉네임을 입력할 수 있어요")
                             .font(.system(size: 20, weight: .semibold))
                             .foregroundColor(.white)
                         Spacer()
