@@ -21,23 +21,21 @@ struct DefaultMusicKitService: MusicKitService {
     }
     
     func getMusic(with isrcs: [String]) async -> [MolioMusic] {
-        return await withTaskGroup(of: MolioMusic?.self) { group in
-            var musics: [MolioMusic] = []
-            for isrc in isrcs {
+        return await withTaskGroup(of: (Int, MolioMusic?).self) { group in
+            for (index, isrc) in isrcs.enumerated() {
                 group.addTask {
-                    return await getMusic(with: isrc)
+                    let music = await getMusic(with: isrc)
+                    return (index, music)
                 }
             }
             
-            for await music in group {
-                if let music {
-                    musics.append(music)
-                }
+            var orderedMusics = [MolioMusic?](repeating: nil, count: isrcs.count)
+            for await (index, music) in group {
+                orderedMusics[index] = music
             }
-            
-            return musics
+            // nil인 경우 제외
+            return orderedMusics.compactMap { $0 }
         }
-
     }
     
     /// 애플 뮤직 플레이리스트 내보내기
