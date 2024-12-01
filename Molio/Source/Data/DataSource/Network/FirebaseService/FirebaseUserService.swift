@@ -53,9 +53,21 @@ final class FirebaseUserService: UserService {
         }
     }
     
-    // MARK: - Private Method
+    func readAllUsers() async throws -> [MolioUserDTO] {
+        let collectionRef = getColloectionReference()
+        let querySnapshot = try await collectionRef.getDocuments()
+        return querySnapshot.documents.compactMap { userDocument in
+            try? userDocument.data(as: MolioUserDTO.self)
+        }
+    }
+    
+    // MARK: - Private methods
     
     private func getDocumentReference(documentName: String) -> DocumentReference {
         return db.collection(collectionName).document(documentName)
+    }
+    
+    private func getColloectionReference() -> CollectionReference {
+        return db.collection(collectionName)
     }
 }
