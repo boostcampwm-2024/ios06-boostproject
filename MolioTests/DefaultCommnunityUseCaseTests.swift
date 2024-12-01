@@ -3,12 +3,12 @@ import XCTest
 
 final class DefaultCommunityUseCaseTests: XCTestCase {
     var useCase: DefaultCommunityUseCase!
-    var mockRepository: MockPlaylistRepository!
+    var mockRepository: MockRealPlaylistRepository!
     var mockCurrentUserIdUseCase: MockCurrentUserIdUseCase!
     
     override func setUp() {
         super.setUp()
-        mockRepository = MockPlaylistRepository()
+        mockRepository = MockRealPlaylistRepository()
         mockCurrentUserIdUseCase = MockCurrentUserIdUseCase()
         useCase = DefaultCommunityUseCase(
             currentUserIdUseCase: mockCurrentUserIdUseCase,

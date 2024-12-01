@@ -2,7 +2,7 @@ import Combine
 import Foundation
 @testable import Molio
 
-final class MockPlaylistRepository: RealPlaylistRepository {
+final class MockRealPlaylistRepository: RealPlaylistRepository {
     var createdPlaylistName: String?
     var createdUserID: String?
     var mockPlaylist: MolioPlaylist?
