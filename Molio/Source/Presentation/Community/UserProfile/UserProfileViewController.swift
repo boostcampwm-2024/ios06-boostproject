@@ -4,40 +4,40 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
     private let viewModel: UserProfileViewModel
     private let followRelationViewModel: FollowRelationViewModel
     
-    private let isMyProfile: Bool
-    private let followRelation: FollowRelationType?
-    private let friendUserID: String?
-    
     // MARK: - Initializer
     
     init(
-        viewModel: UserProfileViewModel = UserProfileViewModel(),
-        followRelationViewModel: FollowRelationViewModel = FollowRelationViewModel(),
-        isMyProfile: Bool,
-        followRelation: FollowRelationType?,
-        friendUserID: String?
+        profileType: ProfileType
     ) {
-        self.viewModel = viewModel
-        self.followRelationViewModel = followRelationViewModel
-        self.isMyProfile = isMyProfile
-        self.followRelation = followRelation
-        self.friendUserID = friendUserID
+        self.viewModel = UserProfileViewModel(profileType: profileType)
+        self.followRelationViewModel = FollowRelationViewModel()
+        let userProfileView = UserProfileView(viewModel: viewModel)
         
-        let userProfileView = UserProfileView(isMyProfile: isMyProfile, followRelationType: followRelation, viewModel: viewModel, friendUserID: friendUserID)
         super.init(rootView: userProfileView)
         
-        rootView.didSettingButtonTapped = navigateToSettingViewController
-        rootView.didFollowerButtonTapped = navigationToFollowerListView
-        rootView.didFollowingButtonTapped = navigationToFollowingListView
-        rootView.didPlaylistCellTapped = navigationToFriendPlaylistListView
+        rootView.didFollowerButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            self.navigationToFollowerListView()
+        }
+        
+        rootView.didFollowingButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            self.navigationToFollowingListView()
+        }
+        
+        rootView.didPlaylistCellTapped = { [weak self] playlist in
+            guard let self = self else { return }
+            self.navigationToFriendPlaylistListView(playlist: playlist)
+        }
+        
+        rootView.didSettingButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            self.navigateToSettingViewController()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
-        self.isMyProfile = false
-        self.followRelation = nil
-        self.friendUserID = nil
-        
-        self.viewModel = UserProfileViewModel()
+        self.viewModel = UserProfileViewModel(profileType: .me)
         self.followRelationViewModel = FollowRelationViewModel()
         super.init(coder: aDecoder)
     }

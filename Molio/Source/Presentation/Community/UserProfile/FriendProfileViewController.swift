@@ -4,37 +4,36 @@ final class FriendProfileViewController: UIHostingController<UserProfileView> {
     private let viewModel: UserProfileViewModel
     private let followRelationViewModel: FollowRelationViewModel
     
-    private let isMyProfile: Bool
-    private let followRelation: FollowRelationType?
-    private let friendUserID: String?
-    
     // MARK: - Initializer
     
     init(
-        isMyProfile: Bool,
-        followRelation: FollowRelationType?,
-        friendUserID: String?
+        profileType: ProfileType
+
     ) {
-        self.viewModel = UserProfileViewModel()
+        self.viewModel = UserProfileViewModel(profileType: profileType)
         self.followRelationViewModel = FollowRelationViewModel()
-        self.isMyProfile = isMyProfile
-        self.followRelation = followRelation
-        self.friendUserID = friendUserID
+        let userProfileView = UserProfileView(viewModel: viewModel)
         
-        let userProfileView = UserProfileView(isMyProfile: isMyProfile, followRelationType: followRelation, viewModel: viewModel, friendUserID: friendUserID)
         super.init(rootView: userProfileView)
         
-        rootView.didFollowerButtonTapped = navigationToFollowerListView
-        rootView.didFollowingButtonTapped = navigationToFollowingListView
-        rootView.didPlaylistCellTapped = navigationToFriendPlaylistListView
+        rootView.didFollowerButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            self.navigationToFollowerListView()
+        }
+        
+        rootView.didFollowingButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            self.navigationToFollowingListView()
+        }
+        
+        rootView.didPlaylistCellTapped = { [weak self] playlist in
+            guard let self = self else { return }
+            self.navigationToFriendPlaylistListView(playlist: playlist)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
-        self.isMyProfile = false
-        self.followRelation = nil
-        self.friendUserID = nil
-        
-        self.viewModel = UserProfileViewModel()
+        self.viewModel = UserProfileViewModel(profileType: .me)
         self.followRelationViewModel = FollowRelationViewModel()
         super.init(coder: aDecoder)
     }
@@ -43,13 +42,12 @@ final class FriendProfileViewController: UIHostingController<UserProfileView> {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden =
-        false
+        navigationController?.navigationBar.isHidden = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden = false
     }
     
     // MARK: - Present Sheet or Navigation

@@ -9,8 +9,9 @@ final class SearchUserViewController: UIHostingController<SearchUserView> {
         super.init(rootView: view)
         
         rootView.didUserInfoCellTapped = { [weak self] selectedUser in
-                    self?.navigateTofriendViewController(with: selectedUser)
-                }
+            guard let self else { return }
+            self.navigateTofriendViewController(with: selectedUser)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -27,11 +28,7 @@ final class SearchUserViewController: UIHostingController<SearchUserView> {
     // MARK: - Present Sheet or Navigation
     
     private func navigateTofriendViewController(with user: MolioUser) {
-            let friendProfileViewController = FriendProfileViewController(
-                isMyProfile: false,
-                followRelation: .following,
-                friendUserID: user.id // 선택된 유저 ID 전달
-            )
-            navigationController?.pushViewController(friendProfileViewController, animated: true)
-        }
+        let friendProfileViewController = FriendProfileViewController(profileType: .friend(userID: user.id, isFollowing: .following))
+        navigationController?.pushViewController(friendProfileViewController, animated: true)
+    }
 }
