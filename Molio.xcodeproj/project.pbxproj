@@ -239,6 +239,8 @@
 		F1770B2A2CEE455800C81272 /* ExportPlaylistImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1770B292CEE455800C81272 /* ExportPlaylistImageView.swift */; };
 		F1770B2C2CEEFF2200C81272 /* PlaylistImageMusicItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1770B2B2CEEFF2200C81272 /* PlaylistImageMusicItem.swift */; };
 		F1770B2E2CEF0F4B00C81272 /* PlaylistImagePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1770B2D2CEF0F4B00C81272 /* PlaylistImagePage.swift */; };
+		F17CA42A2CFB638700B86681 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17CA4292CFB638700B86681 /* ProfileImageView.swift */; };
+		F17CA42E2CFC3ADE00B86681 /* ProfileImageUpdateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17CA42D2CFC3ADE00B86681 /* ProfileImageUpdateType.swift */; };
 		F1865ED62CF618B7007C1E5A /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1865ED52CF618B7007C1E5A /* MyInfoView.swift */; };
 		F1865ED82CF62BBB007C1E5A /* MyInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1865ED72CF62BBB007C1E5A /* MyInfoViewModel.swift */; };
 		F1865EDA2CF63959007C1E5A /* NickNameTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1865ED92CF63959007C1E5A /* NickNameTextFieldView.swift */; };
@@ -500,6 +502,8 @@
 		F1770B292CEE455800C81272 /* ExportPlaylistImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPlaylistImageView.swift; sourceTree = "<group>"; };
 		F1770B2B2CEEFF2200C81272 /* PlaylistImageMusicItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistImageMusicItem.swift; sourceTree = "<group>"; };
 		F1770B2D2CEF0F4B00C81272 /* PlaylistImagePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistImagePage.swift; sourceTree = "<group>"; };
+		F17CA4292CFB638700B86681 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+		F17CA42D2CFC3ADE00B86681 /* ProfileImageUpdateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageUpdateType.swift; sourceTree = "<group>"; };
 		F1865ED52CF618B7007C1E5A /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
 		F1865ED72CF62BBB007C1E5A /* MyInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewModel.swift; sourceTree = "<group>"; };
 		F1865ED92CF63959007C1E5A /* NickNameTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameTextFieldView.swift; sourceTree = "<group>"; };
@@ -735,6 +739,7 @@
 			children = (
 				206149402CF87FFA00FDE96D /* DefaultUserUseCase.swift */,
 				206149412CF87FFA00FDE96D /* UserUseCase.swift */,
+				F17CA42D2CFC3ADE00B86681 /* ProfileImageUpdateType.swift */,
 			);
 			path = UserUseCase;
 			sourceTree = "<group>";
@@ -1336,6 +1341,7 @@
 			children = (
 				F12054ED2CF80B880040A69C /* MyInfoViewController.swift */,
 				F1865ED52CF618B7007C1E5A /* MyInfoView.swift */,
+				F17CA4292CFB638700B86681 /* ProfileImageView.swift */,
 				F1865ED92CF63959007C1E5A /* NickNameTextFieldView.swift */,
 				F1865EDB2CF6397B007C1E5A /* DescriptionTextFieldView.swift */,
 			);
@@ -1880,6 +1886,8 @@
 				B867AE6F2CF8E5FC00ACCEDC /* ExportAppleMusicPlaylistViewController.swift in Sources */,
 				88A7A9852CF85247005EA318 /* FetchPlaylistUseCaseError.swift in Sources */,
 				206149082CF721F800FDE96D /* DefaultFollowRelationUseCase.swift in Sources */,
+				F17CA42E2CFC3ADE00B86681 /* ProfileImageUpdateType.swift in Sources */,
+				F17CA42A2CFB638700B86681 /* ProfileImageView.swift in Sources */,
 				2003BA1C2CDB8EE5002CAB3E /* UILabel+Extension.swift in Sources */,
 				F17369682CE36E8F00F6242C /* DefaultImageRepository.swift in Sources */,
 				F1865EDC2CF6397B007C1E5A /* DescriptionTextFieldView.swift in Sources */,
@@ -2221,7 +2229,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Molio/Resource/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Apple Music의 음악 데이터를 검색하거나 플레이리스트를 내보내려면 Apple Music 접근 권한 승인이 필요합니다.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "이 앱은 재생목록의 음악 정보를 이미지로 저장하기 위해 사진 라이브러리 접근 권한이 필요합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "이 앱은 재생목록의 음악 정보를 이미지로 저장, 앨범에서 이미지를 선택 하기 위해 사진 라이브러리 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -2257,7 +2265,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Molio/Resource/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Apple Music의 음악 데이터를 검색하거나 플레이리스트를 내보내려면 Apple Music 접근 권한 승인이 필요합니다.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "이 앱은 재생목록의 음악 정보를 이미지로 저장하기 위해 사진 라이브러리 접근 권한이 필요합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "이 앱은 재생목록의 음악 정보를 이미지로 저장, 앨범에서 이미지를 선택 하기 위해 사진 라이브러리 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

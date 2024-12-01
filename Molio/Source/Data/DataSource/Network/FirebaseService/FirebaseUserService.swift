@@ -33,9 +33,9 @@ final class FirebaseUserService: UserService {
     }
     
     func updateUser(_ user: MolioUserDTO) async throws {
-        guard let updateUserData = user.toDictionary() else { return } // TODO: 딕셔너리 반환 에러 throw
+        guard let updateUserData = user.toDictionary() else { return }
         let docRef = getDocumentReference(documentName: user.id)
-
+        
         try await docRef.updateData(updateUserData)
     }
     
@@ -60,6 +60,16 @@ final class FirebaseUserService: UserService {
             try? userDocument.data(as: MolioUserDTO.self)
         }
     }
+    
+    func uploadUserImage(userID: String, data: Data) async throws -> URL {
+        return try await storageManager.uploadImage(
+            imageData: data,
+            folder: .profileImage,
+            userID: userID
+        )
+    }
+    
+    // MARK: - Private Method
     
     // MARK: - Private methods
     

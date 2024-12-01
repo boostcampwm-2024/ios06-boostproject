@@ -41,7 +41,7 @@ struct DefaultFirebaseAuthService: AuthService {
         let credential = OAuthProvider.credential(
             providerID: .apple,
             idToken: idToken,
-            rawNonce: "nonce"
+            rawNonce: nonce
         )
         do {
             try await getCurrentUser().reauthenticate(with: credential)
