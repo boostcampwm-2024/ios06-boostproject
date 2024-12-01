@@ -3,23 +3,36 @@ import Foundation
 @testable import Molio
 
 final class MockPlaylistRepository: RealPlaylistRepository {
-    var createPlaylistCalled = false
     var createdPlaylistName: String?
     var createdUserID: String?
     var mockPlaylist: MolioPlaylist?
-    var updatePlaylistCalled = false
     var updatedPlaylist: MolioPlaylist?
-    var deletePlaylistCalled = false
     var deletedPlaylistID: UUID?
+    var playlistsToFetch: [MolioPlaylist]?
+    
+    var addMusicCalled = false
+    var deleteMusicCalled = false
+    var moveMusicCalled = false
+    var createNewPlaylistCalled = false
+    var deletePlaylistCalled = false
+    var fetchPlaylistsCalled = false
+    var fetchPlaylistCalled = false
+    var updatePlaylistCalled = false
 
-    func addMusic(userID: String?, isrc: String, to playlistID: UUID) async throws {}
+    func addMusic(userID: String?, isrc: String, to playlistID: UUID) async throws {
+        addMusicCalled = true
+    }
 
-    func deleteMusic(userID: String?, isrc: String, in playlistID: UUID) async throws {}
+    func deleteMusic(userID: String?, isrc: String, in playlistID: UUID) async throws {
+        deleteMusicCalled = true
+    }
 
-    func moveMusic(userID: String?, isrc: String, in playlistID: UUID, fromIndex: Int, toIndex: Int) async throws {}
+    func moveMusic(userID: String?, isrc: String, in playlistID: UUID, fromIndex: Int, toIndex: Int) async throws {
+        moveMusicCalled = true
+    }
 
     func createNewPlaylist(userID: String?, playlistID: UUID, _ playlistName: String) async throws {
-        createPlaylistCalled = true
+        createNewPlaylistCalled = true
         createdUserID = userID
         createdPlaylistName = playlistName
     }
@@ -30,10 +43,12 @@ final class MockPlaylistRepository: RealPlaylistRepository {
     }
 
     func fetchPlaylists(userID: String?) async throws -> [MolioPlaylist]? {
-        return nil
+        fetchPlaylistsCalled = true
+        return playlistsToFetch
     }
 
     func fetchPlaylist(userID: String?, for playlistID: UUID) async throws -> MolioPlaylist? {
+        fetchPlaylistCalled = true
         return mockPlaylist
     }
 
