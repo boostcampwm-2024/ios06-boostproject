@@ -5,12 +5,12 @@ final class DefaultManageMyPlaylistUseCase:
     ManageMyPlaylistUseCase {
     private let currentUserIdUseCase: CurrentUserIdUseCase
     private let playlistRepository: RealPlaylistRepository
-    private let currentPlaylistRepository: any CurrentPlaylistRepository
+    private let currentPlaylistRepository: CurrentPlaylistRepository
 
     init(
-        currentUserIdUseCase: CurrentUserIdUseCase = DefaultCurrentUserIdUseCase(),
-        playlistRepository: RealPlaylistRepository = DefaultPlaylistRepository(),
-        currentPlaylistRepository: any CurrentPlaylistRepository = DIContainer.shared.resolve()
+        currentUserIdUseCase: CurrentUserIdUseCase = DIContainer.shared.resolve(),
+        playlistRepository: RealPlaylistRepository = DIContainer.shared.resolve(),
+        currentPlaylistRepository: CurrentPlaylistRepository = DIContainer.shared.resolve()
     ) {
         self.currentUserIdUseCase = currentUserIdUseCase
         self.playlistRepository = playlistRepository
