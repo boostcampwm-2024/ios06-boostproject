@@ -8,18 +8,22 @@ final class UserProfileViewModel: ObservableObject {
     @Published var user: MolioUser?
     @Published var isLoading: Bool = false
     @Published var currentID: String?
+    @Published var isLogin: Bool = false
     
+    let manageAuthenticationUseCase: ManageAuthenticationUseCase
     let fetchPlaylistUseCase: FetchPlaylistUseCase
     let currentUserIdUseCase: CurrentUserIdUseCase
     let followRelationUseCase: FollowRelationUseCase
     let userUseCase: UserUseCase
 
     init(
+        manageAuthenticationUseCase: ManageAuthenticationUseCase = DIContainer.shared.resolve(),
         fetchPlaylistUseCase: FetchPlaylistUseCase = DIContainer.shared.resolve(),
         currentUserIdUseCase: CurrentUserIdUseCase = DIContainer.shared.resolve(),
         followRelationUseCase: FollowRelationUseCase = DIContainer.shared.resolve(),
         userUseCase: UserUseCase = DIContainer.shared.resolve()
     ) {
+        self.manageAuthenticationUseCase = manageAuthenticationUseCase
         self.fetchPlaylistUseCase = fetchPlaylistUseCase
         self.currentUserIdUseCase = currentUserIdUseCase
         self.followRelationUseCase = followRelationUseCase
@@ -33,11 +37,12 @@ final class UserProfileViewModel: ObservableObject {
         defer { updateLoadingState(false) }
 
         do {
+            isLogin = manageAuthenticationUseCase.isLogin()
             let (playlists, followers, followings, user) = try await fetchAllData(
                 isMyProfile: isMyProfile,
                 friendUserID: friendUserID
             )
-            await updateState(playlists: playlists, followers: followers, followings: followings, user: user)
+            updateState(playlists: playlists, followers: followers, followings: followings, user: user)
         } catch {
             print("Error fetching data: \(error.localizedDescription)")
         }

@@ -99,5 +99,12 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
             let friendPlaylistListViewController = FriendPlaylistDetailHostingViewController(playlist: playlist)
             self.navigationController?.pushViewController(friendPlaylistListViewController, animated: true)
         }
+        
+        rootView.didNotificationButtonTapped = { [weak self] in
+            guard let self else { return }
+            let notificationViewController = UIHostingController(rootView: NotificationView())
+            notificationViewController.title = "알림"
+            self.navigationController?.pushViewController(notificationViewController, animated: true)
+        }
     }
 }
