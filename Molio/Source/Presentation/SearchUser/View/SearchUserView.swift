@@ -2,9 +2,10 @@ import SwiftUI
 
 struct SearchUserView: View {
     @StateObject var viewModel: SearchUserViewModel
-    var didUserInfoCellTapped: ((MolioFollower) -> Void)?
     @State private var showAlert: Bool = false
     @State private var selectedUser: MolioFollower?
+    
+    var didUserInfoCellTapped: ((MolioFollower) -> Void)?
     
     var body: some View {
         VStack(spacing: 10) {
