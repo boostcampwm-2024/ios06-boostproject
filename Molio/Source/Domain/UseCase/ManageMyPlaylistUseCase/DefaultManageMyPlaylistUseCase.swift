@@ -39,7 +39,7 @@ final class DefaultManageMyPlaylistUseCase:
             .eraseToAnyPublisher()
     }
     
-    func changeCurrentPlaylist(playlistID: UUID){
+    func changeCurrentPlaylist(playlistID: UUID) {
         do {
             try currentPlaylistRepository.setCurrentPlaylist(playlistID)
         } catch {

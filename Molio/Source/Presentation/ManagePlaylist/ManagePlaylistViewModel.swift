@@ -11,15 +11,8 @@ final class ManagePlaylistViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     init(
-        fetchPlaylistUseCase: FetchPlaylistUseCase = DefaultFetchPlaylistUseCase(
-            playlistRepisitory: DefaultPlaylistRepository(
-                playlistService: FirestorePlaylistService(),
-                playlistStorage: CoreDataPlaylistStorage()
-            ),
-            musicKitService: DefaultMusicKitService(),
-            currentUserIDUseCase: DefaultCurrentUserIdUseCase()
-        ),
-        managePlaylistUseCase: ManageMyPlaylistUseCase = DefaultManageMyPlaylistUseCase()
+        fetchPlaylistUseCase: FetchPlaylistUseCase = DIContainer.shared.resolve(),
+        managePlaylistUseCase: ManageMyPlaylistUseCase = DIContainer.shared.resolve()
     ) {
         self.fetchPlaylistUseCase = fetchPlaylistUseCase
         self.managePlaylistUseCase = managePlaylistUseCase
