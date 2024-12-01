@@ -23,13 +23,15 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
         self.followRelation = followRelation
         self.friendUserID = friendUserID
         
-        let userProfileView = UserProfileView(isMyProfile: isMyProfile, followRelationType: followRelation, viewModel: viewModel, friendUserID: friendUserID)
+        let userProfileView = UserProfileView(
+            isMyProfile: isMyProfile,
+            followRelationType: followRelation,
+            viewModel: viewModel,
+            friendUserID: friendUserID
+        )
         super.init(rootView: userProfileView)
         
-        rootView.didSettingButtonTapped = navigateToSettingViewController
-        rootView.didFollowerButtonTapped = navigationToFollowerListView
-        rootView.didFollowingButtonTapped = navigationToFollowingListView
-        rootView.didPlaylistCellTapped = navigationToFriendPlaylistListView
+        setupButtonAction()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -40,6 +42,8 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
         self.viewModel = UserProfileViewModel()
         self.followRelationViewModel = FollowRelationViewModel()
         super.init(coder: aDecoder)
+        
+        setupButtonAction()
     }
     
     // MARK: - Life Cycle
@@ -54,27 +58,54 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
         navigationController?.navigationBar.isHidden = false
     }
     
-    // MARK: - Present Sheet or Navigation
+    // MARK: - Private func
     
-    private func navigateToSettingViewController() {
-        let settingViewModel = SettingViewModel()
-        let settingsViewController = SettingViewController(viewModel: settingViewModel)
-        navigationController?.pushViewController(settingsViewController, animated: true)
-    }
-    
-    private func navigationToFollowingListView() {
-       
-        let followingListViewController = FollowRelationViewController(viewModel: followRelationViewModel, isMyProfile: true, followRelation: .following, friendUserID: nil)
-        navigationController?.pushViewController(followingListViewController, animated: true)
-    }
-    
-    private func navigationToFollowerListView() {
-        let followerListViewController = FollowRelationViewController(viewModel: followRelationViewModel, isMyProfile: true, followRelation: .unfollowing, friendUserID: nil)
-        navigationController?.pushViewController(followerListViewController, animated: true)
-    }
-    
-    private func navigationToFriendPlaylistListView(playlist: MolioPlaylist) {
-        let friendPlaylistListViewController = FriendPlaylistDetailHostingViewController(playlist: playlist)
-        navigationController?.pushViewController(friendPlaylistListViewController, animated: true)
+    private func setupButtonAction() {
+        /// navigate To SettingViewController
+        rootView.didSettingButtonTapped = { [weak self] in
+            guard let self else { return }
+            let settingViewModel = SettingViewModel()
+            let settingsViewController = SettingViewController(viewModel: settingViewModel)
+            self.navigationController?.pushViewController(settingsViewController, animated: true)
+        }
+        
+        /// navigation To FollowerListView
+        rootView.didFollowerButtonTapped = { [weak self] in
+            guard let self else { return }
+            let followerListViewController = FollowRelationViewController(
+                viewModel: followRelationViewModel,
+                isMyProfile: true,
+                followRelation: .unfollowing,
+                friendUserID: nil
+            )
+            self.navigationController?.pushViewController(followerListViewController, animated: true)
+        }
+        
+        /// navigation To FollowingListView
+        rootView.didFollowingButtonTapped = { [weak self] in
+            guard let self else { return }
+            let followingListViewController = FollowRelationViewController(
+                viewModel: followRelationViewModel,
+                isMyProfile: true,
+                followRelation: .following,
+                friendUserID: nil
+            )
+            self.navigationController?.pushViewController(followingListViewController, animated: true)
+        }
+        
+        /// navigation To FriendPlaylistListView
+        rootView.didPlaylistCellTapped = { [weak self] playlist in
+            guard let self else { return }
+            let friendPlaylistListViewController = FriendPlaylistDetailHostingViewController(playlist: playlist)
+            self.navigationController?.pushViewController(friendPlaylistListViewController, animated: true)
+        }
+        
+        rootView.didNotificationButtonTapped = { [weak self] in
+            guard let self else { return }
+            let notificationViewModel = NotificationViewModel()
+            let notificationViewController = UIHostingController(rootView: NotificationView(viewModel: notificationViewModel))
+            notificationViewController.title = "알림"
+            self.navigationController?.pushViewController(notificationViewController, animated: true)
+        }
     }
 }

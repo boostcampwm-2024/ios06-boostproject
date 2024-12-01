@@ -6,6 +6,7 @@ struct UserProfileView: View {
     let followRelationType: FollowRelationType?
     let friendUserID: String?
     
+    var didNotificationButtonTapped: (() -> Void)?
     var didSettingButtonTapped: (() -> Void)?
     var didFollowingButtonTapped: (() -> Void)?
     var didFollowerButtonTapped: (() -> Void)?
@@ -38,6 +39,16 @@ struct UserProfileView: View {
                         Spacer()
                         
                         if isMyProfile {
+                            if viewModel.isLogin {
+                                Button(action: {
+                                    didNotificationButtonTapped?()
+                                }) {
+                                    Image(systemName: "bell.fill")
+                                        .foregroundStyle(.main)
+                                }
+                                Spacer()
+                                    .frame(width: 14)
+                            }
                             Button(action: {
                                 didSettingButtonTapped?()
                             }) {
