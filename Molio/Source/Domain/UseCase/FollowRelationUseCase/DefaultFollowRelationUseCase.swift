@@ -27,6 +27,16 @@ struct DefaultFollowRelationUseCase: FollowRelationUseCase {
         try await service.deleteFollowRelation(relationID: relationID)
     }
     
+    func fetchFollowRelation(for userID: String) async throws -> FollowRelationType {
+        let currentUserID = try authService.getCurrentID()
+        let relation = try await service.readFollowRelation(
+            followingID: currentUserID,
+            followerID: userID,
+            state: nil
+        )
+        return relation.isEmpty ? .unfollowing : .following
+    }
+    
     func unFollow(to targetID: String) async throws {
         let currentUserID = try await fetchMyUserID()
         guard let relationID = try await service.readFollowRelation(followingID: currentUserID, followerID: targetID, state: true).first?.id else { return }

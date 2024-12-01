@@ -47,7 +47,7 @@ final class FriendProfileViewController: UIHostingController<UserProfileView> {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     // MARK: - Present Sheet or Navigation

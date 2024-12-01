@@ -10,18 +10,18 @@ final class UserProfileViewModel: ObservableObject {
     @Published var isLoading: Bool = false
 
     private let fetchPlaylistUseCase: FetchPlaylistUseCase
-    private let followRelationsUseCase: FollowRelationUseCase
+    private let followRelationUseCase: FollowRelationUseCase
     private let userUseCase: UserUseCase
 
     init(
         profileType: ProfileType,
         fetchPlaylistUseCase: FetchPlaylistUseCase = DIContainer.shared.resolve(),
-        followRelationsUseCase: FollowRelationUseCase = DIContainer.shared.resolve(),
+        followRelationUseCase: FollowRelationUseCase = DIContainer.shared.resolve(),
         userUseCase: UserUseCase = DIContainer.shared.resolve()
     ) {
         self.profileType = profileType
         self.fetchPlaylistUseCase = fetchPlaylistUseCase
-        self.followRelationsUseCase = followRelationsUseCase
+        self.followRelationUseCase = followRelationUseCase
         self.userUseCase = userUseCase
     }
     
@@ -33,8 +33,6 @@ final class UserProfileViewModel: ObservableObject {
         
         do {
             let (playlists, followers, followings, user) = try await fetchAllData()
-            print("followers", followers)
-            print("followings", followings)
             updateState(playlists: playlists, followers: followers, followings: followings, user: user)
         } catch {
             print("Error fetching data: \(error.localizedDescription)")
@@ -70,9 +68,9 @@ final class UserProfileViewModel: ObservableObject {
     private func fetchFollowers() async throws -> [MolioFollower] {
         switch profileType {
         case .me:
-            return try await followRelationsUseCase.fetchMyFollowerList()
+            return try await followRelationUseCase.fetchMyFollowerList()
         case .friend(let userID, _):
-            return try await followRelationsUseCase.fetchFriendFollowerList(friendID: userID)
+            return try await followRelationUseCase.fetchFriendFollowerList(friendID: userID)
         }
     }
     
@@ -80,9 +78,9 @@ final class UserProfileViewModel: ObservableObject {
     private func fetchFollowings() async throws -> [MolioFollower] {
         switch profileType {
         case .me:
-            return try await followRelationsUseCase.fetchMyFollowingList()
+            return try await followRelationUseCase.fetchMyFollowingList()
         case .friend(let userID, _):
-            return try await followRelationsUseCase.fetchFriendFollowingList(friendID: userID)
+            return try await followRelationUseCase.fetchFriendFollowingList(friendID: userID)
         }
     }
     
@@ -108,5 +106,37 @@ final class UserProfileViewModel: ObservableObject {
         self.followers = followers
         self.followings = followings
         self.user = user
+    }
+    
+    /// 팔로우 상태 업데이트 메서드
+    @MainActor
+    func updateFollowState(to type: FollowRelationType) async {
+        guard let user else { return }
+        do {
+            // 서버에 팔로우 상태 업데이트
+            switch type {
+            case .following:
+                try await followRelationUseCase.unFollow(to: user.id)
+            case .unfollowing:
+                try await followRelationUseCase.requestFollowing(to: user.id)
+            }
+
+            await refreshFollowState()
+            try await fetchData()
+        } catch {
+            print("Failed to update follow state: \(error.localizedDescription)")
+        }
+    }
+    
+    @MainActor
+    private func refreshFollowState() async {
+        guard let user else { return }
+        do {
+            let updatedFollowRelation = try await followRelationUseCase.fetchFollowRelation(for: user.id)
+            profileType = .friend(userID: user.id, isFollowing: updatedFollowRelation)
+
+        } catch {
+            print("Failed to refresh follow state: \(error.localizedDescription)")
+        }
     }
 }

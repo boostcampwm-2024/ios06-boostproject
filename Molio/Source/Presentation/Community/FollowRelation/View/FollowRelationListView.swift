@@ -4,6 +4,8 @@ struct FollowRelationListView: View {
     @StateObject private var viewModel: FollowRelationViewModel
     private let followRelationType: FollowRelationType
     private let friendUserID: String?
+    @State private var showAlert: Bool = false
+    @State private var selectedUser: MolioFollower?
 
     init(
         viewModel: FollowRelationViewModel,
@@ -27,9 +29,15 @@ struct FollowRelationListView: View {
                         UserInfoCell(
                             user: user,
                             followRelationType: followRelationType
-                        ){ followType in
-                            Task {
-                                await viewModel.updateFollowState(for: user, to: followType, friendUserID: friendUserID)
+                        ) { followType in
+                            if followType == .following {
+                                // 언팔로우 시 Alert 표시
+                                selectedUser = user
+                                showAlert = true
+                            } else {
+                                Task {
+                                    await viewModel.updateFollowState(for: user, to: followType, friendUserID: friendUserID)
+                                }
                             }
                         }
                     }
@@ -38,6 +46,20 @@ struct FollowRelationListView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.background)
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("언팔로우 확인"),
+                message: Text("\(selectedUser?.name ?? "")님을 언팔로우하시겠습니까?"),
+                primaryButton: .destructive(Text("언팔로우")) {
+                    if let user = selectedUser {
+                        Task {
+                            await viewModel.updateFollowState(for: user, to: followRelationType, friendUserID: friendUserID)
+                        }
+                    }
+                },
+                secondaryButton: .cancel()
+            )
+        }
         .onAppear {
             Task {
                 do {
