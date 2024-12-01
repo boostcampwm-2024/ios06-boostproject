@@ -37,7 +37,6 @@ final class UserProfileViewModel: ObservableObject {
                 isMyProfile: isMyProfile,
                 friendUserID: friendUserID
             )
-            print(user ?? "", playlists, followings, followers)
             await updateState(playlists: playlists, followers: followers, followings: followings, user: user)
         } catch {
             print("Error fetching data: \(error.localizedDescription)")
