@@ -37,7 +37,7 @@ struct UserProfileView: View {
                                 Image(systemName: "gearshape.fill")
                                     .foregroundStyle(.main)
                             }
-                 
+                            
                         }
                     }
                     .padding(.horizontal, 22)
@@ -53,7 +53,7 @@ struct UserProfileView: View {
                                     height: proxy.size.height
                                 )
                                 userInfoView(type: .playlist, value: viewModel.playlists.count, size: size)
-                                            
+                                
                                 Button(action: {
                                     didFollowingButtonTapped?()
                                 }) {
@@ -79,30 +79,34 @@ struct UserProfileView: View {
                     
                     if let description = viewModel.user?.description {
                         Text(description)
-                                .font(.system(size: 14, weight: .regular))
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.horizontal, 22)
+                            .font(.system(size: 14, weight: .regular))
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal, 22)
                         
                         Spacer().frame(height: 13)
-
+                        
                     }
                     
                     // MARK: - 팔로우 버튼
-                    if let followRelation = viewModel.user?.followRelation {
-                        FollowRelationButton(type:followRelation) {
-                            if followRelation == .following {
-                                showAlert = true
-                            } else {
-                                Task {
-                                    await viewModel.updateFollowState(to: followRelation)
+                    if case let .friend(_, isFollowing) = viewModel.profileType{
+                        if let followRelation = viewModel.user?.followRelation {
+                            
+                            FollowRelationButton(type: followRelation){
+                                if followRelation == .following {
+                                    // 언팔로우 시 Alert 표시
+                                    showAlert = true
+                                } else {
+                                    Task {
+                                        await viewModel.updateFollowState(to: followRelation)
+                                    }
                                 }
                             }
-                        }
                             .padding(.horizontal, 22)
                             .frame(height: 32)
+                        }
                     }
-                                        
+                    
                     Spacer().frame(height: 13)
                     
                     // MARK: - 유저 플레이리스트
