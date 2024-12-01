@@ -14,8 +14,8 @@ struct DefaultCurrentUserIdUseCase: CurrentUserIdUseCase {
         if usecase.isLogin() {
             do {
                 return try authService.getCurrentID()
-            } catch  {
-                print("error.localizedDescription")
+            } catch {
+                print(error.localizedDescription) 
             }
         }
         return nil
