@@ -30,7 +30,7 @@ struct UserProfileView: View {
                     // MARK: - 상단 제목 및 기어 버튼
                     HStack {
                         Text(viewModel.user?.name ?? "로그인해야 닉네임을 입력할 수 있어요")
-                            .font(.system(size: 20, weight: .semibold))
+                            .font(.system(size: 24, weight: .bold))
                             .foregroundColor(.white)
                         Spacer()
                         
@@ -48,7 +48,7 @@ struct UserProfileView: View {
                     
                     // MARK: - 유저 정보 HStack
                     HStack {
-                        ProfileImageView(imageURL: viewModel.user?.profileImageURL)
+                        ProfileImageView(imageURL: viewModel.user?.profileImageURL, size: 56)
                         
                         GeometryReader { proxy in
                             HStack(spacing: 10) {
@@ -81,16 +81,19 @@ struct UserProfileView: View {
                     
                     // MARK: - 유저 description
                     
-                    Text(viewModel.user?.description ?? "")
-                            .font(.system(size: 14, weight: .regular))
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal, 22)
-                    
-                    Spacer().frame(height: 13)
+                    if let description = viewModel.user?.description {
+                        Text(description)
+                                .font(.system(size: 14, weight: .regular))
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal, 22)
+                        
+                        Spacer().frame(height: 13)
+
+                    }
                     
                     // MARK: - 팔로우 버튼
-                    if case let .friend(userID, isFollowing) = viewModel.profileType {
+                    if case let .friend(_, isFollowing) = viewModel.profileType {
                         FollowRelationButton(type: isFollowing)
                             .padding(.horizontal, 22)
                             .frame(height: 32)
