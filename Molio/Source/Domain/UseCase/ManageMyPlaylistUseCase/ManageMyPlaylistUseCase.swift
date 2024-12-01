@@ -6,7 +6,7 @@ protocol ManageMyPlaylistUseCase {
     func currentPlaylistPublisher() -> AnyPublisher<MolioPlaylist?, Never>
     func changeCurrentPlaylist(playlistID: UUID)
 
-   // 플레이리스트 관리
+    // 플레이리스트 관리
     func createPlaylist(playlistName: String) async throws
     func updatePlaylistName(playlistID: UUID, name: String) async throws
     func updatePlaylistFilter(playlistID: UUID, filter: MusicFilter) async throws

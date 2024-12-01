@@ -11,15 +11,8 @@ final class ManagePlaylistViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     init(
-        fetchPlaylistUseCase: FetchPlaylistUseCase = DefaultFetchPlaylistUseCase(
-            playlistRepisitory: DefaultPlaylistRepository(
-                playlistService: FirestorePlaylistService(),
-                playlistStorage: CoreDataPlaylistStorage()
-            ),
-            musicKitService: DefaultMusicKitService(),
-            currentUserIDUseCase: DefaultCurrentUserIdUseCase()
-        ),
-        managePlaylistUseCase: ManageMyPlaylistUseCase = DefaultManageMyPlaylistUseCase()
+        fetchPlaylistUseCase: FetchPlaylistUseCase = DIContainer.shared.resolve(),
+        managePlaylistUseCase: ManageMyPlaylistUseCase = DIContainer.shared.resolve()
     ) {
         self.fetchPlaylistUseCase = fetchPlaylistUseCase
         self.managePlaylistUseCase = managePlaylistUseCase
@@ -37,7 +30,6 @@ final class ManagePlaylistViewModel: ObservableObject {
     func fetchPlaylists() {
         Task { @MainActor [weak self] in
             guard let playlists = try await self?.fetchPlaylistUseCase.fetchMyAllPlaylists() else { return }
-            print(playlists)
             self?.playlists = playlists
         }
     }
@@ -46,6 +38,7 @@ final class ManagePlaylistViewModel: ObservableObject {
     func setCurrentPlaylist(_ playlist: MolioPlaylist) {
         Task { @MainActor in
             currentPlaylist = playlist
+            changeCurrentPlaylist()
         }
     }
     

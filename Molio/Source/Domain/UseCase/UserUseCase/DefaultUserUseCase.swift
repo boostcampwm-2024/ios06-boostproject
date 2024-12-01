@@ -6,7 +6,7 @@ final class DefaultUserUseCase: UserUseCase {
     
     init(
         service: UserService = DIContainer.shared.resolve(),
-        currentUserIdUseCase: CurrentUserIdUseCase = DefaultCurrentUserIdUseCase()
+        currentUserIdUseCase: CurrentUserIdUseCase = DIContainer.shared.resolve()
     ) {
         self.service = service
         self.currentUserIdUseCase = currentUserIdUseCase
@@ -60,6 +60,7 @@ final class DefaultUserUseCase: UserUseCase {
         newDescription: String?,
         imageUpdate: ProfileImageUpdateType
     ) async throws {
+        // 이미지 업데이트 관련
         let updateImageURLString: String? = switch imageUpdate {
         case .keep:
             try await service.readUser(userID: userID).profileImageURL
@@ -68,6 +69,15 @@ final class DefaultUserUseCase: UserUseCase {
         case .remove:
             ""
         }
+        
+        let updatedUser = MolioUserDTO(
+            id: userID,
+            name: newName,
+            profileImageURL: updateImageURLString,
+            description: newDescription
+        )
+        
+        try await service.updateUser(updatedUser)
     }
     
     func deleteUser(userID: String) async throws {
