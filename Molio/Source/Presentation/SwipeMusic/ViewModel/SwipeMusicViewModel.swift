@@ -38,8 +38,8 @@ final class SwipeMusicViewModel: InputOutputViewModel {
     
     private let musicDeck: any MusicDeck
     private let fetchImageUseCase: FetchImageUseCase
-    private let publishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase
-   
+    private let managePlaylistUseCase: ManageMyPlaylistUseCase
+
     private let selectedPlaylistPublisher = PassthroughSubject<MolioPlaylist, Never>()
     private let isLoadingPublisher = PassthroughSubject<Bool, Never>()
     private let buttonHighlightPublisher = PassthroughSubject<ButtonHighlight, Never>()
@@ -52,13 +52,13 @@ final class SwipeMusicViewModel: InputOutputViewModel {
     init(
         fetchRecommendedMusicUseCase: FetchRecommendedMusicUseCase = DIContainer.shared.resolve(),
         fetchImageUseCase: FetchImageUseCase = DIContainer.shared.resolve(),
-        publishCurrentPlaylistUseCase: PublishCurrentPlaylistUseCase = DIContainer.shared.resolve()
+        managePlaylistUseCase: ManageMyPlaylistUseCase = DefaultManageMyPlaylistUseCase()
     ) {
         self.musicDeck = RandomMusicDeck(
             fetchRecommendedMusicUseCase: fetchRecommendedMusicUseCase
         )
         self.fetchImageUseCase = fetchImageUseCase
-        self.publishCurrentPlaylistUseCase = publishCurrentPlaylistUseCase
+        self.managePlaylistUseCase = managePlaylistUseCase
         
         setupBindings()
     }
@@ -184,7 +184,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
             .store(in: &cancellables)
        
         // MARK: 현재 플레이리스트
-        publishCurrentPlaylistUseCase.execute()
+        managePlaylistUseCase.currentPlaylistPublisher()
             .sink { [weak self] playlist in
                 guard let self else { return }
                 if let playlist = playlist {

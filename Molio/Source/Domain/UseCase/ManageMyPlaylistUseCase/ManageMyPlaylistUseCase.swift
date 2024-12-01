@@ -1,10 +1,15 @@
+import Combine
 import Foundation
 
 protocol ManageMyPlaylistUseCase {
+    // 현재 선택된 플레이리스트
+    func currentPlaylistPublisher() -> AnyPublisher<MolioPlaylist?, Never>
+    func changeCurrentPlaylist(playlistID: UUID)
+
    // 플레이리스트 관리
     func createPlaylist(playlistName: String) async throws
-    func updatePlaylistName(playlistID: String, name: String) async throws
-    func updatePlaylistFilter(playlistID: String, filter: MusicFilter) async throws
+    func updatePlaylistName(playlistID: UUID, name: String) async throws
+    func updatePlaylistFilter(playlistID: UUID, filter: MusicFilter) async throws
     func deletePlaylist(playlistID: UUID) async throws
     
     // 음악 관리
