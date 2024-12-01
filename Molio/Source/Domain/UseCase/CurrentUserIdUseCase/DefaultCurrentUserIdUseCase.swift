@@ -9,12 +9,19 @@ struct DefaultCurrentUserIdUseCase: CurrentUserIdUseCase {
         self.authService = authService
         self.usecase = usecase
     }
-    
+    // TODO: 로그인 재인증 로직 (로그인 화면으로 이동, 재인증 후 다시 불러오기 등) 처리
     func execute() throws -> String? {
         if usecase.isLogin() {
-            return try authService.getCurrentID()
-        } else {
-            return nil
+            do {
+                return try authService.getCurrentID()
+            } catch FirebaseAuthError.userNotFound {
+                print("User not logged in. Redirecting to login.")
+            } catch FirebaseAuthError.requiresReauthentication {
+                print("Token expired. Asking user to reauthenticate.")
+            } catch {
+                print("Unhandled error: \(error)")
+            }
         }
+        return nil
     }
 }
