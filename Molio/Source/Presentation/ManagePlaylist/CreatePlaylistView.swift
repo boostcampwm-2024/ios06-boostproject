@@ -51,7 +51,7 @@ struct CreatePlaylistView: View {
                     }
                     BasicButton(type: .confirm, isEnabled: !text.isEmpty) {
                         Task {
-                            try await viewModel.createPlaylist(playlistName:text)
+                            try await viewModel.createPlaylist(playlistName: text)
                             viewModel.changeCurrentPlaylist()
                             dismiss()
                         }
