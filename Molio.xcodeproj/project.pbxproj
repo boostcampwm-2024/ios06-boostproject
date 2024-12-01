@@ -104,6 +104,7 @@
 		88291CBE2CFA2605007322B5 /* SelectPlaylistToExportFriendMusicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88291CBD2CFA2605007322B5 /* SelectPlaylistToExportFriendMusicViewModel.swift */; };
 		88291CC32CFB00D2007322B5 /* FriendPlaylistDetailHostingViewController+ExportFriendsMusicToMyPlaylistDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88291CC22CFB00D2007322B5 /* FriendPlaylistDetailHostingViewController+ExportFriendsMusicToMyPlaylistDelegate.swift */; };
 		882D56232CFC6D2C0057D436 /* AudioPlayerControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882D56222CFC6D2C0057D436 /* AudioPlayerControlViewModel.swift */; };
+		882D56262CFC8AE90057D436 /* MolioUserMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882D56252CFC8AE90057D436 /* MolioUserMapper.swift */; };
 		884529462CF6EBC4007FD074 /* PlaylistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884529452CF6EBC4007FD074 /* PlaylistService.swift */; };
 		884529482CF6EC6D007FD074 /* FirestorePlaylistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884529472CF6EC6D007FD074 /* FirestorePlaylistService.swift */; };
 		8845294A2CF6ECDD007FD074 /* MolioPlaylistDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884529492CF6ECDD007FD074 /* MolioPlaylistDTO.swift */; };
@@ -369,6 +370,7 @@
 		88291CBD2CFA2605007322B5 /* SelectPlaylistToExportFriendMusicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPlaylistToExportFriendMusicViewModel.swift; sourceTree = "<group>"; };
 		88291CC22CFB00D2007322B5 /* FriendPlaylistDetailHostingViewController+ExportFriendsMusicToMyPlaylistDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendPlaylistDetailHostingViewController+ExportFriendsMusicToMyPlaylistDelegate.swift"; sourceTree = "<group>"; };
 		882D56222CFC6D2C0057D436 /* AudioPlayerControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerControlViewModel.swift; sourceTree = "<group>"; };
+		882D56252CFC8AE90057D436 /* MolioUserMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MolioUserMapper.swift; sourceTree = "<group>"; };
 		884529452CF6EBC4007FD074 /* PlaylistService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistService.swift; sourceTree = "<group>"; };
 		884529472CF6EC6D007FD074 /* FirestorePlaylistService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestorePlaylistService.swift; sourceTree = "<group>"; };
 		884529492CF6ECDD007FD074 /* MolioPlaylistDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MolioPlaylistDTO.swift; sourceTree = "<group>"; };
@@ -1559,6 +1561,7 @@
 			isa = PBXGroup;
 			children = (
 				F17369512CDFA7DC00F6242C /* SongMapper.swift */,
+				882D56252CFC8AE90057D436 /* MolioUserMapper.swift */,
 			);
 			path = Mapper;
 			sourceTree = "<group>";
@@ -2032,6 +2035,7 @@
 				88291CBA2CFA2139007322B5 /* ExportFriendsMusicToMyPlaylistDelegate.swift in Sources */,
 				206148EF2CF704C400FDE96D /* FollowRelationService.swift in Sources */,
 				8818D8F52CFA03470069A7F3 /* FriendPlaylistDetailHostingViewController.swift in Sources */,
+				882D56262CFC8AE90057D436 /* MolioUserMapper.swift in Sources */,
 				F17369522CDFA7DC00F6242C /* SongMapper.swift in Sources */,
 				F17369742CE3733300F6242C /* ImageFecthError.swift in Sources */,
 				885D1B612CF4D27800F532E0 /* FirestoreEntity.swift in Sources */,
