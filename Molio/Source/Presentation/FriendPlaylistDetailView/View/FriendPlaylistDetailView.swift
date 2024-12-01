@@ -21,12 +21,22 @@ struct FriendPlaylistDetailView: View {
 
             List { 
                 ForEach(friendPlaylistDetailViewModel.friendPlaylistMusics, id: \.isrc) { molioMusic in
+                    let listRowBackground = molioMusic.isrc == audioPlayerViewModel.currentPlayingMusic?.isrc
+                        ? Color.tag.opacity(0.3)
+                        : Color.clear
+                    
+
                     MusicCellView(music: molioMusic)
                         .foregroundStyle(.white)
                         .backgroundStyle(.clear)
-                        .listRowBackground(Color.clear)
+                        .listRowBackground(listRowBackground)
                         .listRowSeparatorTint(.gray)
                         .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 0))
+                        .onTapGesture {
+                            audioPlayerViewModel.currentPlayingMusic = audioPlayerViewModel.currentPlayingMusic?.isrc == molioMusic.isrc
+                                ? nil
+                                : molioMusic
+                        }
                         .swipeActions {
                             Button {
                                 friendPlaylistDetailViewModel.exportFriendsMusicToMyPlaylist(molioMusic: molioMusic)

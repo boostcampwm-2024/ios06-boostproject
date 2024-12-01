@@ -73,6 +73,8 @@
 		206149482CF8801600FDE96D /* DefaultUserUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206149472CF8801600FDE96D /* DefaultUserUseCaseTests.swift */; };
 		2061494A2CF8E31600FDE96D /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206149492CF8E31500FDE96D /* UserProfileView.swift */; };
 		206439E62CFC4B5F008E1D42 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206439E52CFC4B5F008E1D42 /* ProfileImageView.swift */; };
+		206439E82CFC5CEF008E1D42 /* FriendProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206439E72CFC5CEF008E1D42 /* FriendProfileViewController.swift */; };
+		206439EA2CFC9778008E1D42 /* ProfileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206439E92CFC9778008E1D42 /* ProfileType.swift */; };
 		2075FEC82CECDF4D009834BE /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC72CECDF4D009834BE /* CoreDataError.swift */; };
 		2082A09E2CF9B13800E8F2D9 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2082A09D2CF9B13800E8F2D9 /* UserProfileViewController.swift */; };
 		2082A0A22CF9C41800E8F2D9 /* FollowRelationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2082A0A12CF9C41800E8F2D9 /* FollowRelationListView.swift */; };
@@ -104,6 +106,7 @@
 		88291CC32CFB00D2007322B5 /* FriendPlaylistDetailHostingViewController+ExportFriendsMusicToMyPlaylistDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88291CC22CFB00D2007322B5 /* FriendPlaylistDetailHostingViewController+ExportFriendsMusicToMyPlaylistDelegate.swift */; };
 		882D56232CFC6D2C0057D436 /* AudioPlayerControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882D56222CFC6D2C0057D436 /* AudioPlayerControlViewModel.swift */; };
 		882D56262CFC8AE90057D436 /* MolioUserMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882D56252CFC8AE90057D436 /* MolioUserMapper.swift */; };
+		882D56282CFCC9740057D436 /* UserPlaylistSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882D56272CFCC9740057D436 /* UserPlaylistSyncManager.swift */; };
 		884529462CF6EBC4007FD074 /* PlaylistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884529452CF6EBC4007FD074 /* PlaylistService.swift */; };
 		884529482CF6EC6D007FD074 /* FirestorePlaylistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884529472CF6EC6D007FD074 /* FirestorePlaylistService.swift */; };
 		8845294A2CF6ECDD007FD074 /* MolioPlaylistDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884529492CF6ECDD007FD074 /* MolioPlaylistDTO.swift */; };
@@ -339,6 +342,8 @@
 		206149472CF8801600FDE96D /* DefaultUserUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultUserUseCaseTests.swift; sourceTree = "<group>"; };
 		206149492CF8E31500FDE96D /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		206439E52CFC4B5F008E1D42 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+		206439E72CFC5CEF008E1D42 /* FriendProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendProfileViewController.swift; sourceTree = "<group>"; };
+		206439E92CFC9778008E1D42 /* ProfileType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileType.swift; sourceTree = "<group>"; };
 		2075FEC72CECDF4D009834BE /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		2082A09D2CF9B13800E8F2D9 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		2082A0A12CF9C41800E8F2D9 /* FollowRelationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowRelationListView.swift; sourceTree = "<group>"; };
@@ -371,6 +376,7 @@
 		88291CC22CFB00D2007322B5 /* FriendPlaylistDetailHostingViewController+ExportFriendsMusicToMyPlaylistDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendPlaylistDetailHostingViewController+ExportFriendsMusicToMyPlaylistDelegate.swift"; sourceTree = "<group>"; };
 		882D56222CFC6D2C0057D436 /* AudioPlayerControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerControlViewModel.swift; sourceTree = "<group>"; };
 		882D56252CFC8AE90057D436 /* MolioUserMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MolioUserMapper.swift; sourceTree = "<group>"; };
+		882D56272CFCC9740057D436 /* UserPlaylistSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPlaylistSyncManager.swift; sourceTree = "<group>"; };
 		884529452CF6EBC4007FD074 /* PlaylistService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistService.swift; sourceTree = "<group>"; };
 		884529472CF6EC6D007FD074 /* FirestorePlaylistService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestorePlaylistService.swift; sourceTree = "<group>"; };
 		884529492CF6ECDD007FD074 /* MolioPlaylistDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MolioPlaylistDTO.swift; sourceTree = "<group>"; };
@@ -755,12 +761,102 @@
 			path = UserUseCase;
 			sourceTree = "<group>";
 		};
-		2082A09F2CF9C3DC00E8F2D9 /* UserProfile */ = {
+		206439EB2CFC9783008E1D42 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				206149492CF8E31500FDE96D /* UserProfileView.swift */,
+				206439E52CFC4B5F008E1D42 /* ProfileImageView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		206439EC2CFC978C008E1D42 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
 				20883BCA2CF9658300C10549 /* UserProfileViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		206439ED2CFC9799008E1D42 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F135BD022CF4C382006C6C4F /* CommunityViewController.swift */,
 				2082A09D2CF9B13800E8F2D9 /* UserProfileViewController.swift */,
+				206439E72CFC5CEF008E1D42 /* FriendProfileViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		206439EE2CFC97DE008E1D42 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2082A0A12CF9C41800E8F2D9 /* FollowRelationListView.swift */,
+				20883BC62CF8EC5B00C10549 /* FollowRelationButton.swift */,
+				2082A0A72CF9DC0600E8F2D9 /* FollowRelationViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		206439EF2CFC97F5008E1D42 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2082A0A32CF9C42600E8F2D9 /* FollowRelationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		206439F12CFC9834008E1D42 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				20883BC82CF95F0900C10549 /* FollowRelationType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		206439F22CFC9848008E1D42 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				206439E92CFC9778008E1D42 /* ProfileType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		206439F32CFCA32E008E1D42 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F135BD072CF5A6C4006C6C4F /* SettingView.swift */,
+				F135BD092CF5C671006C6C4F /* ProfileItemView.swift */,
+				F135BD0B2CF5C68C006C6C4F /* SettingTextItemView.swift */,
+				F12054F12CF84E5E0040A69C /* TermsAndConditionView.swift */,
+				F12054F32CF855F30040A69C /* PrivacyPolicyView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		206439F42CFCA336008E1D42 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F12054EF2CF8419B0040A69C /* SettingViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		206439F52CFCA33F008E1D42 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F12054EB2CF802B80040A69C /* SettingViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2082A09F2CF9C3DC00E8F2D9 /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				206439F22CFC9848008E1D42 /* Model */,
+				206439ED2CFC9799008E1D42 /* ViewController */,
+				206439EB2CFC9783008E1D42 /* View */,
+				206439EC2CFC978C008E1D42 /* ViewModel */,
 			);
 			path = UserProfile;
 			sourceTree = "<group>";
@@ -768,9 +864,9 @@
 		2082A0A02CF9C3EF00E8F2D9 /* FollowRelation */ = {
 			isa = PBXGroup;
 			children = (
-				2082A0A12CF9C41800E8F2D9 /* FollowRelationListView.swift */,
-				2082A0A32CF9C42600E8F2D9 /* FollowRelationViewModel.swift */,
-				2082A0A72CF9DC0600E8F2D9 /* FollowRelationViewController.swift */,
+				206439F12CFC9834008E1D42 /* Model */,
+				206439EE2CFC97DE008E1D42 /* View */,
+				206439EF2CFC97F5008E1D42 /* ViewModel */,
 			);
 			path = FollowRelation;
 			sourceTree = "<group>";
@@ -1291,8 +1387,8 @@
 		B89FFA842CFB8B0B0072F92B /* SearchUser */ = {
 			isa = PBXGroup;
 			children = (
-				B885DB742CFB9A5000719AA6 /* ViewModel */,
 				B885DB732CFB9A2500719AA6 /* View */,
+				B885DB742CFB9A5000719AA6 /* ViewModel */,
 			);
 			path = SearchUser;
 			sourceTree = "<group>";
@@ -1465,13 +1561,9 @@
 		F135BCFF2CF4C358006C6C4F /* Community */ = {
 			isa = PBXGroup;
 			children = (
-				20883BC62CF8EC5B00C10549 /* FollowRelationButton.swift */,
-				20883BC82CF95F0900C10549 /* FollowRelationType.swift */,
 				F17CA4302CFC601800B86681 /* Notification */,
 				2082A0A02CF9C3EF00E8F2D9 /* FollowRelation */,
 				2082A09F2CF9C3DC00E8F2D9 /* UserProfile */,
-				F135BD022CF4C382006C6C4F /* CommunityViewController.swift */,
-				206439E52CFC4B5F008E1D42 /* ProfileImageView.swift */,
 			);
 			path = Community;
 			sourceTree = "<group>";
@@ -1479,13 +1571,9 @@
 		F135BD062CF5A6AB006C6C4F /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				F12054EF2CF8419B0040A69C /* SettingViewModel.swift */,
-				F12054EB2CF802B80040A69C /* SettingViewController.swift */,
-				F135BD072CF5A6C4006C6C4F /* SettingView.swift */,
-				F135BD092CF5C671006C6C4F /* ProfileItemView.swift */,
-				F135BD0B2CF5C68C006C6C4F /* SettingTextItemView.swift */,
-				F12054F12CF84E5E0040A69C /* TermsAndConditionView.swift */,
-				F12054F32CF855F30040A69C /* PrivacyPolicyView.swift */,
+				206439F52CFCA33F008E1D42 /* ViewController */,
+				206439F32CFCA32E008E1D42 /* View */,
+				206439F42CFCA336008E1D42 /* ViewModel */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -1499,6 +1587,7 @@
 				885D1B5A2CF4C8C900F532E0 /* Frameworks */,
 				F17368F62CD86B1100F6242C /* Products */,
 				205E6A452CF5697E005E9150 /* Frameworks */,
+				882D56272CFCC9740057D436 /* UserPlaylistSyncManager.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1949,6 +2038,7 @@
 				20397E702CE5DE56004ED9CE /* PersistenceManager.swift in Sources */,
 				206148E92CF6ED1800FDE96D /* FirebaseUserService.swift in Sources */,
 				F12054F02CF8419B0040A69C /* SettingViewModel.swift in Sources */,
+				206439E82CFC5CEF008E1D42 /* FriendProfileViewController.swift in Sources */,
 				884529552CF71BBE007FD074 /* PlaylistRepository.swift in Sources */,
 				F173691F2CDB995100F6242C /* SwipeMusicViewController.swift in Sources */,
 				206148F32CF70E0C00FDE96D /* FirebaseFollowRelationService.swift in Sources */,
@@ -1960,6 +2050,7 @@
 				2003BA1C2CDB8EE5002CAB3E /* UILabel+Extension.swift in Sources */,
 				F17369682CE36E8F00F6242C /* DefaultImageRepository.swift in Sources */,
 				F1865EDC2CF6397B007C1E5A /* DescriptionTextFieldView.swift in Sources */,
+				882D56282CFCC9740057D436 /* UserPlaylistSyncManager.swift in Sources */,
 				F135BD0C2CF5C68C006C6C4F /* SettingTextItemView.swift in Sources */,
 				B8D554062CE0ED2C007CCD6D /* SpotifyAPI.swift in Sources */,
 				B8046A442CE9250B00933704 /* MusicGenre.swift in Sources */,
@@ -1984,6 +2075,7 @@
 				B8D554C62CE339BC007CCD6D /* DefaultSpotifyTokenProvider.swift in Sources */,
 				884529532CF71AF4007FD074 /* DefaultPlaylistRepository.swift in Sources */,
 				B8046A3C2CE755DB00933704 /* Image+Extension.swift in Sources */,
+				206439EA2CFC9778008E1D42 /* ProfileType.swift in Sources */,
 				B8046A582CEBC08300933704 /* MockDefaultFetchAvailableGenresUseCase.swift in Sources */,
 				B8D554C02CE322CF007CCD6D /* SpotifyTokenProviderError.swift in Sources */,
 				F1770B2E2CEF0F4B00C81272 /* PlaylistImagePage.swift in Sources */,

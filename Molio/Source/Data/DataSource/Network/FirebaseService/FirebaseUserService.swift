@@ -68,9 +68,7 @@ final class FirebaseUserService: UserService {
             userID: userID
         )
     }
-    
-    // MARK: - Private Method
-    
+        
     // MARK: - Private methods
     
     private func getDocumentReference(documentName: String) -> DocumentReference {

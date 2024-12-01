@@ -6,13 +6,13 @@ import SwiftUI
 /// - `isDescriptionVisible` : description 표시 여부
 /// - `followTapAction` : 팔로잉 버튼 탭 액션
 struct UserInfoCell: View {
-    let user: MolioUser
+    let user: MolioFollower
     let followRelationType: FollowRelationType
     let isDescriptionVisible: Bool
     let followTapAction: ((FollowRelationType) -> Void)?
     
     init(
-        user: MolioUser,
+        user: MolioFollower,
         followRelationType: FollowRelationType,
         isDescriptionVisible: Bool = true,
         followTapAction: ((FollowRelationType) -> Void)? = nil
@@ -26,27 +26,9 @@ struct UserInfoCell: View {
     var body: some View {
         HStack {
             // MARK: - 이미지
-            if let imageURL = user.profileImageURL {
-                 AsyncImage(url: imageURL) { phase in
-                     switch phase {
-                     case .empty:
-                         ProgressView()
-                             .foregroundColor(.mainLighter)
-                     case .success(let image):
-                         image
-                             .resizable()
-                             .scaledToFill()
-                             .clipShape(Circle())
-                     case .failure:
-                         DefaultProfile()
-                     @unknown default:
-                         EmptyView()
-                     }
-                 }
-                 .frame(width: 50, height: 50)
-             } else {
-                 DefaultProfile()
-             }
+            
+            ProfileImageView(imageURL: user.profileImageURL)
+            
             // MARK: - 이름/설명
             VStack(alignment: .leading, spacing: 2) {
                 Text.molioMedium(user.name, size: 17)
@@ -66,13 +48,11 @@ struct UserInfoCell: View {
                 case .unfollowing:
                     FollowRelationButton(type: .unfollowing) {
                         followTapAction?(.unfollowing)
-                        print("팔로우 해야 함.")
                     }
                     
                 case .following:
                     FollowRelationButton(type: .following) {
                         followTapAction?(.following)
-                        print("언팔로우 해야 함.")
                     }
                 }
             }
@@ -91,23 +71,23 @@ struct UserInfoCell: View {
         VStack {
             // 팔로잉 버튼
             UserInfoCell(
-                user: MolioUser.mock,
+                user: MolioFollower.mock,
                 followRelationType: .following,
                 isDescriptionVisible: true // description 보임
             )
             UserInfoCell(
-                user: MolioUser.mock,
+                user: MolioFollower.mock,
                 followRelationType: .following,
                 isDescriptionVisible: false// description 보이지 x
             )
             // 언팔로잉 버튼
             UserInfoCell(
-                user: MolioUser.mock,
+                user: MolioFollower.mock,
                 followRelationType: .unfollowing,
                 isDescriptionVisible: true
             )
             UserInfoCell(
-                user: MolioUser.mock,
+                user: MolioFollower.mock,
                 followRelationType: .unfollowing,
                 isDescriptionVisible: false
             )

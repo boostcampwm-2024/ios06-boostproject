@@ -35,6 +35,10 @@ struct SearchBar: View {
             .background(.textFieldBackground)
             .cornerRadius(10)
         }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            }
+        }
     }
 }
 
