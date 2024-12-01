@@ -56,6 +56,9 @@ struct SearchUserView: View {
                 secondaryButton: .cancel()
             )
         }
+        .onTapGesture {
+            hideKeyboard()
+        }
         .onAppear {
             Task {
                 await viewModel.fetchAllUsers()
