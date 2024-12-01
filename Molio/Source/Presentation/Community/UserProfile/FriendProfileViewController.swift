@@ -1,6 +1,6 @@
 import SwiftUI
 
-final class UserProfileViewController: UIHostingController<UserProfileView> {
+final class FriendProfileViewController: UIHostingController<UserProfileView> {
     private let viewModel: UserProfileViewModel
     private let followRelationViewModel: FollowRelationViewModel
     
@@ -11,14 +11,12 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
     // MARK: - Initializer
     
     init(
-        viewModel: UserProfileViewModel = UserProfileViewModel(),
-        followRelationViewModel: FollowRelationViewModel = FollowRelationViewModel(),
         isMyProfile: Bool,
         followRelation: FollowRelationType?,
         friendUserID: String?
     ) {
-        self.viewModel = viewModel
-        self.followRelationViewModel = followRelationViewModel
+        self.viewModel = UserProfileViewModel()
+        self.followRelationViewModel = FollowRelationViewModel()
         self.isMyProfile = isMyProfile
         self.followRelation = followRelation
         self.friendUserID = friendUserID
@@ -26,7 +24,6 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
         let userProfileView = UserProfileView(isMyProfile: isMyProfile, followRelationType: followRelation, viewModel: viewModel, friendUserID: friendUserID)
         super.init(rootView: userProfileView)
         
-        rootView.didSettingButtonTapped = navigateToSettingViewController
         rootView.didFollowerButtonTapped = navigationToFollowerListView
         rootView.didFollowingButtonTapped = navigationToFollowingListView
         rootView.didPlaylistCellTapped = navigationToFriendPlaylistListView
@@ -46,21 +43,16 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden =
+        false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.isHidden = true
     }
     
     // MARK: - Present Sheet or Navigation
-    
-    private func navigateToSettingViewController() {
-        let settingViewModel = SettingViewModel()
-        let settingsViewController = SettingViewController(viewModel: settingViewModel)
-        navigationController?.pushViewController(settingsViewController, animated: true)
-    }
     
     private func navigationToFollowingListView() {
        

@@ -26,6 +26,7 @@ struct UserInfoCell: View {
     var body: some View {
         HStack {
             // MARK: - 이미지
+            // TODO: 공통 컴포넌트로 수정해야 함. - ProfileImageView
             if let imageURL = user.profileImageURL {
                  AsyncImage(url: imageURL) { phase in
                      switch phase {

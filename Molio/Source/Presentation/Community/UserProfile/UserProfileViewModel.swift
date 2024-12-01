@@ -31,7 +31,7 @@ final class UserProfileViewModel: ObservableObject {
     func fetchData(isMyProfile: Bool, friendUserID: String?) async {
         updateLoadingState(true)
         defer { updateLoadingState(false) }
-
+        print(isMyProfile, friendUserID)
         do {
             let (playlists, followers, followings, user) = try await fetchAllData(
                 isMyProfile: isMyProfile,

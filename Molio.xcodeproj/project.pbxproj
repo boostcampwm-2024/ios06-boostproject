@@ -74,6 +74,7 @@
 		206149482CF8801600FDE96D /* DefaultUserUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206149472CF8801600FDE96D /* DefaultUserUseCaseTests.swift */; };
 		2061494A2CF8E31600FDE96D /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206149492CF8E31500FDE96D /* UserProfileView.swift */; };
 		206439E62CFC4B5F008E1D42 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206439E52CFC4B5F008E1D42 /* ProfileImageView.swift */; };
+		206439E82CFC5CEF008E1D42 /* FriendProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206439E72CFC5CEF008E1D42 /* FriendProfileViewController.swift */; };
 		2075FEC82CECDF4D009834BE /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC72CECDF4D009834BE /* CoreDataError.swift */; };
 		2082A09E2CF9B13800E8F2D9 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2082A09D2CF9B13800E8F2D9 /* UserProfileViewController.swift */; };
 		2082A0A22CF9C41800E8F2D9 /* FollowRelationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2082A0A12CF9C41800E8F2D9 /* FollowRelationListView.swift */; };
@@ -335,6 +336,7 @@
 		206149472CF8801600FDE96D /* DefaultUserUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultUserUseCaseTests.swift; sourceTree = "<group>"; };
 		206149492CF8E31500FDE96D /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		206439E52CFC4B5F008E1D42 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+		206439E72CFC5CEF008E1D42 /* FriendProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendProfileViewController.swift; sourceTree = "<group>"; };
 		2075FEC72CECDF4D009834BE /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		2082A09D2CF9B13800E8F2D9 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		2082A0A12CF9C41800E8F2D9 /* FollowRelationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowRelationListView.swift; sourceTree = "<group>"; };
@@ -752,6 +754,7 @@
 				206149492CF8E31500FDE96D /* UserProfileView.swift */,
 				20883BCA2CF9658300C10549 /* UserProfileViewModel.swift */,
 				2082A09D2CF9B13800E8F2D9 /* UserProfileViewController.swift */,
+				206439E72CFC5CEF008E1D42 /* FriendProfileViewController.swift */,
 			);
 			path = UserProfile;
 			sourceTree = "<group>";
@@ -1884,6 +1887,7 @@
 				20397E702CE5DE56004ED9CE /* PersistenceManager.swift in Sources */,
 				206148E92CF6ED1800FDE96D /* FirebaseUserService.swift in Sources */,
 				F12054F02CF8419B0040A69C /* SettingViewModel.swift in Sources */,
+				206439E82CFC5CEF008E1D42 /* FriendProfileViewController.swift in Sources */,
 				884529552CF71BBE007FD074 /* RealPlaylistRepository.swift in Sources */,
 				F173691F2CDB995100F6242C /* SwipeMusicViewController.swift in Sources */,
 				206148F32CF70E0C00FDE96D /* FirebaseFollowRelationService.swift in Sources */,

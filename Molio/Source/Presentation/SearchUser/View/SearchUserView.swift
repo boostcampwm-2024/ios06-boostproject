@@ -4,6 +4,8 @@ struct SearchUserView: View {
     @StateObject var viewModel: SearchUserViewModel
     let followRelationType: FollowRelationType = .following
     
+    var didUserInfoCellTapped: ((MolioUser) -> Void)?
+
     var body: some View {
         VStack(spacing: 10) {
             SearchBar(
@@ -15,12 +17,17 @@ struct SearchUserView: View {
             
             ScrollView {
                 ForEach(viewModel.searchedUser, id: \.id) { user in
-                    UserInfoCell(
-                        user: user,
-                        followRelationType: followRelationType,
-                        isDescriptionVisible: false
-                    ) { followType in
-                        print(followType)
+                    
+                    Button(action: {
+                        didUserInfoCellTapped?(user)
+                    }) {
+                        UserInfoCell(
+                            user: user,
+                            followRelationType: followRelationType,
+                            isDescriptionVisible: false
+                        ) { followType in
+                            print(followType)
+                        }
                     }
                 }
             }
