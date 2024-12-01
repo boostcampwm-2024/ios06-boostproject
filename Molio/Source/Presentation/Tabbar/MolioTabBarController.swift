@@ -22,10 +22,12 @@ final class MolioTabBarController: UITabBarController {
     
     private func setupViewControllers() {
         let swipeMusicViewController = createSwipeMusicViewController()
+        let searchUserViewController = createSearchUserViewController()
         let communityViewController = createCommunityViewController()
         
         viewControllers = [
             swipeMusicViewController,
+            searchUserViewController,
             communityViewController
         ]
     }
@@ -39,6 +41,19 @@ final class MolioTabBarController: UITabBarController {
             title: "",
             image: UIImage(systemName: "house.fill"),
             selectedImage: UIImage(systemName: "house.fill")
+        )
+        
+        return navigationController
+    }
+    
+    private func createSearchUserViewController() -> UINavigationController {
+        let searchUserViewController = SearchUserViewController()
+        let navigationController = UINavigationController(rootViewController: searchUserViewController)
+        
+        searchUserViewController.tabBarItem = UITabBarItem(
+            title: nil,
+            image: UIImage(systemName: "magnifyingglass"),
+            selectedImage: UIImage(systemName: "magnifyingglass")
         )
         
         return navigationController

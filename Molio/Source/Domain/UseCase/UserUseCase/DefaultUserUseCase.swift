@@ -25,22 +25,7 @@ final class DefaultUserUseCase: UserUseCase {
     
     func fetchUser(userID: String) async throws -> MolioUser {
         let userDTO = try await service.readUser(userID: userID)
-        
-        let profileImageURL: URL?
-        if let urlString = userDTO.profileImageURL {
-            profileImageURL = URL(string: urlString)
-        } else {
-            profileImageURL = nil
-        }
-        
-        let user = MolioUser(
-            id: userDTO.id,
-            name: userDTO.name,
-            profileImageURL: profileImageURL,
-            description: userDTO.description
-        )
-        
-        return user
+        return userDTO.toEntity
     }
     
     func fetchFollower(userID: String, state: Bool) async throws -> MolioFollower {
@@ -63,6 +48,13 @@ final class DefaultUserUseCase: UserUseCase {
         return user
     }
     
+    func fetchAllUsers() async throws -> [MolioUser] {
+        let userDTOs = try await service.readAllUsers()
+        // TODO: - MolioFollower로 교체 필요
+        return userDTOs.map(\.toEntity)
+    }
+
+
     func updateUser(
         userID: String,
         newName: String,
@@ -80,13 +72,6 @@ final class DefaultUserUseCase: UserUseCase {
         
         let user = MolioUserDTO(
             id: userID,
-            name: newName,
-            profileImageURL: updateImageURLString,
-            description: newDescription
-        )
-        
-        try await service.updateUser(user)
-    }
     
     func deleteUser(userID: String) async throws {
         try await service.deleteUser(userID: userID)

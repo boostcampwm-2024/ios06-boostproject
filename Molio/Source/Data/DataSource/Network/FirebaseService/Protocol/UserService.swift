@@ -5,5 +5,6 @@ protocol UserService {
     func readUser(userID: String) async throws -> MolioUserDTO
     func updateUser(_ user: MolioUserDTO) async throws
     func deleteUser( userID: String) async throws
+    func readAllUsers() async throws -> [MolioUserDTO]
     func uploadUserImage(userID: String, data: Data) async throws -> URL
 }

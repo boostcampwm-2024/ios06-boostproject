@@ -53,6 +53,14 @@ final class FirebaseUserService: UserService {
         }
     }
     
+    func readAllUsers() async throws -> [MolioUserDTO] {
+        let collectionRef = getColloectionReference()
+        let querySnapshot = try await collectionRef.getDocuments()
+        return querySnapshot.documents.compactMap { userDocument in
+            try? userDocument.data(as: MolioUserDTO.self)
+        }
+    }
+    
     func uploadUserImage(userID: String, data: Data) async throws -> URL {
         return try await storageManager.uploadImage(
             imageData: data,
@@ -63,7 +71,13 @@ final class FirebaseUserService: UserService {
     
     // MARK: - Private Method
     
+    // MARK: - Private methods
+    
     private func getDocumentReference(documentName: String) -> DocumentReference {
         return db.collection(collectionName).document(documentName)
+    }
+    
+    private func getColloectionReference() -> CollectionReference {
+        return db.collection(collectionName)
     }
 }
