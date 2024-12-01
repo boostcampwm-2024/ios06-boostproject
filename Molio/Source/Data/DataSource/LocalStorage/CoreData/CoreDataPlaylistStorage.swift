@@ -71,16 +71,17 @@ final class CoreDataPlaylistStorage: PlaylistLocalStorage {
     }
     
     func readAll() async throws -> [Entity] {
-        fetchRequest.predicate = nil
         return try await context.perform {
+            self.fetchRequest.predicate = nil
             let playlists = try self.context.fetch(self.fetchRequest)
             return playlists.map { playlist in
                 let filter = MusicFilter(genres: playlist.filters.compactMap { MusicGenre(rawValue: $0) })
-                return MolioPlaylist(id: playlist.id,
-                              name: playlist.name,
-                              createdAt: playlist.createdAt,
-                              musicISRCs: playlist.musicISRCs,
-                              filter: filter
+                return MolioPlaylist(
+                    id: playlist.id,
+                    name: playlist.name,
+                    createdAt: playlist.createdAt,
+                    musicISRCs: playlist.musicISRCs,
+                    filter: filter
                 )
             }
         }
