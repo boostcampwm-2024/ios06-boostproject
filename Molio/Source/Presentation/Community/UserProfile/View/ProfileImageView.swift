@@ -16,7 +16,7 @@ struct ProfileImageView: View {
             AsyncImage(url: imageURL) { phase in
                 switch phase {
                 case .empty:
-                    ProgressView() // 로딩 중
+                    ProgressView()
                         .frame(width: size, height: size)
                 case .success(let image):
                     image
@@ -25,23 +25,13 @@ struct ProfileImageView: View {
                         .frame(width: size, height: size)
                         .clipShape(Circle())
                 case .failure(_):
-                    placeholderView
+                    DefaultProfile()
                 @unknown default:
                     EmptyView()
                 }
             }
         } else {
-            placeholderView
+            DefaultProfile()
         }
-    }
-
-    private var placeholderView: some View {
-        Circle()
-            .fill(Color.gray)
-            .frame(width: size, height: size)
-            .overlay(
-                Image(systemName: placeholderIconName)
-                    .foregroundColor(.white)
-            )
     }
 }

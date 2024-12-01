@@ -28,29 +28,14 @@ final class DefaultUserUseCase: UserUseCase {
         return userDTO.toEntity
     }
     
-    func fetchFollower(userID: String, state: Bool) async throws -> MolioFollower {
+    func fetchCurrentUser() async throws -> MolioUser? {
+        guard let userID = try currentUserIdUseCase.execute() else { return nil }
         let userDTO = try await service.readUser(userID: userID)
-        
-        let profileImageURL: URL?
-        if let urlString = userDTO.profileImageURL {
-            profileImageURL = URL(string: urlString)
-        } else {
-            profileImageURL = nil
-        }
-        
-        let user = MolioFollower(
-            id: userDTO.id,
-            name: userDTO.name,
-            profileImageURL: profileImageURL,
-            description: userDTO.description,
-            state: state
-        )
-        return user
+        return userDTO.toEntity
     }
     
     func fetchAllUsers() async throws -> [MolioUser] {
         let userDTOs = try await service.readAllUsers()
-        // TODO: - MolioFollower로 교체 필요
         return userDTOs.map(\.toEntity)
     }
 

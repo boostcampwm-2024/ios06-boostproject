@@ -2,6 +2,8 @@ import Combine
 import SwiftUI
 
 final class FriendPlaylistDetailHostingViewController: UIHostingController<FriendPlaylistDetailView> {
+    // MARK: - Initializer
+    
     init(
         playlist: MolioPlaylist,
         fetchPlaylistUseCase: FetchPlaylistUseCase = DIContainer.shared.resolve()
@@ -22,6 +24,18 @@ final class FriendPlaylistDetailHostingViewController: UIHostingController<Frien
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    // MARK: - Life Cycle
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 }
 

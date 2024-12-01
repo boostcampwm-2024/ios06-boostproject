@@ -10,16 +10,7 @@ final class CommunityViewController: UIViewController {
     }
     
     private func setupUserProfileView() {
-        let viewModelForMyProfile = UserProfileViewModel()
-        let followRelationViewModel = FollowRelationViewModel()
-        
-        let userProfileViewController = UserProfileViewController(
-            viewModel: viewModelForMyProfile, 
-            followRelationViewModel: followRelationViewModel,
-            isMyProfile: true,
-            followRelation: nil,
-            friendUserID: nil
-        )
+        let userProfileViewController = UserProfileViewController(profileType: .me)
         
         addChild(userProfileViewController)
         view.addSubview(userProfileViewController.view)

@@ -50,13 +50,13 @@ final class FirebaseFollowRelationService: FollowRelationService {
             }
         }
     }
-    func createFollowRelation(from followerID: String, to followingID: String) async throws {
+    func createFollowRelation(from followingID: String, to followerID: String) async throws {
         let newFollowingRelation = FollowRelationDTO(
             id: UUID().uuidString,
             date: Date(),
             following: followingID,
             follower: followerID,
-            state: false)
+            state: true)
         
         guard let newFollowingRelationData = newFollowingRelation.toDictionary() else { return } // TODO: throw 추가 - 딕셔너리 변환 실패
         
