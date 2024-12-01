@@ -1,13 +1,13 @@
 import SwiftUI
 
 final class PlaylistDetailViewController: UIHostingController<PlaylistDetailView> {
-    private let viewModel: PlaylistDetailViewModel
+    private let playlistDetailViewModel: PlaylistDetailViewModel
     
     // MARK: - Initializer
     
     init(viewModel: PlaylistDetailViewModel) {
-        self.viewModel = viewModel
-        let playlistDetailView = PlaylistDetailView(viewModel: viewModel)
+        self.playlistDetailViewModel = viewModel
+        let playlistDetailView = PlaylistDetailView(playlistDetailViewModel: viewModel)
         super.init(rootView: playlistDetailView)
         
         rootView.didPlaylistButtonTapped = presentPlaylistChangeSheet
@@ -15,7 +15,7 @@ final class PlaylistDetailViewController: UIHostingController<PlaylistDetailView
     }
 
     required init?(coder aDecoder: NSCoder) {
-        self.viewModel = PlaylistDetailViewModel()
+        self.playlistDetailViewModel = PlaylistDetailViewModel()
         super.init(coder: aDecoder)
     }
     
@@ -45,13 +45,13 @@ final class PlaylistDetailViewController: UIHostingController<PlaylistDetailView
     }
     
     private func presentPlaylistExportSheet() {
-        let platformSelectionVC = PlatformSelectionViewController(viewModel: viewModel)
+        let platformSelectionVC = PlatformSelectionViewController(viewModel: playlistDetailViewModel)
         platformSelectionVC.delegate = self
         self.presentCustomSheet(platformSelectionVC)
     }
     
     private func presentExportAppleMusicPlaylistView() {
-        let exportAppleMusicPlaylistVC = ExportAppleMusicPlaylistViewController(viewModel: viewModel)
+        let exportAppleMusicPlaylistVC = ExportAppleMusicPlaylistViewController(viewModel: playlistDetailViewModel)
         self.presentCustomSheet(exportAppleMusicPlaylistVC, isOverFullScreen: true)
     }
     
@@ -71,7 +71,7 @@ extension PlaylistDetailViewController: PlatformSelectionViewControllerDelegate 
             case .appleMusic:
                 self?.presentExportAppleMusicPlaylistView()
             case .image:
-                guard let musics = self?.viewModel.currentPlaylistMusics else { return }
+                guard let musics = self?.playlistDetailViewModel.currentPlaylistMusics else { return }
                 self?.presentExportPlaylistImageView(with: musics)
             }
         }

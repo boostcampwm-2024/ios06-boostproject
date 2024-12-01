@@ -11,7 +11,9 @@ final class FriendPlaylistDetailHostingViewController: UIHostingController<Frien
             fetchPlaylistUseCase: fetchPlaylistUseCase
         )
 
-        let rootView = FriendPlaylistDetailView(viewModel: viewModel)
+        let rootView = FriendPlaylistDetailView(
+            viewModel: viewModel
+        )
         
         super.init(rootView: rootView)
         
