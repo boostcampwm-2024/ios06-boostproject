@@ -3,7 +3,7 @@ import Combine
 
 final class SearchUserViewModel: ObservableObject {
     @Published var searchText: String = ""
-    @Published private(set) var searchedUser: [MolioUser] = MolioUser.mockArray
+    @Published private(set) var searchedUser: [MolioUser] = []
     
     private var allUsers: [MolioUser] = []
     private var anyCancellables = Set<AnyCancellable>()
@@ -44,7 +44,7 @@ final class SearchUserViewModel: ObservableObject {
             .store(in: &anyCancellables)
     }
     
-    /// 검색 결과로 보여줄 유저를 필터링하는 메서드
+    /// 검색 결과로 보여줄 유저를 필터링
     /// - 로그인하지 않은 경우 : 검색 텍스트가 포함되는 이름을 가진 유저를 모두 반환
     /// - 로그인한 경우 : 검색 텍스트가 포함되는 이름을 가지면서 현재 유저가 아닌 유저를 모두 반환
     private func filterUser(_ user: MolioUser, by searchText: String) -> Bool {
