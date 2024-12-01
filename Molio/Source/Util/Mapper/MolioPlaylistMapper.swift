@@ -14,7 +14,7 @@ struct MolioPlaylistMapper: BidirectionalMapper {
             createdAt: Timestamp(date: entity.createdAt),
             filters: entity.filter.genres.map { $0.rawValue },
             musicISRCs: entity.musicISRCs,
-            likes: entity.like ?? []
+            likes: entity.like
         )
     }
     

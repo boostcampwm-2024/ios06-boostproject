@@ -26,7 +26,6 @@ final class DefaultRandomMusicDeck: RandomMusicDeck {
     private var currentMusicFilter: MusicFilter?
     private var currentPlaylist: MolioPlaylist?
     
-
     // MARK: 생성자
     
     init(
