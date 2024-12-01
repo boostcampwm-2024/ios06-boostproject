@@ -114,7 +114,7 @@ struct MyInfoView: View {
                     isShowingPhotoPicker = true
                 }
                 Button("기본 이미지 적용") {
-                    viewModel.resetDefaultImage()
+                    viewModel.removeProfileImage()
                 }
                 Button("취소", role: .cancel) {}
             }

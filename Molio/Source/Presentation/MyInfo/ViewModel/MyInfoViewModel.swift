@@ -16,6 +16,7 @@ final class MyInfoViewModel: ObservableObject {
     
     private let currentUserIdUseCase: CurrentUserIdUseCase
     private let userUseCase: UserUseCase
+    private var profileImageUpdateType: ProfileImageUpdateType = .keep
     
     init(
         currentUser: MolioUser,
@@ -45,14 +46,17 @@ final class MyInfoViewModel: ObservableObject {
         item.loadTransferable(type: Data.self) { result in
             DispatchQueue.main.async { [weak self] in
                 guard case .success(let data) = result else { return }
+                guard let data = data else { return }
                 self?.userSelectedImageData = data
+                self?.profileImageUpdateType = .update(data)
             }
         }
     }
     
-    func resetDefaultImage() {
+    func removeProfileImage() {
         userImageURL = nil
         userSelectedImageData = nil
+        profileImageUpdateType = .remove
     }
     
     func updateUser() async throws {
@@ -67,7 +71,7 @@ final class MyInfoViewModel: ObservableObject {
                 userID: userID,
                 newName: userNickName,
                 newDescription: userDescription,
-                newImageData: userSelectedImageData
+                imageUpdate: profileImageUpdateType
             )
             await MainActor.run {
                 self.alertState = .successUpdate
