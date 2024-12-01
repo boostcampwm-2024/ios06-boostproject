@@ -297,8 +297,9 @@ final class SwipeMusicViewController: UIViewController {
     }
     
     @objc func didTapPlaylistSelectButton() {
-        let selectplaylistView = SelectPlaylistView(viewModel: ManagePlaylistViewModel())
-        self.presentCustomSheet(content: selectplaylistView)
+        let selectPlaylistVC = SelectPlaylistViewController(viewModel: ManagePlaylistViewModel())
+        selectPlaylistVC.delegate = self
+        self.presentCustomSheet(selectPlaylistVC)
     }
     
     @objc private func didTapMyMolioButton() {
@@ -386,6 +387,13 @@ final class SwipeMusicViewController: UIViewController {
             menuStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             menuStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -22)
         ])
+    }
+}
+
+extension SwipeMusicViewController: SelectPlaylistViewControllerDelegate {
+    func didTapCreateButton() {
+        let createPlaylistVC = CreatePlaylistViewController(viewModel: ManagePlaylistViewModel())
+        self.presentCustomSheet(createPlaylistVC)
     }
 }
 

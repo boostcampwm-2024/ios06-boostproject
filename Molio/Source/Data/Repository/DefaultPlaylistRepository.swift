@@ -2,7 +2,7 @@ import Combine
 import Foundation
 import FirebaseCore
 
-final class DefaultPlaylistRepository: RealPlaylistRepository {
+final class DefaultPlaylistRepository: PlaylistRepository {
     private let playlistService: PlaylistService
     private let playlistStorage: PlaylistLocalStorage
 

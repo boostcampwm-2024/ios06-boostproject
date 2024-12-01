@@ -26,7 +26,7 @@ final class PlaylistDetailViewModel: ObservableObject {
     private var subscriptions: Set<AnyCancellable> = []
     
     init(
-        managePlaylistUseCase: ManageMyPlaylistUseCase = DefaultManageMyPlaylistUseCase(),
+        managePlaylistUseCase: ManageMyPlaylistUseCase = DIContainer.shared.resolve(),
         appleMusicUseCase: AppleMusicUseCase = DIContainer.shared.resolve(),
         fetchPlaylistUseCase: FetchPlaylistUseCase = DIContainer.shared.resolve()
     ) {

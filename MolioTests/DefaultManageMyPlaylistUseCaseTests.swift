@@ -173,10 +173,104 @@
 //        XCTAssertEqual(mockRepository.updatedPlaylist?.musicISRCs, ["ISRC002", "ISRC003"])
 //    }
 //}
-//
-//final class MockCurrentUserIdUseCase: CurrentUserIdUseCase {
-//    var currentUserID: String?
-//    func execute() throws -> String? {
-//        return currentUserID
-//    }
-//}
+
+
+import XCTest
+@testable import Molio
+
+final class ManageMyPlaylistUseCaseTests: XCTestCase {
+    private var sut: ManageMyPlaylistUseCase!
+    private var mockCurrentUserIdUseCase: MockCurrentUserIdUseCase!
+    private var mockPlaylistRepository: MockPlaylistRepository!
+    private var mockCurrentPlaylistRepository: MockCurrentPlaylistRepository!
+    
+    override func setUpWithError() throws {
+        mockCurrentUserIdUseCase = MockCurrentUserIdUseCase()
+        mockPlaylistRepository = MockPlaylistRepository()
+        mockCurrentPlaylistRepository = MockCurrentPlaylistRepository()
+        sut = DefaultManageMyPlaylistUseCase(
+            currentUserIdUseCase: mockCurrentUserIdUseCase,
+            playlistRepository: mockPlaylistRepository,
+            currentPlaylistRepository: mockCurrentPlaylistRepository
+        )
+    }
+    
+    override func tearDownWithError() throws {
+        sut = nil
+        mockCurrentUserIdUseCase = nil
+        mockPlaylistRepository = nil
+        mockCurrentPlaylistRepository = nil
+    }
+    
+    // MARK: - CurrentUserID가 없어도 PlaylistRepository의 메서드는 호출되어야 한다.
+    
+    func test_addMusic_호출시_현재유저ID가_없어도_playlistRepository의_updatePlaylistCalled은_호출된다() async throws {
+        // Given
+        mockCurrentUserIdUseCase.userIDToReturn = nil
+        mockPlaylistRepository.mockPlaylist = MolioPlaylist.mock
+        // When
+        try await sut.addMusic(musicISRC: "", to: UUID())
+        // Then
+        XCTAssertTrue(mockPlaylistRepository.updatePlaylistCalled)
+    }
+    
+    func test_deleteMusic_호출시_현재유저ID가_없어도_playlistRepository의_updatePlaylistCalled은_호출된다() async throws {
+        // Given
+        mockCurrentUserIdUseCase.userIDToReturn = nil
+        mockPlaylistRepository.mockPlaylist = MolioPlaylist.mock
+        // When
+        try await sut.deleteMusic(musicISRC: "", from: UUID())
+        // Then
+        XCTAssertTrue(mockPlaylistRepository.updatePlaylistCalled)
+    }
+    
+    func test_createPlaylist_호출시_현재유저ID가_없어도_playlistRepository의_createNewPlaylist는_호출된다() async throws {
+        // Given
+        mockCurrentUserIdUseCase.userIDToReturn = nil
+        // When
+        try await sut.createPlaylist(playlistName: "")
+        // Then
+        XCTAssertTrue(mockPlaylistRepository.createNewPlaylistCalled)
+    }
+    
+    func test_deletePlaylist_호출시_현재유저ID가_없어도_playlistRepository의_deletePlaylist는_호출된다() async throws {
+        // Given
+        mockCurrentUserIdUseCase.userIDToReturn = nil
+        mockPlaylistRepository.mockPlaylist = MolioPlaylist.mock
+        // When
+        try await sut.deletePlaylist(playlistID: UUID())
+        // Then
+        XCTAssertTrue(mockPlaylistRepository.deletePlaylistCalled)
+    }
+    
+    func test_updatePlaylistName_호출시_현재유저ID가_없어도_playlistRepository의_updatePlaylistCalled는_호출된다() async throws {
+        // Given
+        mockCurrentUserIdUseCase.userIDToReturn = nil
+        mockPlaylistRepository.mockPlaylist = MolioPlaylist.mock
+        // When
+        try await sut.updatePlaylistName(playlistID: UUID(), name: "")
+        // Then
+        XCTAssertTrue(mockPlaylistRepository.updatePlaylistCalled)
+    }
+    
+    func test_updatePlaylistFilter_호출시_현재유저ID가_없어도_playlistRepository의_updatePlaylistCalled는_호출된다() async throws {
+        // Given
+        mockCurrentUserIdUseCase.userIDToReturn = nil
+        mockPlaylistRepository.mockPlaylist = MolioPlaylist.mock
+        // When
+        try await sut.updatePlaylistFilter(playlistID: UUID(), filter: MusicFilter(genres: []))
+        // Then
+        XCTAssertTrue(mockPlaylistRepository.updatePlaylistCalled)
+    }
+    
+    // MARK: - 로직 확인
+    
+    func test_moveMusic_호출시_이동할_인덱스가_같으면_playlistRepository의_updatePlaylist는_호출되지_않는다() async throws {
+        // Given
+        mockCurrentUserIdUseCase.userIDToReturn = nil
+        // When
+        try await sut.moveMusic(musicISRC: "", in: UUID(), fromIndex: 0, toIndex: 0)
+        // Then
+        XCTAssertFalse(mockPlaylistRepository.updatePlaylistCalled)
+    }
+}
