@@ -44,12 +44,12 @@ final class UserPlaylistSyncManager {
             guard let userID = try currentUserIDUseCase.execute() else { return }
 
             // 1. 서버에 있는 플레이리스트를 전부 다 지워버린다.
-            try await deleteAllPlaylistInLocalStorage()
+            try await deleteAllPlaylistInServer()
             
             // 2. 로컬 스토리지에 있는 플레이리스트를 전부 가져온다.
             let userAllPlaylistsInStorage = try await playlistStorage.readAll()
             
-            // 3. 서버에 있는 플레이리스트를 로컬 스토리지에 저장한다.
+            // 3. 로컬 스토리지에 있는 모든 플레이리스트를 서버에 저장한다.
             for playlist in userAllPlaylistsInStorage {
                 let playlistDTO = MolioPlaylistMapper.map(from: playlist)
                 
