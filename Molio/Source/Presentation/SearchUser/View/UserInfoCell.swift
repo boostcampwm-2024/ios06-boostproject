@@ -48,13 +48,11 @@ struct UserInfoCell: View {
                 case .unfollowing:
                     FollowRelationButton(type: .unfollowing) {
                         followTapAction?(.unfollowing)
-                        print("팔로우 해야 함.")
                     }
                     
                 case .following:
                     FollowRelationButton(type: .following) {
                         followTapAction?(.following)
-                        print("언팔로우 해야 함.")
                     }
                 }
             }

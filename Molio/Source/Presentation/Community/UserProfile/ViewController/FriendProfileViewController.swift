@@ -54,12 +54,12 @@ final class FriendProfileViewController: UIHostingController<UserProfileView> {
     
     private func navigationToFollowingListView() {
        
-        let followingListViewController = FollowRelationViewController(viewModel: followRelationViewModel, isMyProfile: true, followRelation: .following, friendUserID: nil)
+        let followingListViewController = FollowRelationViewController(viewModel: followRelationViewModel, followRelationType: .following, friendUserID: nil)
         navigationController?.pushViewController(followingListViewController, animated: true)
     }
     
     private func navigationToFollowerListView() {
-        let followerListViewController = FollowRelationViewController(viewModel: followRelationViewModel, isMyProfile: true, followRelation: .unfollowing, friendUserID: nil)
+        let followerListViewController = FollowRelationViewController(viewModel: followRelationViewModel, followRelationType: .unfollowing, friendUserID: nil)
         navigationController?.pushViewController(followerListViewController, animated: true)
     }
     

@@ -33,6 +33,8 @@ final class UserProfileViewModel: ObservableObject {
         
         do {
             let (playlists, followers, followings, user) = try await fetchAllData()
+            print("followers", followers)
+            print("followings", followings)
             updateState(playlists: playlists, followers: followers, followings: followings, user: user)
         } catch {
             print("Error fetching data: \(error.localizedDescription)")
@@ -50,6 +52,7 @@ final class UserProfileViewModel: ObservableObject {
         async let followers = fetchFollowers()
         async let followings = fetchFollowings()
         async let user = fetchUser()
+
         return try await (playlists, followers, followings, user)
     }
     
@@ -58,7 +61,7 @@ final class UserProfileViewModel: ObservableObject {
         switch profileType {
         case .me:
             return try await fetchPlaylistUseCase.fetchMyAllPlaylists()
-        case .friend(let userID, let isFollowing):
+        case .friend(let userID, _):
             return try await fetchPlaylistUseCase.fetchFriendAllPlaylists(friendUserID: userID)
         }
     }
@@ -68,7 +71,7 @@ final class UserProfileViewModel: ObservableObject {
         switch profileType {
         case .me:
             return try await followRelationsUseCase.fetchMyFollowerList()
-        case .friend(let userID, let isFollowing):
+        case .friend(let userID, _):
             return try await followRelationsUseCase.fetchFriendFollowerList(friendID: userID)
         }
     }
@@ -78,7 +81,7 @@ final class UserProfileViewModel: ObservableObject {
         switch profileType {
         case .me:
             return try await followRelationsUseCase.fetchMyFollowingList()
-        case .friend(let userID, let isFollowing):
+        case .friend(let userID, _):
             return try await followRelationsUseCase.fetchFriendFollowingList(friendID: userID)
         }
     }
@@ -88,7 +91,7 @@ final class UserProfileViewModel: ObservableObject {
         switch profileType {
         case .me:
             return try? await userUseCase.fetchCurrentUser()
-        case .friend(let userID, let isFollowing):
+        case .friend(let userID, _):
             return try? await userUseCase.fetchUser(userID: userID)
         }
     }

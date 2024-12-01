@@ -2,27 +2,31 @@ import SwiftUI
 
 final class FollowRelationViewController: UIHostingController<FollowRelationListView> {
     private let viewModel: FollowRelationViewModel
-    private let isMyProfile: Bool
-    private let followRelation: FollowRelationType
+    private let followRelationType: FollowRelationType
     private let friendUserID: String?
-    
     // MARK: - Initializer
     
-    init(viewModel: FollowRelationViewModel, isMyProfile: Bool, followRelation: FollowRelationType, friendUserID: String?) {
+    init(viewModel: FollowRelationViewModel, followRelationType: FollowRelationType, friendUserID: String?) {
         self.viewModel = viewModel
-        self.isMyProfile = isMyProfile
-        self.followRelation = followRelation
+        self.followRelationType = followRelationType
         self.friendUserID = friendUserID
-        
-        let followRelationListView = FollowRelationListView(viewModel: viewModel, followRelationType: followRelation, friendUserID: friendUserID)
+
+        let followRelationListView = FollowRelationListView(
+            viewModel: viewModel,
+            followRelationType: followRelationType,
+            friendUserID: friendUserID
+        )
         super.init(rootView: followRelationListView)
-        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        switch followRelation {
+        switch followRelationType {
         case .unfollowing:
             navigationItem.title = "팔로워"
         case .following:
@@ -30,19 +34,6 @@ final class FollowRelationViewController: UIHostingController<FollowRelationList
         }
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        self.isMyProfile = false
-        self.followRelation = .following
-        self.friendUserID = nil
-        
-        self.viewModel = FollowRelationViewModel()
-        super.init(coder: aDecoder)
-    }
-    
     // MARK: - Present Sheet or Navigation
-    
-    private func navigateToSettingViewController() {
-      
-    }
 }
 

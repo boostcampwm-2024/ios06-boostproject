@@ -1,76 +1,54 @@
 import SwiftUI
 
 struct FollowRelationListView: View {
-    private let viewModel: FollowRelationViewModel
+    @StateObject private var viewModel: FollowRelationViewModel
     private let followRelationType: FollowRelationType
     private let friendUserID: String?
 
     init(
         viewModel: FollowRelationViewModel,
         followRelationType: FollowRelationType,
-        friendUserID: String?
+        friendUserID: String? = nil
     ) {
-        self.viewModel = viewModel
+        self._viewModel = StateObject(wrappedValue: viewModel)
         self.followRelationType = followRelationType
         self.friendUserID = friendUserID
     }
+    
     var body: some View {
         VStack {
-            ScrollView(.vertical, showsIndicators: true) {
-                ForEach(viewModel.users) { user in
-                    UserInfoCell(user: user, followRelationType: .following)
+            if viewModel.users.isEmpty {
+                Text("사용자가 없습니다.")
+                    .foregroundColor(.gray)
+                    .padding()
+            } else {
+                ScrollView(.vertical, showsIndicators: true) {
+                    ForEach(viewModel.users, id: \.id) { user in
+                        UserInfoCell(
+                            user: user,
+                            followRelationType: followRelationType
+                        ){ followType in
+                            Task {
+                                await viewModel.updateFollowState(for: user, to: followType, friendUserID: friendUserID)
+                            }
+                        }
+                    }
                 }
-              
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.background)
-        
-    }
-    
-    func userIntfoRowView(userName: String, description: String?, imageURL: URL?) -> some View {
-        HStack {
-            ProfileImageView(imageURL: imageURL)
-            VStack(alignment: .leading, spacing: 2) {
-                Text.molioMedium(userName, size: 17)
-                    .foregroundStyle(.white)
-                Text.molioRegular(description ?? "", size: 14)
-                    .foregroundColor(.gray)
-            }
-            Spacer()
-            VStack {
-                switch followRelationType {
-                case .unfollowing:
-                    FollowRelationButton(type: .unfollowing) {
-                        print("언팔로우 해야 함.")
-                    }
-                    
-                case .following:
-                    FollowRelationButton(type: .following) {
-                        print("언팔로우 해야 함.")
-                    }
-                }
-            }
-            .frame(width: 59)
-            .padding(.vertical, 8)
-        }
-        .frame(height: 50)
-        .padding(.horizontal, 22)
         .onAppear {
             Task {
-                guard let friendUserID else {
-                    try await viewModel.fetchMyData(followRelationType: followRelationType)
-                    return
+                do {
+                    try await viewModel.fetchData(followRelationType: followRelationType, friendUserID: friendUserID)
+                } catch {
+                    print("Error fetching data: \(error.localizedDescription)")
                 }
-                
-                try await viewModel.fetchFreindData(followRelationType: followRelationType, friendUserID: friendUserID)
-                
             }
         }
     }
-
 }
-
 // Preview에서 활용 가능
 final class MockFollowRelationViewModel: ObservableObject {
     @Published var users: [MolioUser] = [

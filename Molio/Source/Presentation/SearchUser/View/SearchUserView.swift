@@ -21,10 +21,12 @@ struct SearchUserView: View {
                     }) {
                         UserInfoCell(
                             user: user,
-                            followRelationType: user.state ? .following : .unfollowing,
+                            followRelationType: user.followRelation,
                             isDescriptionVisible: false
                         ) { followType in
-                            print(followType)
+                            Task {
+                                await viewModel.updateFollowState(for: user, to: followType)
+                            }
                         }
                     }
                 }

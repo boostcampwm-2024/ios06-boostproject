@@ -58,4 +58,33 @@ final class SearchUserViewModel: ObservableObject {
             return isContainsSearchText
         }
     }
+    
+    /// 팔로우 상태 업데이트 메서드
+    @MainActor
+    func updateFollowState(for user: MolioFollower, to type: FollowRelationType) async {
+        do {
+            // 서버에 팔로우 상태 업데이트
+            switch type {
+            case .following:
+                try await followRelationUseCase.unFollow(to: user.id)
+            case .unfollowing:
+                try await followRelationUseCase.requestFollowing(to: user.id)
+            }
+
+            await reloadUsers()
+        } catch {
+            print("Failed to update follow state: \(error.localizedDescription)")
+        }
+    }
+    
+    @MainActor
+    private func reloadUsers() async {
+        do {
+            let updatedUsers = try await followRelationUseCase.fetchAllFollowers()
+            allUsers = updatedUsers
+            searchedUser = allUsers.filter { filteredBySearchText($0, by: searchText) }
+        } catch {
+            print("Failed to reload users: \(error.localizedDescription)")
+        }
+    }
 }

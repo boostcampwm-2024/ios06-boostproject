@@ -34,26 +34,6 @@ final class DefaultUserUseCase: UserUseCase {
         return userDTO.toEntity
     }
     
-    func fetchFollower(userID: String, state: Bool) async throws -> MolioFollower {
-        let userDTO = try await service.readUser(userID: userID)
-        
-        let profileImageURL: URL?
-        if let urlString = userDTO.profileImageURL {
-            profileImageURL = URL(string: urlString)
-        } else {
-            profileImageURL = nil
-        }
-        
-        let user = MolioFollower(
-            id: userDTO.id,
-            name: userDTO.name,
-            profileImageURL: profileImageURL,
-            description: userDTO.description,
-            state: state
-        )
-        return user
-    }
-    
     func fetchAllUsers() async throws -> [MolioUser] {
         let userDTOs = try await service.readAllUsers()
         return userDTOs.map(\.toEntity)

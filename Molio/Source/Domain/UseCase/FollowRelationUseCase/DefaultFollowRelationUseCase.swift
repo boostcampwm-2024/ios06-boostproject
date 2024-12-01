@@ -14,8 +14,9 @@ struct DefaultFollowRelationUseCase: FollowRelationUseCase {
         self.userUseCase = userUseCase
     }
     
-    func requestFollowing(from userID: String, to targetID: String) async throws {
-        try await service.createFollowRelation(from: userID, to: targetID)
+    func requestFollowing(to targetID: String) async throws {
+        let currentUserID = try await fetchMyUserID()
+        try await service.createFollowRelation(from: currentUserID, to: targetID)
     }
     
     func approveFollowing(relationID: String) async throws {
@@ -26,115 +27,118 @@ struct DefaultFollowRelationUseCase: FollowRelationUseCase {
         try await service.deleteFollowRelation(relationID: relationID)
     }
     
-    func unFollow(relationID: String) async throws {
+    func unFollow(to targetID: String) async throws {
+        let currentUserID = try await fetchMyUserID()
+        guard let relationID = try await service.readFollowRelation(followingID: currentUserID, followerID: targetID, state: true).first?.id else { return }
         try await service.deleteFollowRelation(relationID: relationID)
     }
     
+    /// 내가 팔로잉한 사용자 목록
     func fetchMyFollowingList() async throws -> [MolioFollower] {
         let currentUserID = try await fetchMyUserID()
         let followingRelations = try await service.readFollowRelation(
-            followingID: currentUserID,
+            followingID: currentUserID, // 내가 followingID로 등록된 관계
             followerID: nil,
-            state: true
+            state: nil // state는 더 이상 필요 없음
         )
-        
-        let followers = try await fetchUsers(from: followingRelations.map { $0.follower })
-        
-        return followers.map { user in
-            user.convertToFollower(state: true)
-        }
+        return try await convertToMolioFollowers(from: followingRelations.map { $0.follower })
     }
-    
-    func fetchFriendFollowingList(friendID: String) async throws -> [MolioFollower] {
-        let followerRelations = try await service.readFollowRelation(followingID: friendID, followerID: nil, state: true)
-        
-        let followings = try await fetchUsers(from: followerRelations.map { $0.follower })
-        return followings.map { user in
-            user.convertToFollower(state: true)
-        }
-    }
-    
+
+    /// 나를 팔로잉한 사용자 목록
     func fetchMyFollowerList() async throws -> [MolioFollower] {
-        let userID = try await fetchMyUserID()
-        let followingRelations = try await service.readFollowRelation(followingID: nil, followerID: userID, state: nil)
-        
-        return try await fetchFollowers(
-            userIDs: followingRelations.map { $0.following },
-            states: followingRelations.map { $0.state }
-        )
-    }
-    
-    func fetchFriendFollowerList(friendID: String) async throws -> [MolioFollower] {
-        let relations = try await service.readFollowRelation(followingID: nil, followerID: friendID, state: true)
-        
-        return try await fetchFollowers(
-            userIDs: relations.map { $0.following },
-            states: relations.map { $0.state }
-        )
-    }
-    
-    func fetchAllFollowers() async throws -> [MolioFollower] {
-        let users = try await userUseCase.fetchAllUsers()
         let currentUserID = try await fetchMyUserID()
-        let relations = try await service.readFollowRelation (
-            followingID: currentUserID,
+        let followerRelations = try await service.readFollowRelation(
+            followingID: nil,
+            followerID: currentUserID, // 내가 followerID로 등록된 관계
+            state: nil
+        )
+        return try await convertToMolioFollowers(from: followerRelations.map { $0.following })
+    }
+
+    /// 친구가 팔로잉한 사용자 목록
+    func fetchFriendFollowingList(friendID: String) async throws -> [MolioFollower] {
+        let followingRelations = try await service.readFollowRelation(
+            followingID: friendID, // 친구가 followingID로 등록된 관계
+            followerID: nil,
+            state: nil
+        )
+        return try await convertToMolioFollowers(from: followingRelations.map { $0.follower })
+    }
+
+    /// 친구를 팔로잉한 사용자 목록
+    func fetchFriendFollowerList(friendID: String) async throws -> [MolioFollower] {
+        let followerRelations = try await service.readFollowRelation(
+            followingID: nil,
+            followerID: friendID, // 친구가 followerID로 등록된 관계
+            state: nil
+        )
+        return try await convertToMolioFollowers(from: followerRelations.map { $0.following })
+    }
+    
+    /// 팔로잉 여부를 포함한 모든 사용자의 목록 
+    func fetchAllFollowers() async throws -> [MolioFollower] {
+        // 모든 유저 데이터를 가져옴
+        let users = try await userUseCase.fetchAllUsers()
+        
+        // 현재 로그인한 사용자 ID
+        let currentUserID = try await fetchMyUserID()
+        
+        // 내가 팔로우한 사용자 목록 가져옴
+        let relations = try await service.readFollowRelation(
+            followingID: currentUserID, // 내가 followingID로 등록된 관계
             followerID: nil,
             state: nil
         )
         
-        let relationStates = relations.reduce(into: [String: Bool]()) { result, relation in
-            result[relation.follower] = relation.state
-        }
+        // 내가 팔로우한 사용자 ID 목록
+        let followingIDs = Set(relations.map { $0.follower })
         
-        return users.map { userDTO in
-            let user = userDTO
-            let state = relationStates[user.id] ?? false
-            return MolioFollower(
+        // 모든 사용자 데이터를 MolioFollower로 변환하며 내가 팔로우했는지 여부를 설정
+        return users.map { user in
+            MolioFollower(
                 id: user.id,
                 name: user.name,
                 profileImageURL: user.profileImageURL,
                 description: user.description,
-                state: state
+                followRelation: followingIDs.contains(user.id) ? .following : .unfollowing
             )
         }
     }
-    
+
+    // MARK: - Private Helpers
+
     private func fetchMyUserID() async throws -> String {
         return try authService.getCurrentID()
     }
-    
+
+    /// 사용자 ID 목록을 기반으로 사용자 데이터를 가져와 MolioFollower로 변환
+    private func convertToMolioFollowers(from userIDs: [String]) async throws -> [MolioFollower] {
+        let users = try await fetchUsers(from: userIDs)
+        return users.map { user in
+            MolioFollower(
+                id: user.id,
+                name: user.name,
+                profileImageURL: user.profileImageURL,
+                description: user.description,
+                followRelation: .following // 모든 사용자는 true로 가정
+            )
+        }
+    }
+
+    /// 사용자 ID 목록을 기반으로 사용자 데이터를 가져옴
     private func fetchUsers(from userIDs: [String]) async throws -> [MolioUser] {
-          var users: [MolioUser] = []
-          for userID in userIDs {
-              if let user = try? await userUseCase.fetchUser(userID: userID) {
-                  users.append(user)
-              }
-          }
-          return users
-      }
-    
-    private func fetchFollowers(userIDs: [String], states: [Bool]) async throws -> [MolioFollower] {
-        guard userIDs.count == states.count else {
-            throw NSError(domain: "InputError", code: 1, userInfo: [NSLocalizedDescriptionKey: "User IDs and states count mismatch"])
-        }
-        
-        var followers: [MolioFollower] = []
-        
-        try await withThrowingTaskGroup(of: MolioFollower?.self) { group in
-            for (userID, state) in zip(userIDs, states) {
+        return try await withThrowingTaskGroup(of: MolioUser?.self) { group in
+            for userID in userIDs {
                 group.addTask {
-                    return try? await userUseCase.fetchFollower(userID: userID, state: state)
+                    return try? await self.userUseCase.fetchUser(userID: userID)
                 }
             }
-            
-            // 그룹의 결과를 수집
-            for try await follower in group {
-                if let follower = follower {
-                    followers.append(follower)
+
+            return try await group.reduce(into: [MolioUser]()) { result, user in
+                if let user = user {
+                    result.append(user)
                 }
             }
         }
-        
-        return followers
     }
 }

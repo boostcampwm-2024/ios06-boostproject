@@ -35,7 +35,7 @@ final class SearchUserViewController: UIHostingController<SearchUserView> {
         let friendProfileViewController = FriendProfileViewController(
             profileType: .friend (
                 userID: user.id,
-                isFollowing: user.state ? .following : .unfollowing
+                isFollowing: user.followRelation
             )
         )
         navigationController?.pushViewController(friendProfileViewController, animated: true)

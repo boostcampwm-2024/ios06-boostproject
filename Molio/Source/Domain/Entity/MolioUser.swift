@@ -6,13 +6,13 @@ struct MolioUser: Identifiable {
     var profileImageURL: URL? // 유저의 사진 URL
     var description: String?  // 유저의 한 줄 설명
     
-    func convertToFollower(state: Bool) -> MolioFollower {
+    func convertToFollower(followRelation: FollowRelationType) -> MolioFollower {
         return MolioFollower(
             id: self.id,
             name: self.name,
             profileImageURL: self.profileImageURL,
             description: self.description,
-            state: state
+            followRelation: followRelation
         )
     }
 }
