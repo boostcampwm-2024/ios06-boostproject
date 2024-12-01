@@ -50,9 +50,7 @@ struct UserProfileView: View {
                     
                     // MARK: - 유저 정보 HStack
                     HStack {
-                        Image(systemName: "person.circle")
-                            .resizable()
-                            .frame(width: 82, height: 82)
+                        ProfileImageView(imageURL: viewModel.user?.profileImageURL)
                         
                         GeometryReader { proxy in
                             HStack(spacing: 10) {
@@ -61,8 +59,7 @@ struct UserProfileView: View {
                                     height: proxy.size.height
                                 )
                                 userInfoView(type: .playlist, value: viewModel.playlists.count, size: size)
-                                
-                                
+                                            
                                 Button(action: {
                                     didFollowingButtonTapped?()
                                 }) {
