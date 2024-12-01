@@ -1,15 +1,18 @@
 import SwiftUI
 
 struct FriendPlaylistDetailView: View {
-    @ObservedObject var viewModel: FriendPlaylistDetailViewModel
+    @ObservedObject var friendPlaylistDetailViewModel: FriendPlaylistDetailViewModel
+    @ObservedObject var audioPlayerViewModel = AudioPlayerControlViewModel()
 
-    init(viewModel: FriendPlaylistDetailViewModel) {
-        self._viewModel = ObservedObject(initialValue: viewModel)
+    init(
+        viewModel: FriendPlaylistDetailViewModel
+    ) {
+        self._friendPlaylistDetailViewModel = ObservedObject(initialValue: viewModel)
     }
     
     var body: some View {
         VStack {
-            Text.molioBold(viewModel.friendPlaylist?.name ?? "제목 없음", size: 34)
+            Text.molioBold(friendPlaylistDetailViewModel.friendPlaylist?.name ?? "제목 없음", size: 34)
                 .foregroundStyle(.white)
                 .padding(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -17,7 +20,7 @@ struct FriendPlaylistDetailView: View {
             // TODO: - 장르 태그 보여주기
 
             List { 
-                ForEach(viewModel.friendPlaylistMusics, id: \.isrc) { molioMusic in
+                ForEach(friendPlaylistDetailViewModel.friendPlaylistMusics, id: \.isrc) { molioMusic in
                     MusicCellView(music: molioMusic)
                         .foregroundStyle(.white)
                         .backgroundStyle(.clear)
@@ -26,7 +29,7 @@ struct FriendPlaylistDetailView: View {
                         .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 0))
                         .swipeActions {
                             Button {
-                                viewModel.exportFriendsMusicToMyPlaylist(molioMusic: molioMusic)
+                                friendPlaylistDetailViewModel.exportFriendsMusicToMyPlaylist(molioMusic: molioMusic)
                             } label: {
                                 Image
                                     .molioSemiBold(
@@ -52,11 +55,15 @@ struct FriendPlaylistDetailView: View {
         .safeAreaInset(edge: .bottom) {
             HStack(spacing: 11) {
                 AudioPlayerControlView()
+                    .environmentObject(audioPlayerViewModel)
                     .layoutPriority(1)
             }
             .frame(maxWidth: .infinity, maxHeight: 66)
             .padding(.horizontal, 22)
             .padding(.bottom, 23)
+        }
+        .onChange(of: friendPlaylistDetailViewModel.friendPlaylistMusics) { musics in
+            audioPlayerViewModel.setMusics(musics)
         }
     }
 }

@@ -2,7 +2,7 @@ import AVKit
 import SwiftUI
 
 struct AudioPlayerControlView: View {
-    @EnvironmentObject private var viewModel: PlaylistDetailViewModel
+    @EnvironmentObject private var viewModel: AudioPlayerControlViewModel
     
     var body: some View {
         HStack {

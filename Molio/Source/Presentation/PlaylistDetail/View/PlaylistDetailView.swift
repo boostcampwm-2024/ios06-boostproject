@@ -2,13 +2,14 @@ import SwiftUI
 import Combine
 
 struct PlaylistDetailView: View {
-    @ObservedObject private var viewModel: PlaylistDetailViewModel
+    @ObservedObject private var playlistDetailViewModel: PlaylistDetailViewModel
+    @ObservedObject private var audioPlayerViewModel = AudioPlayerControlViewModel()
     
     var didPlaylistButtonTapped: (() -> Void)?
     var didExportButtonTapped: (() -> Void)?
 
-    init(viewModel: PlaylistDetailViewModel) {
-        self.viewModel = viewModel
+    init(playlistDetailViewModel: PlaylistDetailViewModel) {
+        self.playlistDetailViewModel = playlistDetailViewModel
     }
 
     var body: some View {
@@ -19,7 +20,7 @@ struct PlaylistDetailView: View {
                 HStack(spacing: 10) {
                     Text
                         .molioBold(
-                            viewModel.currentPlaylist?.name ?? "제목 없음",
+                            playlistDetailViewModel.currentPlaylist?.name ?? "제목 없음",
                             size: 34
                         )
                     Image
@@ -36,11 +37,13 @@ struct PlaylistDetailView: View {
             // TODO: - 하이라이트 리믹스 & 전체 재생 버튼
 
             MusicListView()
+                .environmentObject(audioPlayerViewModel)
         }
         .background(Color.background)
         .safeAreaInset(edge: .bottom) {
             HStack(spacing: 11) {
                 AudioPlayerControlView()
+                    .environmentObject(audioPlayerViewModel)
                     .layoutPriority(1)
                 
                 Button {
@@ -61,12 +64,14 @@ struct PlaylistDetailView: View {
             .padding(.horizontal, 22)
             .padding(.bottom, 23)
         }
-        .environmentObject(viewModel)
+        .onChange(of: playlistDetailViewModel.currentPlaylistMusics) { musics in
+            audioPlayerViewModel.setMusics(playlistDetailViewModel.currentPlaylistMusics)
+        }
     }
 }
 
 #Preview {
     PlaylistDetailView(
-        viewModel: PlaylistDetailViewModel()
+        playlistDetailViewModel: PlaylistDetailViewModel()
     )
 }
