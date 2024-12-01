@@ -772,11 +772,8 @@
 		20A500672CEF117A00E13440 /* ManagePlaylist */ = {
 			isa = PBXGroup;
 			children = (
-				2010484C2CE9FF570015E800 /* CreatePlaylistView.swift */,
-				20A500682CEF119000E13440 /* SelectPlaylistView.swift */,
-				20A5006A2CEF150F00E13440 /* ManagePlaylistViewModel.swift */,
-				B8B974152CFC757400B1298F /* CreatePlaylistViewController.swift */,
-				B8B974172CFC75F200B1298F /* SelectPlaylistViewController.swift */,
+				B8B9741C2CFC9A6900B1298F /* View */,
+				B8B9741B2CFC9A5E00B1298F /* ViewModel */,
 			);
 			path = ManagePlaylist;
 			sourceTree = "<group>";
@@ -1301,6 +1298,41 @@
 				B8B974132CFC48BA00B1298F /* MockManagePlaylistUseCase.swift */,
 			);
 			path = UseCase;
+			sourceTree = "<group>";
+		};
+		B8B974192CFC9A4100B1298F /* CreatePlaylist */ = {
+			isa = PBXGroup;
+			children = (
+				2010484C2CE9FF570015E800 /* CreatePlaylistView.swift */,
+				B8B974152CFC757400B1298F /* CreatePlaylistViewController.swift */,
+			);
+			path = CreatePlaylist;
+			sourceTree = "<group>";
+		};
+		B8B9741A2CFC9A4C00B1298F /* SelectPlaylist */ = {
+			isa = PBXGroup;
+			children = (
+				20A500682CEF119000E13440 /* SelectPlaylistView.swift */,
+				B8B974172CFC75F200B1298F /* SelectPlaylistViewController.swift */,
+			);
+			path = SelectPlaylist;
+			sourceTree = "<group>";
+		};
+		B8B9741B2CFC9A5E00B1298F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				20A5006A2CEF150F00E13440 /* ManagePlaylistViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B8B9741C2CFC9A6900B1298F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B8B9741A2CFC9A4C00B1298F /* SelectPlaylist */,
+				B8B974192CFC9A4100B1298F /* CreatePlaylist */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		B8D553E62CDFE245007CCD6D /* NetworkProvider */ = {
