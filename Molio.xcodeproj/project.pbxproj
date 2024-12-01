@@ -783,6 +783,7 @@
 			children = (
 				2082A0A12CF9C41800E8F2D9 /* FollowRelationListView.swift */,
 				20883BC62CF8EC5B00C10549 /* FollowRelationButton.swift */,
+				2082A0A72CF9DC0600E8F2D9 /* FollowRelationViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -793,14 +794,6 @@
 				2082A0A32CF9C42600E8F2D9 /* FollowRelationViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		206439F02CFC9800008E1D42 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				2082A0A72CF9DC0600E8F2D9 /* FollowRelationViewController.swift */,
-			);
-			path = ViewController;
 			sourceTree = "<group>";
 		};
 		206439F12CFC9834008E1D42 /* Model */ = {
@@ -864,7 +857,6 @@
 				206439F12CFC9834008E1D42 /* Model */,
 				206439EE2CFC97DE008E1D42 /* View */,
 				206439EF2CFC97F5008E1D42 /* ViewModel */,
-				206439F02CFC9800008E1D42 /* ViewController */,
 			);
 			path = FollowRelation;
 			sourceTree = "<group>";
