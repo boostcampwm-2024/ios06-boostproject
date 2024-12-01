@@ -21,4 +21,19 @@ struct MolioUserDTO: Codable {
         }
         return dictionary
     }
+    
+    var toEntity: MolioUser {
+        let profileImageURL: URL?
+        if let urlString = self.profileImageURL {
+            profileImageURL = URL(string: urlString)
+        } else {
+            profileImageURL = nil
+        }
+        return MolioUser(
+            id: self.id,
+            name: self.name,
+            profileImageURL: profileImageURL,
+            description: self.description
+        )
+    }
 }
