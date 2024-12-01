@@ -54,7 +54,6 @@ final class DefaultUserUseCase: UserUseCase {
         return userDTOs.map(\.toEntity)
     }
 
-
     func updateUser(
         userID: String,
         newName: String,
@@ -69,9 +68,7 @@ final class DefaultUserUseCase: UserUseCase {
         case .remove:
             ""
         }
-        
-        let user = MolioUserDTO(
-            id: userID,
+    }
     
     func deleteUser(userID: String) async throws {
         try await service.deleteUser(userID: userID)
