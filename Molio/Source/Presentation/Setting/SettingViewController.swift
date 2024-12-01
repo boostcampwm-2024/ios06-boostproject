@@ -56,18 +56,9 @@ final class SettingViewController: UIHostingController<SettingView> {
     }
     
     private func switchToLoginViewController() {
-        let loginViewModel = LoginViewModel()
-        let loginViewController = LoginViewController(viewModel: loginViewModel)
-        
-        guard let window = self.view.window else { return }
-        
-        UIView.transition(with: window, duration: 0.5) {
-            loginViewController.view.alpha = 0.0
-            window.rootViewController = loginViewController
-            loginViewController.view.alpha = 1.0
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.switchToLoginViewController()
         }
-        
-        window.makeKeyAndVisible()
     }
 }
 
