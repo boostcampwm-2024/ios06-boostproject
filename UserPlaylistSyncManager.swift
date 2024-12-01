@@ -2,10 +2,11 @@ import FirebaseAuth
 import Combine
 
 /// 유저 플레이리스트를 동기화하는 객체
+///
+/// DIContainer에 등록하기만 하면 사용할 수 있습니다.
 final class UserPlaylistSyncManager {
     private var playlistService: PlaylistService
     private var playlistStorage: PlaylistLocalStorage
-    
     private var currentUserIDUseCase: CurrentUserIdUseCase
     
     private var authStateDidChangeListenerHandle: AuthStateDidChangeListenerHandle?
@@ -34,9 +35,9 @@ final class UserPlaylistSyncManager {
         self.subscriptions.forEach { $0.cancel() }
     }
     
-    // 이전 이후 값을 기록해서, 이전 이후가 로그인 - 로그아웃 상태가 변화한 경우에 알맞은 로직을 수행한다.
-    // 그러기 위해서 CurrentValueSubject를 사용했다.
-    // 이전 이후 값을 추적하기 위해서 맨 처음에는 (initialUserIDString, initialUserIDString)로 초기화하는 점이 중요하다.
+    /// (이전 상태, 이후 상태) 라는 것이 존재합니다.
+    /// 두 칸 다 맨 처음에는 현재 유저로 초기화 합니다.
+    /// 그리고 새로운 값이 들어올 때마다 이전 상태를 현재 상태로 옮기고, 새로운 값은 이후 상태로 옮깁니다.
     private func setUpBinding() {
         let initialUserIDString = Auth.auth().currentUser?.uid
         
@@ -53,15 +54,16 @@ final class UserPlaylistSyncManager {
             .store(in: &subscriptions)
     }
     
+    /// 이전 유저 id, 이후 유저 id를 비교해서 로직을 수행합니다.
     private func performSyncLogic(beforeUserID: String?, afterUserID: String?) {
         switch (beforeUserID, afterUserID) {
+        // 로그아웃 -> 로그인
         case (.none, .some(let loggedInUserID)):
-            // 로그아웃 -> 로그인
             Task {
                 await self.logoutToLoginLogic(userID: loggedInUserID)
             }
+        // 로그인 -> 로그아웃
         case (.some(let loggedOutUserID), .none):
-            // 로그인 -> 로그아웃
             Task {
                 await self.loginToLogoutLogic(userID: loggedOutUserID)
             }
@@ -70,14 +72,19 @@ final class UserPlaylistSyncManager {
         }
     }
     
+    // 이전, 이후 상태를 기록해서 처리하기 위해서 어쩔 수 없이 CurrentValueSubject를 사용합니다.
+    // 그리고 Source of Truth인 현재 로그인 상태는 여기에서 옵니다.
+    // 이거는 로그인 변화를 감지해서 실행하는 리스너입니다. (탈퇴 포함)
     private func setLoginStatusListener() -> AuthStateDidChangeListenerHandle{
         return Auth.auth().addStateDidChangeListener { [weak self] _, user in
             self?.currentUser.send(user?.uid)
         }
     }
     
+    // MARK: - 로그인 <-> 로그아웃 시 실행하는 로직
+    
     private func loginToLogoutLogic(userID: String) async {
-        print("로그인 -> 로그아웃 로직 수행")
+        debugPrint("로그인 -> 로그아웃 로직 수행")
         do {
             // 1. 로컬 스토어의 플레이리스트를 전부 다 지워버린다.
             try await deleteAllPlaylistInLocalStorage()
@@ -91,12 +98,12 @@ final class UserPlaylistSyncManager {
                 try await playlistStorage.create(playlistEntity)
             }
         } catch {
-            print(error.localizedDescription)
+            debugPrint(error.localizedDescription)
         }
     }
     
     private func logoutToLoginLogic(userID: String) async {
-        print("로그아웃 -> 로그인 로직 수행")
+        debugPrint("로그아웃 -> 로그인 로직 수행")
         do {
             // 1. 서버에 있는 플레이리스트를 전부 다 지워버린다.
             try await deleteAllPlaylistInServer(userID: userID)
@@ -114,7 +121,7 @@ final class UserPlaylistSyncManager {
                 try await playlistService.createPlaylist(playlist: authorIDChangedPlaylistDTO)
             }
         } catch {
-            print(error.localizedDescription)
+            debugPrint(error.localizedDescription)
         }
     }
     
