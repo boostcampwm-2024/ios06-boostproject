@@ -51,10 +51,7 @@ struct FriendPlaylistDetailView: View {
         .background(Color.background)
         .safeAreaInset(edge: .bottom) {
             HStack(spacing: 11) {
-                AudioPlayerControlView(
-                    musics: $viewModel.friendPlaylistMusics,
-                    selectedIndex: $viewModel.selectedIndex
-                )
+                AudioPlayerControlView()
                     .layoutPriority(1)
             }
             .frame(maxWidth: .infinity, maxHeight: 66)

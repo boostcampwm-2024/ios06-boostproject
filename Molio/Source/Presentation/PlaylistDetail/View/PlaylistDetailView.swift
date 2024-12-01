@@ -2,7 +2,6 @@ import SwiftUI
 import Combine
 
 struct PlaylistDetailView: View {
-    @State private var selectedIndex: Int?
     @ObservedObject private var viewModel: PlaylistDetailViewModel
     
     var didPlaylistButtonTapped: (() -> Void)?
@@ -18,8 +17,17 @@ struct PlaylistDetailView: View {
                 didPlaylistButtonTapped?()
             } label: {
                 HStack(spacing: 10) {
-                    Text.molioBold(viewModel.currentPlaylist?.name ?? "제목 없음", size: 34)
-                    Image.molioMedium(systemName: "chevron.down", size: 16, color: .white)
+                    Text
+                        .molioBold(
+                            viewModel.currentPlaylist?.name ?? "제목 없음",
+                            size: 34
+                        )
+                    Image
+                        .molioMedium(
+                            systemName: "chevron.down",
+                            size: 16,
+                            color: .white
+                        )
                 }
                 .foregroundStyle(.white)
             }
@@ -27,21 +35,23 @@ struct PlaylistDetailView: View {
             
             // TODO: - 하이라이트 리믹스 & 전체 재생 버튼
 
-            MusicListView(
-                musics: viewModel.currentPlaylistMusics,
-                selectedIndex: $selectedIndex
-            )
+            MusicListView()
         }
         .background(Color.background)
         .safeAreaInset(edge: .bottom) {
             HStack(spacing: 11) {
-                AudioPlayerControlView(musics: $viewModel.currentPlaylistMusics, selectedIndex: $selectedIndex)
+                AudioPlayerControlView()
                     .layoutPriority(1)
                 
                 Button {
                     didExportButtonTapped?()
                 } label: {
-                    Image.molioSemiBold(systemName: "square.and.arrow.up", size: 20, color: .main)
+                    Image
+                        .molioSemiBold(
+                            systemName: "square.and.arrow.up",
+                            size: 20,
+                            color: .main
+                        )
                 }
                 .frame(width: 66, height: 66)
                 .background(Color.gray)
@@ -51,6 +61,7 @@ struct PlaylistDetailView: View {
             .padding(.horizontal, 22)
             .padding(.bottom, 23)
         }
+        .environmentObject(viewModel)
     }
 }
 
