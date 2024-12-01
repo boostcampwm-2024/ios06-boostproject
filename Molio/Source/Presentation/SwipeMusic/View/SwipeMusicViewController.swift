@@ -64,33 +64,41 @@ final class SwipeMusicViewController: UIViewController {
         return nextCardView
     }()
     
-    private let filterButton = CircleMenuButton(backgroundColor: .black.withAlphaComponent(0.51),
-                                                highlightColor: .white.withAlphaComponent(0.51),
-                                                buttonSize: 58.0,
-                                                tintColor: .white,
-                                                buttonImage: UIImage(systemName: "slider.horizontal.3"),
-                                                buttonImageSize: CGSize(width: 21.0, height: 19.0))
+    private let filterButton = CircleMenuButton(
+        backgroundColor: .black.withAlphaComponent(0.51),
+        highlightColor: .white.withAlphaComponent(0.51),
+        buttonSize: 58.0,
+        tintColor: .white,
+        buttonImage: UIImage(systemName: "slider.horizontal.3"),
+        buttonImageSize: CGSize(width: 21.0, height: 19.0)
+    )
     
-    private let dislikeButton = CircleMenuButton(backgroundColor: .black.withAlphaComponent(0.51),
-                                                 highlightColor: .white.withAlphaComponent(0.51),
-                                                 buttonSize: 66.0,
-                                                 tintColor: UIColor(hex: "#FF3D3D"),
-                                                 buttonImage: UIImage(systemName: "xmark"),
-                                                 buttonImageSize: CGSize(width: 25.0, height: 29.0))
-    
-    private let likeButton = CircleMenuButton(backgroundColor: .black.withAlphaComponent(0.51),
-                                              highlightColor: .white.withAlphaComponent(0.51),
-                                              buttonSize: 66.0,
-                                              tintColor: UIColor(resource: .main),
-                                              buttonImage: UIImage(systemName: "heart.fill"),
-                                              buttonImageSize: CGSize(width: 30.0, height: 29.0))
-    
-    private let myMolioButton = CircleMenuButton(backgroundColor: .black.withAlphaComponent(0.51),
-                                                 highlightColor: .white.withAlphaComponent(0.51),
-                                                 buttonSize: 58.0,
-                                                 tintColor: UIColor(hex: "#FFFAFA"),
-                                                 buttonImage: UIImage(systemName: "music.note"),
-                                                 buttonImageSize: CGSize(width: 18.0, height: 24.0))
+    private let dislikeButton = CircleMenuButton(
+        backgroundColor: .black.withAlphaComponent(0.51),
+        highlightColor: .white.withAlphaComponent(0.51),
+        buttonSize: 66.0,
+        tintColor: UIColor(hex: "#FF3D3D"),
+        buttonImage: UIImage(systemName: "xmark"),
+        buttonImageSize: CGSize(width: 25.0, height: 29.0)
+    )
+
+    private let likeButton = CircleMenuButton(
+        backgroundColor: .black.withAlphaComponent(0.51),
+        highlightColor: .white.withAlphaComponent(0.51),
+        buttonSize: 66.0,
+        tintColor: UIColor(resource: .main),
+        buttonImage: UIImage(systemName: "heart.fill"),
+        buttonImageSize: CGSize(width: 30.0, height: 29.0)
+    )
+
+    private let myMolioButton = CircleMenuButton(
+        backgroundColor: .black.withAlphaComponent(0.51),
+        highlightColor: .white.withAlphaComponent(0.51),
+        buttonSize: 58.0,
+        tintColor: UIColor(hex: "#FFFAFA"),
+        buttonImage: UIImage(systemName: "music.note"),
+        buttonImageSize: CGSize(width: 18.0, height: 24.0)
+    )
     
     init(viewModel: SwipeMusicViewModel, musicPlayer: AudioPlayer = DIContainer.shared.resolve()) {
         self.viewModel = viewModel
@@ -140,7 +148,7 @@ final class SwipeMusicViewController: UIViewController {
     
     private func setupBindings() {
         output.selectedPlaylist
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] playlist in
                 guard let self else { return }
                 self.selectedPlaylistTitleLabel.text = playlist.name
@@ -148,7 +156,7 @@ final class SwipeMusicViewController: UIViewController {
             .store(in: &cancellables)
         
         output.currentMusicTrack
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] music in
                 guard let self else { return }
                 if isMusicCardAnimating {
@@ -160,7 +168,7 @@ final class SwipeMusicViewController: UIViewController {
             .store(in: &cancellables)
         
         output.nextMusicTrack
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] music in
                 guard let self else { return }
                 if isMusicCardAnimating {
@@ -172,7 +180,7 @@ final class SwipeMusicViewController: UIViewController {
             .store(in: &cancellables)
         
         output.buttonHighlight
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] buttonHighlight in
                 guard let self else { return }
                 self.likeButton.isHighlighted = buttonHighlight.isLikeHighlighted
@@ -181,7 +189,7 @@ final class SwipeMusicViewController: UIViewController {
             .store(in: &cancellables)
         
         output.musicCardSwipeAnimation
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] swipeDirection in
                 guard let self else { return }
                 self.animateMusicCard(direction: swipeDirection)

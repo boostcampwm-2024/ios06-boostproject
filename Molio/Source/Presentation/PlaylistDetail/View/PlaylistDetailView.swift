@@ -2,14 +2,14 @@ import SwiftUI
 import Combine
 
 struct PlaylistDetailView: View {
-    @State private var selectedIndex: Int?
-    @ObservedObject private var viewModel: PlaylistDetailViewModel
+    @ObservedObject private var playlistDetailViewModel: PlaylistDetailViewModel
+    @ObservedObject private var audioPlayerViewModel = AudioPlayerControlViewModel()
     
     var didPlaylistButtonTapped: (() -> Void)?
     var didExportButtonTapped: (() -> Void)?
 
-    init(viewModel: PlaylistDetailViewModel) {
-        self.viewModel = viewModel
+    init(playlistDetailViewModel: PlaylistDetailViewModel) {
+        self.playlistDetailViewModel = playlistDetailViewModel
     }
 
     var body: some View {
@@ -18,8 +18,17 @@ struct PlaylistDetailView: View {
                 didPlaylistButtonTapped?()
             } label: {
                 HStack(spacing: 10) {
-                    Text.molioBold(viewModel.currentPlaylist?.name ?? "제목 없음", size: 34)
-                    Image.molioMedium(systemName: "chevron.down", size: 16, color: .white)
+                    Text
+                        .molioBold(
+                            playlistDetailViewModel.currentPlaylist?.name ?? "제목 없음",
+                            size: 34
+                        )
+                    Image
+                        .molioMedium(
+                            systemName: "chevron.down",
+                            size: 16,
+                            color: .white
+                        )
                 }
                 .foregroundStyle(.white)
             }
@@ -27,21 +36,25 @@ struct PlaylistDetailView: View {
             
             // TODO: - 하이라이트 리믹스 & 전체 재생 버튼
 
-            MusicListView(
-                musics: viewModel.currentPlaylistMusics,
-                selectedIndex: $selectedIndex
-            )
+            MusicListView()
+                .environmentObject(audioPlayerViewModel)
         }
         .background(Color.background)
         .safeAreaInset(edge: .bottom) {
             HStack(spacing: 11) {
-                AudioPlayerControlView(musics: $viewModel.currentPlaylistMusics, selectedIndex: $selectedIndex)
+                AudioPlayerControlView()
+                    .environmentObject(audioPlayerViewModel)
                     .layoutPriority(1)
                 
                 Button {
                     didExportButtonTapped?()
                 } label: {
-                    Image.molioSemiBold(systemName: "square.and.arrow.up", size: 20, color: .main)
+                    Image
+                        .molioSemiBold(
+                            systemName: "square.and.arrow.up",
+                            size: 20,
+                            color: .main
+                        )
                 }
                 .frame(width: 66, height: 66)
                 .background(Color.gray)
@@ -51,11 +64,14 @@ struct PlaylistDetailView: View {
             .padding(.horizontal, 22)
             .padding(.bottom, 23)
         }
+        .onChange(of: playlistDetailViewModel.currentPlaylistMusics) { musics in
+            audioPlayerViewModel.setMusics(playlistDetailViewModel.currentPlaylistMusics)
+        }
     }
 }
 
 #Preview {
     PlaylistDetailView(
-        viewModel: PlaylistDetailViewModel()
+        playlistDetailViewModel: PlaylistDetailViewModel()
     )
 }
