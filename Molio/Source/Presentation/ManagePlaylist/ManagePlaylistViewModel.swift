@@ -39,6 +39,7 @@ final class ManagePlaylistViewModel: ObservableObject {
     func setCurrentPlaylist(_ playlist: MolioPlaylist) {
         Task { @MainActor in
             currentPlaylist = playlist
+            changeCurrentPlaylist()
         }
     }
     

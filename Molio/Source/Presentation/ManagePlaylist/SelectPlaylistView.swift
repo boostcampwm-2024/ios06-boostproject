@@ -3,7 +3,6 @@ import SwiftUI
 struct SelectPlaylistView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel: ManagePlaylistViewModel
-//    @State private var isModalPresented = false
     private let isCreatable: Bool
     
     var createButtonTapAction: (() -> Void)?
@@ -59,7 +58,6 @@ struct SelectPlaylistView: View {
                     
                     if isCreatable {
                         Button(action: {
-//                            isModalPresented.toggle()
                             createButtonTapAction?()
                         }) {
                             Image.molioBlack(systemName: "plus", size: 20, color: .white)
@@ -68,16 +66,6 @@ struct SelectPlaylistView: View {
                                 .clipShape(Circle())
                                 .shadow(radius: 5)
                         }
-//                        .sheet(isPresented: $isModalPresented) {
-//                            CreatePlaylistView(viewModel: viewModel)
-//                                .presentationDetents([.fraction(0.5)])
-//                                .presentationDragIndicator(.visible)
-//                        }
-//                        .onChange(of: isModalPresented) { newValue in
-//                            if !newValue {
-//                                viewModel.fetchPlaylists()
-//                            }
-//                        }
                     }
                     
                     Spacer()
@@ -86,9 +74,6 @@ struct SelectPlaylistView: View {
                 
                 Spacer()
             }
-        }
-        .onDisappear {
-            viewModel.changeCurrentPlaylist()
         }
     }
 }
