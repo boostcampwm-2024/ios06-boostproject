@@ -1,6 +1,6 @@
 import Combine
 
-protocol MusicDeck {
+protocol RandomMusicDeck {
     var currentMusicTrackModelPublisher: AnyPublisher<MolioMusic?, Never> { get }
     
     var nextMusicTrackModelPublisher: AnyPublisher<MolioMusic?, Never> { get }
