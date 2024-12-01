@@ -1,5 +1,5 @@
-import UIKit
 import Combine
+import UIKit
 
 final class SwipeMusicViewController: UIViewController {
     private let viewModel: SwipeMusicViewModel
@@ -278,7 +278,10 @@ final class SwipeMusicViewController: UIViewController {
         guard let card = gesture.view else { return }
         
         let translation = gesture.translation(in: view)
-        card.center = CGPoint(x: view.center.x + translation.x, y: view.center.y + translation.y)
+        card.center = CGPoint(
+            x: nextCardView.center.x + translation.x,
+            y: nextCardView.center.y + translation.y
+        )
         
         if gesture.state == .changed {
             musicCardDidChangeSwipePublisher.send(translation.x)
