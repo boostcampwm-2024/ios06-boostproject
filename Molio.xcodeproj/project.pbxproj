@@ -777,13 +777,13 @@
 			path = ManagePlaylist;
 			sourceTree = "<group>";
 		};
-		881622722CE3BAB900E81EA0 /* MusicDeck */ = {
+		881622722CE3BAB900E81EA0 /* RandomMusicDeck */ = {
 			isa = PBXGroup;
 			children = (
 				881622682CE3671400E81EA0 /* DefaultRandomMusicDeck.swift */,
 				8816226C2CE3B11C00E81EA0 /* RandomMusicDeck.swift */,
 			);
-			path = MusicDeck;
+			path = RandomMusicDeck;
 			sourceTree = "<group>";
 		};
 		881BBCAE2CDCF91B00010A61 /* SpotifyTokenProvider */ = {
@@ -1099,7 +1099,7 @@
 			children = (
 				206149452CF8800500FDE96D /* MolioUser.swift */,
 				F1E4059C2CEC935B00533701 /* Auth */,
-				881622722CE3BAB900E81EA0 /* MusicDeck */,
+				881622722CE3BAB900E81EA0 /* RandomMusicDeck */,
 				2008FCBA2CE8A1B90060F3B8 /* MolioPlaylist.swift */,
 				881BBCBF2CDCF97900010A61 /* MusicFilter.swift */,
 				881BBCC02CDCF97900010A61 /* RecommendationRequestEntity.swift */,
