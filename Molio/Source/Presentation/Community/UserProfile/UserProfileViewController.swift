@@ -102,7 +102,8 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
         
         rootView.didNotificationButtonTapped = { [weak self] in
             guard let self else { return }
-            let notificationViewController = UIHostingController(rootView: NotificationView())
+            let notificationViewModel = NotificationViewModel()
+            let notificationViewController = UIHostingController(rootView: NotificationView(viewModel: notificationViewModel))
             notificationViewController.title = "알림"
             self.navigationController?.pushViewController(notificationViewController, animated: true)
         }
