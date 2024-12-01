@@ -25,9 +25,7 @@ final class SearchUserViewModel: ObservableObject {
     func fetchAllUsers() async {
         do {
             let followers = try await followRelationUseCase.fetchAllFollowers()
-            DispatchQueue.main.async {
-                self.allUsers = followers
-            }
+            self.allUsers = followers
         } catch {
             print("Error fetching followers: \(error.localizedDescription)")
         }

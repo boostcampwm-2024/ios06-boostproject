@@ -177,6 +177,7 @@
 		B8B974142CFC48BA00B1298F /* MockManagePlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B974132CFC48BA00B1298F /* MockManagePlaylistUseCase.swift */; };
 		B8B974162CFC757400B1298F /* CreatePlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B974152CFC757400B1298F /* CreatePlaylistViewController.swift */; };
 		B8B974182CFC75F200B1298F /* SelectPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B974172CFC75F200B1298F /* SelectPlaylistViewController.swift */; };
+		B8B9743C2CFCFF0000B1298F /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B9743B2CFCFF0000B1298F /* View+Extension.swift */; };
 		B8D553E82CDFE25C007CCD6D /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D553E72CDFE25C007CCD6D /* NetworkProvider.swift */; };
 		B8D553EA2CDFE271007CCD6D /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D553E92CDFE271007CCD6D /* EndPoint.swift */; };
 		B8D553EC2CDFE29D007CCD6D /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D553EB2CDFE29D007CCD6D /* NetworkError.swift */; };
@@ -446,6 +447,7 @@
 		B8B974132CFC48BA00B1298F /* MockManagePlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockManagePlaylistUseCase.swift; sourceTree = "<group>"; };
 		B8B974152CFC757400B1298F /* CreatePlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaylistViewController.swift; sourceTree = "<group>"; };
 		B8B974172CFC75F200B1298F /* SelectPlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPlaylistViewController.swift; sourceTree = "<group>"; };
+		B8B9743B2CFCFF0000B1298F /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		B8D553E72CDFE25C007CCD6D /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		B8D553E92CDFE271007CCD6D /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		B8D553EB2CDFE29D007CCD6D /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -589,6 +591,7 @@
 				2003BA152CDB8D69002CAB3E /* Font+Extension.swift */,
 				2003BA172CDB8DE0002CAB3E /* Text+Extension.swift */,
 				B8046A3B2CE755DB00933704 /* Image+Extension.swift */,
+				B8B9743B2CFCFF0000B1298F /* View+Extension.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -2068,6 +2071,7 @@
 				B8D553EC2CDFE29D007CCD6D /* NetworkError.swift in Sources */,
 				881BBCC22CDCF97900010A61 /* RecommendationRequestEntity.swift in Sources */,
 				F135BCF02CF441B7006C6C4F /* DefaultAuthStateRepository.swift in Sources */,
+				B8B9743C2CFCFF0000B1298F /* View+Extension.swift in Sources */,
 				200918482CECAB4D0058D8C7 /* UserDefaultsKey.swift in Sources */,
 				888352EE2CF4DC7B00C48F68 /* MolioPlaylist+Decodable.swift in Sources */,
 				884529482CF6EC6D007FD074 /* FirestorePlaylistService.swift in Sources */,
