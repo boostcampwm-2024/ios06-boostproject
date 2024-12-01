@@ -26,6 +26,9 @@ struct SearchUserView: View {
             }
         }
         .background(Color.background)
+        .onAppear {
+            viewModel.fetchAllUsers()
+        }
     }
 }
 
