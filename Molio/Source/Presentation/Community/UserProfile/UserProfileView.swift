@@ -62,7 +62,6 @@ struct UserProfileView: View {
                                 )
                                 userInfoView(type: .playlist, value: viewModel.playlists.count, size: size)
                                 
-                                
                                 Button(action: {
                                     didFollowingButtonTapped?()
                                 }) {

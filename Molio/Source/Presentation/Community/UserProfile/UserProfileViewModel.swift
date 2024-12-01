@@ -15,10 +15,10 @@ final class UserProfileViewModel: ObservableObject {
     let userUseCase: UserUseCase
 
     init(
-        fetchPlaylistUseCase: FetchPlaylistUseCase,
-        currentUserIdUseCase: CurrentUserIdUseCase,
-        followRelationUseCase: FollowRelationUseCase,
-        userUseCase: UserUseCase
+        fetchPlaylistUseCase: FetchPlaylistUseCase = DIContainer.shared.resolve(),
+        currentUserIdUseCase: CurrentUserIdUseCase = DIContainer.shared.resolve(),
+        followRelationUseCase: FollowRelationUseCase = DIContainer.shared.resolve(),
+        userUseCase: UserUseCase = DIContainer.shared.resolve()
     ) {
         self.fetchPlaylistUseCase = fetchPlaylistUseCase
         self.currentUserIdUseCase = currentUserIdUseCase

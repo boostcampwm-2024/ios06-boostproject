@@ -10,41 +10,8 @@ final class CommunityViewController: UIViewController {
     }
     
     private func setupUserProfileView() {
-        let viewModelForMyProfile = UserProfileViewModel(
-            fetchPlaylistUseCase: DefaultFetchPlaylistUseCase(
-                playlistRepisitory: DefaultPlaylistRepository(
-                    playlistService: FirestorePlaylistService(),
-                    playlistStorage: CoreDataPlaylistStorage()
-                ),
-                musicKitService: DefaultMusicKitService(),
-                currentUserIDUseCase: DefaultCurrentUserIdUseCase(
-                    authService: DefaultFirebaseAuthService(),
-                    usecase: DefaultManageAuthenticationUseCase(
-                        authStateRepository: DefaultAuthStateRepository()
-                    )
-                )
-            ),
-            currentUserIdUseCase: DefaultCurrentUserIdUseCase(
-                authService: DefaultFirebaseAuthService(),
-                usecase: DefaultManageAuthenticationUseCase(
-                    authStateRepository: DefaultAuthStateRepository()
-                )
-            ),
-            followRelationUseCase: DefaultFollowRelationUseCase(
-                service: FirebaseFollowRelationService(),
-                authService: DefaultFirebaseAuthService(), userUseCase: DefaultUserUseCase(service: FirebaseUserService())
-            ), userUseCase: DefaultUserUseCase(service: FirebaseUserService())
-        )
-        let followRelationViewModel = FollowRelationViewModel(
-            followRelationUseCase: DefaultFollowRelationUseCase(
-                service: FirebaseFollowRelationService(),
-                authService: DefaultFirebaseAuthService(),
-                userUseCase: DefaultUserUseCase(
-                    service: FirebaseUserService())
-            ),
-            userUseCase: DefaultUserUseCase(
-                service: FirebaseUserService())
-        )
+        let viewModelForMyProfile = UserProfileViewModel()
+        let followRelationViewModel = FollowRelationViewModel()
         
         let userProfileViewController = UserProfileViewController(
             viewModel: viewModelForMyProfile, 

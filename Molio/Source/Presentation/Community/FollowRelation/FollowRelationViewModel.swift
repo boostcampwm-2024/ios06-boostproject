@@ -28,8 +28,8 @@ final class FollowRelationViewModel: ObservableObject {
     private let userUseCase: UserUseCase
     
     init(
-        followRelationUseCase: FollowRelationUseCase, 
-        userUseCase: UserUseCase
+        followRelationUseCase: FollowRelationUseCase = DIContainer.shared.resolve(),
+        userUseCase: UserUseCase = DIContainer.shared.resolve()
     ) {
         self.followRelationUseCase = followRelationUseCase
         self.userUseCase = userUseCase

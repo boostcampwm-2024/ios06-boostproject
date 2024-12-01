@@ -9,8 +9,7 @@ final class MusicFilterViewModelTests: XCTestCase {
     override func setUpWithError() throws {
         sut = MusicFilterViewModel(
             fetchAvailableGenresUseCase: MockFetchAvailableGenresUseCase(),
-            publishCurrentPlaylistUseCase: MockPublishCurrentPlaylistUseCase(),
-            updatePlaylistUseCase: MockUpdatePlaylistUseCase()
+            managePlaylistUseCase: MockManagePlaylistUseCase()
         )
     }
 
@@ -29,16 +28,15 @@ final class MusicFilterViewModelTests: XCTestCase {
             musicISRCs: [],
             filter: mockFilter
         )
-        let mockPublishCurrentPlaylistUseCase = MockPublishCurrentPlaylistUseCase(mockPlaylist: mockPlaylist)
+        let mockManagePlaylistUseCase = MockManagePlaylistUseCase(playlistToReturn: mockPlaylist)
         sut = MusicFilterViewModel(
             fetchAvailableGenresUseCase: MockFetchAvailableGenresUseCase(),
-            publishCurrentPlaylistUseCase: mockPublishCurrentPlaylistUseCase,
-            updatePlaylistUseCase: MockUpdatePlaylistUseCase()
+            managePlaylistUseCase: mockManagePlaylistUseCase
         )
         var result: UUID!
         
         // When
-        mockPublishCurrentPlaylistUseCase.execute()
+        mockManagePlaylistUseCase.currentPlaylistPublisher()
             .sink { playlist in
                 result = playlist?.id
             }
@@ -60,16 +58,15 @@ final class MusicFilterViewModelTests: XCTestCase {
             musicISRCs: [],
             filter: mockFilter
         )
-        let mockPublishCurrentPlaylistUseCase = MockPublishCurrentPlaylistUseCase(mockPlaylist: mockPlaylist)
+        let mockManagePlaylistUseCase = MockManagePlaylistUseCase(playlistToReturn: mockPlaylist)
         sut = MusicFilterViewModel(
             fetchAvailableGenresUseCase: MockFetchAvailableGenresUseCase(),
-            publishCurrentPlaylistUseCase: mockPublishCurrentPlaylistUseCase,
-            updatePlaylistUseCase: MockUpdatePlaylistUseCase()
+            managePlaylistUseCase: mockManagePlaylistUseCase
         )
         var result: MolioPlaylist!
         
         // When
-        mockPublishCurrentPlaylistUseCase.execute()
+        mockManagePlaylistUseCase.currentPlaylistPublisher()
             .sink { playlist in
                 result = playlist
             }
