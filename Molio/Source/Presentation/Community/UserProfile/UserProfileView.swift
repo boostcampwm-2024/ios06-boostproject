@@ -32,7 +32,7 @@ struct UserProfileView: View {
                 VStack {
                     // MARK: - 상단 제목 및 기어 버튼
                     HStack {
-                        Text("몰리오올리오")
+                        Text(viewModel.user?.name ?? "로그인해야 닉네임을 입력할 수 있어요")
                             .font(.system(size: 20, weight: .semibold))
                             .foregroundColor(.white)
                         Spacer()
@@ -50,9 +50,7 @@ struct UserProfileView: View {
                     
                     // MARK: - 유저 정보 HStack
                     HStack {
-                        Image(systemName: "person.circle")
-                            .resizable()
-                            .frame(width: 82, height: 82)
+                        ProfileImageView(imageURL: viewModel.user?.profileImageURL)
                         
                         GeometryReader { proxy in
                             HStack(spacing: 10) {
@@ -61,7 +59,7 @@ struct UserProfileView: View {
                                     height: proxy.size.height
                                 )
                                 userInfoView(type: .playlist, value: viewModel.playlists.count, size: size)
-                                
+                                            
                                 Button(action: {
                                     didFollowingButtonTapped?()
                                 }) {
@@ -126,7 +124,7 @@ struct UserProfileView: View {
         .background(Color.background)
         .onAppear {
             Task {
-                try await viewModel.fetchData(isMyProfile: isMyProfile, friendUserID: nil)
+                await viewModel.fetchData(isMyProfile: isMyProfile, friendUserID: nil)
             }
         }
     }

@@ -73,6 +73,7 @@
 		206149462CF8800500FDE96D /* MolioUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206149452CF8800500FDE96D /* MolioUser.swift */; };
 		206149482CF8801600FDE96D /* DefaultUserUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206149472CF8801600FDE96D /* DefaultUserUseCaseTests.swift */; };
 		2061494A2CF8E31600FDE96D /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206149492CF8E31500FDE96D /* UserProfileView.swift */; };
+		206439E62CFC4B5F008E1D42 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206439E52CFC4B5F008E1D42 /* ProfileImageView.swift */; };
 		2075FEC82CECDF4D009834BE /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC72CECDF4D009834BE /* CoreDataError.swift */; };
 		2082A09E2CF9B13800E8F2D9 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2082A09D2CF9B13800E8F2D9 /* UserProfileViewController.swift */; };
 		2082A0A22CF9C41800E8F2D9 /* FollowRelationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2082A0A12CF9C41800E8F2D9 /* FollowRelationListView.swift */; };
@@ -239,7 +240,7 @@
 		F1770B2A2CEE455800C81272 /* ExportPlaylistImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1770B292CEE455800C81272 /* ExportPlaylistImageView.swift */; };
 		F1770B2C2CEEFF2200C81272 /* PlaylistImageMusicItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1770B2B2CEEFF2200C81272 /* PlaylistImageMusicItem.swift */; };
 		F1770B2E2CEF0F4B00C81272 /* PlaylistImagePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1770B2D2CEF0F4B00C81272 /* PlaylistImagePage.swift */; };
-		F17CA42A2CFB638700B86681 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17CA4292CFB638700B86681 /* ProfileImageView.swift */; };
+		F17CA42A2CFB638700B86681 /* ChangeProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17CA4292CFB638700B86681 /* ChangeProfileImageView.swift */; };
 		F17CA42E2CFC3ADE00B86681 /* ProfileImageUpdateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17CA42D2CFC3ADE00B86681 /* ProfileImageUpdateType.swift */; };
 		F1865ED62CF618B7007C1E5A /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1865ED52CF618B7007C1E5A /* MyInfoView.swift */; };
 		F1865ED82CF62BBB007C1E5A /* MyInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1865ED72CF62BBB007C1E5A /* MyInfoViewModel.swift */; };
@@ -333,6 +334,7 @@
 		206149452CF8800500FDE96D /* MolioUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MolioUser.swift; sourceTree = "<group>"; };
 		206149472CF8801600FDE96D /* DefaultUserUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultUserUseCaseTests.swift; sourceTree = "<group>"; };
 		206149492CF8E31500FDE96D /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		206439E52CFC4B5F008E1D42 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		2075FEC72CECDF4D009834BE /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		2082A09D2CF9B13800E8F2D9 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		2082A0A12CF9C41800E8F2D9 /* FollowRelationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowRelationListView.swift; sourceTree = "<group>"; };
@@ -502,7 +504,7 @@
 		F1770B292CEE455800C81272 /* ExportPlaylistImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPlaylistImageView.swift; sourceTree = "<group>"; };
 		F1770B2B2CEEFF2200C81272 /* PlaylistImageMusicItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistImageMusicItem.swift; sourceTree = "<group>"; };
 		F1770B2D2CEF0F4B00C81272 /* PlaylistImagePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistImagePage.swift; sourceTree = "<group>"; };
-		F17CA4292CFB638700B86681 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+		F17CA4292CFB638700B86681 /* ChangeProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfileImageView.swift; sourceTree = "<group>"; };
 		F17CA42D2CFC3ADE00B86681 /* ProfileImageUpdateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageUpdateType.swift; sourceTree = "<group>"; };
 		F1865ED52CF618B7007C1E5A /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
 		F1865ED72CF62BBB007C1E5A /* MyInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewModel.swift; sourceTree = "<group>"; };
@@ -1341,7 +1343,7 @@
 			children = (
 				F12054ED2CF80B880040A69C /* MyInfoViewController.swift */,
 				F1865ED52CF618B7007C1E5A /* MyInfoView.swift */,
-				F17CA4292CFB638700B86681 /* ProfileImageView.swift */,
+				F17CA4292CFB638700B86681 /* ChangeProfileImageView.swift */,
 				F1865ED92CF63959007C1E5A /* NickNameTextFieldView.swift */,
 				F1865EDB2CF6397B007C1E5A /* DescriptionTextFieldView.swift */,
 			);
@@ -1416,6 +1418,7 @@
 				2082A0A02CF9C3EF00E8F2D9 /* FollowRelation */,
 				2082A09F2CF9C3DC00E8F2D9 /* UserProfile */,
 				F135BD022CF4C382006C6C4F /* CommunityViewController.swift */,
+				206439E52CFC4B5F008E1D42 /* ProfileImageView.swift */,
 			);
 			path = Community;
 			sourceTree = "<group>";
@@ -1850,6 +1853,7 @@
 				205E6A442CF563BC005E9150 /* FirebaseStorageManager.swift in Sources */,
 				88E4834B2CEDDD4A003D624E /* MusicListView.swift in Sources */,
 				206149432CF87FFA00FDE96D /* DefaultUserUseCase.swift in Sources */,
+				206439E62CFC4B5F008E1D42 /* ProfileImageView.swift in Sources */,
 				88E4834C2CEDDD4A003D624E /* MusicCellView.swift in Sources */,
 				B867AE632CF7240900ACCEDC /* PlatformSelectionViewController.swift in Sources */,
 				F12054EC2CF802B80040A69C /* SettingViewController.swift in Sources */,
@@ -1887,7 +1891,7 @@
 				88A7A9852CF85247005EA318 /* FetchPlaylistUseCaseError.swift in Sources */,
 				206149082CF721F800FDE96D /* DefaultFollowRelationUseCase.swift in Sources */,
 				F17CA42E2CFC3ADE00B86681 /* ProfileImageUpdateType.swift in Sources */,
-				F17CA42A2CFB638700B86681 /* ProfileImageView.swift in Sources */,
+				F17CA42A2CFB638700B86681 /* ChangeProfileImageView.swift in Sources */,
 				2003BA1C2CDB8EE5002CAB3E /* UILabel+Extension.swift in Sources */,
 				F17369682CE36E8F00F6242C /* DefaultImageRepository.swift in Sources */,
 				F1865EDC2CF6397B007C1E5A /* DescriptionTextFieldView.swift in Sources */,
