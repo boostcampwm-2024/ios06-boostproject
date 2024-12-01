@@ -181,12 +181,12 @@ import XCTest
 final class ManageMyPlaylistUseCaseTests: XCTestCase {
     private var sut: ManageMyPlaylistUseCase!
     private var mockCurrentUserIdUseCase: MockCurrentUserIdUseCase!
-    private var mockPlaylistRepository: MockRealPlaylistRepository!
+    private var mockPlaylistRepository: MockPlaylistRepository!
     private var mockCurrentPlaylistRepository: MockCurrentPlaylistRepository!
     
     override func setUpWithError() throws {
         mockCurrentUserIdUseCase = MockCurrentUserIdUseCase()
-        mockPlaylistRepository = MockRealPlaylistRepository()
+        mockPlaylistRepository = MockPlaylistRepository()
         mockCurrentPlaylistRepository = MockCurrentPlaylistRepository()
         sut = DefaultManageMyPlaylistUseCase(
             currentUserIdUseCase: mockCurrentUserIdUseCase,

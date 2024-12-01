@@ -2,12 +2,12 @@ import Foundation
 
 final class DefaultFetchPlaylistUseCase: FetchPlaylistUseCase {
     
-    let playlistRepisitory: RealPlaylistRepository
+    let playlistRepisitory: PlaylistRepository
     let musicKitService: MusicKitService
     let currentUserIDUseCase: CurrentUserIdUseCase
     
     init(
-        playlistRepisitory: RealPlaylistRepository = DIContainer.shared.resolve(),
+        playlistRepisitory: PlaylistRepository = DIContainer.shared.resolve(),
         musicKitService: MusicKitService = DIContainer.shared.resolve(),
         currentUserIDUseCase: CurrentUserIdUseCase = DIContainer.shared.resolve()
     ) {

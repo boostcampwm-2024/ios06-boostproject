@@ -3,22 +3,22 @@ import XCTest
 
 final class DefaultCommunityUseCaseTests: XCTestCase {
     var useCase: DefaultCommunityUseCase!
-    var mockRepository: MockRealPlaylistRepository!
+    var mockPlaylistRepository: MockPlaylistRepository!
     var mockCurrentUserIdUseCase: MockCurrentUserIdUseCase!
     
     override func setUp() {
         super.setUp()
-        mockRepository = MockRealPlaylistRepository()
+        mockPlaylistRepository = MockPlaylistRepository()
         mockCurrentUserIdUseCase = MockCurrentUserIdUseCase()
         useCase = DefaultCommunityUseCase(
             currentUserIdUseCase: mockCurrentUserIdUseCase,
-            repository: mockRepository
+            playlistRepository: mockPlaylistRepository
         )
     }
     
     override func tearDown() {
         useCase = nil
-        mockRepository = nil
+        mockPlaylistRepository = nil
         mockCurrentUserIdUseCase = nil
         super.tearDown()
     }
@@ -39,18 +39,18 @@ final class DefaultCommunityUseCaseTests: XCTestCase {
         )
         
         mockCurrentUserIdUseCase.userIDToReturn = userID
-        mockRepository.mockPlaylist = playlist
+        mockPlaylistRepository.mockPlaylist = playlist
         useCase = DefaultCommunityUseCase(
             currentUserIdUseCase: mockCurrentUserIdUseCase,
-            repository: mockRepository
+            playlistRepository: mockPlaylistRepository
         )
         
         // When
         try await useCase.likePlaylist(playlistID: playlistID)
         
         // Then
-        XCTAssertTrue(mockRepository.updatePlaylistCalled)
-        XCTAssertEqual(mockRepository.updatedPlaylist?.like.contains(userID), true)
+        XCTAssertTrue(mockPlaylistRepository.updatePlaylistCalled)
+        XCTAssertEqual(mockPlaylistRepository.updatedPlaylist?.like.contains(userID), true)
     }
     
     func testUnlikePlaylist() async throws {
@@ -69,17 +69,17 @@ final class DefaultCommunityUseCaseTests: XCTestCase {
         )
         
         mockCurrentUserIdUseCase.userIDToReturn = userID
-        mockRepository.mockPlaylist = playlist
+        mockPlaylistRepository.mockPlaylist = playlist
         useCase = DefaultCommunityUseCase(
             currentUserIdUseCase: mockCurrentUserIdUseCase,
-            repository: mockRepository
+            playlistRepository: mockPlaylistRepository
         )
         
         // When
         try await useCase.unlikePlaylist(playlistID: playlistID)
         
         // Then
-        XCTAssertTrue(mockRepository.updatePlaylistCalled)
-        XCTAssertEqual(mockRepository.updatedPlaylist?.like.contains(userID), false)
+        XCTAssertTrue(mockPlaylistRepository.updatePlaylistCalled)
+        XCTAssertEqual(mockPlaylistRepository.updatedPlaylist?.like.contains(userID), false)
     }
 }

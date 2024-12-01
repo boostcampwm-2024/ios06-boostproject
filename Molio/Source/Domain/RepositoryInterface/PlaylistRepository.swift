@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-protocol RealPlaylistRepository {
+protocol PlaylistRepository {
     func addMusic(userID: String?, isrc: String, to playlistID: UUID) async throws
     func deleteMusic(userID: String?, isrc: String, in playlistID: UUID) async throws
     func moveMusic(userID: String?, isrc: String, in playlistID: UUID, fromIndex: Int, toIndex: Int) async throws
