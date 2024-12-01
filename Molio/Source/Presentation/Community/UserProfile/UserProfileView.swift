@@ -1,25 +1,22 @@
 import SwiftUI
 
+enum ProfileType {
+    case me
+    case friend(userID: String, isFollowing: FollowRelationType)
+}
+
 struct UserProfileView: View {
     @StateObject var viewModel: UserProfileViewModel
-    let isMyProfile: Bool
-    let followRelationType: FollowRelationType?
-    let friendUserID: String?
     
     var didSettingButtonTapped: (() -> Void)?
     var didFollowingButtonTapped: (() -> Void)?
     var didFollowerButtonTapped: (() -> Void)?
     var didPlaylistCellTapped: ((MolioPlaylist) -> Void)?
+    
     init(
-        isMyProfile: Bool,
-        followRelationType: FollowRelationType? = nil,
-        viewModel: UserProfileViewModel,
-        friendUserID: String? = nil
+        viewModel: UserProfileViewModel
     ) {
-        self.isMyProfile = isMyProfile
-        self.followRelationType = followRelationType
-        _viewModel = StateObject(wrappedValue: viewModel)
-        self.friendUserID = friendUserID
+        self._viewModel = StateObject(wrappedValue: viewModel)
     }
     
     var body: some View {
@@ -37,13 +34,14 @@ struct UserProfileView: View {
                             .foregroundColor(.white)
                         Spacer()
                         
-                        if isMyProfile {
+                        if case .me = viewModel.profileType {
                             Button(action: {
                                 didSettingButtonTapped?()
                             }) {
                                 Image(systemName: "gearshape.fill")
                                     .foregroundStyle(.main)
                             }
+                 
                         }
                     }
                     .padding(.horizontal, 22)
@@ -83,23 +81,21 @@ struct UserProfileView: View {
                     
                     // MARK: - 유저 description
                     
-                    if viewModel.currentID != nil, let description = viewModel.user?.description {
-                        Text(description)
+                    Text(viewModel.user?.description ?? "")
                             .font(.system(size: 14, weight: .regular))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 22)
-                    }
                     
                     Spacer().frame(height: 13)
                     
                     // MARK: - 팔로우 버튼
-                    if !isMyProfile, let followRelationType = followRelationType {
-                        FollowRelationButton(type: followRelationType)
+                    if case let .friend(userID, isFollowing) = viewModel.profileType {
+                        FollowRelationButton(type: isFollowing)
                             .padding(.horizontal, 22)
                             .frame(height: 32)
                     }
-                    
+                                        
                     Spacer().frame(height: 13)
                     
                     // MARK: - 유저 플레이리스트
@@ -124,7 +120,7 @@ struct UserProfileView: View {
         .background(Color.background)
         .onAppear {
             Task {
-                await viewModel.fetchData(isMyProfile: isMyProfile, friendUserID: friendUserID)
+                await viewModel.fetchData()
             }
         }
     }
