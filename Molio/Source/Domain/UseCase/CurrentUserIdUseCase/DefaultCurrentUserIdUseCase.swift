@@ -14,12 +14,8 @@ struct DefaultCurrentUserIdUseCase: CurrentUserIdUseCase {
         if usecase.isLogin() {
             do {
                 return try authService.getCurrentID()
-            } catch FirebaseAuthError.userNotFound {
-                print("User not logged in. Redirecting to login.")
-            } catch FirebaseAuthError.requiresReauthentication {
-                print("Token expired. Asking user to reauthenticate.")
-            } catch {
-                print("Unhandled error: \(error)")
+            } catch  {
+                print("error.localizedDescription")
             }
         }
         return nil
