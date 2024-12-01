@@ -17,8 +17,7 @@ final class DefaultCommunityUseCase:
         guard let userID = try currentUserIdUseCase.execute(),
               let playlist = try await repository.fetchPlaylist(userID: userID, for: playlistID) else { return }
         
-        guard var updatedLike = playlist.like else { throw PlaylistLikeError.likeNotFound }
-        
+        var updatedLike = playlist.like
         updatedLike.append(userID)
         let newPlaylist = playlist.copy(like: updatedLike)
         try await repository.updatePlaylist(userID: userID, newPlaylist: newPlaylist)
@@ -28,8 +27,7 @@ final class DefaultCommunityUseCase:
         guard let userID = try currentUserIdUseCase.execute(),
               let playlist = try await repository.fetchPlaylist(userID: userID, for: playlistID) else { return }
         
-        guard var updatedLike = playlist.like else { throw PlaylistLikeError.likeNotFound }
-        
+        var updatedLike = playlist.like
         updatedLike.removeAll { $0 == userID }
         
         let newPlaylist = playlist.copy(like: updatedLike)

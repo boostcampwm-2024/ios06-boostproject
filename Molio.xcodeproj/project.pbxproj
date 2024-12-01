@@ -168,6 +168,8 @@
 		B89FFA832CFB8A350072F92B /* DefaultProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89FFA822CFB8A350072F92B /* DefaultProfile.swift */; };
 		B89FFA862CFB8B1D0072F92B /* UserInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89FFA852CFB8B1D0072F92B /* UserInfoCell.swift */; };
 		B89FFA882CFB8FC50072F92B /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89FFA872CFB8FC50072F92B /* SearchBar.swift */; };
+		B8B974122CFC46A500B1298F /* MockCurrentUserIdUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B974112CFC46A500B1298F /* MockCurrentUserIdUseCase.swift */; };
+		B8B974142CFC48BA00B1298F /* MockManagePlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B974132CFC48BA00B1298F /* MockManagePlaylistUseCase.swift */; };
 		B8D553E82CDFE25C007CCD6D /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D553E72CDFE25C007CCD6D /* NetworkProvider.swift */; };
 		B8D553EA2CDFE271007CCD6D /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D553E92CDFE271007CCD6D /* EndPoint.swift */; };
 		B8D553EC2CDFE29D007CCD6D /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D553EB2CDFE29D007CCD6D /* NetworkError.swift */; };
@@ -424,6 +426,8 @@
 		B89FFA822CFB8A350072F92B /* DefaultProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfile.swift; sourceTree = "<group>"; };
 		B89FFA852CFB8B1D0072F92B /* UserInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoCell.swift; sourceTree = "<group>"; };
 		B89FFA872CFB8FC50072F92B /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		B8B974112CFC46A500B1298F /* MockCurrentUserIdUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCurrentUserIdUseCase.swift; sourceTree = "<group>"; };
+		B8B974132CFC48BA00B1298F /* MockManagePlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockManagePlaylistUseCase.swift; sourceTree = "<group>"; };
 		B8D553E72CDFE25C007CCD6D /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		B8D553E92CDFE271007CCD6D /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		B8D553EB2CDFE29D007CCD6D /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -1223,13 +1227,6 @@
 			path = DataSource;
 			sourceTree = "<group>";
 		};
-		B876E64F2CEF77F70048CAF9 /* UseCase */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UseCase;
-			sourceTree = "<group>";
-		};
 		B88557662CF6E40E0063B0BF /* ExportAppleMusicPlaylist */ = {
 			isa = PBXGroup;
 			children = (
@@ -1276,6 +1273,15 @@
 			path = SearchUser;
 			sourceTree = "<group>";
 		};
+		B8B974102CFC469500B1298F /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				B8B974112CFC46A500B1298F /* MockCurrentUserIdUseCase.swift */,
+				B8B974132CFC48BA00B1298F /* MockManagePlaylistUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
 		B8D553E62CDFE245007CCD6D /* NetworkProvider */ = {
 			isa = PBXGroup;
 			children = (
@@ -1300,7 +1306,7 @@
 		B8D553FA2CDFEA61007CCD6D /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				B876E64F2CEF77F70048CAF9 /* UseCase */,
+				B8B974102CFC469500B1298F /* UseCase */,
 				B876E64C2CEF779A0048CAF9 /* DataSource */,
 				B876E64B2CEF77940048CAF9 /* Repository */,
 			);
@@ -2029,6 +2035,8 @@
 				20397E802CE5FD0A004ED9CE /* CoreDataPlaylistStorageTests.swift in Sources */,
 				B8D554872CE0F41F007CCD6D /* NetworkProviderTests.swift in Sources */,
 				2061490E2CF7294700FDE96D /* MockAuthService.swift in Sources */,
+				B8B974122CFC46A500B1298F /* MockCurrentUserIdUseCase.swift in Sources */,
+				B8B974142CFC48BA00B1298F /* MockManagePlaylistUseCase.swift in Sources */,
 				885D1B5E2CF4CF3A00F532E0 /* FirestoreManagerTests.swift in Sources */,
 				88A7A98A2CF852F9005EA318 /* DefaultFetchPlaylistUseCaseTests.swift in Sources */,
 				B876E64E2CEF77C20048CAF9 /* MockPlaylistRepository.swift in Sources */,
