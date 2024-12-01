@@ -170,6 +170,7 @@
 		B89FFA882CFB8FC50072F92B /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89FFA872CFB8FC50072F92B /* SearchBar.swift */; };
 		B8B974122CFC46A500B1298F /* MockCurrentUserIdUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B974112CFC46A500B1298F /* MockCurrentUserIdUseCase.swift */; };
 		B8B974142CFC48BA00B1298F /* MockManagePlaylistUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B974132CFC48BA00B1298F /* MockManagePlaylistUseCase.swift */; };
+		B8B974162CFC757400B1298F /* CreatePlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B974152CFC757400B1298F /* CreatePlaylistViewController.swift */; };
 		B8D553E82CDFE25C007CCD6D /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D553E72CDFE25C007CCD6D /* NetworkProvider.swift */; };
 		B8D553EA2CDFE271007CCD6D /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D553E92CDFE271007CCD6D /* EndPoint.swift */; };
 		B8D553EC2CDFE29D007CCD6D /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D553EB2CDFE29D007CCD6D /* NetworkError.swift */; };
@@ -430,6 +431,7 @@
 		B89FFA872CFB8FC50072F92B /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		B8B974112CFC46A500B1298F /* MockCurrentUserIdUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCurrentUserIdUseCase.swift; sourceTree = "<group>"; };
 		B8B974132CFC48BA00B1298F /* MockManagePlaylistUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockManagePlaylistUseCase.swift; sourceTree = "<group>"; };
+		B8B974152CFC757400B1298F /* CreatePlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaylistViewController.swift; sourceTree = "<group>"; };
 		B8D553E72CDFE25C007CCD6D /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		B8D553E92CDFE271007CCD6D /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		B8D553EB2CDFE29D007CCD6D /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -770,6 +772,7 @@
 				2010484C2CE9FF570015E800 /* CreatePlaylistView.swift */,
 				20A500682CEF119000E13440 /* SelectPlaylistView.swift */,
 				20A5006A2CEF150F00E13440 /* ManagePlaylistViewModel.swift */,
+				B8B974152CFC757400B1298F /* CreatePlaylistViewController.swift */,
 			);
 			path = ManagePlaylist;
 			sourceTree = "<group>";
@@ -1875,6 +1878,7 @@
 				885D1B632CF4D28700F532E0 /* MolioPlaylist+FirestoreEntity.swift in Sources */,
 				B8378BC22CF6DD0200737125 /* ExportPlatform.swift in Sources */,
 				206149392CF8677D00FDE96D /* DefaultCommunityUseCase.swift in Sources */,
+				B8B974162CFC757400B1298F /* CreatePlaylistViewController.swift in Sources */,
 				F1770B2A2CEE455800C81272 /* ExportPlaylistImageView.swift in Sources */,
 				F173693D2CDF191800F6242C /* MolioMusic.swift in Sources */,
 				20397E702CE5DE56004ED9CE /* PersistenceManager.swift in Sources */,
