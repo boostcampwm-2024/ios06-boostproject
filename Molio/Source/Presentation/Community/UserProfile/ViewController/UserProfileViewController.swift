@@ -66,7 +66,7 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
     }
     
     private func navigationToFollowingListView() {
-       
+        
         let followingListViewController = FollowRelationViewController(viewModel: followRelationViewModel, followRelationType: .following, friendUserID: nil)
         navigationController?.pushViewController(followingListViewController, animated: true)
     }
@@ -79,6 +79,7 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
     private func navigationToFriendPlaylistListView(playlist: MolioPlaylist) {
         let friendPlaylistListViewController = FriendPlaylistDetailHostingViewController(playlist: playlist)
         navigationController?.pushViewController(friendPlaylistListViewController, animated: true)
+    }
     private func setupButtonAction() {
         // /// navigate To SettingViewController
         // rootView.didSettingButtonTapped = { [weak self] in
@@ -128,3 +129,4 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
         }
     }
 }
+
