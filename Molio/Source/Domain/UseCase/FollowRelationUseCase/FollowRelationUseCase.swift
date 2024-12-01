@@ -3,8 +3,9 @@ protocol FollowRelationUseCase {
     func approveFollowing(relationID: String) async throws
     func refuseFollowing(relationID: String) async throws
     func unFollow(relationID: String) async throws
-    func fetchMyFollowingList() async throws -> [MolioUser]
-    func fetchFriendFollowingList(friendID: String) async throws -> [MolioUser]
+    func fetchAllFollowers() async throws -> [MolioFollower]
+    func fetchMyFollowingList() async throws -> [MolioFollower]
+    func fetchFriendFollowingList(friendID: String) async throws -> [MolioFollower]
     func fetchMyFollowerList() async throws -> [MolioFollower]
     func fetchFriendFollowerList(friendID: String) async throws -> [MolioFollower]
 }

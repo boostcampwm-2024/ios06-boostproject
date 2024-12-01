@@ -56,7 +56,6 @@ final class DefaultUserUseCase: UserUseCase {
     
     func fetchAllUsers() async throws -> [MolioUser] {
         let userDTOs = try await service.readAllUsers()
-        // TODO: - MolioFollower로 교체 필요
         return userDTOs.map(\.toEntity)
     }
 

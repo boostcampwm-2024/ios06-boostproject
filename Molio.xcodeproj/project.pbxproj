@@ -819,6 +819,34 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		206439F32CFCA32E008E1D42 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F135BD072CF5A6C4006C6C4F /* SettingView.swift */,
+				F135BD092CF5C671006C6C4F /* ProfileItemView.swift */,
+				F135BD0B2CF5C68C006C6C4F /* SettingTextItemView.swift */,
+				F12054F12CF84E5E0040A69C /* TermsAndConditionView.swift */,
+				F12054F32CF855F30040A69C /* PrivacyPolicyView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		206439F42CFCA336008E1D42 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F12054EF2CF8419B0040A69C /* SettingViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		206439F52CFCA33F008E1D42 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F12054EB2CF802B80040A69C /* SettingViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		2082A09F2CF9C3DC00E8F2D9 /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
@@ -1507,13 +1535,9 @@
 		F135BD062CF5A6AB006C6C4F /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				F12054EF2CF8419B0040A69C /* SettingViewModel.swift */,
-				F12054EB2CF802B80040A69C /* SettingViewController.swift */,
-				F135BD072CF5A6C4006C6C4F /* SettingView.swift */,
-				F135BD092CF5C671006C6C4F /* ProfileItemView.swift */,
-				F135BD0B2CF5C68C006C6C4F /* SettingTextItemView.swift */,
-				F12054F12CF84E5E0040A69C /* TermsAndConditionView.swift */,
-				F12054F32CF855F30040A69C /* PrivacyPolicyView.swift */,
+				206439F52CFCA33F008E1D42 /* ViewController */,
+				206439F32CFCA32E008E1D42 /* View */,
+				206439F42CFCA336008E1D42 /* ViewModel */,
 			);
 			path = Setting;
 			sourceTree = "<group>";

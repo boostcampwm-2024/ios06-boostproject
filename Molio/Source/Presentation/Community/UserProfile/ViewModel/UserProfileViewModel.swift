@@ -3,7 +3,7 @@ import SwiftUI
 
 final class UserProfileViewModel: ObservableObject {
     @Published var playlists: [MolioPlaylist] = []
-    @Published var followings: [MolioUser] = []
+    @Published var followings: [MolioFollower] = []
     @Published var followers: [MolioFollower] = []
     @Published var user: MolioUser?
     @Published var profileType: ProfileType
@@ -43,7 +43,7 @@ final class UserProfileViewModel: ObservableObject {
     private func fetchAllData() async throws -> (
         playlists: [MolioPlaylist],
         followers: [MolioFollower],
-        followings: [MolioUser],
+        followings: [MolioFollower],
         user: MolioUser?
     ) {
         async let playlists = fetchPlaylists()
@@ -74,7 +74,7 @@ final class UserProfileViewModel: ObservableObject {
     }
     
     /// 팔로잉 목록 가져오기
-    private func fetchFollowings() async throws -> [MolioUser] {
+    private func fetchFollowings() async throws -> [MolioFollower] {
         switch profileType {
         case .me:
             return try await followRelationsUseCase.fetchMyFollowingList()
@@ -98,7 +98,7 @@ final class UserProfileViewModel: ObservableObject {
     private func updateState(
         playlists: [MolioPlaylist],
         followers: [MolioFollower],
-        followings: [MolioUser],
+        followings: [MolioFollower],
         user: MolioUser?
     ) {
         self.playlists = playlists

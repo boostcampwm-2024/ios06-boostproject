@@ -17,17 +17,8 @@ struct FollowRelationListView: View {
     var body: some View {
         VStack {
             ScrollView(.vertical, showsIndicators: true) {
-                switch followRelationType {
-                case .unfollowing:
-                    ForEach(viewModel.followerUsers) { user in
-                        userIntfoRowView(userName: user.name, description: user.description, imageURL: user.profileImageURL)
-                            .padding(.vertical, 4)
-                    }
-                case .following:
-                    ForEach(viewModel.followerUsers) { user in
-                        userIntfoRowView(userName: user.name, description: user.description, imageURL: user.profileImageURL)
-                            .padding(.vertical, 4)
-                    }
+                ForEach(viewModel.users) { user in
+                    UserInfoCell(user: user, followRelationType: .following)
                 }
               
             }
@@ -68,11 +59,11 @@ struct FollowRelationListView: View {
         .onAppear {
             Task {
                 guard let friendUserID else {
-                    try await viewModel.fecthMydData(followRelationType: followRelationType)
+                    try await viewModel.fetchMyData(followRelationType: followRelationType)
                     return
                 }
                 
-                try await viewModel.fecthFreindData(followRelationType: followRelationType, friendUserID: friendUserID)
+                try await viewModel.fetchFreindData(followRelationType: followRelationType, friendUserID: friendUserID)
                 
             }
         }

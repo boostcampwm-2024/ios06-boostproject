@@ -31,8 +31,13 @@ final class SearchUserViewController: UIHostingController<SearchUserView> {
     
     // MARK: - Present Sheet or Navigation
     
-    private func navigateTofriendViewController(with user: MolioUser) {
-        let friendProfileViewController = FriendProfileViewController(profileType: .friend(userID: user.id, isFollowing: .following))
+    private func navigateTofriendViewController(with user: MolioFollower) {
+        let friendProfileViewController = FriendProfileViewController(
+            profileType: .friend (
+                userID: user.id,
+                isFollowing: user.state ? .following : .unfollowing
+            )
+        )
         navigationController?.pushViewController(friendProfileViewController, animated: true)
     }
 }

@@ -2,9 +2,7 @@ import SwiftUI
 
 struct SearchUserView: View {
     @StateObject var viewModel: SearchUserViewModel
-    let followRelationType: FollowRelationType = .following
-    
-    var didUserInfoCellTapped: ((MolioUser) -> Void)?
+    var didUserInfoCellTapped: ((MolioFollower) -> Void)?
 
     var body: some View {
         VStack(spacing: 10) {
@@ -23,7 +21,7 @@ struct SearchUserView: View {
                     }) {
                         UserInfoCell(
                             user: user,
-                            followRelationType: followRelationType,
+                            followRelationType: user.state ? .following : .unfollowing,
                             isDescriptionVisible: false
                         ) { followType in
                             print(followType)

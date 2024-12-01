@@ -30,17 +30,28 @@ struct DefaultFollowRelationUseCase: FollowRelationUseCase {
         try await service.deleteFollowRelation(relationID: relationID)
     }
     
-    func fetchMyFollowingList() async throws -> [MolioUser] {
+    func fetchMyFollowingList() async throws -> [MolioFollower] {
         let currentUserID = try await fetchMyUserID()
-        let followingRelations = try await service.readFollowRelation(followingID: currentUserID, followerID: nil, state: true)
+        let followingRelations = try await service.readFollowRelation(
+            followingID: currentUserID,
+            followerID: nil,
+            state: true
+        )
         
-        return try await fetchUsers(from: followingRelations.map { $0.follower })
+        let followers = try await fetchUsers(from: followingRelations.map { $0.follower })
+        
+        return followers.map { user in
+            user.convertToFollower(state: true)
+        }
     }
     
-    func fetchFriendFollowingList(friendID: String) async throws -> [MolioUser] {
+    func fetchFriendFollowingList(friendID: String) async throws -> [MolioFollower] {
         let followerRelations = try await service.readFollowRelation(followingID: friendID, followerID: nil, state: true)
         
-        return try await fetchUsers(from: followerRelations.map { $0.follower })
+        let followings = try await fetchUsers(from: followerRelations.map { $0.follower })
+        return followings.map { user in
+            user.convertToFollower(state: true)
+        }
     }
     
     func fetchMyFollowerList() async throws -> [MolioFollower] {
@@ -62,7 +73,32 @@ struct DefaultFollowRelationUseCase: FollowRelationUseCase {
         )
     }
     
-    // MARK: - Private Method
+    func fetchAllFollowers() async throws -> [MolioFollower] {
+        let users = try await userUseCase.fetchAllUsers()
+        let currentUserID = try await fetchMyUserID()
+        let relations = try await service.readFollowRelation (
+            followingID: currentUserID,
+            followerID: nil,
+            state: nil
+        )
+        
+        let relationStates = relations.reduce(into: [String: Bool]()) { result, relation in
+            result[relation.follower] = relation.state
+        }
+        
+        return users.map { userDTO in
+            let user = userDTO
+            let state = relationStates[user.id] ?? false
+            return MolioFollower(
+                id: user.id,
+                name: user.name,
+                profileImageURL: user.profileImageURL,
+                description: user.description,
+                state: state
+            )
+        }
+    }
+    
     private func fetchMyUserID() async throws -> String {
         return try authService.getCurrentID()
     }
