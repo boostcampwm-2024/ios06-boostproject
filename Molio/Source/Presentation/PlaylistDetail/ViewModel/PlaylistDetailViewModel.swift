@@ -20,15 +20,12 @@ final class PlaylistDetailViewModel: ObservableObject {
     @Published var exportStatus: ExportStatus = .preparing
     @Published var createdPlaylistURL: String?
     
-
-    
     // MARK: - UseCase
     
     private let managePlaylistUseCase: ManageMyPlaylistUseCase
     private let appleMusicUseCase: AppleMusicUseCase
     private let fetchPlaylistUseCase: FetchPlaylistUseCase
     
-
     private var currentPlayingMusicIndex: Int? {
         get {
             currentPlaylistMusics.firstIndex { $0.isrc == currentSelectedMusic?.isrc }
@@ -71,7 +68,6 @@ final class PlaylistDetailViewModel: ObservableObject {
     
     // MARK: - Audio Player
     
-
     private func bind() {
         
         // MARK: - 현재 위치한 플레이리스트 받아오기
