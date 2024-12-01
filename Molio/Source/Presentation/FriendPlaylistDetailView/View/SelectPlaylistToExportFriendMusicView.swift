@@ -71,11 +71,12 @@ struct SelectPlaylistToExportFriendMusicView: View {
                         
                     }
 
-                    Button("네", role: .destructive) {
+                    Button("네") {
                         let selectedMusic = viewModel.selectedMusic
                         viewModel.exportMusicToMyPlaylist(music: selectedMusic)
                         dismiss()
                     }
+                    
                 } message: {
                     Text("몰리오올리오님의 노래를 내 플레이리스트에 추가할까요?")
                 }
