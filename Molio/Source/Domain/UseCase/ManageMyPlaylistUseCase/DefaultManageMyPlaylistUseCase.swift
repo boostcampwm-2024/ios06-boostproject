@@ -52,6 +52,7 @@ final class DefaultManageMyPlaylistUseCase:
         
         let newPlaylistID = UUID()
         try await playlistRepository.createNewPlaylist(userID: userID, playlistID: newPlaylistID, playlistName)
+        changeCurrentPlaylist(playlistID: newPlaylistID)
     }
     
     func updatePlaylistName(playlistID: UUID, name: String) async throws {

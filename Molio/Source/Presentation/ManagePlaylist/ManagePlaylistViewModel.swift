@@ -30,7 +30,6 @@ final class ManagePlaylistViewModel: ObservableObject {
     func fetchPlaylists() {
         Task { @MainActor [weak self] in
             guard let playlists = try await self?.fetchPlaylistUseCase.fetchMyAllPlaylists() else { return }
-            print(playlists)
             self?.playlists = playlists
         }
     }
