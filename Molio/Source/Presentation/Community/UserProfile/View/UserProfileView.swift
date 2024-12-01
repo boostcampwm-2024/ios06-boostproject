@@ -1,10 +1,5 @@
 import SwiftUI
 
-enum ProfileType {
-    case me
-    case friend(userID: String, isFollowing: FollowRelationType)
-}
-
 struct UserProfileView: View {
     @StateObject var viewModel: UserProfileViewModel
     

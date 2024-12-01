@@ -75,6 +75,7 @@
 		2061494A2CF8E31600FDE96D /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206149492CF8E31500FDE96D /* UserProfileView.swift */; };
 		206439E62CFC4B5F008E1D42 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206439E52CFC4B5F008E1D42 /* ProfileImageView.swift */; };
 		206439E82CFC5CEF008E1D42 /* FriendProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206439E72CFC5CEF008E1D42 /* FriendProfileViewController.swift */; };
+		206439EA2CFC9778008E1D42 /* ProfileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206439E92CFC9778008E1D42 /* ProfileType.swift */; };
 		2075FEC82CECDF4D009834BE /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075FEC72CECDF4D009834BE /* CoreDataError.swift */; };
 		2082A09E2CF9B13800E8F2D9 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2082A09D2CF9B13800E8F2D9 /* UserProfileViewController.swift */; };
 		2082A0A22CF9C41800E8F2D9 /* FollowRelationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2082A0A12CF9C41800E8F2D9 /* FollowRelationListView.swift */; };
@@ -337,6 +338,7 @@
 		206149492CF8E31500FDE96D /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		206439E52CFC4B5F008E1D42 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		206439E72CFC5CEF008E1D42 /* FriendProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendProfileViewController.swift; sourceTree = "<group>"; };
+		206439E92CFC9778008E1D42 /* ProfileType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileType.swift; sourceTree = "<group>"; };
 		2075FEC72CECDF4D009834BE /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		2082A09D2CF9B13800E8F2D9 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		2082A0A12CF9C41800E8F2D9 /* FollowRelationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowRelationListView.swift; sourceTree = "<group>"; };
@@ -748,13 +750,81 @@
 			path = UserUseCase;
 			sourceTree = "<group>";
 		};
-		2082A09F2CF9C3DC00E8F2D9 /* UserProfile */ = {
+		206439EB2CFC9783008E1D42 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				206149492CF8E31500FDE96D /* UserProfileView.swift */,
+				206439E52CFC4B5F008E1D42 /* ProfileImageView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		206439EC2CFC978C008E1D42 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
 				20883BCA2CF9658300C10549 /* UserProfileViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		206439ED2CFC9799008E1D42 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F135BD022CF4C382006C6C4F /* CommunityViewController.swift */,
 				2082A09D2CF9B13800E8F2D9 /* UserProfileViewController.swift */,
 				206439E72CFC5CEF008E1D42 /* FriendProfileViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		206439EE2CFC97DE008E1D42 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2082A0A12CF9C41800E8F2D9 /* FollowRelationListView.swift */,
+				20883BC62CF8EC5B00C10549 /* FollowRelationButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		206439EF2CFC97F5008E1D42 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2082A0A32CF9C42600E8F2D9 /* FollowRelationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		206439F02CFC9800008E1D42 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2082A0A72CF9DC0600E8F2D9 /* FollowRelationViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		206439F12CFC9834008E1D42 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				20883BC82CF95F0900C10549 /* FollowRelationType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		206439F22CFC9848008E1D42 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				206439E92CFC9778008E1D42 /* ProfileType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2082A09F2CF9C3DC00E8F2D9 /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				206439F22CFC9848008E1D42 /* Model */,
+				206439ED2CFC9799008E1D42 /* ViewController */,
+				206439EB2CFC9783008E1D42 /* View */,
+				206439EC2CFC978C008E1D42 /* ViewModel */,
 			);
 			path = UserProfile;
 			sourceTree = "<group>";
@@ -762,9 +832,10 @@
 		2082A0A02CF9C3EF00E8F2D9 /* FollowRelation */ = {
 			isa = PBXGroup;
 			children = (
-				2082A0A12CF9C41800E8F2D9 /* FollowRelationListView.swift */,
-				2082A0A32CF9C42600E8F2D9 /* FollowRelationViewModel.swift */,
-				2082A0A72CF9DC0600E8F2D9 /* FollowRelationViewController.swift */,
+				206439F12CFC9834008E1D42 /* Model */,
+				206439EE2CFC97DE008E1D42 /* View */,
+				206439EF2CFC97F5008E1D42 /* ViewModel */,
+				206439F02CFC9800008E1D42 /* ViewController */,
 			);
 			path = FollowRelation;
 			sourceTree = "<group>";
@@ -1277,8 +1348,8 @@
 		B89FFA842CFB8B0B0072F92B /* SearchUser */ = {
 			isa = PBXGroup;
 			children = (
-				B885DB742CFB9A5000719AA6 /* ViewModel */,
 				B885DB732CFB9A2500719AA6 /* View */,
+				B885DB742CFB9A5000719AA6 /* ViewModel */,
 			);
 			path = SearchUser;
 			sourceTree = "<group>";
@@ -1416,12 +1487,8 @@
 		F135BCFF2CF4C358006C6C4F /* Community */ = {
 			isa = PBXGroup;
 			children = (
-				20883BC62CF8EC5B00C10549 /* FollowRelationButton.swift */,
-				20883BC82CF95F0900C10549 /* FollowRelationType.swift */,
 				2082A0A02CF9C3EF00E8F2D9 /* FollowRelation */,
 				2082A09F2CF9C3DC00E8F2D9 /* UserProfile */,
-				F135BD022CF4C382006C6C4F /* CommunityViewController.swift */,
-				206439E52CFC4B5F008E1D42 /* ProfileImageView.swift */,
 			);
 			path = Community;
 			sourceTree = "<group>";
@@ -1923,6 +1990,7 @@
 				B8D554C62CE339BC007CCD6D /* DefaultSpotifyTokenProvider.swift in Sources */,
 				884529532CF71AF4007FD074 /* DefaultPlaylistRepository.swift in Sources */,
 				B8046A3C2CE755DB00933704 /* Image+Extension.swift in Sources */,
+				206439EA2CFC9778008E1D42 /* ProfileType.swift in Sources */,
 				B8046A582CEBC08300933704 /* MockDefaultFetchAvailableGenresUseCase.swift in Sources */,
 				B8D554C02CE322CF007CCD6D /* SpotifyTokenProviderError.swift in Sources */,
 				F1770B2E2CEF0F4B00C81272 /* PlaylistImagePage.swift in Sources */,
