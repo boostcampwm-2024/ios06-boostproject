@@ -7,7 +7,7 @@ final class FirebaseStorageManager {
     func uploadImage(
         imageData: Data,
         folder: FolderType,
-        fileName: String = UUID().uuidString
+        userID fileName: String
     ) async throws -> URL {
         
         guard !imageData.isEmpty else {
