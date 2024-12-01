@@ -4,12 +4,12 @@ import Foundation
 final class DefaultManageMyPlaylistUseCase:
     ManageMyPlaylistUseCase {
     private let currentUserIdUseCase: CurrentUserIdUseCase
-    private let playlistRepository: RealPlaylistRepository
+    private let playlistRepository: PlaylistRepository
     private let currentPlaylistRepository: CurrentPlaylistRepository
 
     init(
         currentUserIdUseCase: CurrentUserIdUseCase = DIContainer.shared.resolve(),
-        playlistRepository: RealPlaylistRepository = DIContainer.shared.resolve(),
+        playlistRepository: PlaylistRepository = DIContainer.shared.resolve(),
         currentPlaylistRepository: CurrentPlaylistRepository = DIContainer.shared.resolve()
     ) {
         self.currentUserIdUseCase = currentUserIdUseCase
@@ -39,7 +39,7 @@ final class DefaultManageMyPlaylistUseCase:
             .eraseToAnyPublisher()
     }
     
-    func changeCurrentPlaylist(playlistID: UUID){
+    func changeCurrentPlaylist(playlistID: UUID) {
         do {
             try currentPlaylistRepository.setCurrentPlaylist(playlistID)
         } catch {
@@ -48,10 +48,11 @@ final class DefaultManageMyPlaylistUseCase:
     }
     
     func createPlaylist(playlistName: String) async throws {
-        guard let userID = try currentUserIdUseCase.execute() else { return }
+        let userID = try currentUserIdUseCase.execute()
         
         let newPlaylistID = UUID()
         try await playlistRepository.createNewPlaylist(userID: userID, playlistID: newPlaylistID, playlistName)
+        changeCurrentPlaylist(playlistID: newPlaylistID)
     }
     
     func updatePlaylistName(playlistID: UUID, name: String) async throws {
@@ -122,7 +123,6 @@ final class DefaultManageMyPlaylistUseCase:
     private func updatePlaylist(playlistID: UUID, name: String? = nil, musicISRCs: [String]? = nil, filter: MusicFilter? = nil, like: [String]? = nil) async throws {
         let userID = try currentUserIdUseCase.execute()
 
-        
         guard let playlist = try await playlistRepository.fetchPlaylist(userID: userID, for: playlistID) else { return }
         
         let newPlaylist = playlist.copy(name: name, musicISRCs: musicISRCs, filter: filter, like: like)

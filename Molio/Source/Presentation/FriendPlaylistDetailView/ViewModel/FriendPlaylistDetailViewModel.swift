@@ -11,7 +11,7 @@ final class FriendPlaylistDetailViewModel: ObservableObject {
         
     init(
         friendPlaylist: MolioPlaylist,
-        fetchPlaylistUseCase: FetchPlaylistUseCase = DefaultFetchPlaylistUseCase()
+        fetchPlaylistUseCase: FetchPlaylistUseCase = DIContainer.shared.resolve()
     ) {
         self.friendPlaylist = friendPlaylist
         self.fetchPlaylistUseCase = fetchPlaylistUseCase

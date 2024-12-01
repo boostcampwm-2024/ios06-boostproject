@@ -11,8 +11,8 @@ final class SelectPlaylistToExportFriendMusicViewModel: ObservableObject {
     private let manageMyPlaylistUseCase: ManageMyPlaylistUseCase
     
     init(
-        fetchPlaylistUseCase: FetchPlaylistUseCase = DefaultFetchPlaylistUseCase(),
-        manageMyPlaylistUseCase: ManageMyPlaylistUseCase = DefaultManageMyPlaylistUseCase(),
+        fetchPlaylistUseCase: FetchPlaylistUseCase = DIContainer.shared.resolve(),
+        manageMyPlaylistUseCase: ManageMyPlaylistUseCase = DIContainer.shared.resolve(),
         
         selectedMusic: MolioMusic
     ) {

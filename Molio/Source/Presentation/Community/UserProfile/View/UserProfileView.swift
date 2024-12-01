@@ -4,6 +4,7 @@ struct UserProfileView: View {
     @StateObject var viewModel: UserProfileViewModel
     @State private var showAlert: Bool = false
     
+    var didNotificationButtonTapped: (() -> Void)?
     var didSettingButtonTapped: (() -> Void)?
     var didFollowingButtonTapped: (() -> Void)?
     var didFollowerButtonTapped: (() -> Void)?
@@ -31,6 +32,16 @@ struct UserProfileView: View {
                         Spacer()
                         
                         if case .me = viewModel.profileType {
+                            if viewModel.isLogin {
+                                Button(action: {
+                                    didNotificationButtonTapped?()
+                                }) {
+                                    Image(systemName: "bell.fill")
+                                        .foregroundStyle(.main)
+                                }
+                                Spacer()
+                                    .frame(width: 14)
+                            }
                             Button(action: {
                                 didSettingButtonTapped?()
                             }) {
@@ -38,7 +49,7 @@ struct UserProfileView: View {
                                     .foregroundStyle(.main)
                             }
                             
-                        }
+                        
                     }
                     .padding(.horizontal, 22)
                     

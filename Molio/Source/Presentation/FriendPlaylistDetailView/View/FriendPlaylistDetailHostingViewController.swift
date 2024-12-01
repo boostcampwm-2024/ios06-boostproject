@@ -6,7 +6,7 @@ final class FriendPlaylistDetailHostingViewController: UIHostingController<Frien
     
     init(
         playlist: MolioPlaylist,
-        fetchPlaylistUseCase: FetchPlaylistUseCase = DefaultFetchPlaylistUseCase()
+        fetchPlaylistUseCase: FetchPlaylistUseCase = DIContainer.shared.resolve()
     ) {
         let viewModel = FriendPlaylistDetailViewModel(
             friendPlaylist: playlist,
