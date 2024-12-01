@@ -1,4 +1,6 @@
-enum FirebaseAuthError: Error {
+import Foundation
+
+enum FirebaseAuthError: LocalizedError {
     case loginFailed
     case logoutFailed
     case requiresReauthentication

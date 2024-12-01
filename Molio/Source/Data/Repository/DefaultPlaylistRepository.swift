@@ -136,7 +136,7 @@ final class DefaultPlaylistRepository: PlaylistRepository {
             
             let playlistDTO = try await playlistService.readPlaylist(playlistID: playlistID)
             
-            guard let uuid = UUID(uuidString: playlistDTO.id) else {
+            guard UUID(uuidString: playlistDTO.id) != nil else {
                 return nil
             }
             
