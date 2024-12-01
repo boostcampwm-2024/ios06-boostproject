@@ -21,6 +21,7 @@ final class SearchUserViewModel: ObservableObject {
         bind()
     }
     
+    @MainActor
     func fetchAllUsers() {
         Task {
             do {
