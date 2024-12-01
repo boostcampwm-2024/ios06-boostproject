@@ -37,7 +37,7 @@ struct UserInfoCell: View {
                              .resizable()
                              .scaledToFill()
                              .clipShape(Circle())
-                     case .failure(_):
+                     case .failure:
                          DefaultProfile()
                      @unknown default:
                          EmptyView()

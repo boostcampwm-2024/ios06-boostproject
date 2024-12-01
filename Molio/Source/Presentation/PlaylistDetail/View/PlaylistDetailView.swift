@@ -64,7 +64,7 @@ struct PlaylistDetailView: View {
             .padding(.horizontal, 22)
             .padding(.bottom, 23)
         }
-        .onChange(of: playlistDetailViewModel.currentPlaylistMusics) { musics in
+        .onChange(of: playlistDetailViewModel.currentPlaylistMusics) { _ in
             audioPlayerViewModel.setMusics(playlistDetailViewModel.currentPlaylistMusics)
         }
     }

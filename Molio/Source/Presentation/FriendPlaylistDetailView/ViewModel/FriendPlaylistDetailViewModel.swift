@@ -4,7 +4,7 @@ import Foundation
 final class FriendPlaylistDetailViewModel: ObservableObject {
     @Published var friendPlaylist: MolioPlaylist?
     @Published var friendPlaylistMusics: [MolioMusic] = []
-    @Published var selectedIndex: Int? = nil
+    @Published var selectedIndex: Int?
     
     private let fetchPlaylistUseCase: FetchPlaylistUseCase
     var exportFriendsMusicToMyPlaylistDelegate: ExportFriendsMusicToMyPlaylistDelegate?

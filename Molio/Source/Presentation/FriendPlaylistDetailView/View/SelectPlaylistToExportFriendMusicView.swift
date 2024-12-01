@@ -52,10 +52,9 @@ struct SelectPlaylistToExportFriendMusicView: View {
                 .padding(.vertical, 0)
                 .scrollContentBackground(.hidden)
                
-                
                 Spacer()
                 
-                Button{
+                Button {
                     showConfirmationAlert.toggle()
                 } label: {
                     Text("추가하기")
@@ -81,7 +80,6 @@ struct SelectPlaylistToExportFriendMusicView: View {
                     Text("몰리오올리오님의 노래를 내 플레이리스트에 추가할까요?")
                 }
 
-                
                 Spacer()
                     .frame(height: 1)
             }

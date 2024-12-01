@@ -119,7 +119,7 @@ struct UserProfileView: View {
                             ForEach(viewModel.playlists, id: \.self) { playlist in
                                 Button(action: {
                                     didPlaylistCellTapped?(playlist)
-                                }){
+                                }) {
                                     userPlaylistRowView(playlist: playlist)
                                 }
                             }

@@ -24,7 +24,7 @@ struct ProfileImageView: View {
                         .scaledToFill()
                         .frame(width: size, height: size)
                         .clipShape(Circle())
-                case .failure(_):
+                case .failure:
                     placeholderView
                 @unknown default:
                     EmptyView()
