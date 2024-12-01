@@ -67,14 +67,25 @@ final class DefaultUserUseCase: UserUseCase {
         userID: String,
         newName: String,
         newDescription: String?,
-        newImageData: Data?
+        imageUpdate: ProfileImageUpdateType
     ) async throws {
-        try await service.updateUser(
-            userID: userID,
-            newName: newName,
-            newDescription: newDescription,
-            newImageData: newImageData
+        let updateImageURLString: String? = switch imageUpdate {
+        case .keep:
+            try await service.readUser(userID: userID).profileImageURL
+        case .update(let imageData):
+            try await service.uploadUserImage(userID: userID, data: imageData).absoluteString
+        case .remove:
+            ""
+        }
+        
+        let user = MolioUserDTO(
+            id: userID,
+            name: newName,
+            profileImageURL: updateImageURLString,
+            description: newDescription
         )
+        
+        try await service.updateUser(user)
     }
     
     func deleteUser(userID: String) async throws {

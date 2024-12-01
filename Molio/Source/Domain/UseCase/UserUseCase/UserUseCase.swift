@@ -4,6 +4,6 @@ protocol UserUseCase {
     func createUser(userName: String?) async throws
     func fetchUser(userID: String) async throws -> MolioUser
     func fetchFollower(userID: String, state: Bool) async throws -> MolioFollower
-    func updateUser(userID: String, newName: String, newDescription: String?, newImageData: Data?) async throws
+    func updateUser(userID: String, newName: String, newDescription: String?, imageUpdate: ProfileImageUpdateType) async throws
     func deleteUser(userID: String) async throws
 }
