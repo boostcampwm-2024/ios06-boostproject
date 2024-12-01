@@ -33,9 +33,9 @@ final class FirebaseUserService: UserService {
     }
     
     func updateUser(_ user: MolioUserDTO) async throws {
-        guard let updateUserData = user.toDictionary() else { return } // TODO: 딕셔너리 반환 에러 throw
+        guard let updateUserData = user.toDictionary() else { return }
         let docRef = getDocumentReference(documentName: user.id)
-
+        
         try await docRef.updateData(updateUserData)
     }
     
@@ -53,9 +53,31 @@ final class FirebaseUserService: UserService {
         }
     }
     
+    func readAllUsers() async throws -> [MolioUserDTO] {
+        let collectionRef = getColloectionReference()
+        let querySnapshot = try await collectionRef.getDocuments()
+        return querySnapshot.documents.compactMap { userDocument in
+            try? userDocument.data(as: MolioUserDTO.self)
+        }
+    }
+    
+    func uploadUserImage(userID: String, data: Data) async throws -> URL {
+        return try await storageManager.uploadImage(
+            imageData: data,
+            folder: .profileImage,
+            userID: userID
+        )
+    }
+    
     // MARK: - Private Method
+    
+    // MARK: - Private methods
     
     private func getDocumentReference(documentName: String) -> DocumentReference {
         return db.collection(collectionName).document(documentName)
+    }
+    
+    private func getColloectionReference() -> CollectionReference {
+        return db.collection(collectionName)
     }
 }

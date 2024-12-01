@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(UserService.self, dependency: FirebaseUserService())
         container.register(PlaylistService.self, dependency: FirestorePlaylistService())
         container.register(PlaylistLocalStorage.self, dependency: CoreDataPlaylistStorage())
+        container.register(FollowRelationService.self, dependency: FirebaseFollowRelationService())
+        container.register(FirebaseStorageManager.self, dependency: FirebaseStorageManager())
         
         // Repository
         container.register(RecommendedMusicRepository.self, dependency: DefaultRecommendedMusicRepository())
@@ -37,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(UserUseCase.self, dependency: DefaultUserUseCase())
         container.register(FetchPlaylistUseCase.self, dependency: DefaultFetchPlaylistUseCase())
         container.register(ManageMyPlaylistUseCase.self, dependency: DefaultManageMyPlaylistUseCase())
+        container.register(FollowRelationUseCase.self, dependency: DefaultFollowRelationUseCase())
         return true
     }
     

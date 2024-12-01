@@ -1,11 +1,16 @@
 import SwiftUI
+import _PhotosUI_SwiftUI
 
 struct MyInfoView: View {
     @ObservedObject private var viewModel: MyInfoViewModel
+    @State private var selectedItem: PhotosPickerItem?
     @Environment(\.dismiss) private var dismiss
     @FocusState private var focusedField: Field?
     @Namespace private var topID
     @Namespace private var descriptionID
+    @State private var isShowingActionSheet = false
+    @State private var isShowingPhotoPicker = false
+    var didTapUpdateConfirmButton: (() -> Void)?
     
     enum Field: Hashable {
         case nickname
@@ -17,25 +22,18 @@ struct MyInfoView: View {
     }
     
     var body: some View {
-        NavigationStack {
+        ZStack {
             ScrollViewReader { proxy in
                 ScrollView {
                     VStack(spacing: 0) {
                         ZStack(alignment: .bottomTrailing) {
-                            AsyncImage(url: viewModel.userImageURL) { phase in
-                                if let image = phase.image {
-                                    image
-                                        .resizable()
-                                } else {
-                                    Image(ImageResource.personCircle)
-                                        .resizable()
-                                }
-                            }
-                            .frame(width: 110, height: 110)
-                            .clipShape(Circle())
-                            Button(action: {
-                                // TODO: 이미지 선택 액션
-                            }) {
+                            ChangeProfileImageView(
+                                selectedImageData: viewModel.userSelectedImageData,
+                                imageURL: viewModel.userImageURL
+                            )
+                            Button {
+                                isShowingActionSheet = true
+                            } label: {
                                 ZStack {
                                     Circle()
                                         .fill(.white)
@@ -100,7 +98,9 @@ struct MyInfoView: View {
                     type: .confirm,
                     isEnabled: viewModel.isPossibleConfirmButton
                 ) {
-                    
+                    Task {
+                        try await viewModel.updateUser()
+                    }
                 }
                 .frame(maxWidth: .infinity, maxHeight: 66)
                 .padding(.horizontal, 22)
@@ -108,6 +108,42 @@ struct MyInfoView: View {
             }
             .onTapGesture {
                 focusedField = .none
+            }
+            .confirmationDialog("프로필 사진 설정", isPresented: $isShowingActionSheet) {
+                Button("앨범에서 사진 선택하기") {
+                    isShowingPhotoPicker = true
+                }
+                Button("기본 이미지 적용") {
+                    viewModel.removeProfileImage()
+                }
+                Button("취소", role: .cancel) {}
+            }
+            .photosPicker(
+                isPresented: $isShowingPhotoPicker,
+                selection: $selectedItem,
+                matching: .images
+            )
+            .onChange(of: selectedItem) { newItem in
+                if let item = newItem {
+                    viewModel.didSelectImage(item)
+                }
+            }
+            .alert(
+                viewModel.alertState.title,
+                isPresented: $viewModel.showAlert) {
+                    Button("확인") {
+                        if viewModel.alertState == .successUpdate {
+                            didTapUpdateConfirmButton?()
+                        }
+                    }
+                }
+            if viewModel.isLoading {
+                Color.background.opacity(0.4)
+                    .ignoresSafeArea()
+                
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                    .scaleEffect(1.0, anchor: .center)
             }
         }
     }

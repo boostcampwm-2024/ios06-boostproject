@@ -25,22 +25,7 @@ final class DefaultUserUseCase: UserUseCase {
     
     func fetchUser(userID: String) async throws -> MolioUser {
         let userDTO = try await service.readUser(userID: userID)
-        
-        let profileImageURL: URL?
-        if let urlString = userDTO.profileImageURL {
-            profileImageURL = URL(string: urlString)
-        } else {
-            profileImageURL = nil
-        }
-        
-        let user = MolioUser(
-            id: userDTO.id,
-            name: userDTO.name,
-            profileImageURL: profileImageURL,
-            description: userDTO.description
-        )
-        
-        return user
+        return userDTO.toEntity
     }
     
     func fetchFollower(userID: String, state: Bool) async throws -> MolioFollower {
@@ -63,37 +48,26 @@ final class DefaultUserUseCase: UserUseCase {
         return user
     }
     
-    func updateUserName(userID: String, newName: String) async throws {
-        let user = try await service.readUser(userID: userID)
-        let newUser = MolioUserDTO(
-            id: user.id,
-            name: newName,
-            profileImageURL: user.profileImageURL,
-            description: user.description
-        )
-        try await service.updateUser(newUser)
+    func fetchAllUsers() async throws -> [MolioUser] {
+        let userDTOs = try await service.readAllUsers()
+        // TODO: - MolioFollower로 교체 필요
+        return userDTOs.map(\.toEntity)
     }
-    
-    func updateUserDescription(userID: String, newDescription: String?) async throws {
-        let user = try await service.readUser(userID: userID)
-        let newUser = MolioUserDTO(
-            id: user.id,
-            name: user.name,
-            profileImageURL: user.profileImageURL,
-            description: newDescription
-        )
-        try await service.updateUser(newUser)
-    }
-    
-    func updateUserImage(userID: String, newImageURL: URL?) async throws {
-        let user = try await service.readUser(userID: userID)
-        let newUser = MolioUserDTO(
-            id: user.id,
-            name: user.name,
-            profileImageURL: newImageURL?.absoluteString,
-            description: user.description
-        )
-        try await service.updateUser(newUser)
+
+    func updateUser(
+        userID: String,
+        newName: String,
+        newDescription: String?,
+        imageUpdate: ProfileImageUpdateType
+    ) async throws {
+        let updateImageURLString: String? = switch imageUpdate {
+        case .keep:
+            try await service.readUser(userID: userID).profileImageURL
+        case .update(let imageData):
+            try await service.uploadUserImage(userID: userID, data: imageData).absoluteString
+        case .remove:
+            ""
+        }
     }
     
     func deleteUser(userID: String) async throws {
