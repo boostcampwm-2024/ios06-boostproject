@@ -11,6 +11,8 @@ final class CircleMenuButton: UIButton {
         effectView.layer.cornerRadius = 0 // 초기값, 버튼 크기에 따라 조정
         effectView.clipsToBounds = true
         effectView.isUserInteractionEnabled = false // 터치 이벤트를 블러 뷰가 소모하지 않도록 설정
+        effectView.alpha = 0.5
+
         return effectView
     }()
     
