@@ -139,11 +139,15 @@ final class SwipeMusicViewController: UIViewController {
         setupBindings()
         setupButtonTarget()
         addPanGestureToMusicTrack()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        musicPlayer.play()
+        
+        guard let previewAssetURL = viewModel.currentMusic?.previewAsset else { return }
+        
+        loadAndPlaySongs(url: previewAssetURL)
     }
     
     private func setupBindings() {
