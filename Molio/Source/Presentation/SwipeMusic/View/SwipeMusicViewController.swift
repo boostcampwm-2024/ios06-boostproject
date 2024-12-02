@@ -27,7 +27,7 @@ final class SwipeMusicViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         // 글래스모피즘 효과 추가
-        let blurEffect = UIBlurEffect(style: .regular)
+        let blurEffect = UIBlurEffect(style: .systemMaterialDark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.layer.cornerRadius = 10
         blurEffectView.clipsToBounds = true
