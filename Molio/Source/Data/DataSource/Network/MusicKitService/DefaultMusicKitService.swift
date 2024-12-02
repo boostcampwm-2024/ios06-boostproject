@@ -10,6 +10,34 @@ struct DefaultMusicKitService: MusicKitService {
         }
     }
     
+    func fetchGenres() async throws -> [MusicGenre] {
+        let request = MusicCatalogResourceRequest<Genre>()
+        let response = try await request.response()
+        return response.items.map(\.name)
+    }
+    
+    /// 랜덤하게 추천 음악을 불러온다.
+    /// - `genres` : 전달받은 장르에 해당하는 차트 음악들을 불러와서 랜덤하게 섞어서 반환
+    func fetchRecommendedMusics(by genres: [MusicGenre]) async throws -> [MolioMusic] {
+//        checkAuthorizationStatus()
+        var recommendedMusics: [MolioMusic] = []
+        let musicKitGenres = try await convertToAppleMusicGenre(genres)
+        
+        // 설정된 장르가 없는 경우
+        if musicKitGenres.isEmpty {
+            let songs = try await getMusicCatalogChart()
+            let molioMusics = songs.compactMap({ SongMapper.toDomain($0) })
+            recommendedMusics += molioMusics
+        } else {
+            for genre in musicKitGenres {
+                let songs = try await getMusicCatalogChart(of: genre)
+                let molioMusics = songs.compactMap({ SongMapper.toDomain($0) })
+                recommendedMusics += molioMusics
+            }
+        }
+        return recommendedMusics.shuffled()
+    }
+    
     /// ISRC 코드로 애플 뮤직 카탈로그 음악을 검색
     ///  - Parameters: 검색할 isrc 문자열
     ///  - Returns: 응답 데이터 (RandomMusic)
@@ -104,5 +132,29 @@ struct DefaultMusicKitService: MusicKitService {
         } catch {
             return nil
         }
+    }
+    
+    /// 애플 뮤직 카탈로그의 차트 음악들을 불러온다.
+    /// - `genre` : 해당 장르에 해당하는 차트 음악들을 불러옴
+    private func getMusicCatalogChart(of appleMusicGenre: Genre? = nil) async throws -> [Song] {
+        var request = MusicCatalogChartsRequest(
+            genre: appleMusicGenre,
+            kinds: [.dailyGlobalTop, .cityTop, .mostPlayed],
+            types: [Song.self]
+        )
+        request.limit = 100
+        let response = try await request.response()
+        return response.songCharts.flatMap(\.items)
+    }
+    
+    /// id 값을 통해 `MusicGenre(String)`의 배열을 MusicKit의 `Genre` 로 변환
+    private func convertToAppleMusicGenre(_ genres: [MusicGenre]) async throws -> [Genre] {
+        let request = MusicCatalogResourceRequest<Genre>()
+        let response = try await request.response()
+        let allAppleMusicGenres = response.items
+        let filteredAppleMusicGenres = genres.compactMap { genreName in
+            allAppleMusicGenres.first(where: { $0.name == genreName })
+        }
+        return filteredAppleMusicGenres
     }
 }
