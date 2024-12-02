@@ -1,7 +1,7 @@
 import Combine
 import Foundation
 
-final class SplahViewModel: InputOutputViewModel {
+final class SplashViewModel: InputOutputViewModel {
     struct Input {
         let viewDidLoad: AnyPublisher<Void, Never>
     }
