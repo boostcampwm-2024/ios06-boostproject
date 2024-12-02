@@ -82,8 +82,29 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
     }
     
     private func navigationToFriendPlaylistListView(playlist: MolioPlaylist) {
-        let friendPlaylistListViewController = FriendPlaylistDetailHostingViewController(playlist: playlist)
-        navigationController?.pushViewController(friendPlaylistListViewController, animated: true)
+        let useCase: CurrentUserIdUseCase = DIContainer.shared.resolve()
+        
+        do {
+            let userID = try useCase.execute()
+            
+            // 사용자 ID에 따라 화면을 결정
+            let viewController: UIViewController
+            if playlist.authorID == userID {
+                // 자신의 플레이리스트
+                let myPlaylistViewModel = PlaylistDetailViewModel(currentPlaylist: playlist)
+                viewController = PlaylistDetailViewController(viewModel: myPlaylistViewModel)
+            } else {
+                // 친구의 플레이리스트
+                let friendPlaylistViewController = FriendPlaylistDetailHostingViewController(playlist: playlist)
+                viewController = friendPlaylistViewController
+            }
+            
+            // 네비게이션으로 이동
+            navigationController?.pushViewController(viewController, animated: true)
+            
+        } catch {
+            print("Error retrieving user ID: \(error.localizedDescription)")
+        }
     }
    
 }
