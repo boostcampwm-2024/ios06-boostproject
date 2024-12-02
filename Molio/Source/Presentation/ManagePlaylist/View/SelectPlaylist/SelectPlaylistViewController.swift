@@ -3,8 +3,8 @@ import SwiftUI
 final class SelectPlaylistViewController: UIHostingController<SelectPlaylistView> {
     weak var delegate: SelectPlaylistViewControllerDelegate?
     
-    init(viewModel: ManagePlaylistViewModel) {
-        let view = SelectPlaylistView(viewModel: viewModel)
+    init(viewModel: ManagePlaylistViewModel, isCreatable: Bool = true) {
+        let view = SelectPlaylistView(viewModel: viewModel, isCreatable: isCreatable)
         super.init(rootView: view)
         
         rootView.createButtonTapAction = { [weak self] in
