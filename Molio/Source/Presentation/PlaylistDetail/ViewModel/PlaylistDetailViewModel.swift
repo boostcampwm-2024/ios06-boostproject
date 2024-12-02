@@ -1,6 +1,7 @@
 import Combine
 import SwiftUI
 
+@MainActor
 final class PlaylistDetailViewModel: ObservableObject {
     
     // MARK: - 기본
