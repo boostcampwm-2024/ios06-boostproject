@@ -319,8 +319,10 @@ final class SwipeMusicViewController: UIViewController {
         guard gesture.view == currentCardView else { return }
         if musicPlayer.isPlaying {
             musicPlayer.pause()
+            currentCardView.showPlayPauseIcon(isPlaying: true)
         } else {
             musicPlayer.play()
+            currentCardView.showPlayPauseIcon(isPlaying: false)
         }
     }
     

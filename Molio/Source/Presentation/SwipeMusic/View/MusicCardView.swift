@@ -45,6 +45,14 @@ final class MusicCardView: UIView {
         return stackView
     }()
     
+    private let playPauseIcon: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.alpha = 0 // 기본적으로 숨김 상태
+        return imageView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -121,6 +129,8 @@ final class MusicCardView: UIView {
         addSubview(songTitleLabel)
         addSubview(artistNameLabel)
         addSubview(genreStackView)
+        addSubview(playPauseIcon)
+        
     }
     
     private func setupConstraint() {
@@ -154,6 +164,30 @@ final class MusicCardView: UIView {
             genreStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -34),
             genreStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 28)
         ])
+        
+        NSLayoutConstraint.activate([
+            playPauseIcon.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            playPauseIcon.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            playPauseIcon.widthAnchor.constraint(equalToConstant: 50),
+            playPauseIcon.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+    
+    // 재생 아이콘 표시
+    func showPlayPauseIcon(isPlaying: Bool) {
+        // 재생 중이면 일시정지 아이콘, 아니면 재생 아이콘 설정
+        let iconName = isPlaying ? "pause.circle.fill" : "play.circle.fill"
+        playPauseIcon.image = UIImage(systemName: iconName)
+        playPauseIcon.tintColor = .white
+        
+        // 애니메이션으로 아이콘 표시
+        UIView.animate(withDuration: 0.2, animations: {
+            self.playPauseIcon.alpha = 1.0
+        }) { _ in
+            UIView.animate(withDuration: 0.2, delay: 0.8, options: [], animations: {
+                self.playPauseIcon.alpha = 0.0
+            }, completion: nil)
+        }
     }
 }
 
