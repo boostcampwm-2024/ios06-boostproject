@@ -33,6 +33,7 @@ final class SwipeMusicViewController: UIViewController {
         blurEffectView.clipsToBounds = true
         blurEffectView.isUserInteractionEnabled = false // 터치 이벤트 차단 방지
         blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+        blurEffectView.alpha = 0.5
         
         button.addSubview(blurEffectView)
         NSLayoutConstraint.activate([
