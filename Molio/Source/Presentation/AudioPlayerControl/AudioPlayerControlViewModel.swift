@@ -2,6 +2,7 @@ import AVKit
 import SwiftUI
 import Combine
 
+@MainActor
 final class AudioPlayerControlViewModel: ObservableObject {
     
     // MARK: - 기본
