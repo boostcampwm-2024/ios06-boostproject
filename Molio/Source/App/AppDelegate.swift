@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(FetchRecommendedMusicUseCase.self, dependency: DefaultFetchRecommendedMusicUseCase())
         container.register(FetchImageUseCase.self, dependency: DefaultFetchImageUseCase())
         container.register(FetchAvailableGenresUseCase.self, dependency: DefaultFetchAvailableGenresUseCase())
-        container.register(AudioPlayer.self, dependency: SwipeMusicPlayer())
+        container.register(AudioPlayer.self, dependency: DefaultAudioPlayer())
         container.register(ManageAuthenticationUseCase.self, dependency: DefaultManageAuthenticationUseCase())
         container.register(AppleMusicUseCase.self, dependency: DefaultAppleMusicUseCase())
         container.register(CurrentUserIdUseCase.self, dependency: DefaultCurrentUserIdUseCase())
