@@ -38,7 +38,7 @@ final class UserPlaylistSyncManager {
     // 이전, 이후 상태를 기록해서 처리하기 위해서 CurrentValueSubject를 사용합니다.
     // 그리고 Source of Truth인 현재 로그인 상태는 `Auth.auth().addStateDidChangeListener` ㅇ 옵니다.
     // 이거는 로그인 변화를 감지해서 실행하는 리스너입니다. (탈퇴 포함)
-    private func setLoginStatusListener() -> AuthStateDidChangeListenerHandle{
+    private func setLoginStatusListener() -> AuthStateDidChangeListenerHandle {
         return Auth.auth().addStateDidChangeListener { [weak self] _, user in
             self?.currentUser.send(user?.uid)
         }
