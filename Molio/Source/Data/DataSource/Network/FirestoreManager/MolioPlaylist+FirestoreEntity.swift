@@ -8,7 +8,7 @@ extension MolioPlaylist: FirestoreEntity {
     var toDictionary: [String: Any]? {
         [
             "createdAt": createdAt,
-            "filters": filter.genres.map { $0.rawValue },
+            "filters": filter.genres,
             "like": like,
             "musicISRCs": musicISRCs,
             "playlistID": id.uuidString,

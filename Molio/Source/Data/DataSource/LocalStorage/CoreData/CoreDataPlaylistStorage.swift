@@ -31,7 +31,7 @@ final class CoreDataPlaylistStorage: PlaylistLocalStorage {
             playlist.name = entity.name
             playlist.createdAt = Date()
             playlist.musicISRCs = entity.musicISRCs
-            playlist.filters = entity.filter.genres.map(\.rawValue)
+            playlist.filters = entity.filter.genres
             
             try self.saveContext()
         }
@@ -52,7 +52,7 @@ final class CoreDataPlaylistStorage: PlaylistLocalStorage {
                         return
                     }
                     
-                    let filter = MusicFilter(genres: playlist.filters.compactMap { MusicGenre(rawValue: $0) })
+                    let filter = MusicFilter(genres: playlist.filters)
                     let molioPlaylist = MolioPlaylist(
                         id: playlist.id,
                         name: playlist.name,
@@ -75,7 +75,7 @@ final class CoreDataPlaylistStorage: PlaylistLocalStorage {
             self.fetchRequest.predicate = nil
             let playlists = try self.context.fetch(self.fetchRequest)
             return playlists.map { playlist in
-                let filter = MusicFilter(genres: playlist.filters.compactMap { MusicGenre(rawValue: $0) })
+                let filter = MusicFilter(genres: playlist.filters)
                 return MolioPlaylist(
                     id: playlist.id,
                     name: playlist.name,
@@ -97,7 +97,7 @@ final class CoreDataPlaylistStorage: PlaylistLocalStorage {
                 }
                 playlist.name = entity.name
                 playlist.musicISRCs = entity.musicISRCs
-                playlist.filters = entity.filter.genres.map(\.rawValue)
+                playlist.filters = entity.filter.genres
                 
                 try self.saveContext()
             } catch {

@@ -15,7 +15,7 @@ struct MusicFilterView: View {
                 TagLayout {
                     ForEach(musicFilterViewModel.allGenres, id: \.self) { genre in
                         FilterTag(
-                            content: genre.description,
+                            content: genre,
                             isSelected: musicFilterViewModel.selectedGenres.contains(genre)
                         ) {
                             musicFilterViewModel.toggleSelection(of: genre)
@@ -35,7 +35,7 @@ struct MusicFilterView: View {
         MusicFilterView(
             viewModel: MusicFilterViewModel(
                 fetchAvailableGenresUseCase: MockFetchAvailableGenresUseCase(),
-                selectedGenres: [.acoustic, .blackMetal, .emo, .jDance, .workOut]
+                selectedGenres: ["Jazz", "K-Pop"]
             )
         )
     }

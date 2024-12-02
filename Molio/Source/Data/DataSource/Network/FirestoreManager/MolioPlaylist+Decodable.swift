@@ -10,10 +10,7 @@ extension MolioPlaylist: Decodable {
         let musicISRCs = try container.decode([String].self, forKey: .musicISRCs)
         let like = try container.decode([String].self, forKey: .like)
 
-        let filtersArray = try container.decode([String].self, forKey: .filters)
-        
-        let genres = filtersArray.compactMap { MusicGenre(rawValue: $0) }
-        
+        let genres = try container.decode([String].self, forKey: .filters)
         let filter = MusicFilter(genres: genres)
 
         self.init(
