@@ -78,10 +78,7 @@ final class DefaultRandomMusicDeck: RandomMusicDeck {
     
     func reset(with filter: [MusicGenre]) {
         currentMusicFilter = filter
-        let cardCountToRemove = max(0, self.randomMusics.value.count - 2)
-        DispatchQueue.main.async { [weak self] in
-            self?.randomMusics.value.removeLast(cardCountToRemove)
-        }
+        randomMusics.value = []
     }
 
     private func setupCurrentPlaylistCancellable() {
@@ -115,20 +112,17 @@ final class DefaultRandomMusicDeck: RandomMusicDeck {
                 let fetchedMusics = try await self?.fetchRecommendedMusicUseCase.execute(with: filter)
                 
                 let usersAllMusicISRCs: [String]
-                
                 // TODO: 이걸 현재 플리에 있는 노래만 추천받지 않도록 할 지를 수정해야 한다.
                 if let playlists = try await self?.fetchPlaylistUseCase.fetchMyAllPlaylists() {
                     usersAllMusicISRCs = playlists.flatMap { $0.musicISRCs }
                 } else {
                     // 유저 플레이리스트 자체가 없는 경우
-                    
                     usersAllMusicISRCs = []
                 }
                                 
                 guard let fetchedMusics else { return }
                 
                 // 이미 플리에 있는 노래는 추천받지 않는다.
-                
                 let filteredMusics = fetchedMusics.filter { music in
                     return !usersAllMusicISRCs.contains(music.isrc)
                 }
