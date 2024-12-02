@@ -58,7 +58,8 @@ struct UserProfileView: View {
                         }
                     }
                     .padding(.horizontal, 22)
-                    
+                    .padding(.top, 20)
+
                     // MARK: - 유저 정보 HStack
                     HStack {
                         ProfileImageView(imageURL: viewModel.user?.profileImageURL, size: 56)

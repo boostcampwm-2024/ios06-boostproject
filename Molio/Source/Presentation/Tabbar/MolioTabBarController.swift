@@ -9,15 +9,19 @@ final class MolioTabBarController: UITabBarController {
     
     private func setupTabBarAppearance() {
         let appearance = UITabBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .black
-        
+        appearance.configureWithTransparentBackground()
         appearance.stackedLayoutAppearance.selected.iconColor = .main
         appearance.stackedLayoutAppearance.normal.iconColor = .white
-        
+
+        // 탭 바의 외형 설정
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = appearance
-        tabBar.itemPositioning = .centered
+        
+        let customBackgroundView = UIView(frame: tabBar.bounds)
+        customBackgroundView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        customBackgroundView.addGradientBackground()
+        
+        tabBar.insertSubview(customBackgroundView, at: 0)
     }
     
     private func setupViewControllers() {
@@ -36,38 +40,21 @@ final class MolioTabBarController: UITabBarController {
         let swipeMusicViewModel = SwipeMusicViewModel()
         let swipeMusicViewController = SwipeMusicViewController(viewModel: swipeMusicViewModel)
         let navigationController = UINavigationController(rootViewController: swipeMusicViewController)
-        
-        swipeMusicViewController.tabBarItem = UITabBarItem(
-            title: "",
-            image: UIImage(systemName: "house.fill"),
-            selectedImage: UIImage(systemName: "house.fill")
-        )
-        
+        swipeMusicViewController.tabBarItem.image = UIImage(systemName: "house.fill")
         return navigationController
     }
     
     private func createSearchUserViewController() -> UINavigationController {
         let searchUserViewController = SearchUserViewController()
         let navigationController = UINavigationController(rootViewController: searchUserViewController)
-        
-        searchUserViewController.tabBarItem = UITabBarItem(
-            title: nil,
-            image: UIImage(systemName: "magnifyingglass"),
-            selectedImage: UIImage(systemName: "magnifyingglass")
-        )
-        
+        searchUserViewController.tabBarItem.image = UIImage(systemName: "magnifyingglass")
         return navigationController
     }
     
     private func createCommunityViewController() -> UINavigationController {
         let communityViewController = CommunityViewController()
         let communityViewNavigationController = UINavigationController(rootViewController: communityViewController)
-        communityViewController.tabBarItem = UITabBarItem(
-            title: "",
-            image: UIImage(resource: .personCircle).withRenderingMode(.alwaysOriginal),
-            selectedImage: UIImage(resource: .personCircle).withRenderingMode(.alwaysOriginal)
-        )
-        
+        communityViewController.tabBarItem.image = UIImage(systemName: "person.fill")
         return communityViewNavigationController
     }
 }
