@@ -251,6 +251,7 @@
 		F17CA42E2CFC3ADE00B86681 /* ProfileImageUpdateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17CA42D2CFC3ADE00B86681 /* ProfileImageUpdateType.swift */; };
 		F17CA4322CFC603900B86681 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17CA4312CFC603900B86681 /* NotificationView.swift */; };
 		F17CA4342CFC918A00B86681 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17CA4332CFC918A00B86681 /* NotificationViewModel.swift */; };
+		F17CA43B2CFDD98E00B86681 /* LoginRequiredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17CA43A2CFDD98E00B86681 /* LoginRequiredView.swift */; };
 		F1865ED62CF618B7007C1E5A /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1865ED52CF618B7007C1E5A /* MyInfoView.swift */; };
 		F1865ED82CF62BBB007C1E5A /* MyInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1865ED72CF62BBB007C1E5A /* MyInfoViewModel.swift */; };
 		F1865EDA2CF63959007C1E5A /* NickNameTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1865ED92CF63959007C1E5A /* NickNameTextFieldView.swift */; };
@@ -524,6 +525,7 @@
 		F17CA42D2CFC3ADE00B86681 /* ProfileImageUpdateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageUpdateType.swift; sourceTree = "<group>"; };
 		F17CA4312CFC603900B86681 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		F17CA4332CFC918A00B86681 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
+		F17CA43A2CFDD98E00B86681 /* LoginRequiredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequiredView.swift; sourceTree = "<group>"; };
 		F1865ED52CF618B7007C1E5A /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
 		F1865ED72CF62BBB007C1E5A /* MyInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewModel.swift; sourceTree = "<group>"; };
 		F1865ED92CF63959007C1E5A /* NickNameTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameTextFieldView.swift; sourceTree = "<group>"; };
@@ -1366,6 +1368,7 @@
 				B89FFA872CFB8FC50072F92B /* SearchBar.swift */,
 				B885DB712CFB93AE00719AA6 /* SearchUserView.swift */,
 				B89DCE442CFBA0E100F8E651 /* SearchUserViewController.swift */,
+				F17CA43A2CFDD98E00B86681 /* LoginRequiredView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2032,6 +2035,7 @@
 				F173694B2CDF265900F6242C /* DefaultRecommendedMusicRepository.swift in Sources */,
 				B885DB762CFB9A5A00719AA6 /* SearchUserViewModel.swift in Sources */,
 				F135BCEE2CF440B5006C6C4F /* AuthStateRepository.swift in Sources */,
+				F17CA43B2CFDD98E00B86681 /* LoginRequiredView.swift in Sources */,
 				885D1B632CF4D28700F532E0 /* MolioPlaylist+FirestoreEntity.swift in Sources */,
 				B8378BC22CF6DD0200737125 /* ExportPlatform.swift in Sources */,
 				206149392CF8677D00FDE96D /* DefaultCommunityUseCase.swift in Sources */,
