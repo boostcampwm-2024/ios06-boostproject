@@ -22,6 +22,7 @@ final class MusicFilterViewModel: ObservableObject {
         self.allGenres = allGenres
         self.selectedGenres = selectedGenres
         
+        getAllGenres()
         bindCurrentPlaylist()
     }
     
