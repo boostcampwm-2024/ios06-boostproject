@@ -157,6 +157,7 @@ final class SwipeMusicViewController: UIViewController {
         setupBindings()
         setupButtonTarget()
         addPanGestureToMusicTrack()
+        addTapGestureToMusicTrack()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -279,6 +280,11 @@ final class SwipeMusicViewController: UIViewController {
         currentCardView.addGestureRecognizer(panGesture)
     }
     
+    private func addTapGestureToMusicTrack() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
+        currentCardView.addGestureRecognizer(tapGesture)
+    }
+
     private func setupButtonTarget() {
         likeButton.addTarget(self, action: #selector(didTapLikeButton), for: .touchUpInside)
         dislikeButton.addTarget(self, action: #selector(didTapDislikeButton), for: .touchUpInside)
@@ -311,6 +317,15 @@ final class SwipeMusicViewController: UIViewController {
             providedImpactFeedback(translationX: translation.x)
         } else if gesture.state == .ended {
             musicCardDidFinishSwipePublisher.send(translation.x)
+        }
+    }
+    
+    @objc private func handleTapGesture(_ gesture: UITapGestureRecognizer) {
+        guard gesture.view == currentCardView else { return }
+        if musicPlayer.isPlaying {
+            musicPlayer.pause()
+        } else {
+            musicPlayer.play()
         }
     }
     
