@@ -34,15 +34,20 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
             guard let self = self else { return }
             self.navigateToSettingViewController()
         }
-        setupButtonAction()
+        
+        rootView.didNotificationButtonTapped = { [weak self] in
+            guard let self else { return }
+            let notificationViewModel = NotificationViewModel()
+            let notificationViewController = UIHostingController(rootView: NotificationView(viewModel: notificationViewModel))
+            notificationViewController.title = "알림"
+            self.navigationController?.pushViewController(notificationViewController, animated: true)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         self.viewModel = UserProfileViewModel(profileType: .me)
         self.followRelationViewModel = FollowRelationViewModel()
         super.init(coder: aDecoder)
-        
-        setupButtonAction()
     }
     
     // MARK: - Life Cycle
@@ -80,53 +85,6 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
         let friendPlaylistListViewController = FriendPlaylistDetailHostingViewController(playlist: playlist)
         navigationController?.pushViewController(friendPlaylistListViewController, animated: true)
     }
-    private func setupButtonAction() {
-        // /// navigate To SettingViewController
-        // rootView.didSettingButtonTapped = { [weak self] in
-        //     guard let self else { return }
-        //     let settingViewModel = SettingViewModel()
-        //     let settingsViewController = SettingViewController(viewModel: settingViewModel)
-        //     self.navigationController?.pushViewController(settingsViewController, animated: true)
-        // }
-        
-        // /// navigation To FollowerListView
-        // rootView.didFollowerButtonTapped = { [weak self] in
-        //     guard let self else { return }
-        //     let followerListViewController = FollowRelationViewController(
-        //         viewModel: followRelationViewModel,
-        //         isMyProfile: true,
-        //         followRelation: .unfollowing,
-        //         friendUserID: nil
-        //     )
-        //     self.navigationController?.pushViewController(followerListViewController, animated: true)
-        // }
-        
-        // /// navigation To FollowingListView
-        // rootView.didFollowingButtonTapped = { [weak self] in
-        //     guard let self else { return }
-        //     let followingListViewController = FollowRelationViewController(
-        //         viewModel: followRelationViewModel,
-        //         isMyProfile: true,
-        //         followRelation: .following,
-        //         friendUserID: nil
-        //     )
-        //     self.navigationController?.pushViewController(followingListViewController, animated: true)
-        // }
-        
-        // /// navigation To FriendPlaylistListView
-        // rootView.didPlaylistCellTapped = { [weak self] playlist in
-        //     guard let self else { return }
-        //     let friendPlaylistListViewController = FriendPlaylistDetailHostingViewController(playlist: playlist)
-        //     self.navigationController?.pushViewController(friendPlaylistListViewController, animated: true)
-        // }
-        
-        rootView.didNotificationButtonTapped = { [weak self] in
-            guard let self else { return }
-            let notificationViewModel = NotificationViewModel()
-            let notificationViewController = UIHostingController(rootView: NotificationView(viewModel: notificationViewModel))
-            notificationViewController.title = "알림"
-            self.navigationController?.pushViewController(notificationViewController, animated: true)
-        }
-    }
+   
 }
 
