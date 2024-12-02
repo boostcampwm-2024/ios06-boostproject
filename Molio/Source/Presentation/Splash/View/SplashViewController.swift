@@ -2,9 +2,9 @@ import Combine
 import UIKit
 
 final class SplashViewController: UIViewController {
-    private let viewModel: SplahViewModel
-    private var input: SplahViewModel.Input
-    private var output: SplahViewModel.Output
+    private let viewModel: SplashViewModel
+    private var input: SplashViewModel.Input
+    private var output: SplashViewModel.Output
     
     private let viewDidLoadPublisher = PassthroughSubject<Void, Never>()
     private var cancellables = Set<AnyCancellable>()
@@ -35,9 +35,9 @@ final class SplashViewController: UIViewController {
         return label
     }()
     
-    init(viewModel: SplahViewModel) {
+    init(viewModel: SplashViewModel) {
         self.viewModel = viewModel
-        self.input = SplahViewModel.Input(viewDidLoad: viewDidLoadPublisher.eraseToAnyPublisher())
+        self.input = SplashViewModel.Input(viewDidLoad: viewDidLoadPublisher.eraseToAnyPublisher())
         self.output = viewModel.transform(from: input)
         super.init(nibName: nil, bundle: nil)
     }
@@ -65,7 +65,7 @@ final class SplashViewController: UIViewController {
             .store(in: &cancellables)
     }
     
-    private func switchNextViewController(_ nextScreenType: SplahViewModel.NextScreenType) {
+    private func switchNextViewController(_ nextScreenType: SplashViewModel.NextScreenType) {
         let nextViewController = switch nextScreenType {
         case .login:
             LoginViewController(viewModel: LoginViewModel())
