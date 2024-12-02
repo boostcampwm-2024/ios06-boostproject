@@ -1181,7 +1181,7 @@
 				F135BCE42CF43BC2006C6C4F /* ManageAuthenticationUseCase */,
 				B8046A502CEB93C600933704 /* FetchAvailableGenresUseCase */,
 				F173695E2CE36D4D00F6242C /* FetchImageUsecase */,
-				F17369432CDF248700F6242C /* FetchMusicsUseCase */,
+				F17369432CDF248700F6242C /* FetchRecommendedMusicUseCase */,
 				88A7A9882CF8526C005EA318 /* RealPlaylistUseCase */,
 			);
 			path = UseCase;
@@ -1659,29 +1659,13 @@
 			path = MolioTests;
 			sourceTree = "<group>";
 		};
-		F17369432CDF248700F6242C /* FetchMusicsUseCase */ = {
-			isa = PBXGroup;
-			children = (
-				F17369442CDF249400F6242C /* Protocol */,
-				F17369472CDF24E900F6242C /* Implementation */,
-			);
-			path = FetchMusicsUseCase;
-			sourceTree = "<group>";
-		};
-		F17369442CDF249400F6242C /* Protocol */ = {
+		F17369432CDF248700F6242C /* FetchRecommendedMusicUseCase */ = {
 			isa = PBXGroup;
 			children = (
 				F17369452CDF24A100F6242C /* FetchRecommendedMusicUseCase.swift */,
-			);
-			path = Protocol;
-			sourceTree = "<group>";
-		};
-		F17369472CDF24E900F6242C /* Implementation */ = {
-			isa = PBXGroup;
-			children = (
 				F17369482CDF250200F6242C /* DefaultFetchRecommendedMusicUseCase.swift */,
 			);
-			path = Implementation;
+			path = FetchRecommendedMusicUseCase;
 			sourceTree = "<group>";
 		};
 		F17369502CDFA7A100F6242C /* Mapper */ = {
