@@ -30,10 +30,12 @@ struct SettingTextItemView: View {
                         .padding(.trailing, 16)
                 }
             }
-            Divider()
-                .background(Color(UIColor.darkGray))
-                .padding(.leading, 16)
-                .padding(.bottom, 1)
+            if !itemType.isLastItem {
+                Divider()
+                    .background(Color(UIColor.darkGray))
+                    .padding(.leading, 16)
+                    .padding(.bottom, 1)
+            }
         }
         .background(Color(uiColor: UIColor(resource: .background)))
     }
@@ -60,6 +62,15 @@ struct SettingTextItemView: View {
                 "로그인"
             case .deleteAccount:
                 "회원 탈퇴"
+            }
+        }
+        
+        var isLastItem: Bool {
+            switch self {
+            case .appVersion, .termsAndCondition, .logout:
+                false
+            case .privacyPolicy, .deleteAccount, .login:
+                true
             }
         }
     }

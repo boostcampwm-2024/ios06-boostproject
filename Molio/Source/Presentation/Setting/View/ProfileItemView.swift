@@ -20,8 +20,8 @@ struct ProfileItemView: View {
                     }
                 }
                 .padding(.leading, 16)
-                .padding(.top, 4)
-                .padding(.bottom, 4)
+                .padding(.top, 6)
+                .padding(.bottom, 6)
                 
                 VStack(alignment: .leading) {
                     Text(molioUser?.name ?? "")
@@ -38,10 +38,6 @@ struct ProfileItemView: View {
                     .foregroundStyle(.gray)
                     .padding(.trailing, 16)
             }
-            Divider()
-                .background(Color(UIColor.darkGray))
-                .padding(.leading, 80)
-                .padding(.bottom, 6)
         }
         .background(Color(uiColor: UIColor(resource: .background)))
     }
