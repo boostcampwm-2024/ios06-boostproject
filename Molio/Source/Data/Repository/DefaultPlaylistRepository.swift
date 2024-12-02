@@ -18,11 +18,18 @@ final class DefaultPlaylistRepository: PlaylistRepository {
         if userID != nil {
             let playlistDTO = try await playlistService.readPlaylist(playlistID: playlistID)
             
+            // 플리에 이미 있는 노래는 추가하지 않는다.
+            guard !playlistDTO.musicISRCs.contains(isrc) else { return }
+            
             let updatedPlaylist = playlistDTO.copy(musicISRCs: playlistDTO.musicISRCs + [isrc])
             
             try await playlistService.updatePlaylist(newPlaylist: updatedPlaylist)
         } else {
             guard let playlist = try await playlistStorage.read(by: playlistID.uuidString) else { return }
+            
+            // 이미 있는 노래는 추가하지 않는다.
+            guard !playlist.musicISRCs.contains(isrc) else { return }
+            
             let updatedPlaylist = MolioPlaylist(
                 id: playlist.id,
                 name: playlist.name,
