@@ -15,12 +15,12 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
         
         super.init(rootView: userProfileView)
         
-        rootView.didFollowerButtonTapped = { [weak self] in
+        rootView.didFollowerButtonTapped = { [weak self] profileType in
             guard let self = self else { return }
             self.navigationToFollowerListView()
         }
         
-        rootView.didFollowingButtonTapped = { [weak self] in
+        rootView.didFollowingButtonTapped = { [weak self] profileType in
             guard let self = self else { return }
             self.navigationToFollowingListView()
         }
