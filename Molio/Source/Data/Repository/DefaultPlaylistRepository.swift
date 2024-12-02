@@ -107,7 +107,7 @@ final class DefaultPlaylistRepository: PlaylistRepository {
                 name: playlistName,
                 createdAt: Date(),
                 musicISRCs: [],
-                filter: MusicFilter(genres: [])
+                filter: []
             )
             
             try await playlistStorage.create(newPlaylist)

@@ -11,7 +11,7 @@ final class SwipeMusicViewController: UIViewController {
     private let musicCardDidFinishSwipePublisher = PassthroughSubject<CGFloat, Never>()
     private let likeButtonDidTapPublisher = PassthroughSubject<Void, Never>()
     private let dislikeButtonDidTapPublisher = PassthroughSubject<Void, Never>()
-    private let filterDidUpdatePublisher = PassthroughSubject<MusicFilter, Never>()
+    private let filterDidUpdatePublisher = PassthroughSubject<[MusicGenre], Never>()
     private var cancellables = Set<AnyCancellable>()
     
     private var isMusicCardAnimating = false

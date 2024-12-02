@@ -23,7 +23,7 @@ final class DefaultRandomMusicDeck: RandomMusicDeck {
     private let randomMusics: CurrentValueSubject<[MolioMusic], Never>
     private var cancellables = Set<AnyCancellable>()
     
-    private var currentMusicFilter: MusicFilter?
+    private var currentMusicFilter: [MusicGenre]?
     private var currentPlaylist: MolioPlaylist?
     
     // MARK: 생성자
@@ -76,7 +76,7 @@ final class DefaultRandomMusicDeck: RandomMusicDeck {
         _ = popCurrentMusic()
     }
     
-    func reset(with filter: MusicFilter) {
+    func reset(with filter: [MusicGenre]) {
         currentMusicFilter = filter
         let cardCountToRemove = max(0, self.randomMusics.value.count - 2)
         DispatchQueue.main.async { [weak self] in
@@ -108,7 +108,7 @@ final class DefaultRandomMusicDeck: RandomMusicDeck {
     }
     
     private func loadRandomMusic() {
-        let filter = currentMusicFilter ?? MusicFilter(genres: [])
+        let filter = currentMusicFilter ?? []
         
         Task { [weak self] in
             do {

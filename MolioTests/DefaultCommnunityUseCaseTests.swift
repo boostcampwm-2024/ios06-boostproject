@@ -34,7 +34,7 @@ final class DefaultCommunityUseCaseTests: XCTestCase {
             name: "Test Playlist",
             createdAt: Date(),
             musicISRCs: [],
-            filter: MusicFilter(genres: []),
+            filter: [],
             like: initialLikes
         )
         
@@ -64,7 +64,7 @@ final class DefaultCommunityUseCaseTests: XCTestCase {
             name: "Test Playlist",
             createdAt: Date(),
             musicISRCs: [],
-            filter: MusicFilter(genres: []),
+            filter: [],
             like: initialLikes
         )
         

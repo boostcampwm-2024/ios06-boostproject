@@ -1,3 +1,3 @@
 protocol FetchRecommendedMusicUseCase {
-    func execute(with filter: MusicFilter) async throws -> [MolioMusic]
+    func execute(with filter: [MusicGenre]) async throws -> [MolioMusic]
 }

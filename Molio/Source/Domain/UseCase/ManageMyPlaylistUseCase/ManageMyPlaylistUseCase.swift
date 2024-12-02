@@ -9,7 +9,7 @@ protocol ManageMyPlaylistUseCase {
     // 플레이리스트 관리
     func createPlaylist(playlistName: String) async throws
     func updatePlaylistName(playlistID: UUID, name: String) async throws
-    func updatePlaylistFilter(playlistID: UUID, filter: MusicFilter) async throws
+    func updatePlaylistFilter(playlistID: UUID, filter: [MusicGenre]) async throws
     func deletePlaylist(playlistID: UUID) async throws
     
     // 음악 관리

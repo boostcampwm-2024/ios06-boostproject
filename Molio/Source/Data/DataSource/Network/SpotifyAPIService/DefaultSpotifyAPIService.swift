@@ -10,9 +10,9 @@ struct DefaultSpotifyAPIService: SpotifyAPIService {
         self.tokenProvider = tokenProvider
     }
     
-    func fetchRecommendedMusicISRCs(with filter: MusicFilter) async throws -> [String] {
+    func fetchRecommendedMusicISRCs(with filter: [MusicGenre]) async throws -> [String] {
         let accessToken = try await tokenProvider.getAccessToken()
-        let genresParam = filter.genres
+        let genresParam = filter
         let endPoint = SpotifyAPI.getRecommendations(genres: genresParam, accessToken: accessToken)
         let dto: RecommendationsResponseDTO = try await networkProvider.request(endPoint)
         return dto.tracks.map(\.externalIDs.isrc)

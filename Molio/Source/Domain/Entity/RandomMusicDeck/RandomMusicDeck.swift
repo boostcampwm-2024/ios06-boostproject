@@ -9,5 +9,5 @@ protocol RandomMusicDeck {
     
     func dislikeCurrentMusic()
     
-    func reset(with filter: MusicFilter)
+    func reset(with filter: [MusicGenre])
 }
