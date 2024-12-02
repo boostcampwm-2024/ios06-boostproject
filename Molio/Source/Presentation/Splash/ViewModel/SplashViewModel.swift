@@ -42,7 +42,7 @@ final class SplashViewModel: InputOutputViewModel {
                     : NextScreenType.login
                 )
                 
-                /// 현재 최소 플
+                /// 현재 갖고있는 플레이리스트가 없다면 기본 플레이리스트 생성
                 let playlistCheckPublisher = Future<Void, Never> { promise in
                     Task {
                         let sholudCreateDefaultPlaylist = try await self.shouldCreateDefaultPlaylist()
