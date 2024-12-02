@@ -5,7 +5,7 @@ final class CircleMenuButton: UIButton {
     private var defaultBackgroundColor: UIColor
     private var highlightBackgroundColor: UIColor
     private let blurEffectView: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: .regular)
+        let blurEffect = UIBlurEffect(style: .systemMaterialDark)
         let effectView = UIVisualEffectView(effect: blurEffect)
         effectView.translatesAutoresizingMaskIntoConstraints = false
         effectView.layer.cornerRadius = 0 // 초기값, 버튼 크기에 따라 조정
