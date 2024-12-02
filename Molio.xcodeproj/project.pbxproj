@@ -209,7 +209,7 @@
 		F135BCF02CF441B7006C6C4F /* DefaultAuthStateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCEF2CF441B7006C6C4F /* DefaultAuthStateRepository.swift */; };
 		F135BCF42CF445D7006C6C4F /* DefaultAuthLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCF32CF445D7006C6C4F /* DefaultAuthLocalStorage.swift */; };
 		F135BCF82CF45E39006C6C4F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCF72CF45E39006C6C4F /* SplashViewController.swift */; };
-		F135BCFB2CF4620C006C6C4F /* SplahViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCFA2CF4620C006C6C4F /* SplahViewModel.swift */; };
+		F135BCFB2CF4620C006C6C4F /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCFA2CF4620C006C6C4F /* SplashViewModel.swift */; };
 		F135BCFE2CF4BDE3006C6C4F /* MolioTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BCFD2CF4BDE3006C6C4F /* MolioTabBarController.swift */; };
 		F135BD032CF4C382006C6C4F /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BD022CF4C382006C6C4F /* CommunityViewController.swift */; };
 		F135BD082CF5A6C4006C6C4F /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135BD072CF5A6C4006C6C4F /* SettingView.swift */; };
@@ -479,7 +479,7 @@
 		F135BCEF2CF441B7006C6C4F /* DefaultAuthStateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthStateRepository.swift; sourceTree = "<group>"; };
 		F135BCF32CF445D7006C6C4F /* DefaultAuthLocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthLocalStorage.swift; sourceTree = "<group>"; };
 		F135BCF72CF45E39006C6C4F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
-		F135BCFA2CF4620C006C6C4F /* SplahViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplahViewModel.swift; sourceTree = "<group>"; };
+		F135BCFA2CF4620C006C6C4F /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		F135BCFD2CF4BDE3006C6C4F /* MolioTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MolioTabBarController.swift; sourceTree = "<group>"; };
 		F135BD022CF4C382006C6C4F /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 		F135BD072CF5A6C4006C6C4F /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -1548,7 +1548,7 @@
 		F135BCF92CF461F8006C6C4F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				F135BCFA2CF4620C006C6C4F /* SplahViewModel.swift */,
+				F135BCFA2CF4620C006C6C4F /* SplashViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1994,7 +1994,7 @@
 				F17369492CDF250200F6242C /* DefaultFetchRecommendedMusicUseCase.swift in Sources */,
 				B8D554842CE0F3F3007CCD6D /* SpotifyAccessTokenResponseDTO.swift in Sources */,
 				B867AE782CFAF1E000ACCEDC /* DefaultAppleMusicUseCase.swift in Sources */,
-				F135BCFB2CF4620C006C6C4F /* SplahViewModel.swift in Sources */,
+				F135BCFB2CF4620C006C6C4F /* SplashViewModel.swift in Sources */,
 				F173697B2CE4AAC600F6242C /* AudioPlayer.swift in Sources */,
 				F1E4058C2CEB8FC500533701 /* LoginViewController.swift in Sources */,
 				88A7A9832CF84D48005EA318 /* FetchPlaylistUseCase.swift in Sources */,

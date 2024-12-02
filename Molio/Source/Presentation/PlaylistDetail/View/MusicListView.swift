@@ -55,5 +55,6 @@ struct MusicListView: View {
 
     private func deleteMusic(music: MolioMusic) {
         playlistDetailViewModel.deleteMusic(music: music)
+        audioPlayerViewModel.musics = playlistDetailViewModel.currentPlaylistMusics
     }
 }

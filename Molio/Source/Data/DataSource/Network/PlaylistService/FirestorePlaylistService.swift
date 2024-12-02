@@ -5,14 +5,11 @@ final class FirestorePlaylistService: PlaylistService {
     private let db: Firestore
     private let collectionName = "playlists"
     
-    init(
-    ) {
-        
+    init() {
         if FirebaseApp.app() == nil {
             FirebaseApp.configure()
         }
         self.db = Firestore.firestore()
-
     }
     
     func createPlaylist(playlist: MolioPlaylistDTO) async throws {
