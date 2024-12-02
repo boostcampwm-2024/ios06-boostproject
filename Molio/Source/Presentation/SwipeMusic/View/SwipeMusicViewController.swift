@@ -24,8 +24,25 @@ final class SwipeMusicViewController: UIViewController {
         let button = UIButton()
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
-        button.backgroundColor = .black.withAlphaComponent(0.3)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
+        // 글래스모피즘 효과 추가
+        let blurEffect = UIBlurEffect(style: .regular)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.layer.cornerRadius = 10
+        blurEffectView.clipsToBounds = true
+        blurEffectView.isUserInteractionEnabled = false // 터치 이벤트 차단 방지
+        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.addSubview(blurEffectView)
+        NSLayoutConstraint.activate([
+            blurEffectView.leadingAnchor.constraint(equalTo: button.leadingAnchor),
+            blurEffectView.trailingAnchor.constraint(equalTo: button.trailingAnchor),
+            blurEffectView.topAnchor.constraint(equalTo: button.topAnchor),
+            blurEffectView.bottomAnchor.constraint(equalTo: button.bottomAnchor)
+        ])
+        
+        button.backgroundColor = UIColor.black.withAlphaComponent(0.1) // 반투명 배경
         return button
     }()
     

@@ -4,6 +4,15 @@ final class CircleMenuButton: UIButton {
     
     private var defaultBackgroundColor: UIColor
     private var highlightBackgroundColor: UIColor
+    private let blurEffectView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .regular)
+        let effectView = UIVisualEffectView(effect: blurEffect)
+        effectView.translatesAutoresizingMaskIntoConstraints = false
+        effectView.layer.cornerRadius = 0 // 초기값, 버튼 크기에 따라 조정
+        effectView.clipsToBounds = true
+        effectView.isUserInteractionEnabled = false // 터치 이벤트를 블러 뷰가 소모하지 않도록 설정
+        return effectView
+    }()
     
     override var isHighlighted: Bool {
         didSet {
@@ -48,7 +57,11 @@ final class CircleMenuButton: UIButton {
                            tintColor: UIColor?,
                            buttonImage: UIImage?
     ) {
-        self.backgroundColor = backgroundColor
+        // Apply blur effect for glassmorphism
+        blurEffectView.layer.cornerRadius = buttonSize / 2
+        self.insertSubview(blurEffectView, at: 0)
+        
+        self.backgroundColor = .clear // Transparent to show blur effect
         layer.cornerRadius = buttonSize / 2
         clipsToBounds = true
         buttonImageView.tintColor = tintColor
@@ -56,6 +69,7 @@ final class CircleMenuButton: UIButton {
     }
     
     private func setupHierarchy() {
+        addSubview(blurEffectView)
         addSubview(buttonImageView)
     }
     
@@ -63,6 +77,13 @@ final class CircleMenuButton: UIButton {
         NSLayoutConstraint.activate([
             self.widthAnchor.constraint(equalToConstant: buttonSize),
             self.heightAnchor.constraint(equalToConstant: buttonSize)
+        ])
+        
+        NSLayoutConstraint.activate([
+            blurEffectView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            blurEffectView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            blurEffectView.topAnchor.constraint(equalTo: self.topAnchor),
+            blurEffectView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
         
         NSLayoutConstraint.activate([
