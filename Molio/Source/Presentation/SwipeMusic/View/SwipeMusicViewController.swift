@@ -146,6 +146,11 @@ final class SwipeMusicViewController: UIViewController {
         musicPlayer.play()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        musicPlayer.stop()
+    }
+    
     private func setupBindings() {
         output.selectedPlaylist
             .receive(on: DispatchQueue.main)
