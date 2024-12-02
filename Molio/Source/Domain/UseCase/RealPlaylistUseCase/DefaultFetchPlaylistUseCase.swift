@@ -36,9 +36,7 @@ final class DefaultFetchPlaylistUseCase: FetchPlaylistUseCase {
     
     func fetchAllMyMusicIn(playlistID: UUID) async throws -> [MolioMusic] {
         let playlist = try await fetchMyPlaylist(playlistID: playlistID)
-        
-        let musicsInPlaylist = await musicKitService.getMusic(with: playlist.musicISRCs)
-        
+        let musicsInPlaylist = try await musicKitService.getMusic(with: playlist.musicISRCs)
         return musicsInPlaylist
     }
     
@@ -58,13 +56,11 @@ final class DefaultFetchPlaylistUseCase: FetchPlaylistUseCase {
     
     func fetchAllFriendMusics(friendUserID: String, playlistID: UUID) async throws -> [MolioMusic] {
         let playlist = try await playlistRepisitory.fetchPlaylist(userID: friendUserID, for: playlistID)
-        
         guard let playlist else {
             throw FetchPlaylistUseCaseError.playlistNotFoundWithID
         }
         
-        let musicsInPlaylist = await musicKitService.getMusic(with: playlist.musicISRCs)
-
+        let musicsInPlaylist = try await musicKitService.getMusic(with: playlist.musicISRCs)
         return musicsInPlaylist
     }
 }
