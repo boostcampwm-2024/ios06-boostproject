@@ -72,9 +72,10 @@ final class DefaultManageMyPlaylistUseCase:
     func addMusic(musicISRC: String, to playlistID: UUID) async throws {
         let userID = try currentUserIdUseCase.execute() 
         guard let playlist = try await playlistRepository.fetchPlaylist(userID: userID, for: playlistID) else {
-            print("playlist 못 받아옴;;")
             return
         }
+        
+        guard !playlist.musicISRCs.contains(musicISRC) else { return }
         
         let newMusicISRCs = playlist.musicISRCs + [musicISRC]
         let newPlaylist = playlist.copy(musicISRCs: newMusicISRCs)

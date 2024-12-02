@@ -18,11 +18,18 @@ final class DefaultPlaylistRepository: PlaylistRepository {
         if userID != nil {
             let playlistDTO = try await playlistService.readPlaylist(playlistID: playlistID)
             
+            // 플리에 이미 있는 노래는 추가하지 않는다.
+            guard !playlistDTO.musicISRCs.contains(isrc) else { return }
+            
             let updatedPlaylist = playlistDTO.copy(musicISRCs: playlistDTO.musicISRCs + [isrc])
             
             try await playlistService.updatePlaylist(newPlaylist: updatedPlaylist)
         } else {
             guard let playlist = try await playlistStorage.read(by: playlistID.uuidString) else { return }
+            
+            // 이미 있는 노래는 추가하지 않는다.
+            guard !playlist.musicISRCs.contains(isrc) else { return }
+            
             let updatedPlaylist = MolioPlaylist(
                 id: playlist.id,
                 name: playlist.name,
@@ -61,7 +68,6 @@ final class DefaultPlaylistRepository: PlaylistRepository {
 
     func moveMusic(userID: String?, isrc: String, in playlistID: UUID, fromIndex: Int, toIndex: Int) async throws {
         if userID != nil {
-            // TODO: Implement Firestore logic for moving music
             guard let playlist = try await playlistStorage.read(by: playlistID.uuidString) else { return }
             var newMusicISRCs = playlist.musicISRCs
             
@@ -75,7 +81,7 @@ final class DefaultPlaylistRepository: PlaylistRepository {
             try await playlistService.updatePlaylist(newPlaylist: updatedPlaylistDTO)
             
         } else {
-            // TODO: Implement local storage logic for moving music
+
         }
     }
 
@@ -132,8 +138,6 @@ final class DefaultPlaylistRepository: PlaylistRepository {
 
     func fetchPlaylist(userID: String?, for playlistID: UUID) async throws -> MolioPlaylist? {
         if userID != nil {
-            // TODO: Implement Firestore logic for fetching a single playlist
-            
             let playlistDTO = try await playlistService.readPlaylist(playlistID: playlistID)
             
             guard UUID(uuidString: playlistDTO.id) != nil else {
