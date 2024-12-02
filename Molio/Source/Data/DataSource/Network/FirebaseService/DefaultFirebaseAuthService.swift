@@ -35,7 +35,7 @@ struct DefaultFirebaseAuthService: AuthService {
     }
     
     func reauthenticateApple(idToken: String, nonce: String) async throws {
-        guard let currentUser = Auth.auth().currentUser else {
+        guard Auth.auth().currentUser != nil else {
             throw FirebaseAuthError.userNotFound
         }
         let credential = OAuthProvider.credential(
