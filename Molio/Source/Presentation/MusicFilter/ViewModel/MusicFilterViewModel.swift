@@ -13,7 +13,7 @@ final class MusicFilterViewModel: ObservableObject {
     
     init(
         fetchAvailableGenresUseCase: FetchAvailableGenresUseCase = DIContainer.shared.resolve(),
-        managePlaylistUseCase: ManageMyPlaylistUseCase = DefaultManageMyPlaylistUseCase(),
+        managePlaylistUseCase: ManageMyPlaylistUseCase = DIContainer.shared.resolve(),
         allGenres: [MusicGenre] = MusicGenre.allCases,
         selectedGenres: Set<MusicGenre> = []
     ) {
