@@ -12,14 +12,12 @@ final class OnBoardingPlaylistViewController: UIHostingController<OnBoardingView
                           """,
             image: Image(.onBoardingPlaylist)
         )
-        
         super.init(rootView: onBordingView)
         
         rootView.didButtonTapped = { [weak self] in
             guard let self = self else { return }
             self.navigateToOnBoardingSwipeViewController()
         }
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -46,6 +44,8 @@ final class OnBoardingPlaylistViewController: UIHostingController<OnBoardingView
     }
     
 }
+
+// MARK: - Preview
 
 struct OnBoardingPlaylistViewControllerPreview: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> OnBoardingPlaylistViewController {

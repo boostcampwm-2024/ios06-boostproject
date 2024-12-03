@@ -20,7 +20,7 @@ struct OnBoardingView: View {
         ZStack {
             Color.background.edgesIgnoringSafeArea(.all)
             VStack(spacing: 0) {
-                VStack (alignment: .leading) {
+                VStack(alignment: .leading) {
                     Spacer()
                         .frame(height: 10)
                     

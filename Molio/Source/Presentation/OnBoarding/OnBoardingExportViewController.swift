@@ -18,7 +18,7 @@ final class OnBoardingExportViewController: UIHostingController<OnBoardingView> 
         )
         
         super.init(rootView: onBordingView)
-
+        
         rootView.didButtonTapped = { [weak self] in
             guard let self = self else { return }
             self.navigateToOnBoardingCommunityViewController()
@@ -49,5 +49,3 @@ final class OnBoardingExportViewController: UIHostingController<OnBoardingView> 
     }
     
 }
-
-

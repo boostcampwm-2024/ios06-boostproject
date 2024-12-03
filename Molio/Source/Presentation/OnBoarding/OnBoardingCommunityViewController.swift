@@ -44,6 +44,3 @@ final class OnBoardingCommunityViewController: UIHostingController<OnBoardingVie
     }
     
 }
-
-
-
