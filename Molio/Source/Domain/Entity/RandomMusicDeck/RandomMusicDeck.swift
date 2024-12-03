@@ -5,6 +5,8 @@ protocol RandomMusicDeck {
     
     var nextMusicTrackModelPublisher: AnyPublisher<MolioMusic?, Never> { get }
     
+    var isPreparingMusckDeckPublisher: AnyPublisher<Bool, Never> { get }
+    
     func likeCurrentMusic()
     
     func dislikeCurrentMusic()

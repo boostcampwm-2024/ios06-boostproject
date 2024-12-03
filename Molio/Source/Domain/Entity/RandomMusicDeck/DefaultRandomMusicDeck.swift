@@ -9,8 +9,13 @@ final class DefaultRandomMusicDeck: RandomMusicDeck {
     var currentMusicTrackModelPublisher: AnyPublisher<MolioMusic?, Never> {
         return musicPublisher(at: 0)
     }
+    
     var nextMusicTrackModelPublisher: AnyPublisher<MolioMusic?, Never> {
         return musicPublisher(at: 1)
+    }
+    
+    var isPreparingMusckDeckPublisher: AnyPublisher<Bool, Never> {
+        return preparingPublisher()
     }
     
     // MARK: Private 속성
@@ -152,6 +157,14 @@ final class DefaultRandomMusicDeck: RandomMusicDeck {
                 return randomMusics[index]
             }
             .removeDuplicates { $0?.isrc == $1?.isrc }
+            .eraseToAnyPublisher()
+    }
+    
+    private func preparingPublisher() -> AnyPublisher<Bool, Never> {
+        randomMusics
+            .map { randomMusics in
+                randomMusics.isEmpty
+            }
             .eraseToAnyPublisher()
     }
 }
