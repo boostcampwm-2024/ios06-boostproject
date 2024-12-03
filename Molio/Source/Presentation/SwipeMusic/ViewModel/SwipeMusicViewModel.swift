@@ -161,9 +161,8 @@ final class SwipeMusicViewModel: InputOutputViewModel {
                         let swipeMusicTrackModel = try await self.loadMusicCard(from: currentMusic)
                         self.currentMusicTrackPublisher.send(swipeMusicTrackModel)
                     } catch {
-                        self.currentMusicTrackPublisher.send(SwipeMusicTrackModel(
-                            randomMusic: currentMusic,
-                            imageData: nil)
+                        self.currentMusicTrackPublisher.send(
+                            SwipeMusicTrackModel(randomMusic: currentMusic, imageData: nil)
                         )
                     }
                 }
@@ -185,15 +184,23 @@ final class SwipeMusicViewModel: InputOutputViewModel {
                         let swipeMusicTrackModel = try await self.loadMusicCard(from: nextMusic)
                         self.nextMusicTrackPublisher.send(swipeMusicTrackModel)
                     } catch {
-                        self.currentMusicTrackPublisher.send(SwipeMusicTrackModel(
-                            randomMusic: nextMusic,
-                            imageData: nil)
+                        self.nextMusicTrackPublisher.send(
+                            SwipeMusicTrackModel(randomMusic: nextMusic,imageData: nil)
                         )
                     }
                 }
             }
             .store(in: &cancellables)
-       
+        
+        // MARK: Music Deck 준비여부 관련
+        musicDeck.isPreparingMusicDeckPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isPreparingDeck in
+                guard let self else { return }
+                self.isLoadingPublisher.send(isPreparingDeck)
+            }
+            .store(in: &cancellables)
+ 
         // MARK: 현재 플레이리스트
         managePlaylistUseCase.currentPlaylistPublisher()
             .receive(on: DispatchQueue.main)
