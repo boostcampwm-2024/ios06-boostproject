@@ -25,6 +25,14 @@
 		2009183E2CEC9C5B0058D8C7 /* DefaultCurrentPlaylistRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2009183D2CEC9C5B0058D8C7 /* DefaultCurrentPlaylistRepository.swift */; };
 		200918422CECA79A0058D8C7 /* UserDefaultsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200918412CECA79A0058D8C7 /* UserDefaultsError.swift */; };
 		200918482CECAB4D0058D8C7 /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200918472CECAB4D0058D8C7 /* UserDefaultsKey.swift */; };
+		200FABE82CFF23B500454919 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200FABE72CFF23B500454919 /* OnBoardingView.swift */; };
+		200FABEA2CFF2A1C00454919 /* OnBoardingPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200FABE92CFF2A1C00454919 /* OnBoardingPlaylistViewController.swift */; };
+		200FABEC2CFF2BD000454919 /* OnBoardingSwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200FABEB2CFF2BD000454919 /* OnBoardingSwipeViewController.swift */; };
+		200FABEE2CFF2C4800454919 /* OnBoardingFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200FABED2CFF2C4800454919 /* OnBoardingFilterViewController.swift */; };
+		200FABF02CFF2C9200454919 /* OnBoardingExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200FABEF2CFF2C9200454919 /* OnBoardingExportViewController.swift */; };
+		200FABF22CFF2D3F00454919 /* OnBoardingCommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200FABF12CFF2D3F00454919 /* OnBoardingCommunityViewController.swift */; };
+		200FABF42CFF2D6400454919 /* OnBoardingFriendPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200FABF32CFF2D6400454919 /* OnBoardingFriendPlaylistViewController.swift */; };
+		200FABF62CFF2F0100454919 /* OnBoardingAppleMusicAccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200FABF52CFF2F0100454919 /* OnBoardingAppleMusicAccessViewController.swift */; };
 		2010484B2CE9FC8D0015E800 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2010484A2CE9FC8D0015E800 /* Secrets.xcconfig */; };
 		2010484D2CE9FF570015E800 /* CreatePlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2010484C2CE9FF570015E800 /* CreatePlaylistView.swift */; };
 		2010484F2CEA0B300015E800 /* BasicButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2010484E2CEA0B300015E800 /* BasicButton.swift */; };
@@ -295,6 +303,14 @@
 		2009183D2CEC9C5B0058D8C7 /* DefaultCurrentPlaylistRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCurrentPlaylistRepository.swift; sourceTree = "<group>"; };
 		200918412CECA79A0058D8C7 /* UserDefaultsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsError.swift; sourceTree = "<group>"; };
 		200918472CECAB4D0058D8C7 /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
+		200FABE72CFF23B500454919 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
+		200FABE92CFF2A1C00454919 /* OnBoardingPlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingPlaylistViewController.swift; sourceTree = "<group>"; };
+		200FABEB2CFF2BD000454919 /* OnBoardingSwipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingSwipeViewController.swift; sourceTree = "<group>"; };
+		200FABED2CFF2C4800454919 /* OnBoardingFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingFilterViewController.swift; sourceTree = "<group>"; };
+		200FABEF2CFF2C9200454919 /* OnBoardingExportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingExportViewController.swift; sourceTree = "<group>"; };
+		200FABF12CFF2D3F00454919 /* OnBoardingCommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingCommunityViewController.swift; sourceTree = "<group>"; };
+		200FABF32CFF2D6400454919 /* OnBoardingFriendPlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingFriendPlaylistViewController.swift; sourceTree = "<group>"; };
+		200FABF52CFF2F0100454919 /* OnBoardingAppleMusicAccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingAppleMusicAccessViewController.swift; sourceTree = "<group>"; };
 		2010484A2CE9FC8D0015E800 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		2010484C2CE9FF570015E800 /* CreatePlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaylistView.swift; sourceTree = "<group>"; };
 		2010484E2CEA0B300015E800 /* BasicButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicButton.swift; sourceTree = "<group>"; };
@@ -622,6 +638,21 @@
 				2075FEC72CECDF4D009834BE /* CoreDataError.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		200FABE62CFF23A000454919 /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				200FABE72CFF23B500454919 /* OnBoardingView.swift */,
+				200FABE92CFF2A1C00454919 /* OnBoardingPlaylistViewController.swift */,
+				200FABEB2CFF2BD000454919 /* OnBoardingSwipeViewController.swift */,
+				200FABED2CFF2C4800454919 /* OnBoardingFilterViewController.swift */,
+				200FABEF2CFF2C9200454919 /* OnBoardingExportViewController.swift */,
+				200FABF12CFF2D3F00454919 /* OnBoardingCommunityViewController.swift */,
+				200FABF32CFF2D6400454919 /* OnBoardingFriendPlaylistViewController.swift */,
+				200FABF52CFF2F0100454919 /* OnBoardingAppleMusicAccessViewController.swift */,
+			);
+			path = OnBoarding;
 			sourceTree = "<group>";
 		};
 		201048522CEA27F40015E800 /* UIViewController */ = {
@@ -1088,6 +1119,7 @@
 		B80970762CDB43E2007BC3C4 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				200FABE62CFF23A000454919 /* OnBoarding */,
 				882D56242CFC6E2B0057D436 /* AudioPlayerControl */,
 				B89FFA842CFB8B0B0072F92B /* SearchUser */,
 				F1865ED42CF6188E007C1E5A /* MyInfo */,
@@ -2025,6 +2057,7 @@
 				F173691F2CDB995100F6242C /* SwipeMusicViewController.swift in Sources */,
 				206148F32CF70E0C00FDE96D /* FirebaseFollowRelationService.swift in Sources */,
 				B867AE6F2CF8E5FC00ACCEDC /* ExportAppleMusicPlaylistViewController.swift in Sources */,
+				200FABF02CFF2C9200454919 /* OnBoardingExportViewController.swift in Sources */,
 				88A7A9852CF85247005EA318 /* FetchPlaylistUseCaseError.swift in Sources */,
 				206149082CF721F800FDE96D /* DefaultFollowRelationUseCase.swift in Sources */,
 				F17CA42E2CFC3ADE00B86681 /* ProfileImageUpdateType.swift in Sources */,
@@ -2033,6 +2066,7 @@
 				F17369682CE36E8F00F6242C /* DefaultImageRepository.swift in Sources */,
 				F1865EDC2CF6397B007C1E5A /* DescriptionTextFieldView.swift in Sources */,
 				882D56282CFCC9740057D436 /* UserPlaylistSyncManager.swift in Sources */,
+				200FABF22CFF2D3F00454919 /* OnBoardingCommunityViewController.swift in Sources */,
 				F135BD0C2CF5C68C006C6C4F /* SettingTextItemView.swift in Sources */,
 				B8D554062CE0ED2C007CCD6D /* SpotifyAPI.swift in Sources */,
 				B8046A442CE9250B00933704 /* MusicGenre.swift in Sources */,
@@ -2108,8 +2142,10 @@
 				F12054F42CF855F30040A69C /* PrivacyPolicyView.swift in Sources */,
 				206149062CF7219B00FDE96D /* MolioFollowRelation.swift in Sources */,
 				B8D554892CE10A3A007CCD6D /* DefaultSpotifyAPIService.swift in Sources */,
+				200FABEA2CFF2A1C00454919 /* OnBoardingPlaylistViewController.swift in Sources */,
 				F1E405AE2CECA35E00533701 /* DefaultFirebaseAuthService.swift in Sources */,
 				F1E4059E2CEC936700533701 /* AppleAuthInfo.swift in Sources */,
+				200FABF42CFF2D6400454919 /* OnBoardingFriendPlaylistViewController.swift in Sources */,
 				F17369292CDC79E100F6242C /* MusicCardView.swift in Sources */,
 				2082A0A62CF9D87D00E8F2D9 /* MolioFollower.swift in Sources */,
 				F173693F2CDF21BC00F6242C /* RecommendedMusicRepository.swift in Sources */,
@@ -2121,6 +2157,7 @@
 				8816226D2CE3B11C00E81EA0 /* RandomMusicDeck.swift in Sources */,
 				F1E4059B2CEC6E9B00533701 /* LoginViewModel.swift in Sources */,
 				F135BD082CF5A6C4006C6C4F /* SettingView.swift in Sources */,
+				200FABEE2CFF2C4800454919 /* OnBoardingFilterViewController.swift in Sources */,
 				20883BCB2CF9658300C10549 /* UserProfileViewModel.swift in Sources */,
 				881622692CE3671400E81EA0 /* DefaultRandomMusicDeck.swift in Sources */,
 				F173695D2CE31CBA00F6242C /* InputOutputViewModel.swift in Sources */,
@@ -2148,11 +2185,13 @@
 				F17369522CDFA7DC00F6242C /* SongMapper.swift in Sources */,
 				F17369742CE3733300F6242C /* ImageFecthError.swift in Sources */,
 				885D1B612CF4D27800F532E0 /* FirestoreEntity.swift in Sources */,
+				200FABE82CFF23B500454919 /* OnBoardingView.swift in Sources */,
 				881BBCB42CDCF91B00010A61 /* SpotifyTokenProvider.swift in Sources */,
 				881BBCB52CDCF91B00010A61 /* MockSpotifyTokenProvider.swift in Sources */,
 				206148E72CF6E93600FDE96D /* MolioUserDTO.swift in Sources */,
 				F1A3BB792CF0E0BF0062C79C /* ExportPlaylistImageViewModel.swift in Sources */,
 				20397E722CE5DFC6004ED9CE /* CoreDataPlaylistStorage.swift in Sources */,
+				200FABF62CFF2F0100454919 /* OnBoardingAppleMusicAccessViewController.swift in Sources */,
 				881BBCB62CDCF91B00010A61 /* SpotifyAPIService.swift in Sources */,
 				200918422CECA79A0058D8C7 /* UserDefaultsError.swift in Sources */,
 				888352EC2CF4D2B500C48F68 /* FirestoreError.swift in Sources */,
@@ -2175,6 +2214,7 @@
 				88291CBC2CFA25F4007322B5 /* SelectPlaylistToExportFriendMusicView.swift in Sources */,
 				88291CC32CFB00D2007322B5 /* FriendPlaylistDetailHostingViewController+ExportFriendsMusicToMyPlaylistDelegate.swift in Sources */,
 				20A500692CEF119000E13440 /* SelectPlaylistView.swift in Sources */,
+				200FABEC2CFF2BD000454919 /* OnBoardingSwipeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2372,6 +2412,7 @@
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Molio/Resource/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = molio;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Apple Music의 음악 데이터를 검색하거나 플레이리스트를 내보내려면 Apple Music 접근 권한 승인이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "이 앱은 재생목록의 음악 정보를 이미지로 저장, 앨범에서 이미지를 선택 하기 위해 사진 라이브러리 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -2408,6 +2449,7 @@
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Molio/Resource/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = molio;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Apple Music의 음악 데이터를 검색하거나 플레이리스트를 내보내려면 Apple Music 접근 권한 승인이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "이 앱은 재생목록의 음악 정보를 이미지로 저장, 앨범에서 이미지를 선택 하기 위해 사진 라이브러리 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
