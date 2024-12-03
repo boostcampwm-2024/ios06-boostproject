@@ -4,20 +4,9 @@ final class OnBoardingExportViewController: UIHostingController<OnBoardingView> 
     // MARK: - Initializer
     
     init() {
-        let onBordingView = OnBoardingView(
-            title: """
-            몰리오에서 만들 플레이리스트를
-            다른 플랫폼으로 내보낼 수 있어요!
-            """,
-            subTitle: 
-            """
-            애플 뮤직 을 구독하지 않은 경우에는
-            플레이리스트를 사진으로 내보낼 수 있어요.
-            """,
-            image: Image(.onBoardingExport)
-        )
+        let onBoardingView = OnBoardingView(page: .four)
         
-        super.init(rootView: onBordingView)
+        super.init(rootView: onBoardingView)
         
         rootView.didButtonTapped = { [weak self] in
             guard let self = self else { return }

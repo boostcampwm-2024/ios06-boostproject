@@ -165,6 +165,7 @@
 		B867AE732CF9D09300ACCEDC /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867AE722CF9D09300ACCEDC /* UIButton+Extension.swift */; };
 		B867AE762CFAF1D100ACCEDC /* AppleMusicUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867AE752CFAF1D100ACCEDC /* AppleMusicUseCase.swift */; };
 		B867AE782CFAF1E000ACCEDC /* DefaultAppleMusicUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867AE772CFAF1E000ACCEDC /* DefaultAppleMusicUseCase.swift */; };
+		B873CA042CFF6944000D8D6C /* OnBoardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B873CA032CFF6944000D8D6C /* OnBoardingPage.swift */; };
 		B876E64E2CEF77C20048CAF9 /* MockPlaylistRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B876E64D2CEF77C20048CAF9 /* MockPlaylistRepository.swift */; };
 		B876E6532CEF78710048CAF9 /* MockCurrentPlaylistRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B876E6522CEF78710048CAF9 /* MockCurrentPlaylistRepository.swift */; };
 		B88557682CF6E4280063B0BF /* ExportAppleMusicPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88557672CF6E4280063B0BF /* ExportAppleMusicPlaylistView.swift */; };
@@ -442,6 +443,7 @@
 		B867AE722CF9D09300ACCEDC /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		B867AE752CFAF1D100ACCEDC /* AppleMusicUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicUseCase.swift; sourceTree = "<group>"; };
 		B867AE772CFAF1E000ACCEDC /* DefaultAppleMusicUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAppleMusicUseCase.swift; sourceTree = "<group>"; };
+		B873CA032CFF6944000D8D6C /* OnBoardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingPage.swift; sourceTree = "<group>"; };
 		B876E64D2CEF77C20048CAF9 /* MockPlaylistRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPlaylistRepository.swift; sourceTree = "<group>"; };
 		B876E6522CEF78710048CAF9 /* MockCurrentPlaylistRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCurrentPlaylistRepository.swift; sourceTree = "<group>"; };
 		B88557672CF6E4280063B0BF /* ExportAppleMusicPlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportAppleMusicPlaylistView.swift; sourceTree = "<group>"; };
@@ -651,6 +653,7 @@
 				200FABF12CFF2D3F00454919 /* OnBoardingCommunityViewController.swift */,
 				200FABF32CFF2D6400454919 /* OnBoardingFriendPlaylistViewController.swift */,
 				200FABF52CFF2F0100454919 /* OnBoardingAppleMusicAccessViewController.swift */,
+				B873CA032CFF6944000D8D6C /* OnBoardingPage.swift */,
 			);
 			path = OnBoarding;
 			sourceTree = "<group>";
@@ -1999,6 +2002,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B873CA042CFF6944000D8D6C /* OnBoardingPage.swift in Sources */,
 				B88F80BE2CE4927B000480E6 /* FilterTag.swift in Sources */,
 				205E6A4C2CF570AC005E9150 /* FirebaseStorageError.swift in Sources */,
 				F17369492CDF250200F6242C /* DefaultFetchRecommendedMusicUseCase.swift in Sources */,

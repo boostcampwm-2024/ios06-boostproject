@@ -4,15 +4,9 @@ final class OnBoardingCommunityViewController: UIHostingController<OnBoardingVie
     // MARK: - Initializer
     
     init() {
-        let onBordingView = OnBoardingView(
-            title: """
-            내 친구의 플레이리스트를
-            구경할 수 있어요!
-            """,
-            image: Image(.onBoardingCommunity)
-        )
+        let onBoardingView = OnBoardingView(page: .five)
         
-        super.init(rootView: onBordingView)
+        super.init(rootView: onBoardingView)
 
         rootView.didButtonTapped = { [weak self] in
             guard let self = self else { return }

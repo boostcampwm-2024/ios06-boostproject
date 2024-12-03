@@ -4,15 +4,9 @@ final class OnBoardingAppleMusicAccessViewController: UIHostingController<OnBoar
     // MARK: - Initializer
     
     init() {
-        let onBordingView = OnBoardingView(
-            title: """
-            쉽고 빠르게 스와이프로
-            내 취향인 노래를 저장해보세요!
-            """,
-            image: Image("")
-        )
+        let onBoardingView = OnBoardingView(page: .seven)
         
-        super.init(rootView: onBordingView)
+        super.init(rootView: onBoardingView)
 
         rootView.didButtonTapped = { [weak self] in
             guard let self = self else { return }

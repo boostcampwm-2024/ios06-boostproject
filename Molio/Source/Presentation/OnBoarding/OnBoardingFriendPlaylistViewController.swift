@@ -4,15 +4,9 @@ final class OnBoardingFriendPlaylistViewController: UIHostingController<OnBoardi
     // MARK: - Initializer
     
     init() {
-        let onBordingView = OnBoardingView(
-            title: """
-            친구의 플레이리스트에서
-            마음에 드는 노래를 가져올 수 있어요!
-            """,
-            image: Image(.onBoardingFriendPlaylist)
-        )
+        let onBoardingView = OnBoardingView(page: .six)
         
-        super.init(rootView: onBordingView)
+        super.init(rootView: onBoardingView)
 
         rootView.didButtonTapped = { [weak self] in
             guard let self = self else { return }

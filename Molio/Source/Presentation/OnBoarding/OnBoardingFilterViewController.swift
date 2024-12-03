@@ -4,16 +4,9 @@ final class OnBoardingFilterViewController: UIHostingController<OnBoardingView> 
     // MARK: - Initializer
     
     init() {
-        let onBordingView = OnBoardingView(
-            title: """
-            원하는 장르를 선택하여
-            나만의 플레이리스트를 만들어보세요!
-            """,
-            subTitle: "플레이리스트에 넣을 음악의 장르를 선택할 수 있어요.",
-            image: Image(.onBoardingFilter)
-        )
+        let onBoardingView = OnBoardingView(page: .three)
         
-        super.init(rootView: onBordingView)
+        super.init(rootView: onBoardingView)
 
         rootView.didButtonTapped = { [weak self] in
             guard let self = self else { return }
