@@ -1,24 +1,21 @@
 import UIKit
 
 final class CircleMenuButton: UIButton {
-    
-    private var defaultBackgroundColor: UIColor
-    private var highlightBackgroundColor: UIColor
-    private let blurEffectView: UIVisualEffectView = {
+    private let defaultBackgroundColor: UIColor
+    private let highlightBackgroundColor: UIColor
+    private var blurEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .systemMaterialDark)
         let effectView = UIVisualEffectView(effect: blurEffect)
-        effectView.translatesAutoresizingMaskIntoConstraints = false
-        effectView.layer.cornerRadius = 0 // 초기값, 버튼 크기에 따라 조정
         effectView.clipsToBounds = true
-        effectView.isUserInteractionEnabled = false // 터치 이벤트를 블러 뷰가 소모하지 않도록 설정
+        effectView.isUserInteractionEnabled = false
         effectView.alpha = 0.5
-
+        effectView.translatesAutoresizingMaskIntoConstraints = false
         return effectView
     }()
     
     override var isHighlighted: Bool {
         didSet {
-            self.backgroundColor = isHighlighted ? highlightBackgroundColor : defaultBackgroundColor
+            self.blurEffectView.backgroundColor = isHighlighted ? highlightBackgroundColor : defaultBackgroundColor
         }
     }
     
@@ -29,23 +26,29 @@ final class CircleMenuButton: UIButton {
         return imageView
     }()
     
-    init(backgroundColor: UIColor,
-         highlightColor: UIColor? = nil,
-         buttonSize: CGFloat,
-         tintColor: UIColor?,
-         buttonImage: UIImage?,
-         buttonImageSize: CGSize
+    init(
+        backgroundColor: UIColor,
+        highlightColor: UIColor? = nil,
+        buttonSize: CGFloat,
+        tintColor: UIColor?,
+        buttonImage: UIImage?,
+        buttonImageSize: CGSize
     ) {
         self.defaultBackgroundColor = backgroundColor
         self.highlightBackgroundColor = highlightColor ?? backgroundColor.withAlphaComponent(0.8)
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
-        setupView(backgroundColor: backgroundColor,
-                  buttonSize: buttonSize,
-                  tintColor: tintColor,
-                  buttonImage: buttonImage)
+        setupView(
+            backgroundColor: backgroundColor,
+            buttonSize: buttonSize,
+            tintColor: tintColor,
+            buttonImage: buttonImage
+        )
         setupHierarchy()
-        setupConstraint(buttonSize: buttonSize, buttonImageSize: buttonImageSize)
+        setupConstraint(
+            buttonSize: buttonSize,
+            buttonImageSize: buttonImageSize
+        )
     }
     
     required init?(coder: NSCoder) {
@@ -54,18 +57,19 @@ final class CircleMenuButton: UIButton {
         super.init(coder: coder)
     }
     
-    private func setupView(backgroundColor: UIColor,
-                           buttonSize: CGFloat,
-                           tintColor: UIColor?,
-                           buttonImage: UIImage?
+    private func setupView(
+        backgroundColor: UIColor,
+        buttonSize: CGFloat,
+        tintColor: UIColor?,
+        buttonImage: UIImage?
     ) {
-        // Apply blur effect for glassmorphism
-        blurEffectView.layer.cornerRadius = buttonSize / 2
-        self.insertSubview(blurEffectView, at: 0)
+        self.backgroundColor = .clear
+        self.clipsToBounds = true
+        self.layer.cornerRadius = buttonSize / 2
         
-        self.backgroundColor = .clear // Transparent to show blur effect
-        layer.cornerRadius = buttonSize / 2
-        clipsToBounds = true
+        blurEffectView.layer.cornerRadius = buttonSize / 2
+        blurEffectView.backgroundColor = backgroundColor
+        
         buttonImageView.tintColor = tintColor
         buttonImageView.image = buttonImage
     }
