@@ -1,5 +1,5 @@
 protocol MusicKitService {
-    func checkAuthorizationStatus() throws
+    func checkAuthorizationStatus() async throws
     func checkSubscriptionStatus() async throws -> Bool
     
     func fetchGenres() async throws -> [MusicGenre]

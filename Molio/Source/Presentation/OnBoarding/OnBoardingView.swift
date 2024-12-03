@@ -5,9 +5,15 @@ struct OnBoardingView: View {
     var didButtonTapped: (() -> Void)?
     
     @State var isAppleMusicPermissonAllowed: Bool = false
+    @State var shoudModifyInSettingsApp: Bool = false
+    private let musicKitService: MusicKitService
     
-    init(page: OnBoardingPage) {
+    init(
+        page: OnBoardingPage,
+        musicKitService: MusicKitService = DIContainer.shared.resolve()
+    ) {
         self.page = page
+        self.musicKitService = musicKitService
     }
     
     var body: some View {
@@ -39,6 +45,15 @@ struct OnBoardingView: View {
                         .aspectRatio(contentMode: .fit)
                 } else {
                     appleMusicPermisonRequestView()
+                    if shoudModifyInSettingsApp {
+                        Button {
+                            openSettingsApp()
+                        } label: {
+                            Text.molioRegular("⚙️ 설정 앱에서 Apple Music 권한을 허용해주세요", size: 17)
+                                .foregroundStyle(.mainLighter)
+                        }
+
+                    }
                 }
                 
                 Spacer()
@@ -59,7 +74,7 @@ struct OnBoardingView: View {
         }
     }
     
-    func appleMusicPermisonRequestView() -> some View {
+    private func appleMusicPermisonRequestView() -> some View {
         VStack(alignment: .leading) {
             Text.molioMedium("필수 권한", size: 16)
                 .foregroundStyle(.gray)
@@ -69,7 +84,10 @@ struct OnBoardingView: View {
                     .frame(width: 49, height: 49)
                 Text.molioSemiBold("미디어 및 Apple Music", size: 18)
                     .fixedSize(horizontal: true, vertical: false)
-                Toggle(isOn: $isAppleMusicPermissonAllowed) {
+                Toggle(isOn: Binding(
+                    get: { isAppleMusicPermissonAllowed },
+                    set: { _ in requestAppleMusicPermission() }
+                )) {
                     Text("Request Apple Music Permission")
                 }
                 .labelsHidden()
@@ -79,6 +97,26 @@ struct OnBoardingView: View {
             .background {
                 RoundedRectangle(cornerRadius: 24)
                     .foregroundStyle(.white)
+            }
+        }
+    }
+    
+    private func requestAppleMusicPermission() {
+        Task {
+            do {
+                try await musicKitService.checkAuthorizationStatus()
+                isAppleMusicPermissonAllowed = true
+            } catch {
+                isAppleMusicPermissonAllowed = false
+                shoudModifyInSettingsApp = true
+            }
+        }
+    }
+    
+    private func openSettingsApp() {
+        if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+            if UIApplication.shared.canOpenURL(settingsURL) {
+                UIApplication.shared.open(settingsURL)
             }
         }
     }
