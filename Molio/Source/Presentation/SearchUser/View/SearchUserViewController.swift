@@ -12,6 +12,12 @@ final class SearchUserViewController: UIHostingController<SearchUserView> {
             guard let self else { return }
             self.navigateTofriendViewController(with: selectedUser)
         }
+        
+        rootView.didTabLoginRequiredButton = {
+            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                sceneDelegate.switchToLoginViewController()
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -33,7 +39,7 @@ final class SearchUserViewController: UIHostingController<SearchUserView> {
     
     private func navigateTofriendViewController(with user: MolioFollower) {
         let friendProfileViewController = FriendProfileViewController(
-            profileType: .friend (
+            profileType: .friend(
                 userID: user.id,
                 isFollowing: user.followRelation
             )
