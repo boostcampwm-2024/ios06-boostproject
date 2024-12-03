@@ -71,6 +71,11 @@ struct OnBoardingView: View {
             }
             .padding(.horizontal, 22)
             .padding(.vertical, 15)
+            .onAppear {
+                if page == .seven {
+                    requestAppleMusicPermission()
+                }
+            }
         }
     }
     
