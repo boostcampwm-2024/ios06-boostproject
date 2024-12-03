@@ -32,9 +32,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func setupNavigationBarAppearance() {
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithOpaqueBackground()
+        navigationBarAppearance.backgroundColor = UIColor.background
+        navigationBarAppearance.titleTextAttributes = [
+            .foregroundColor: UIColor.white
+        ]
+        
         let appearance = UINavigationBar.appearance()
+        appearance.standardAppearance = navigationBarAppearance
+        appearance.scrollEdgeAppearance = navigationBarAppearance
         appearance.tintColor = .main
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
     func switchToLoginViewController() {
