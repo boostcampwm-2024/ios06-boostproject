@@ -16,14 +16,14 @@ final class FriendProfileViewController: UIHostingController<UserProfileView> {
         
         super.init(rootView: userProfileView)
         
-        rootView.didFollowerButtonTapped = { [weak self] in
+        rootView.didFollowerButtonTapped = { [weak self] profileType in
             guard let self = self else { return }
-            self.navigationToFollowerListView()
+            self.navigationToFollowerListView(profileType: profileType)
         }
         
-        rootView.didFollowingButtonTapped = { [weak self] in
+        rootView.didFollowingButtonTapped = { [weak self] profileType in
             guard let self = self else { return }
-            self.navigationToFollowingListView()
+            self.navigationToFollowingListView(profileType: profileType)
         }
         
         rootView.didPlaylistCellTapped = { [weak self] playlist in
@@ -52,14 +52,31 @@ final class FriendProfileViewController: UIHostingController<UserProfileView> {
     
     // MARK: - Present Sheet or Navigation
     
-    private func navigationToFollowingListView() {
-       
-        let followingListViewController = FollowRelationViewController(viewModel: followRelationViewModel, followRelationType: .following, friendUserID: nil)
+    private func navigationToFollowingListView(profileType: ProfileType) {
+        var friendUserID: String?
+        
+        switch profileType {
+        case .me:
+            friendUserID = nil
+        case .friend(let userID, let isFollowing):
+            friendUserID = userID
+        }
+        
+        let followingListViewController = FollowRelationViewController(viewModel: followRelationViewModel, followRelationType: .following, friendUserID: friendUserID)
         navigationController?.pushViewController(followingListViewController, animated: true)
     }
     
-    private func navigationToFollowerListView() {
-        let followerListViewController = FollowRelationViewController(viewModel: followRelationViewModel, followRelationType: .unfollowing, friendUserID: nil)
+    private func navigationToFollowerListView(profileType: ProfileType) {
+        var friendUserID: String?
+
+        switch profileType {
+        case .me:
+            friendUserID = nil
+        case .friend(let userID, let isFollowing):
+            friendUserID = userID
+        }
+        
+        let followerListViewController = FollowRelationViewController(viewModel: followRelationViewModel, followRelationType: .unfollowing, friendUserID: friendUserID)
         navigationController?.pushViewController(followerListViewController, animated: true)
     }
     
