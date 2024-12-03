@@ -49,6 +49,10 @@ final class SwipeMusicViewModel: InputOutputViewModel {
     private let errorPublisher = PassthroughSubject<String, Never>()
     private var cancellables = Set<AnyCancellable>()
     
+    var currentMusic: MolioMusic? {
+        musicDeck.currentMusic
+    }
+    
     init(
         fetchRecommendedMusicUseCase: FetchRecommendedMusicUseCase = DIContainer.shared.resolve(),
         fetchImageUseCase: FetchImageUseCase = DIContainer.shared.resolve(),

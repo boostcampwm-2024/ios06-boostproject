@@ -64,9 +64,9 @@
 | ------ | -------------------------------------- | -------------------------------------- | ------------------------------------- | -------------------------------------- |
 | 이름   | 박근영                                  | 강민수                                  | 김영빈                                 | 강창우                                  |
 | 생일   | 2002.02                                | 2000.10                                | 199x.06                               | 199x.11                                |
-| 사진   | <img width=150 src="https://github.com/user-attachments/assets/7af07e9b-7e88-443f-896e-392b954ba675">| <img width=150 src="https://github.com/user-attachments/assets/b8922aca-bd78-4947-9ad6-69f4239e3c4f"> | <img width=150 src="https://github.com/user-attachments/assets/df00dd8d-5731-4f01-9662-16ebbf8bf7ce"> |  |
+| 사진   | <img width=150 src="https://github.com/user-attachments/assets/7af07e9b-7e88-443f-896e-392b954ba675">| <img width=150 src="https://github.com/user-attachments/assets/b8922aca-bd78-4947-9ad6-69f4239e3c4f"> | <img width=150 src="https://github.com/user-attachments/assets/df00dd8d-5731-4f01-9662-16ebbf8bf7ce"> | <img width=150 src="https://github.com/user-attachments/assets/9374bae4-661f-4cbb-986a-078d73f54cae"> |
 | 깃허브 링크 | [@Park-kxng](https://github.com/Park-kxng) | [@alstn38](https://github.com/alstn38) | [@kybeen](https://github.com/kybeen) | [@windowcow](https://github.com/windowcow) |
-     
+
 
 ## 6. 문서
 
