@@ -350,7 +350,8 @@ final class SwipeMusicViewController: UIViewController {
     }
     
     @objc func didTapPlaylistSelectButton() {
-        let selectPlaylistVC = SelectPlaylistViewController(viewModel: ManagePlaylistViewModel())
+        let viewModel = ManagePlaylistViewModel()
+        let selectPlaylistVC = SelectPlaylistViewController(viewModel: viewModel)
         selectPlaylistVC.delegate = self
         self.presentCustomSheet(selectPlaylistVC)
     }
@@ -366,9 +367,13 @@ final class SwipeMusicViewController: UIViewController {
         musicPlayer.stop()
         let viewModel = MusicFilterViewModel()
         let musicFilterVC = MusicFilterViewController(viewModel: viewModel) { [weak self] updatedFilter in
-            self?.filterDidUpdatePublisher.send(updatedFilter)
+            if let updatedFilter = updatedFilter {
+                self?.filterDidUpdatePublisher.send(updatedFilter)
+            } else {
+                self?.musicPlayer.play() // 필터를 설정하지 않고 dismiss한 경우 이어서 재생
+            }
         }
-        navigationController?.pushViewController(musicFilterVC, animated: true)
+        self.present(musicFilterVC, animated: true)
     }
     
     private func setupSelectPlaylistView() {
