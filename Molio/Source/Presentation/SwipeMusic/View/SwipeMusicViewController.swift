@@ -20,18 +20,25 @@ final class SwipeMusicViewController: UIViewController {
     private var impactFeedBack = UIImpactFeedbackGenerator(style: .medium)
     private var hasProvidedImpactFeedback: Bool = false
     
+    private let loadingIndicatorView: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .white
+        indicator.hidesWhenStopped = true
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
+    
     private let playlistSelectButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        // 글래스모피즘 효과 추가
         let blurEffect = UIBlurEffect(style: .systemMaterialDark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.layer.cornerRadius = 10
         blurEffectView.clipsToBounds = true
-        blurEffectView.isUserInteractionEnabled = false // 터치 이벤트 차단 방지
+        blurEffectView.isUserInteractionEnabled = false
         blurEffectView.translatesAutoresizingMaskIntoConstraints = false
         blurEffectView.alpha = 0.5
         
@@ -43,7 +50,7 @@ final class SwipeMusicViewController: UIViewController {
             blurEffectView.bottomAnchor.constraint(equalTo: button.bottomAnchor)
         ])
         
-        button.backgroundColor = UIColor.black.withAlphaComponent(0.1) // 반투명 배경
+        button.backgroundColor = UIColor.black.withAlphaComponent(0.1)
         return button
     }()
     
@@ -176,6 +183,18 @@ final class SwipeMusicViewController: UIViewController {
             .sink { [weak self] playlist in
                 guard let self else { return }
                 self.selectedPlaylistTitleLabel.text = playlist.name
+            }
+            .store(in: &cancellables)
+        
+        output.isLoading
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isLoading in
+                guard let self else { return }
+                if isLoading {
+                    loadingIndicatorView.startAnimating()
+                } else {
+                    loadingIndicatorView.stopAnimating()
+                }
             }
             .store(in: &cancellables)
         
@@ -386,19 +405,6 @@ final class SwipeMusicViewController: UIViewController {
         ])
     }
     
-    private func refreshCurrentMusicTrackView() {
-        currentCardView.removeFromSuperview()
-        
-        view.insertSubview(currentCardView, aboveSubview: nextCardView)
-        
-        NSLayoutConstraint.activate([
-            currentCardView.topAnchor.constraint(equalTo: playlistSelectButton.bottomAnchor, constant: 12),
-            currentCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
-            currentCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
-            currentCardView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -107)
-        ])
-    }
-    
     private func setupMusicTrackView() {
         // MARK: 다음 노래 카드
         view.insertSubview(nextCardView, belowSubview: playlistSelectButton)
@@ -416,6 +422,12 @@ final class SwipeMusicViewController: UIViewController {
             currentCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
             currentCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
             currentCardView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -107)
+        ])
+        
+        view.addSubview(loadingIndicatorView)
+        NSLayoutConstraint.activate([
+            loadingIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     
