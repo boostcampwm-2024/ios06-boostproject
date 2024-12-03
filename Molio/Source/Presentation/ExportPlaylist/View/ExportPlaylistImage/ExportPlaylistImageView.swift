@@ -12,10 +12,11 @@ struct ExportPlaylistImageView: View {
     var body: some View {
         VStack {
             HStack {
-                Spacer()
+                Rectangle()
+                    .foregroundStyle(.clear)
                     .frame(maxWidth: .infinity)
                 Text.molioSemiBold(StringLiterals.navigationTitle, size: 17)
-                    .foregroundColor(.white)
+                    .foregroundStyle(.white)
                     .frame(maxWidth: .infinity)
                     .fixedSize(horizontal: true, vertical: false)
                     .multilineTextAlignment(.center)
@@ -23,7 +24,7 @@ struct ExportPlaylistImageView: View {
                     doneButtonTapAction?()
                 } label: {
                     Text.molioSemiBold("완료", size: 17)
-                        .foregroundColor(.main)
+                        .foregroundStyle(.mainLighter)
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
             }
