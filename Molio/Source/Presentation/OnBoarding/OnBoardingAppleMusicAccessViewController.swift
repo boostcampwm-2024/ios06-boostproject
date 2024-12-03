@@ -10,7 +10,7 @@ final class OnBoardingAppleMusicAccessViewController: UIHostingController<OnBoar
 
         rootView.didButtonTapped = { [weak self] in
             guard let self = self else { return }
-            self.navigateToMainTabBarController()
+            self.navigateToLoginViewController()
             setIsOnboardedTrue()
         }
     }
@@ -33,15 +33,15 @@ final class OnBoardingAppleMusicAccessViewController: UIHostingController<OnBoar
     
     // MARK: - Private func
     
-    private func navigateToMainTabBarController() {
-        let molioTabBarController = MolioTabBarController()
+    private func navigateToLoginViewController() {
+        let loginViewController = LoginViewController(viewModel: LoginViewModel())
 
         guard let window = self.view.window else { return }
         
         UIView.transition(with: window, duration: 0.5) {
-            molioTabBarController.view.alpha = 0.0
-            window.rootViewController = molioTabBarController
-            molioTabBarController.view.alpha = 1.0
+            loginViewController.view.alpha = 0.0
+            window.rootViewController = loginViewController
+            loginViewController.view.alpha = 1.0
         }
         
         window.makeKeyAndVisible()

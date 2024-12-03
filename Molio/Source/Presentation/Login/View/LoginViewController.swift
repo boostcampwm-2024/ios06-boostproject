@@ -105,27 +105,18 @@ final class LoginViewController: UIViewController {
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
                 guard let self else { return }
-                self.switchToRootViewController()
+                self.switchToTapBarController()
             }
             .store(in: &cancellables)
     }
     
-    private func switchToRootViewController() {
-        let nextViewController: UIViewController
-        
-        let isOnboarded = UserDefaults.standard.bool(forKey: UserDefaultKey.isOnboarded.rawValue)
-        if isOnboarded {
-            nextViewController = MolioTabBarController()
-        } else {
-            let onboardingVC = OnBoardingPlaylistViewController()
-            nextViewController = UINavigationController(rootViewController: onboardingVC)
-        }
-        
+    private func switchToTapBarController() {
+        let molioTabBarController = MolioTabBarController()
         guard let window = self.view.window else { return }
         UIView.transition(with: window, duration: 0.5) {
-            nextViewController.view.alpha = 0.0
-            window.rootViewController = nextViewController
-            nextViewController.view.alpha = 1.0
+            molioTabBarController.view.alpha = 0.0
+            window.rootViewController = molioTabBarController
+            molioTabBarController.view.alpha = 1.0
         }
         window.makeKeyAndVisible()
     }
