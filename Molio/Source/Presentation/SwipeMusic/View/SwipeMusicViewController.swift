@@ -19,6 +19,8 @@ final class SwipeMusicViewController: UIViewController {
     private let basicBackgroundColor = UIColor(resource: .background)
     private var impactFeedBack = UIImpactFeedbackGenerator(style: .medium)
     private var hasProvidedImpactFeedback: Bool = false
+    private var currentCardBackgroundColor: RGBAColor?
+    private var nextCardBackgroundColor: RGBAColor?
     private var previousRotationAngle: CGFloat?
     private var previousYDirection: CGFloat?
     
@@ -218,6 +220,7 @@ final class SwipeMusicViewController: UIViewController {
                 } else {
                     self.updateCurrentCard(with: music)
                 }
+                currentCardBackgroundColor = music.artworkBackgroundColor
             }
             .store(in: &cancellables)
         
@@ -230,6 +233,7 @@ final class SwipeMusicViewController: UIViewController {
                 } else {
                     nextCardView.configure(music: music)
                 }
+                nextCardBackgroundColor = music.artworkBackgroundColor
             }
             .store(in: &cancellables)
         
@@ -296,19 +300,18 @@ final class SwipeMusicViewController: UIViewController {
                 guard let self else { return }
                 self.currentCardView.center = self.nextCardView.center
                 self.currentCardView.transform = .identity
+                let currentCardBackgroundColor = currentCardBackgroundColor
+                    .flatMap { UIColor(rgbaColor: $0) } ?? self.basicBackgroundColor
+                
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.view.backgroundColor = currentCardBackgroundColor
+                })
             }
         }
     }
     
     /// 현재 노래 카드 정보 변경 및 현재 노래 재생하는 메서드
     private func updateCurrentCard(with music: SwipeMusicTrackModel) {
-        let artworkBackgroundColor = music.artworkBackgroundColor
-            .flatMap { UIColor(rgbaColor: $0) } ?? self.basicBackgroundColor
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            self.view.backgroundColor = artworkBackgroundColor
-        })
-        
         currentCardView.configure(music: music)
         self.loadAndPlaySongs(url: music.previewAsset)
     }
@@ -357,6 +360,11 @@ final class SwipeMusicViewController: UIViewController {
         if gesture.state == .changed {
             musicCardDidChangeSwipePublisher.send(translation.x)
             providedImpactFeedback(translationX: translation.x)
+            interpolateBackgroundColor(
+                from: currentCardBackgroundColor,
+                to: nextCardBackgroundColor,
+                movedX: translation.x
+            )
         } else if gesture.state == .ended {
             previousRotationAngle = rotationAngle
             previousYDirection = translation.y >= 0 ? 1 : -1
@@ -408,6 +416,18 @@ final class SwipeMusicViewController: UIViewController {
             }
         }
         self.present(musicFilterVC, animated: true)
+    }
+    
+    /// 이동하는 값에 따라 두 색깔 사이의 값으로 배경색이 변하는 메서드
+    private func interpolateBackgroundColor(from: RGBAColor?, to: RGBAColor?, movedX: CGFloat) {
+        let from = from ?? RGBAColor.background
+        let to = to ?? RGBAColor.background
+        let progress: CGFloat = min((abs(movedX) / viewModel.swipeThreshold), 1.0)
+        let red = from.red + (to.red - from.red) * progress
+        let green = from.green + (to.green - from.green) * progress
+        let blue = from.blue + (to.blue - from.blue) * progress
+        let alpha = from.alpha + (to.alpha - from.alpha) * progress
+        view.backgroundColor = UIColor(red: red, green: green, blue: blue, alpha: alpha)
     }
     
     /// 카드 이동에 따른 회전 각도 계산하는 메서드
