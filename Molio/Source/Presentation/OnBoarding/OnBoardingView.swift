@@ -45,6 +45,10 @@ struct OnBoardingView: View {
                         .aspectRatio(contentMode: .fit)
                 } else {
                     appleMusicPermisonRequestView()
+                    if isAppleMusicPermissonAllowed {
+                        Text.molioRegular("✅ Apple Music 권한 설정 완료!", size: 17)
+                            .foregroundStyle(.mainLighter)
+                    }
                     if shoudModifyInSettingsApp {
                         Button {
                             openSettingsApp()
@@ -52,7 +56,6 @@ struct OnBoardingView: View {
                             Text.molioRegular("⚙️ 설정 앱에서 Apple Music 권한을 허용해주세요", size: 17)
                                 .foregroundStyle(.mainLighter)
                         }
-
                     }
                 }
                 
