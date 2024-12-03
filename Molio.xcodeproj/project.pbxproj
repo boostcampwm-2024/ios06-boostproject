@@ -2372,6 +2372,7 @@
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Molio/Resource/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = molio;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Apple Music의 음악 데이터를 검색하거나 플레이리스트를 내보내려면 Apple Music 접근 권한 승인이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "이 앱은 재생목록의 음악 정보를 이미지로 저장, 앨범에서 이미지를 선택 하기 위해 사진 라이브러리 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -2408,6 +2409,7 @@
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Molio/Resource/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = molio;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Apple Music의 음악 데이터를 검색하거나 플레이리스트를 내보내려면 Apple Music 접근 권한 승인이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "이 앱은 재생목록의 음악 정보를 이미지로 저장, 앨범에서 이미지를 선택 하기 위해 사진 라이브러리 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
