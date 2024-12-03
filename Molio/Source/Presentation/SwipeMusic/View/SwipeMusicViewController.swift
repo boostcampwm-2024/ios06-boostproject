@@ -24,8 +24,26 @@ final class SwipeMusicViewController: UIViewController {
         let button = UIButton()
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
-        button.backgroundColor = .black.withAlphaComponent(0.3)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
+        // 글래스모피즘 효과 추가
+        let blurEffect = UIBlurEffect(style: .systemMaterialDark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.layer.cornerRadius = 10
+        blurEffectView.clipsToBounds = true
+        blurEffectView.isUserInteractionEnabled = false // 터치 이벤트 차단 방지
+        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+        blurEffectView.alpha = 0.5
+        
+        button.addSubview(blurEffectView)
+        NSLayoutConstraint.activate([
+            blurEffectView.leadingAnchor.constraint(equalTo: button.leadingAnchor),
+            blurEffectView.trailingAnchor.constraint(equalTo: button.trailingAnchor),
+            blurEffectView.topAnchor.constraint(equalTo: button.topAnchor),
+            blurEffectView.bottomAnchor.constraint(equalTo: button.bottomAnchor)
+        ])
+        
+        button.backgroundColor = UIColor.black.withAlphaComponent(0.1) // 반투명 배경
         return button
     }()
     
@@ -139,6 +157,7 @@ final class SwipeMusicViewController: UIViewController {
         setupBindings()
         setupButtonTarget()
         addPanGestureToMusicTrack()
+        addTapGestureToMusicTrack()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -261,6 +280,11 @@ final class SwipeMusicViewController: UIViewController {
         currentCardView.addGestureRecognizer(panGesture)
     }
     
+    private func addTapGestureToMusicTrack() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
+        currentCardView.addGestureRecognizer(tapGesture)
+    }
+
     private func setupButtonTarget() {
         likeButton.addTarget(self, action: #selector(didTapLikeButton), for: .touchUpInside)
         dislikeButton.addTarget(self, action: #selector(didTapDislikeButton), for: .touchUpInside)
@@ -293,6 +317,17 @@ final class SwipeMusicViewController: UIViewController {
             providedImpactFeedback(translationX: translation.x)
         } else if gesture.state == .ended {
             musicCardDidFinishSwipePublisher.send(translation.x)
+        }
+    }
+    
+    @objc private func handleTapGesture(_ gesture: UITapGestureRecognizer) {
+        guard gesture.view == currentCardView else { return }
+        if musicPlayer.isPlaying {
+            musicPlayer.pause()
+            currentCardView.showPlayPauseIcon(isPlaying: true)
+        } else {
+            musicPlayer.play()
+            currentCardView.showPlayPauseIcon(isPlaying: false)
         }
     }
     
