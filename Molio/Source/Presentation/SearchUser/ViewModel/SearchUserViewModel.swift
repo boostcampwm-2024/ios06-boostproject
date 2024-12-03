@@ -8,17 +8,26 @@ final class SearchUserViewModel: ObservableObject {
     private var allUsers: [MolioFollower] = []
     private var anyCancellables = Set<AnyCancellable>()
     
+    private let manageAuthenticationUseCase: ManageAuthenticationUseCase
     private let currentUserIdUseCase: CurrentUserIdUseCase
     private let followRelationUseCase: FollowRelationUseCase
     
     init(
+        manageAuthenticationUseCase: ManageAuthenticationUseCase = DIContainer.shared.resolve(),
         currentUserIdUseCase: CurrentUserIdUseCase = DIContainer.shared.resolve(),
         followRelationUseCase: FollowRelationUseCase = DIContainer.shared.resolve()
     ) {
+        self.manageAuthenticationUseCase = manageAuthenticationUseCase
         self.currentUserIdUseCase = currentUserIdUseCase
         self.followRelationUseCase = followRelationUseCase
         
         bind()
+    }
+    
+    /// 게스트모드로 사용중인 유저 검색 기능 제한
+    /// - 로그인하지 않은 경우 로그인 유도 화면이 보여진다.
+    func shouldShowLoginRequired() -> Bool {
+        !manageAuthenticationUseCase.isLogin()
     }
     
     @MainActor
