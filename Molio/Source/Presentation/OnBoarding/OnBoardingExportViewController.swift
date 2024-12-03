@@ -14,7 +14,7 @@ final class OnBoardingExportViewController: UIHostingController<OnBoardingView> 
             애플 뮤직 을 구독하지 않은 경우에는
             플레이리스트를 사진으로 내보낼 수 있어요.
             """,
-            image: Image("onBoardingExport")
+            image: Image(.onBoardingExport)
         )
         
         super.init(rootView: onBordingView)

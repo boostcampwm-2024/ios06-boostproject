@@ -10,7 +10,7 @@ final class OnBoardingPlaylistViewController: UIHostingController<OnBoardingView
                           몰리오는 기본 플레이리스트를 제공해요!
                           내가 원하는 테마, 분위기에 따라 플리를 생성할 수 있어요.
                           """,
-            image: Image("onBoardingPlaylist")
+            image: Image(.onBoardingPlaylist)
         )
         
         super.init(rootView: onBordingView)

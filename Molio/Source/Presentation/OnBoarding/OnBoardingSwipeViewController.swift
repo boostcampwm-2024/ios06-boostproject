@@ -9,7 +9,7 @@ final class OnBoardingSwipeViewController: UIHostingController<OnBoardingView> {
             쉽고 빠르게 스와이프로
             내 취향인 노래를 저장해보세요!
             """,
-            image: Image("onBoardingSwipe")
+            image: Image(.onBoardingSwipe)
         )
         
         super.init(rootView: onBordingView)

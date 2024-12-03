@@ -9,7 +9,7 @@ final class OnBoardingCommunityViewController: UIHostingController<OnBoardingVie
             내 친구의 플레이리스트를
             구경할 수 있어요!
             """,
-            image: Image("onBoardingCommunity")
+            image: Image(.onBoardingCommunity)
         )
         
         super.init(rootView: onBordingView)

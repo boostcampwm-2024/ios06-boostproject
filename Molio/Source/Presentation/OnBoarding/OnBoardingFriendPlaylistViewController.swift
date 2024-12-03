@@ -9,7 +9,7 @@ final class OnBoardingFriendPlaylistViewController: UIHostingController<OnBoardi
             친구의 플레이리스트에서
             마음에 드는 노래를 가져올 수 있어요!
             """,
-            image: Image("onBoardingFriendPlaylist")
+            image: Image(.onBoardingFriendPlaylist)
         )
         
         super.init(rootView: onBordingView)
