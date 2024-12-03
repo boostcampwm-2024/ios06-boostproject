@@ -32,6 +32,7 @@ struct PlaylistDetailView: View {
                 }
                 .foregroundStyle(.white)
             }
+            .padding(.top, 16)
             .padding(.leading, 22)
             
             // TODO: - 하이라이트 리믹스 & 전체 재생 버튼
