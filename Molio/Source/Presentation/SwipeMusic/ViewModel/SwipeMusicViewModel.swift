@@ -189,7 +189,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
             .store(in: &cancellables)
         
         // MARK: Music Deck 준비여부 관련
-        musicDeck.isPreparingMusckDeckPublisher
+        musicDeck.isPreparingMusicDeckPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isPreparingDeck in
                 guard let self else { return }

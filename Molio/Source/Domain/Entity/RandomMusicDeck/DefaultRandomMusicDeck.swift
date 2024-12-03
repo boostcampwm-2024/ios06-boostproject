@@ -14,7 +14,7 @@ final class DefaultRandomMusicDeck: RandomMusicDeck {
         return musicPublisher(at: 1)
     }
     
-    var isPreparingMusckDeckPublisher: AnyPublisher<Bool, Never> {
+    var isPreparingMusicDeckPublisher: AnyPublisher<Bool, Never> {
         return preparingPublisher()
     }
     
