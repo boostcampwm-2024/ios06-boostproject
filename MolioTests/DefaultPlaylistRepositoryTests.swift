@@ -93,7 +93,7 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
             name: "Workout Mix Updated",
             createdAt: originalPlaylistDTO.createdAt.dateValue(),
             musicISRCs: ["ISRC003", "ISRC004"],
-            filter: MusicFilter(genres: [])
+            filter: []
         )
         try await repository.updatePlaylist(userID: userID, newPlaylist: updatedPlaylist)
         
@@ -161,7 +161,7 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
             name: "Evening Relax",
             createdAt: Date(),
             musicISRCs: ["ISRC006", "ISRC007"],
-            filter: MusicFilter(genres: [])
+            filter: []
         )
         try await mockStorage.create(playlist)
         
@@ -185,7 +185,7 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
             name: "Morning Boost",
             createdAt: Date(),
             musicISRCs: ["ISRC008"],
-            filter: MusicFilter(genres: [])
+            filter: []
         )
         try await mockStorage.create(originalPlaylist)
         
@@ -195,7 +195,7 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
             name: "Morning Boost Updated",
             createdAt: originalPlaylist.createdAt,
             musicISRCs: ["ISRC008", "ISRC009"],
-            filter: MusicFilter(genres: [])
+            filter: []
         )
         try await repository.updatePlaylist(userID: userID, newPlaylist: updatedPlaylist)
         
@@ -216,7 +216,7 @@ final class DefaultPlaylistRepositoryTests: XCTestCase {
             name: "Silent Playlist",
             createdAt: Date(),
             musicISRCs: ["ISRC010"],
-            filter: MusicFilter(genres: [])
+            filter: []
         )
         try await mockStorage.create(playlist)
         

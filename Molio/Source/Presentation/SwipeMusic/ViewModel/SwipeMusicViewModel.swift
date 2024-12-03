@@ -8,7 +8,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
         let musicCardDidFinishSwipe: AnyPublisher<CGFloat, Never>
         let likeButtonDidTap: AnyPublisher<Void, Never>
         let dislikeButtonDidTap: AnyPublisher<Void, Never>
-        let filterDidUpdate: AnyPublisher<MusicFilter, Never>
+        let filterDidUpdate: AnyPublisher<[MusicGenre], Never>
     }
     
     struct Output {

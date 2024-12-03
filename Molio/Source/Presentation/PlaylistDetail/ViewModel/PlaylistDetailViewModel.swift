@@ -40,11 +40,10 @@ final class PlaylistDetailViewModel: ObservableObject {
         if currentPlaylist != nil {
             // CurrenPlaylist를 지정할 수 있음.
             self.currentPlaylist = currentPlaylist
+            setupMusics()
         } else {
             currentPlaylistBinding()
         }
-        
-        setupMusics()
     }
     
     private func currentPlaylistBinding() {
@@ -53,9 +52,8 @@ final class PlaylistDetailViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] playlist in
                 guard let playlist = playlist else { return }
-                
                 self?.currentPlaylist = playlist
-           
+                self?.setupMusics()
             }
             .store(in: &subscriptions)
     }

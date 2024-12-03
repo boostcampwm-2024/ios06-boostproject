@@ -15,7 +15,7 @@ struct MockManagePlaylistUseCase: ManageMyPlaylistUseCase {
     
     func updatePlaylistName(playlistID: UUID, name: String) async throws {}
     
-    func updatePlaylistFilter(playlistID: UUID, filter: Molio.MusicFilter) async throws {}
+    func updatePlaylistFilter(playlistID: UUID, filter: [MusicGenre]) async throws {}
     
     func deletePlaylist(playlistID: UUID) async throws {}
     

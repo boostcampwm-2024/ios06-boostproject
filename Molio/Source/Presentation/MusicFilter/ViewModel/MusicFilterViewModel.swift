@@ -14,7 +14,7 @@ final class MusicFilterViewModel: ObservableObject {
     init(
         fetchAvailableGenresUseCase: FetchAvailableGenresUseCase = DIContainer.shared.resolve(),
         managePlaylistUseCase: ManageMyPlaylistUseCase = DIContainer.shared.resolve(),
-        allGenres: [MusicGenre] = MusicGenre.allCases,
+        allGenres: [MusicGenre] = [],
         selectedGenres: Set<MusicGenre> = []
     ) {
         self.fetchAvailableGenresUseCase = fetchAvailableGenresUseCase
@@ -22,6 +22,7 @@ final class MusicFilterViewModel: ObservableObject {
         self.allGenres = allGenres
         self.selectedGenres = selectedGenres
         
+        getAllGenres()
         bindCurrentPlaylist()
     }
     
@@ -49,7 +50,7 @@ final class MusicFilterViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] playlist in
                 self?.currentPlaylist = playlist
-                self?.selectedGenres = Set<MusicGenre>(playlist?.filter.genres ?? [])
+                self?.selectedGenres = Set<MusicGenre>(playlist?.filter ?? [])
             }
             .store(in: &subscriptions)
     }
@@ -57,7 +58,7 @@ final class MusicFilterViewModel: ObservableObject {
     /// 새 장르로 변경된 필터 정보로 플레이리스트를 업데이트
     private func updateFilterWithNewGenre() async throws {
         guard let currentPlaylist = currentPlaylist else { return }
-        let newFilter = MusicFilter(genres: Array(selectedGenres))
+        let newFilter = Array(selectedGenres)
         try await managePlaylistUseCase.updatePlaylistFilter(playlistID: currentPlaylist.id, filter: newFilter)
        
     }
@@ -67,8 +68,8 @@ final class MusicFilterViewModel: ObservableObject {
 
 extension MusicFilterViewModel: MusicFilterViewControllerDelegate {
     /// 저장 버튼 탭 시 동작
-    func didSaveButtonTapped() async throws -> MusicFilter {
+    func didSaveButtonTapped() async throws -> [MusicGenre] {
         try await updateFilterWithNewGenre()
-        return MusicFilter(genres: Array(selectedGenres))
+        return Array(selectedGenres)
     }
 }

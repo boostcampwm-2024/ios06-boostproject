@@ -59,7 +59,7 @@ final class DefaultManageMyPlaylistUseCase:
         try await updatePlaylist(playlistID: playlistID, name: name )
     }
 
-    func updatePlaylistFilter(playlistID: UUID, filter: MusicFilter) async throws {
+    func updatePlaylistFilter(playlistID: UUID, filter: [MusicGenre]) async throws {
         try await updatePlaylist(playlistID: playlistID, filter: filter)
     }
     
@@ -121,7 +121,7 @@ final class DefaultManageMyPlaylistUseCase:
     
     // MARK: - Private Method
     
-    private func updatePlaylist(playlistID: UUID, name: String? = nil, musicISRCs: [String]? = nil, filter: MusicFilter? = nil, like: [String]? = nil) async throws {
+    private func updatePlaylist(playlistID: UUID, name: String? = nil, musicISRCs: [String]? = nil, filter: [MusicGenre]? = nil, like: [String]? = nil) async throws {
         let userID = try currentUserIdUseCase.execute()
 
         guard let playlist = try await playlistRepository.fetchPlaylist(userID: userID, for: playlistID) else { return }
