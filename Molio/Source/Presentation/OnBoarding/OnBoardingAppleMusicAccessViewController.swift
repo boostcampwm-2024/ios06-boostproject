@@ -10,7 +10,8 @@ final class OnBoardingAppleMusicAccessViewController: UIHostingController<OnBoar
 
         rootView.didButtonTapped = { [weak self] in
             guard let self = self else { return }
-            self.navigateToSwipeMusicViewController()
+            self.navigateToMainTabBarController()
+            setIsOnboardedTrue()
         }
     }
     
@@ -32,9 +33,21 @@ final class OnBoardingAppleMusicAccessViewController: UIHostingController<OnBoar
     
     // MARK: - Private func
     
-    private func navigateToSwipeMusicViewController() {
-        print("메인 화면으로 이동")
-        // TODO: 메인 화면으로 이동하는 로직 추가 아예 rootView를 갈아 끼워야?
+    private func navigateToMainTabBarController() {
+        let molioTabBarController = MolioTabBarController()
+
+        guard let window = self.view.window else { return }
+        
+        UIView.transition(with: window, duration: 0.5) {
+            molioTabBarController.view.alpha = 0.0
+            window.rootViewController = molioTabBarController
+            molioTabBarController.view.alpha = 1.0
+        }
+        
+        window.makeKeyAndVisible()
     }
     
+    private func setIsOnboardedTrue() {
+        UserDefaults.standard.set(true, forKey: UserDefaultKey.isOnboarded.rawValue)
+    }
 }

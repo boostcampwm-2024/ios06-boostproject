@@ -66,11 +66,19 @@ final class SplashViewController: UIViewController {
     }
     
     private func switchNextViewController(_ nextScreenType: SplashViewModel.NextScreenType) {
-        let nextViewController = switch nextScreenType {
+        let nextViewController: UIViewController
+        switch nextScreenType {
         case .login:
-            LoginViewController(viewModel: LoginViewModel())
+            nextViewController = LoginViewController(viewModel: LoginViewModel())
         case .main:
-            MolioTabBarController()
+            // 온보딩 여부에 따른 화면 분기
+            let isOnboarded = UserDefaults.standard.bool(forKey: UserDefaultKey.isOnboarded.rawValue)
+            if isOnboarded {
+                nextViewController = MolioTabBarController()
+            } else {
+                let onboardingVC = OnBoardingPlaylistViewController()
+                nextViewController = UINavigationController(rootViewController: onboardingVC)
+            }
         }
         
         guard let window = self.view.window else { return }
