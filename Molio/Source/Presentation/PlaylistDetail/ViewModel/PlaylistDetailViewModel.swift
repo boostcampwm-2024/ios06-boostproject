@@ -27,37 +27,44 @@ final class PlaylistDetailViewModel: ObservableObject {
     private var subscriptions: Set<AnyCancellable> = []
     
     init(
+        currentPlaylist: MolioPlaylist? = nil,
         managePlaylistUseCase: ManageMyPlaylistUseCase = DIContainer.shared.resolve(),
         appleMusicUseCase: AppleMusicUseCase = DIContainer.shared.resolve(),
         fetchPlaylistUseCase: FetchPlaylistUseCase = DIContainer.shared.resolve()
     ) {
+        self.currentPlaylist = currentPlaylist
         self.managePlaylistUseCase = managePlaylistUseCase
         self.appleMusicUseCase = appleMusicUseCase
         self.fetchPlaylistUseCase = fetchPlaylistUseCase
         
-        bind()
+        if currentPlaylist != nil {
+            // CurrenPlaylist를 지정할 수 있음.
+            self.currentPlaylist = currentPlaylist
+            setupMusics()
+        } else {
+            currentPlaylistBinding()
+        }
     }
     
-    // MARK: - Audio Player
-    
-    private func bind() {
-        
-        // MARK: - 현재 위치한 플레이리스트 받아오기
-        
+    private func currentPlaylistBinding() {
         managePlaylistUseCase
             .currentPlaylistPublisher()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] playlist in
                 guard let playlist = playlist else { return }
-                
                 self?.currentPlaylist = playlist
-                
-                Task { @MainActor [weak self] in
-                    let playlistMusics = try await self?.fetchPlaylistUseCase.fetchAllMyMusicIn(playlistID: playlist.id)
-                    self?.currentPlaylistMusics = playlistMusics ?? []
-                }
+                self?.setupMusics()
             }
             .store(in: &subscriptions)
+    }
+    
+    private func setupMusics() {
+        guard let currentPlaylist else { return }
+        
+        Task { @MainActor [weak self] in
+            let playlistMusics = try await self?.fetchPlaylistUseCase.fetchAllMyMusicIn(playlistID: currentPlaylist.id)
+            self?.currentPlaylistMusics = playlistMusics ?? []
+        }
     }
     
     func checkAppleMusicSubscription() {

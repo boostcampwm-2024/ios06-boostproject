@@ -2,7 +2,7 @@ struct MockFetchAvailableGenresUseCase: FetchAvailableGenresUseCase {
     var musicGenreArrToReturn: [MusicGenre]
     
     init(
-        musicGenreArrToReturn: [MusicGenre] = Array(MusicGenre.allCases.prefix(20))
+        musicGenreArrToReturn: [MusicGenre] = ["Jazz", "K-Pop"]
     ) {
         self.musicGenreArrToReturn = musicGenreArrToReturn
     }

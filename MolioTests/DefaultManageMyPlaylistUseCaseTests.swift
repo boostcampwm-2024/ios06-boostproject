@@ -258,7 +258,7 @@ final class ManageMyPlaylistUseCaseTests: XCTestCase {
         mockCurrentUserIdUseCase.userIDToReturn = nil
         mockPlaylistRepository.mockPlaylist = MolioPlaylist.mock
         // When
-        try await sut.updatePlaylistFilter(playlistID: UUID(), filter: MusicFilter(genres: []))
+        try await sut.updatePlaylistFilter(playlistID: UUID(), filter: [])
         // Then
         XCTAssertTrue(mockPlaylistRepository.updatePlaylistCalled)
     }

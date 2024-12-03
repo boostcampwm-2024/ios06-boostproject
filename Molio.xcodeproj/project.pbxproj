@@ -97,9 +97,6 @@
 		881BBCBB2CDCF95600010A61 /* TrackDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881BBCBA2CDCF95600010A61 /* TrackDTO.swift */; };
 		881BBCBC2CDCF95600010A61 /* RecommendationsResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881BBCB92CDCF95600010A61 /* RecommendationsResponseDTO.swift */; };
 		881BBCBD2CDCF95600010A61 /* ExternalIDsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881BBCB72CDCF95600010A61 /* ExternalIDsDTO.swift */; };
-		881BBCBE2CDCF95600010A61 /* RecommendationsRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881BBCB82CDCF95600010A61 /* RecommendationsRequestDTO.swift */; };
-		881BBCC12CDCF97900010A61 /* MusicFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881BBCBF2CDCF97900010A61 /* MusicFilter.swift */; };
-		881BBCC22CDCF97900010A61 /* RecommendationRequestEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881BBCC02CDCF97900010A61 /* RecommendationRequestEntity.swift */; };
 		88291CBA2CFA2139007322B5 /* ExportFriendsMusicToMyPlaylistDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88291CB92CFA2139007322B5 /* ExportFriendsMusicToMyPlaylistDelegate.swift */; };
 		88291CBC2CFA25F4007322B5 /* SelectPlaylistToExportFriendMusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88291CBB2CFA25F4007322B5 /* SelectPlaylistToExportFriendMusicView.swift */; };
 		88291CBE2CFA2605007322B5 /* SelectPlaylistToExportFriendMusicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88291CBD2CFA2605007322B5 /* SelectPlaylistToExportFriendMusicViewModel.swift */; };
@@ -251,6 +248,7 @@
 		F17CA42E2CFC3ADE00B86681 /* ProfileImageUpdateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17CA42D2CFC3ADE00B86681 /* ProfileImageUpdateType.swift */; };
 		F17CA4322CFC603900B86681 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17CA4312CFC603900B86681 /* NotificationView.swift */; };
 		F17CA4342CFC918A00B86681 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17CA4332CFC918A00B86681 /* NotificationViewModel.swift */; };
+		F17CA43B2CFDD98E00B86681 /* LoginRequiredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17CA43A2CFDD98E00B86681 /* LoginRequiredView.swift */; };
 		F1865ED62CF618B7007C1E5A /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1865ED52CF618B7007C1E5A /* MyInfoView.swift */; };
 		F1865ED82CF62BBB007C1E5A /* MyInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1865ED72CF62BBB007C1E5A /* MyInfoViewModel.swift */; };
 		F1865EDA2CF63959007C1E5A /* NickNameTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1865ED92CF63959007C1E5A /* NickNameTextFieldView.swift */; };
@@ -366,11 +364,8 @@
 		881BBCAF2CDCF91B00010A61 /* MockSpotifyAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSpotifyAPIService.swift; sourceTree = "<group>"; };
 		881BBCB02CDCF91B00010A61 /* SpotifyAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAPIService.swift; sourceTree = "<group>"; };
 		881BBCB72CDCF95600010A61 /* ExternalIDsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalIDsDTO.swift; sourceTree = "<group>"; };
-		881BBCB82CDCF95600010A61 /* RecommendationsRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsRequestDTO.swift; sourceTree = "<group>"; };
 		881BBCB92CDCF95600010A61 /* RecommendationsResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsResponseDTO.swift; sourceTree = "<group>"; };
 		881BBCBA2CDCF95600010A61 /* TrackDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDTO.swift; sourceTree = "<group>"; };
-		881BBCBF2CDCF97900010A61 /* MusicFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicFilter.swift; sourceTree = "<group>"; };
-		881BBCC02CDCF97900010A61 /* RecommendationRequestEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationRequestEntity.swift; sourceTree = "<group>"; };
 		88291CB92CFA2139007322B5 /* ExportFriendsMusicToMyPlaylistDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportFriendsMusicToMyPlaylistDelegate.swift; sourceTree = "<group>"; };
 		88291CBB2CFA25F4007322B5 /* SelectPlaylistToExportFriendMusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPlaylistToExportFriendMusicView.swift; sourceTree = "<group>"; };
 		88291CBD2CFA2605007322B5 /* SelectPlaylistToExportFriendMusicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPlaylistToExportFriendMusicViewModel.swift; sourceTree = "<group>"; };
@@ -524,6 +519,7 @@
 		F17CA42D2CFC3ADE00B86681 /* ProfileImageUpdateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageUpdateType.swift; sourceTree = "<group>"; };
 		F17CA4312CFC603900B86681 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		F17CA4332CFC918A00B86681 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
+		F17CA43A2CFDD98E00B86681 /* LoginRequiredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequiredView.swift; sourceTree = "<group>"; };
 		F1865ED52CF618B7007C1E5A /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
 		F1865ED72CF62BBB007C1E5A /* MyInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewModel.swift; sourceTree = "<group>"; };
 		F1865ED92CF63959007C1E5A /* NickNameTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameTextFieldView.swift; sourceTree = "<group>"; };
@@ -1181,7 +1177,7 @@
 				F135BCE42CF43BC2006C6C4F /* ManageAuthenticationUseCase */,
 				B8046A502CEB93C600933704 /* FetchAvailableGenresUseCase */,
 				F173695E2CE36D4D00F6242C /* FetchImageUsecase */,
-				F17369432CDF248700F6242C /* FetchMusicsUseCase */,
+				F17369432CDF248700F6242C /* FetchRecommendedMusicUseCase */,
 				88A7A9882CF8526C005EA318 /* RealPlaylistUseCase */,
 			);
 			path = UseCase;
@@ -1206,8 +1202,6 @@
 				F1E4059C2CEC935B00533701 /* Auth */,
 				881622722CE3BAB900E81EA0 /* RandomMusicDeck */,
 				2008FCBA2CE8A1B90060F3B8 /* MolioPlaylist.swift */,
-				881BBCBF2CDCF97900010A61 /* MusicFilter.swift */,
-				881BBCC02CDCF97900010A61 /* RecommendationRequestEntity.swift */,
 				F173693C2CDF191800F6242C /* MolioMusic.swift */,
 				88E4834D2CEDDD66003D624E /* MolioMusic+sample.swift */,
 				F17369582CDFB73000F6242C /* RGBAColor.swift */,
@@ -1243,7 +1237,6 @@
 			isa = PBXGroup;
 			children = (
 				881BBCB72CDCF95600010A61 /* ExternalIDsDTO.swift */,
-				881BBCB82CDCF95600010A61 /* RecommendationsRequestDTO.swift */,
 				884529492CF6ECDD007FD074 /* MolioPlaylistDTO.swift */,
 				881BBCB92CDCF95600010A61 /* RecommendationsResponseDTO.swift */,
 				881BBCBA2CDCF95600010A61 /* TrackDTO.swift */,
@@ -1366,6 +1359,7 @@
 				B89FFA872CFB8FC50072F92B /* SearchBar.swift */,
 				B885DB712CFB93AE00719AA6 /* SearchUserView.swift */,
 				B89DCE442CFBA0E100F8E651 /* SearchUserViewController.swift */,
+				F17CA43A2CFDD98E00B86681 /* LoginRequiredView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1659,29 +1653,13 @@
 			path = MolioTests;
 			sourceTree = "<group>";
 		};
-		F17369432CDF248700F6242C /* FetchMusicsUseCase */ = {
-			isa = PBXGroup;
-			children = (
-				F17369442CDF249400F6242C /* Protocol */,
-				F17369472CDF24E900F6242C /* Implementation */,
-			);
-			path = FetchMusicsUseCase;
-			sourceTree = "<group>";
-		};
-		F17369442CDF249400F6242C /* Protocol */ = {
+		F17369432CDF248700F6242C /* FetchRecommendedMusicUseCase */ = {
 			isa = PBXGroup;
 			children = (
 				F17369452CDF24A100F6242C /* FetchRecommendedMusicUseCase.swift */,
-			);
-			path = Protocol;
-			sourceTree = "<group>";
-		};
-		F17369472CDF24E900F6242C /* Implementation */ = {
-			isa = PBXGroup;
-			children = (
 				F17369482CDF250200F6242C /* DefaultFetchRecommendedMusicUseCase.swift */,
 			);
-			path = Implementation;
+			path = FetchRecommendedMusicUseCase;
 			sourceTree = "<group>";
 		};
 		F17369502CDFA7A100F6242C /* Mapper */ = {
@@ -2032,6 +2010,7 @@
 				F173694B2CDF265900F6242C /* DefaultRecommendedMusicRepository.swift in Sources */,
 				B885DB762CFB9A5A00719AA6 /* SearchUserViewModel.swift in Sources */,
 				F135BCEE2CF440B5006C6C4F /* AuthStateRepository.swift in Sources */,
+				F17CA43B2CFDD98E00B86681 /* LoginRequiredView.swift in Sources */,
 				885D1B632CF4D28700F532E0 /* MolioPlaylist+FirestoreEntity.swift in Sources */,
 				B8378BC22CF6DD0200737125 /* ExportPlatform.swift in Sources */,
 				206149392CF8677D00FDE96D /* DefaultCommunityUseCase.swift in Sources */,
@@ -2058,7 +2037,6 @@
 				B8D554062CE0ED2C007CCD6D /* SpotifyAPI.swift in Sources */,
 				B8046A442CE9250B00933704 /* MusicGenre.swift in Sources */,
 				B8D554C82CE34A47007CCD6D /* String+Extension.swift in Sources */,
-				881BBCC12CDCF97900010A61 /* MusicFilter.swift in Sources */,
 				885D1B592CF4C7E400F532E0 /* FirestoreManager.swift in Sources */,
 				F135BCE82CF43E13006C6C4F /* AuthMode.swift in Sources */,
 				2082A0A82CF9DC0600E8F2D9 /* FollowRelationViewController.swift in Sources */,
@@ -2069,7 +2047,6 @@
 				206149442CF87FFA00FDE96D /* UserUseCase.swift in Sources */,
 				B88F80C22CE4B23B000480E6 /* TagLayout.swift in Sources */,
 				B8D553EC2CDFE29D007CCD6D /* NetworkError.swift in Sources */,
-				881BBCC22CDCF97900010A61 /* RecommendationRequestEntity.swift in Sources */,
 				F135BCF02CF441B7006C6C4F /* DefaultAuthStateRepository.swift in Sources */,
 				B8B9743C2CFCFF0000B1298F /* View+Extension.swift in Sources */,
 				200918482CECAB4D0058D8C7 /* UserDefaultsKey.swift in Sources */,
@@ -2131,7 +2108,6 @@
 				F12054F42CF855F30040A69C /* PrivacyPolicyView.swift in Sources */,
 				206149062CF7219B00FDE96D /* MolioFollowRelation.swift in Sources */,
 				B8D554892CE10A3A007CCD6D /* DefaultSpotifyAPIService.swift in Sources */,
-				881BBCBE2CDCF95600010A61 /* RecommendationsRequestDTO.swift in Sources */,
 				F1E405AE2CECA35E00533701 /* DefaultFirebaseAuthService.swift in Sources */,
 				F1E4059E2CEC936700533701 /* AppleAuthInfo.swift in Sources */,
 				F17369292CDC79E100F6242C /* MusicCardView.swift in Sources */,

@@ -15,12 +15,12 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
         
         super.init(rootView: userProfileView)
         
-        rootView.didFollowerButtonTapped = { [weak self] in
+        rootView.didFollowerButtonTapped = { [weak self] profileType in
             guard let self = self else { return }
             self.navigationToFollowerListView()
         }
         
-        rootView.didFollowingButtonTapped = { [weak self] in
+        rootView.didFollowingButtonTapped = { [weak self] profileType in
             guard let self = self else { return }
             self.navigationToFollowingListView()
         }
@@ -34,15 +34,20 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
             guard let self = self else { return }
             self.navigateToSettingViewController()
         }
-        setupButtonAction()
+        
+        rootView.didNotificationButtonTapped = { [weak self] in
+            guard let self else { return }
+            let notificationViewModel = NotificationViewModel()
+            let notificationViewController = UIHostingController(rootView: NotificationView(viewModel: notificationViewModel))
+            notificationViewController.title = "알림"
+            self.navigationController?.pushViewController(notificationViewController, animated: true)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         self.viewModel = UserProfileViewModel(profileType: .me)
         self.followRelationViewModel = FollowRelationViewModel()
         super.init(coder: aDecoder)
-        
-        setupButtonAction()
     }
     
     // MARK: - Life Cycle
@@ -77,56 +82,30 @@ final class UserProfileViewController: UIHostingController<UserProfileView> {
     }
     
     private func navigationToFriendPlaylistListView(playlist: MolioPlaylist) {
-        let friendPlaylistListViewController = FriendPlaylistDetailHostingViewController(playlist: playlist)
-        navigationController?.pushViewController(friendPlaylistListViewController, animated: true)
-    }
-    private func setupButtonAction() {
-        // /// navigate To SettingViewController
-        // rootView.didSettingButtonTapped = { [weak self] in
-        //     guard let self else { return }
-        //     let settingViewModel = SettingViewModel()
-        //     let settingsViewController = SettingViewController(viewModel: settingViewModel)
-        //     self.navigationController?.pushViewController(settingsViewController, animated: true)
-        // }
+        let useCase: CurrentUserIdUseCase = DIContainer.shared.resolve()
         
-        // /// navigation To FollowerListView
-        // rootView.didFollowerButtonTapped = { [weak self] in
-        //     guard let self else { return }
-        //     let followerListViewController = FollowRelationViewController(
-        //         viewModel: followRelationViewModel,
-        //         isMyProfile: true,
-        //         followRelation: .unfollowing,
-        //         friendUserID: nil
-        //     )
-        //     self.navigationController?.pushViewController(followerListViewController, animated: true)
-        // }
-        
-        // /// navigation To FollowingListView
-        // rootView.didFollowingButtonTapped = { [weak self] in
-        //     guard let self else { return }
-        //     let followingListViewController = FollowRelationViewController(
-        //         viewModel: followRelationViewModel,
-        //         isMyProfile: true,
-        //         followRelation: .following,
-        //         friendUserID: nil
-        //     )
-        //     self.navigationController?.pushViewController(followingListViewController, animated: true)
-        // }
-        
-        // /// navigation To FriendPlaylistListView
-        // rootView.didPlaylistCellTapped = { [weak self] playlist in
-        //     guard let self else { return }
-        //     let friendPlaylistListViewController = FriendPlaylistDetailHostingViewController(playlist: playlist)
-        //     self.navigationController?.pushViewController(friendPlaylistListViewController, animated: true)
-        // }
-        
-        rootView.didNotificationButtonTapped = { [weak self] in
-            guard let self else { return }
-            let notificationViewModel = NotificationViewModel()
-            let notificationViewController = UIHostingController(rootView: NotificationView(viewModel: notificationViewModel))
-            notificationViewController.title = "알림"
-            self.navigationController?.pushViewController(notificationViewController, animated: true)
+        do {
+            let userID = try useCase.execute()
+            
+            // 사용자 ID에 따라 화면을 결정
+            let viewController: UIViewController
+            if playlist.authorID == userID {
+                // 자신의 플레이리스트
+                let myPlaylistViewModel = PlaylistDetailViewModel(currentPlaylist: playlist)
+                viewController = PlaylistDetailViewController(viewModel: myPlaylistViewModel)
+            } else {
+                // 친구의 플레이리스트
+                let friendPlaylistViewController = FriendPlaylistDetailHostingViewController(playlist: playlist)
+                viewController = friendPlaylistViewController
+            }
+            
+            // 네비게이션으로 이동
+            navigationController?.pushViewController(viewController, animated: true)
+            
+        } catch {
+            print("Error retrieving user ID: \(error.localizedDescription)")
         }
     }
+   
 }
 

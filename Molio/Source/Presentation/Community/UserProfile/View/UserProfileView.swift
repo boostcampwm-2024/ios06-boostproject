@@ -14,8 +14,8 @@ struct UserProfileView: View {
     
     var didNotificationButtonTapped: (() -> Void)?
     var didSettingButtonTapped: (() -> Void)?
-    var didFollowingButtonTapped: (() -> Void)?
-    var didFollowerButtonTapped: (() -> Void)?
+    var didFollowingButtonTapped: ((ProfileType) -> Void)?
+    var didFollowerButtonTapped: ((ProfileType) -> Void)?
     var didPlaylistCellTapped: ((MolioPlaylist) -> Void)?
     
     init(
@@ -58,6 +58,7 @@ struct UserProfileView: View {
                         }
                     }
                     .padding(.horizontal, 22)
+                    .padding(.top, 20)
 
                     // MARK: - 유저 정보 HStack
                     HStack {
@@ -72,13 +73,13 @@ struct UserProfileView: View {
                                 UserInfoView(type: .playlist, value: viewModel.playlists.count, size: size)
                                 
                                 Button(action: {
-                                    didFollowingButtonTapped?()
+                                    didFollowingButtonTapped?(viewModel.profileType)
                                 }) {
                                     UserInfoView(type: .following, value: viewModel.followings.count, size: size)
                                 }
                                 
                                 Button(action: {
-                                    didFollowerButtonTapped?()
+                                    didFollowerButtonTapped?(viewModel.profileType)
                                 }) {
                                     UserInfoView(type: .follower, value: viewModel.followers.count, size: size)
                                 }
@@ -89,9 +90,9 @@ struct UserProfileView: View {
                     .frame(maxWidth: .infinity, maxHeight: 82)
                     .padding(.horizontal, 22)
                     .padding(.top, 16)
-                        
+                    
                     Spacer().frame(height: 21)
-                        
+                    
                     // MARK: - 유저 description
                     
                     if let description = viewModel.user?.description {
@@ -104,7 +105,7 @@ struct UserProfileView: View {
                         Spacer().frame(height: 13)
                         
                     }
-                        
+                    
                     // MARK: - 팔로우 버튼
                     if case let .friend(_, isFollowing) = viewModel.profileType {
                         if let followRelation = viewModel.user?.followRelation {
@@ -124,7 +125,7 @@ struct UserProfileView: View {
                     }
                     
                     Spacer().frame(height: 13)
-                        
+                    
                     // MARK: - 유저 플레이리스트
                     
                     ScrollView(.vertical, showsIndicators: true) {
@@ -139,8 +140,8 @@ struct UserProfileView: View {
                         }
                         .padding(.horizontal, 22)
                     }
-                        
-                        Spacer()
+                    
+                    Spacer()
                 }
             }
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -179,7 +180,7 @@ struct UserPlaylistRowView: View {
                     .font(.system(size: 16, weight: .regular))
                     .foregroundColor(.white)
                 HStack {
-                    ForEach(playlist.filter.genres, id: \.self) { genre in
+                    ForEach(playlist.filter, id: \.self) { genre in
                         FilterTag(content: genre.description)
                     }
                 }

@@ -10,7 +10,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(NetworkProvider.self, dependency: DefaultNetworkProvider())
         container.register(SpotifyTokenProvider.self, dependency: DefaultSpotifyTokenProvider())
         container.register(ImageFetchService.self, dependency: DefaultImageFetchService())
-        container.register(SpotifyAPIService.self, dependency: MockSpotifyAPIService())
         container.register(MusicKitService.self, dependency: DefaultMusicKitService())
         container.register(AuthService.self, dependency: DefaultFirebaseAuthService())
         container.register(AuthLocalStorage.self, dependency: DefaultAuthLocalStorage())
