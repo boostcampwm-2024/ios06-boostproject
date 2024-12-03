@@ -1134,6 +1134,7 @@
 				F17369792CE4AAB600F6242C /* Protocol */,
 				F173695B2CE0F5B800F6242C /* Mapper */,
 				B80970992CDB4678007BC3C4 /* Extension */,
+				882D56272CFCC9740057D436 /* UserPlaylistSyncManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1584,7 +1585,6 @@
 				885D1B5A2CF4C8C900F532E0 /* Frameworks */,
 				F17368F62CD86B1100F6242C /* Products */,
 				205E6A452CF5697E005E9150 /* Frameworks */,
-				882D56272CFCC9740057D436 /* UserPlaylistSyncManager.swift */,
 			);
 			sourceTree = "<group>";
 		};
