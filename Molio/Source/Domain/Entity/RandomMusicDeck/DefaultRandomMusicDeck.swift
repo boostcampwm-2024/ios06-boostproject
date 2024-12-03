@@ -23,7 +23,7 @@ final class DefaultRandomMusicDeck: RandomMusicDeck {
     private let randomMusics: CurrentValueSubject<[MolioMusic], Never>
     private var cancellables = Set<AnyCancellable>()
     
-    private var currentMusicFilter: MusicFilter?
+    private var currentMusicFilter: [MusicGenre]?
     private var currentPlaylist: MolioPlaylist?
     
     // MARK: 생성자
@@ -76,12 +76,9 @@ final class DefaultRandomMusicDeck: RandomMusicDeck {
         _ = popCurrentMusic()
     }
     
-    func reset(with filter: MusicFilter) {
+    func reset(with filter: [MusicGenre]) {
         currentMusicFilter = filter
-        let cardCountToRemove = max(0, self.randomMusics.value.count - 2)
-        DispatchQueue.main.async { [weak self] in
-            self?.randomMusics.value.removeLast(cardCountToRemove)
-        }
+        randomMusics.value = []
     }
 
     private func setupCurrentPlaylistCancellable() {
@@ -108,27 +105,24 @@ final class DefaultRandomMusicDeck: RandomMusicDeck {
     }
     
     private func loadRandomMusic() {
-        let filter = currentMusicFilter ?? MusicFilter(genres: [])
+        let filter = currentMusicFilter ?? []
         
         Task { [weak self] in
             do {
                 let fetchedMusics = try await self?.fetchRecommendedMusicUseCase.execute(with: filter)
                 
                 let usersAllMusicISRCs: [String]
-                
                 // TODO: 이걸 현재 플리에 있는 노래만 추천받지 않도록 할 지를 수정해야 한다.
                 if let playlists = try await self?.fetchPlaylistUseCase.fetchMyAllPlaylists() {
                     usersAllMusicISRCs = playlists.flatMap { $0.musicISRCs }
                 } else {
                     // 유저 플레이리스트 자체가 없는 경우
-                    
                     usersAllMusicISRCs = []
                 }
                                 
                 guard let fetchedMusics else { return }
                 
                 // 이미 플리에 있는 노래는 추천받지 않는다.
-                
                 let filteredMusics = fetchedMusics.filter { music in
                     return !usersAllMusicISRCs.contains(music.isrc)
                 }

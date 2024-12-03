@@ -3,7 +3,7 @@ import SwiftUI
 // MARK: - Implementation
 
 final class MusicFilterViewController: UIHostingController<MusicFilterView> {
-    typealias PopCompletion = (MusicFilter) -> Void // 필터 화면 pop이후 수행할 동작
+    typealias PopCompletion = ([MusicGenre]) -> Void // 필터 화면 pop이후 수행할 동작
     
     weak var delegate: MusicFilterViewControllerDelegate?
     private var onPopCompletion: PopCompletion
@@ -83,7 +83,7 @@ final class MusicFilterViewController: UIHostingController<MusicFilterView> {
 // MARK: - Delegate
 
 protocol MusicFilterViewControllerDelegate: AnyObject {
-    func didSaveButtonTapped() async throws -> MusicFilter
+    func didSaveButtonTapped() async throws -> [MusicGenre]
 }
 
 // MARK: - Preview

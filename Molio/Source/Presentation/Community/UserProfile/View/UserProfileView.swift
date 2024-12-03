@@ -180,7 +180,7 @@ struct UserPlaylistRowView: View {
                     .font(.system(size: 16, weight: .regular))
                     .foregroundColor(.white)
                 HStack {
-                    ForEach(playlist.filter.genres, id: \.self) { genre in
+                    ForEach(playlist.filter, id: \.self) { genre in
                         FilterTag(content: genre.description)
                     }
                 }
