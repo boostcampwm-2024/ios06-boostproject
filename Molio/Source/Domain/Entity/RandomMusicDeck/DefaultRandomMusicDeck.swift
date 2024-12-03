@@ -5,6 +5,9 @@ import Foundation
 
 final class DefaultRandomMusicDeck: RandomMusicDeck {
     // MARK: - 프로토콜 준수
+    var currentMusic: MolioMusic? {
+        return randomMusics.value.first
+    }
     
     var currentMusicTrackModelPublisher: AnyPublisher<MolioMusic?, Never> {
         return musicPublisher(at: 0)

@@ -85,12 +85,14 @@ final class AudioPlayerControlViewModel: ObservableObject {
     // MARK: - Audio Player Control
     
     private func setupAudioPlayer() {
-        NotificationCenter.default.addObserver(
+        audioPlayer.musicItemDidPlayToEndTimeObserver = NotificationCenter.default.addObserver(
             forName: .AVPlayerItemDidPlayToEndTime,
             object: nil,
             queue: .main
-        ) { [self] _ in
-            self.handlePlaybackCompletion()
+        ) { _ in
+            DispatchQueue.main.async { [weak self] in
+                self?.handlePlaybackCompletion()
+            }
         }
     }
     
