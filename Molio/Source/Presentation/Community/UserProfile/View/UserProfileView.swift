@@ -73,15 +73,15 @@ struct UserProfileView: View {
                                 UserInfoView(type: .playlist, value: viewModel.playlists.count, size: size)
                                 
                                 Button(action: {
-                                    didFollowingButtonTapped?(viewModel.profileType)
-                                }) {
-                                    UserInfoView(type: .following, value: viewModel.followings.count, size: size)
-                                }
-                                
-                                Button(action: {
                                     didFollowerButtonTapped?(viewModel.profileType)
                                 }) {
                                     UserInfoView(type: .follower, value: viewModel.followers.count, size: size)
+                                }
+                                
+                                Button(action: {
+                                    didFollowingButtonTapped?(viewModel.profileType)
+                                }) {
+                                    UserInfoView(type: .following, value: viewModel.followings.count, size: size)
                                 }
                             }
                         }
