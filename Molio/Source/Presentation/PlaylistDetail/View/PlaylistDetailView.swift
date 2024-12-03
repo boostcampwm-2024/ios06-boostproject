@@ -38,6 +38,7 @@ struct PlaylistDetailView: View {
 
             MusicListView()
                 .environmentObject(audioPlayerViewModel)
+                .environmentObject(playlistDetailViewModel)
         }
         .background(Color.background)
         .safeAreaInset(edge: .bottom) {
@@ -64,8 +65,8 @@ struct PlaylistDetailView: View {
             .padding(.horizontal, 22)
             .padding(.bottom, 23)
         }
-        .onChange(of: playlistDetailViewModel.currentPlaylistMusics) { _ in
-            audioPlayerViewModel.setMusics(playlistDetailViewModel.currentPlaylistMusics)
+        .onChange(of: playlistDetailViewModel.currentPlaylistMusics) { musics in
+            audioPlayerViewModel.setMusics(musics)
         }
     }
 }

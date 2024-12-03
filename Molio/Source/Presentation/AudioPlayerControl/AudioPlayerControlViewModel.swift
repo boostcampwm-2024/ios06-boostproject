@@ -2,6 +2,7 @@ import AVKit
 import SwiftUI
 import Combine
 
+@MainActor
 final class AudioPlayerControlViewModel: ObservableObject {
     
     // MARK: - 기본
@@ -98,7 +99,7 @@ final class AudioPlayerControlViewModel: ObservableObject {
     }
     
     func playButtonTapped() {
-        guard let currentPlayingMusic else {
+        guard currentPlayingMusic != nil else {
             // 현재 선택된 노래가 없는 경우
             guard let firstMusic = musics.first else { return }
             

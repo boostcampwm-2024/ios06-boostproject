@@ -10,7 +10,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         configureAudioSession()
         setupNavigationBarAppearance()
-        let splashViewController = SplashViewController(viewModel: SplahViewModel())
+        let splashViewController = SplashViewController(viewModel: SplashViewModel())
         
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = UINavigationController(rootViewController: splashViewController)

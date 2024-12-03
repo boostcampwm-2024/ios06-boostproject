@@ -165,6 +165,11 @@ final class SwipeMusicViewController: UIViewController {
         musicPlayer.play()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        musicPlayer.stop()
+    }
+    
     private func setupBindings() {
         output.selectedPlaylist
             .receive(on: DispatchQueue.main)
@@ -434,6 +439,8 @@ extension SwipeMusicViewController: SelectPlaylistViewControllerDelegate {
         self.presentCustomSheet(createPlaylistVC)
     }
 }
+
+// MARK: - Preview
 
 // SwiftUI에서 SwipeViewController 미리보기
 import SwiftUI
