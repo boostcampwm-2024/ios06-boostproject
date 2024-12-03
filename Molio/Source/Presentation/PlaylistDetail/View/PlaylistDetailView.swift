@@ -3,7 +3,7 @@ import Combine
 
 struct PlaylistDetailView: View {
     @ObservedObject private var playlistDetailViewModel: PlaylistDetailViewModel
-    @ObservedObject private var audioPlayerViewModel = AudioPlayerControlViewModel()
+    @StateObject private var audioPlayerViewModel = AudioPlayerControlViewModel()
     
     var didPlaylistButtonTapped: (() -> Void)?
     var didExportButtonTapped: (() -> Void)?
