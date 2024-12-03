@@ -19,6 +19,7 @@ final class SwipeMusicViewController: UIViewController {
     private let basicBackgroundColor = UIColor(resource: .background)
     private var impactFeedBack = UIImpactFeedbackGenerator(style: .medium)
     private var hasProvidedImpactFeedback: Bool = false
+    private var anchoredRotationDirection: CGFloat? // 각 스와이프 제스처의 회전 방향을 고정하기 위한 값
     
     private let playlistSelectButton: UIButton = {
         let button = UIButton()
@@ -307,16 +308,36 @@ final class SwipeMusicViewController: UIViewController {
         guard let card = gesture.view else { return }
         
         let translation = gesture.translation(in: view)
+        if gesture.state == .began {
+            // 제스처 시작 시 손가락 탭 위치와 카드 중심을 비교해서 회전 방향 선택
+            let gestureLocation = gesture.location(in: view)
+            let cardCenter = card.center
+            anchoredRotationDirection = (gestureLocation.y >= cardCenter.y ? -1 : 1)
+        }
+        
+        // 카드 이동
         card.center = CGPoint(
             x: nextCardView.center.x + translation.x,
             y: nextCardView.center.y + translation.y
         )
+        // 카드 회전
+        let maxRotationAngle: CGFloat = .pi / 12
+        let horizontalFactor = translation.x / view.bounds.width
+        if let rotationDirection = anchoredRotationDirection {
+            let rotationAngle = maxRotationAngle * horizontalFactor * rotationDirection
+            card.transform = CGAffineTransform(rotationAngle: rotationAngle)
+        }
         
         if gesture.state == .changed {
             musicCardDidChangeSwipePublisher.send(translation.x)
             providedImpactFeedback(translationX: translation.x)
         } else if gesture.state == .ended {
+            UIView.animate(withDuration: 0.3) {
+                card.center = self.view.center
+                card.transform = .identity
+            }
             musicCardDidFinishSwipePublisher.send(translation.x)
+            anchoredRotationDirection = nil
         }
     }
     
