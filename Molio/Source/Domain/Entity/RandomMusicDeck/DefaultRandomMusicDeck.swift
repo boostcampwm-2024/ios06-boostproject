@@ -104,6 +104,7 @@ final class DefaultRandomMusicDeck: RandomMusicDeck {
         randomMusics
             .map { $0.count }
             .receive(on: DispatchQueue.main)
+            .debounce(for: .seconds(0.2), scheduler: DispatchQueue.main)
             .sink { [weak self] musicCount in
                 if musicCount < 10 {
                     self?.loadRandomMusic()
@@ -118,7 +119,6 @@ final class DefaultRandomMusicDeck: RandomMusicDeck {
         Task { [weak self] in
             do {
                 let fetchedMusics = try await self?.fetchRecommendedMusicUseCase.execute(with: filter)
-                
                 let usersAllMusicISRCs: [String]
                 // TODO: 이걸 현재 플리에 있는 노래만 추천받지 않도록 할 지를 수정해야 한다.
                 if let playlists = try await self?.fetchPlaylistUseCase.fetchMyAllPlaylists() {
@@ -136,7 +136,7 @@ final class DefaultRandomMusicDeck: RandomMusicDeck {
                 }
                 
                 DispatchQueue.main.async { [weak self] in
-                    self?.randomMusics.value.append(contentsOf: fetchedMusics)
+                    self?.randomMusics.value.append(contentsOf: filteredMusics)
                 }
             } catch {
                 print(error.localizedDescription)
