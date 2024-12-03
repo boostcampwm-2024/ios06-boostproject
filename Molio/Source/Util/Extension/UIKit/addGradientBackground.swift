@@ -11,7 +11,7 @@ extension UIView {
         gradientEndPoint: CGPoint = CGPoint(x: 1, y: 0),
         blurStyle: UIBlurEffect.Style = .regular
     ) {
-        self.subviews.forEach { $0.removeFromSuperview() }
+//        self.subviews.forEach { $0.removeFromSuperview() }
         
         // 그라데이션 레이어 추가
         let gradientLayer = CAGradientLayer()

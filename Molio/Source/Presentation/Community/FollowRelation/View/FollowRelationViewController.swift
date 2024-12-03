@@ -51,4 +51,3 @@ final class FollowRelationViewController: UIHostingController<FollowRelationList
         navigationController?.pushViewController(friendProfileViewController, animated: true)
     }
 }
-
