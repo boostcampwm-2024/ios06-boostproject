@@ -1,3 +1,5 @@
+import SwiftUI
+
 enum OnBoardingPage {
     case one
     case two

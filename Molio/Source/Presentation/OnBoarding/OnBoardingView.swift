@@ -4,6 +4,8 @@ struct OnBoardingView: View {
     private let page: OnBoardingPage
     var didButtonTapped: (() -> Void)?
     
+    @State var isAppleMusicPermissonAllowed: Bool = false
+    
     init(page: OnBoardingPage) {
         self.page = page
     }
@@ -26,7 +28,6 @@ struct OnBoardingView: View {
                             .lineSpacing(4)
                             .fixedSize(horizontal: false, vertical: true)
                             .frame(maxWidth: .infinity, alignment: .leading)
-
                     }
                 }
                 
@@ -36,35 +37,53 @@ struct OnBoardingView: View {
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fit)
+                } else {
+                    appleMusicPermisonRequestView()
                 }
                 
                 Spacer()
                 
-                BasicButton(type: .onBoarding) {
-                    didButtonTapped?()
+                switch page {
+                case .seven:
+                    BasicButton(type: .startMolio, isEnabled: isAppleMusicPermissonAllowed) {
+                        didButtonTapped?()
+                    }
+                default:
+                    BasicButton(type: .onBoarding) {
+                        didButtonTapped?()
+                    }
                 }
             }
             .padding(.horizontal, 22)
             .padding(.vertical, 15)
         }
     }
+    
+    func appleMusicPermisonRequestView() -> some View {
+        VStack(alignment: .leading) {
+            Text.molioMedium("필수 권한", size: 16)
+                .foregroundStyle(.gray)
+            HStack(alignment: .center) {
+                Image("appleMusicLogo")
+                    .resizable()
+                    .frame(width: 49, height: 49)
+                Text.molioSemiBold("미디어 및 Apple Music", size: 18)
+                    .fixedSize(horizontal: true, vertical: false)
+                Toggle(isOn: $isAppleMusicPermissonAllowed) {
+                    Text("Request Apple Music Permission")
+                }
+                .labelsHidden()
+            }
+            .padding(.vertical, 45)
+            .padding(.horizontal, 27)
+            .background {
+                RoundedRectangle(cornerRadius: 24)
+                    .foregroundStyle(.white)
+            }
+        }
+    }
 }
 
 #Preview {
-    OnBoardingView(page: .one)
-}
-#Preview {
-    OnBoardingView(page: .two)
-}
-#Preview {
-    OnBoardingView(page: .three)
-}
-#Preview {
-    OnBoardingView(page: .four)
-}
-#Preview {
-    OnBoardingView(page: .five)
-}
-#Preview {
-    OnBoardingView(page: .six)
+    OnBoardingView(page: .seven)
 }
