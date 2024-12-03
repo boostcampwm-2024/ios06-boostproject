@@ -165,6 +165,12 @@ final class SwipeMusicViewController: UIViewController {
         
         guard let previewAssetURL = viewModel.currentMusic?.previewAsset else { return }
         
+        // 옵저버가 등록되어 있는 경우에는 삭제한다.
+        if let observer = musicPlayer.musicItemDidPlayToEndTimeObserver {
+            NotificationCenter.default.removeObserver(observer)
+            musicPlayer.musicItemDidPlayToEndTimeObserver = nil
+        }
+        
         loadAndPlaySongs(url: previewAssetURL)
     }
     
@@ -225,6 +231,7 @@ final class SwipeMusicViewController: UIViewController {
     }
     
     private func loadAndPlaySongs(url: URL) {
+        musicPlayer.stop()
         musicPlayer.loadSong(with: url)
         musicPlayer.play()
     }
