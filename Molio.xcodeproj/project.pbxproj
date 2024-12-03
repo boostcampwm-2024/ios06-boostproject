@@ -32,7 +32,7 @@
 		201048542CEA280E0015E800 /* presentCustomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201048532CEA280E0015E800 /* presentCustomSheet.swift */; };
 		20150EC52CEA36B700FC8883 /* Playlist+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20150EC32CEA36B700FC8883 /* Playlist+CoreDataClass.swift */; };
 		20150EC62CEA36B700FC8883 /* Playlist+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20150EC42CEA36B700FC8883 /* Playlist+CoreDataProperties.swift */; };
-		20397E512CE33C03004ED9CE /* SwipeMusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20397E502CE33C03004ED9CE /* SwipeMusicPlayer.swift */; };
+		20397E512CE33C03004ED9CE /* DefaultAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20397E502CE33C03004ED9CE /* DefaultAudioPlayer.swift */; };
 		20397E6A2CE5DCDD004ED9CE /* MolioModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20397E682CE5DCDD004ED9CE /* MolioModel.xcdatamodeld */; };
 		20397E702CE5DE56004ED9CE /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20397E6F2CE5DE56004ED9CE /* PersistenceManager.swift */; };
 		20397E722CE5DFC6004ED9CE /* CoreDataPlaylistStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20397E712CE5DFC6004ED9CE /* CoreDataPlaylistStorage.swift */; };
@@ -302,7 +302,7 @@
 		201048532CEA280E0015E800 /* presentCustomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = presentCustomSheet.swift; sourceTree = "<group>"; };
 		20150EC32CEA36B700FC8883 /* Playlist+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Playlist+CoreDataClass.swift"; sourceTree = "<group>"; };
 		20150EC42CEA36B700FC8883 /* Playlist+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Playlist+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		20397E502CE33C03004ED9CE /* SwipeMusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeMusicPlayer.swift; sourceTree = "<group>"; };
+		20397E502CE33C03004ED9CE /* DefaultAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAudioPlayer.swift; sourceTree = "<group>"; };
 		20397E692CE5DCDD004ED9CE /* MolioModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MolioModel.xcdatamodel; sourceTree = "<group>"; };
 		20397E6F2CE5DE56004ED9CE /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		20397E712CE5DFC6004ED9CE /* CoreDataPlaylistStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPlaylistStorage.swift; sourceTree = "<group>"; };
@@ -1134,6 +1134,7 @@
 				F17369792CE4AAB600F6242C /* Protocol */,
 				F173695B2CE0F5B800F6242C /* Mapper */,
 				B80970992CDB4678007BC3C4 /* Extension */,
+				882D56272CFCC9740057D436 /* UserPlaylistSyncManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1584,7 +1585,6 @@
 				885D1B5A2CF4C8C900F532E0 /* Frameworks */,
 				F17368F62CD86B1100F6242C /* Products */,
 				205E6A452CF5697E005E9150 /* Frameworks */,
-				882D56272CFCC9740057D436 /* UserPlaylistSyncManager.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1685,7 +1685,7 @@
 			isa = PBXGroup;
 			children = (
 				2003BA212CDCB31B002CAB3E /* SwipeMusicViewModel.swift */,
-				20397E502CE33C03004ED9CE /* SwipeMusicPlayer.swift */,
+				20397E502CE33C03004ED9CE /* DefaultAudioPlayer.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2042,7 +2042,7 @@
 				2082A0A82CF9DC0600E8F2D9 /* FollowRelationViewController.swift in Sources */,
 				201048512CEA23190015E800 /* addGradientBackground.swift in Sources */,
 				205E6A5D2CF5D7EB005E9150 /* AuthLocalStorage.swift in Sources */,
-				20397E512CE33C03004ED9CE /* SwipeMusicPlayer.swift in Sources */,
+				20397E512CE33C03004ED9CE /* DefaultAudioPlayer.swift in Sources */,
 				206149462CF8800500FDE96D /* MolioUser.swift in Sources */,
 				206149442CF87FFA00FDE96D /* UserUseCase.swift in Sources */,
 				B88F80C22CE4B23B000480E6 /* TagLayout.swift in Sources */,
