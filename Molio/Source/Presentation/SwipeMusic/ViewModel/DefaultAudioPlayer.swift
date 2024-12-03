@@ -4,6 +4,7 @@ final class DefaultAudioPlayer: AudioPlayer {
     var isPlaying: Bool = false
     var player: AVQueuePlayer?
     var looper: AVPlayerLooper?
+    var musicItemDidPlayToEndTimeObserver: (any NSObjectProtocol)?
     
     func loadSong(with url: URL) {
         stop()
