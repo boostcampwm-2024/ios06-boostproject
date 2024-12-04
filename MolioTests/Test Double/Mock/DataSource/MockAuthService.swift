@@ -14,8 +14,8 @@ final class MockAuthService: AuthService {
 
     }
     
-    func signInApple(info: Molio.AppleAuthInfo) async throws {
-        
+    func signInApple(info: AppleAuthInfo) async throws -> (uid: String, isNewUser: Bool) {
+        return ("", false)
     }
     
     func logout() throws {
