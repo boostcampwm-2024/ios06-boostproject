@@ -30,6 +30,8 @@ struct SettingTextItemView: View {
                         .padding(.trailing, 16)
                 }
             }
+            .padding(.vertical, 4)
+
             if !itemType.isLastItem {
                 Divider()
                     .background(Color(UIColor.darkGray))
