@@ -13,6 +13,7 @@ enum ButtonType: String {
     case didNotSelectPlatform = "플랫폼을 선택해주세요"
     case loginRequired = "로그인하러 가기!"
     case onBoarding = "이해했어요!"
+    case startMolio = "몰리오 시작하기!"
 }
 
 struct BasicButton: View {
@@ -39,7 +40,7 @@ struct BasicButton: View {
         switch type {
         case .cancel, .needAppleMusicSubcription, .didNotSelectPlatform:
             return Color.white.opacity(0.2)
-        case .confirm, .next, .exportToAppleMusic, .exportToImage, .saveImage, .shareInstagram, .loginRequired, .onBoarding:
+        case .confirm, .next, .exportToAppleMusic, .exportToImage, .saveImage, .shareInstagram, .loginRequired, .onBoarding, .startMolio:
             return Color.mainLighter
         case .goToAppleMusic:
             return Color.background
@@ -51,7 +52,7 @@ struct BasicButton: View {
         switch type {
         case .cancel, .needAppleMusicSubcription, .didNotSelectPlatform:
             return Color.white
-        case .confirm, .next, .exportToAppleMusic, .exportToImage, .saveImage, .shareInstagram, .loginRequired, .onBoarding:
+        case .confirm, .next, .exportToAppleMusic, .exportToImage, .saveImage, .shareInstagram, .loginRequired, .onBoarding, .startMolio:
             return Color.black
         case .goToAppleMusic:
             return Color.mainLighter

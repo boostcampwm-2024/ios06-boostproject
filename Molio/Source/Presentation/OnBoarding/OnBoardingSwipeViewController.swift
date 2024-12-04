@@ -4,15 +4,8 @@ final class OnBoardingSwipeViewController: UIHostingController<OnBoardingView> {
     // MARK: - Initializer
     
     init() {
-        let onBordingView = OnBoardingView(
-            title: """
-            쉽고 빠르게 스와이프로
-            내 취향인 노래를 저장해보세요!
-            """,
-            image: Image(.onBoardingSwipe)
-        )
-        
-        super.init(rootView: onBordingView)
+        let onBoardingView = OnBoardingView(page: .two)
+        super.init(rootView: onBoardingView)
 
         rootView.didButtonTapped = { [weak self] in
             guard let self = self else { return }
@@ -42,6 +35,4 @@ final class OnBoardingSwipeViewController: UIHostingController<OnBoardingView> {
         let viewController = OnBoardingFilterViewController()
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
 }
-
