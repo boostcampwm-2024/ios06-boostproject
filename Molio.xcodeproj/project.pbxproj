@@ -40,6 +40,9 @@
 		201048542CEA280E0015E800 /* presentCustomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201048532CEA280E0015E800 /* presentCustomSheet.swift */; };
 		20150EC52CEA36B700FC8883 /* Playlist+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20150EC32CEA36B700FC8883 /* Playlist+CoreDataClass.swift */; };
 		20150EC62CEA36B700FC8883 /* Playlist+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20150EC42CEA36B700FC8883 /* Playlist+CoreDataProperties.swift */; };
+		20297AD42D00268500799A54 /* GmarketSansTTFBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20297AD32D0023EE00799A54 /* GmarketSansTTFBold.ttf */; };
+		20297AD52D00268700799A54 /* GmarketSansTTFLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20297AD12D0023ED00799A54 /* GmarketSansTTFLight.ttf */; };
+		20297AD62D00268A00799A54 /* GmarketSansTTFMedium_2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20297AD22D0023ED00799A54 /* GmarketSansTTFMedium_2.ttf */; };
 		20397E512CE33C03004ED9CE /* DefaultAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20397E502CE33C03004ED9CE /* DefaultAudioPlayer.swift */; };
 		20397E6A2CE5DCDD004ED9CE /* MolioModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20397E682CE5DCDD004ED9CE /* MolioModel.xcdatamodeld */; };
 		20397E702CE5DE56004ED9CE /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20397E6F2CE5DE56004ED9CE /* PersistenceManager.swift */; };
@@ -319,6 +322,9 @@
 		201048532CEA280E0015E800 /* presentCustomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = presentCustomSheet.swift; sourceTree = "<group>"; };
 		20150EC32CEA36B700FC8883 /* Playlist+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Playlist+CoreDataClass.swift"; sourceTree = "<group>"; };
 		20150EC42CEA36B700FC8883 /* Playlist+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Playlist+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		20297AD12D0023ED00799A54 /* GmarketSansTTFLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFLight.ttf; sourceTree = "<group>"; };
+		20297AD22D0023ED00799A54 /* GmarketSansTTFMedium_2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFMedium_2.ttf; sourceTree = "<group>"; };
+		20297AD32D0023EE00799A54 /* GmarketSansTTFBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFBold.ttf; sourceTree = "<group>"; };
 		20397E502CE33C03004ED9CE /* DefaultAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAudioPlayer.swift; sourceTree = "<group>"; };
 		20397E692CE5DCDD004ED9CE /* MolioModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MolioModel.xcdatamodel; sourceTree = "<group>"; };
 		20397E6F2CE5DE56004ED9CE /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
@@ -595,6 +601,9 @@
 				2003BA082CDB8300002CAB3E /* Pretendard-Regular.otf */,
 				2003BA092CDB8300002CAB3E /* Pretendard-SemiBold.otf */,
 				2003BA042CDB82FF002CAB3E /* Pretendard-Thin.otf */,
+				20297AD32D0023EE00799A54 /* GmarketSansTTFBold.ttf */,
+				20297AD12D0023ED00799A54 /* GmarketSansTTFLight.ttf */,
+				20297AD22D0023ED00799A54 /* GmarketSansTTFMedium_2.ttf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -1976,15 +1985,18 @@
 				2010484B2CE9FC8D0015E800 /* Secrets.xcconfig in Resources */,
 				F17369122CDAFE8C00F6242C /* .swiftlint.yml in Resources */,
 				2003BA0F2CDB8300002CAB3E /* Pretendard-Light.otf in Resources */,
+				20297AD62D00268A00799A54 /* GmarketSansTTFMedium_2.ttf in Resources */,
 				2003BA102CDB8300002CAB3E /* Pretendard-ExtraBold.otf in Resources */,
 				2003BA0C2CDB8300002CAB3E /* Pretendard-Medium.otf in Resources */,
 				F17369022CD86B1300F6242C /* Assets.xcassets in Resources */,
 				2003BA132CDB8300002CAB3E /* Pretendard-ExtraLight.otf in Resources */,
+				20297AD52D00268700799A54 /* GmarketSansTTFLight.ttf in Resources */,
 				2003BA0D2CDB8300002CAB3E /* Pretendard-Thin.otf in Resources */,
 				F17369052CD86B1300F6242C /* Base in Resources */,
 				2003BA112CDB8300002CAB3E /* Pretendard-Regular.otf in Resources */,
 				2003BA0E2CDB8300002CAB3E /* Pretendard-Black.otf in Resources */,
 				B82EB4222CEE0AF10023210A /* GoogleService-Info.plist in Resources */,
+				20297AD42D00268500799A54 /* GmarketSansTTFBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

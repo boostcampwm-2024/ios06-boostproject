@@ -26,8 +26,6 @@ struct ProfileImageView: View {
                         .clipShape(Circle())
                 case .failure:
                     DefaultProfile()
-                case .failure(_):
-                    DefaultProfile()
                 @unknown default:
                     EmptyView()
                 }
