@@ -220,6 +220,11 @@ final class SwipeMusicViewController: UIViewController {
                 if isMusicCardAnimating {
                     self.pendingMusic.currentMusic = music
                 } else {
+                    let currentCardBackgroundColor = music.artworkBackgroundColor
+                        .flatMap { UIColor(rgbaColor: $0) } ?? self.basicBackgroundColor
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.view.backgroundColor = currentCardBackgroundColor
+                    })
                     self.updateCurrentCard(with: music)
                 }
                 currentCardBackgroundColor = music.artworkBackgroundColor
