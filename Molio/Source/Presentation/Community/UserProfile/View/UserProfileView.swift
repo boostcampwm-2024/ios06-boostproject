@@ -94,11 +94,10 @@ struct UserProfileView: View {
                     // MARK: - 유저 description
                     
                     if let description = viewModel.user?.description, description != "" {
-                        Spacer().frame(height: 21)
-
                         Text(description)
                             .font(.system(size: 14, weight: .regular))
                             .foregroundColor(.white)
+                            .padding(.top, 21)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 22)
                         
