@@ -9,6 +9,7 @@ struct ChangeProfileImageView: View {
            let selectedImage = UIImage(data: selectedImageData) {
             Image(uiImage: selectedImage)
                 .resizable()
+                .scaledToFill()
                 .frame(width: 110, height: 110)
                 .clipShape(Circle())
         } else {

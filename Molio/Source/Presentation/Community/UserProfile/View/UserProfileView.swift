@@ -182,7 +182,7 @@ struct UserPlaylistRowView: View {
                 HStack {
                     ForEach(playlist.filter, id: \.self) { genre in
                         FilterTag(content: genre.description)
-                            .lineLimit(1) 
+                            .lineLimit(1)
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
