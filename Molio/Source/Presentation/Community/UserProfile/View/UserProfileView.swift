@@ -62,7 +62,7 @@ struct UserProfileView: View {
 
                     // MARK: - 유저 정보 HStack
                     HStack {
-                        ProfileImageView(imageURL: viewModel.user?.profileImageURL, size: 56)
+                        ProfileImageView(imageURL: viewModel.user?.profileImageURL, size: 66)
                         
                         GeometryReader { proxy in
                             HStack(spacing: 10) {
