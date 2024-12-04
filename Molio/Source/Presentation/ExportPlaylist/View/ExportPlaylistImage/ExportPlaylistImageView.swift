@@ -80,7 +80,6 @@ struct ExportPlaylistImageView: View {
                         await viewModel.exportPlaylistToAlbum()
                     }
                 }
-                BasicButton(type: .shareInstagram) { }
             }
             .padding(.horizontal, 22)
             .padding(.bottom, 30)
