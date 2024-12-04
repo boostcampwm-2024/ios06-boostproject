@@ -18,10 +18,11 @@ struct DefaultManageAuthenticationUseCase: ManageAuthenticationUseCase {
         }
     }
     
-    func singInApple(info: AppleAuthInfo) async throws {
-        try await authStateRepository.signInApple(info: info)
+    func signInApple(info: AppleAuthInfo) async throws -> (uid: String, isNewUser: Bool) {
+        let (uid, isNewUser) = try await authStateRepository.signInApple(info: info)
         authStateRepository.setAuthMode(.authenticated)
         authStateRepository.setAuthSelection(.selected)
+        return (uid, isNewUser)
     }
     
     func loginGuest() {
