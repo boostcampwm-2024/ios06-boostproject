@@ -6,19 +6,8 @@ struct ProfileItemView: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 12) {
-                AsyncImage(url: molioUser?.profileImageURL) { phase in
-                    if let image = phase.image {
-                        image
-                            .resizable()
-                            .frame(width: 52, height: 52)
-                            .clipShape(Circle())
-                    } else {
-                        Image(uiImage: UIImage(resource: .personCircle))
-                            .resizable()
-                            .frame(width: 52, height: 52)
-                            .clipShape(Circle())
-                    }
-                }
+                
+                ProfileImageView(imageURL: molioUser?.profileImageURL, size: 52)
                 .padding(.leading, 16)
                 .padding(.top, 6)
                 .padding(.bottom, 6)
@@ -27,17 +16,21 @@ struct ProfileItemView: View {
                     Text(molioUser?.name ?? "")
                         .font(.pretendardRegular(size: 16))
                         .foregroundStyle(.white)
+                        .multilineTextAlignment(.leading)
+
                     Text(molioUser?.description ?? "")
                         .font(.pretendardRegular(size: 15))
                         .foregroundStyle(.gray)
+                        .multilineTextAlignment(.leading)
                 }
-                
+            
                 Spacer()
                 
                 Image(systemName: "chevron.right")
                     .foregroundStyle(.gray)
                     .padding(.trailing, 16)
             }
+            .padding(.vertical, 8)
         }
         .background(Color(uiColor: UIColor(resource: .background)))
     }

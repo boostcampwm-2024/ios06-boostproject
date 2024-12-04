@@ -204,8 +204,10 @@ final class SwipeMusicViewController: UIViewController {
             .sink { [weak self] isLoading in
                 guard let self else { return }
                 if isLoading {
+                    currentCardView.isUserInteractionEnabled = false
                     loadingIndicatorView.startAnimating()
                 } else {
+                    currentCardView.isUserInteractionEnabled = true
                     loadingIndicatorView.stopAnimating()
                 }
             }
@@ -279,6 +281,10 @@ final class SwipeMusicViewController: UIViewController {
                     self.currentCardView.center = CGPoint(x: movedCenterX, y: movedCenterY)
                     // 카드 회전
                     self.currentCardView.transform = CGAffineTransform(rotationAngle: previousRotationAngle ?? 0)
+                    // 배경색 변경
+                    let nextCardBackgroundColor = nextCardBackgroundColor
+                        .flatMap { UIColor(rgbaColor: $0) } ?? self.basicBackgroundColor
+                    self.view.backgroundColor = nextCardBackgroundColor
                 },
                 completion: { [weak self] _ in
                     guard let self else { return }
@@ -384,10 +390,12 @@ final class SwipeMusicViewController: UIViewController {
     }
     
     @objc private func didTapLikeButton() {
+        setRandomRotationAngle(isLike: true)
         likeButtonDidTapPublisher.send()
     }
     
     @objc private func didTapDislikeButton() {
+        setRandomRotationAngle(isLike: false)
         dislikeButtonDidTapPublisher.send()
     }
     
@@ -416,6 +424,23 @@ final class SwipeMusicViewController: UIViewController {
             }
         }
         self.present(musicFilterVC, animated: true)
+    }
+    
+    /// 버튼 클릭시, (상, 중, 하)에 따라 달라지는 카드 애니메이션 값 적용하는 메서드
+    private func setRandomRotationAngle(isLike: Bool) {
+        let randomDirection = [-1, 0, 1].randomElement() ?? 0
+        let rotationDirection: CGFloat = isLike ? 1 : -1
+        switch randomDirection {
+        case -1:
+            previousYDirection = -1
+            previousRotationAngle = .pi / 6 * rotationDirection
+        case 1:
+            previousYDirection = 1
+            previousRotationAngle = .pi / 6 * rotationDirection * -1
+        default:
+            previousYDirection = 0
+            previousRotationAngle = 0
+        }
     }
     
     /// 이동하는 값에 따라 두 색깔 사이의 값으로 배경색이 변하는 메서드
@@ -497,8 +522,8 @@ final class SwipeMusicViewController: UIViewController {
         
         view.addSubview(loadingIndicatorView)
         NSLayoutConstraint.activate([
-            loadingIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loadingIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            loadingIndicatorView.centerXAnchor.constraint(equalTo: nextCardView.centerXAnchor),
+            loadingIndicatorView.centerYAnchor.constraint(equalTo: nextCardView.centerYAnchor)
         ])
     }
     

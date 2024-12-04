@@ -13,6 +13,9 @@
 	<string>$(SPOTIFY_CLIENT_SECRET)</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>GmarketSansTTFBold.ttf</string>
+		<string>GmarketSansTTFLight.ttf</string>
+		<string>GmarketSansTTFMedium_2.ttf</string>
 		<string>Pretendard-Black.otf</string>
 		<string>Pretendard-Bold.otf</string>
 		<string>Pretendard-ExtraBold.otf</string>
