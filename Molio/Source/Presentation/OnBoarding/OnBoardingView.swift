@@ -1,120 +1,135 @@
 import SwiftUI
 
 struct OnBoardingView: View {
-    private let title: String
-    private let subTitle: String?
-    private let image: Image?
+    private let page: OnBoardingPage
     var didButtonTapped: (() -> Void)?
     
+    @State var isAppleMusicPermissonAllowed: Bool = false
+    @State var shoudModifyInSettingsApp: Bool = false
+    private let musicKitService: MusicKitService
+    
     init(
-        title: String,
-        subTitle: String? = nil,
-        image: Image? = nil
+        page: OnBoardingPage,
+        musicKitService: MusicKitService = DIContainer.shared.resolve()
     ) {
-        self.title = title
-        self.subTitle = subTitle
-        self.image = image
+        self.page = page
+        self.musicKitService = musicKitService
     }
     
     var body: some View {
         ZStack {
             Color.background.edgesIgnoringSafeArea(.all)
-            VStack(spacing: 0) {
-                VStack (alignment: .leading) {
-                    Spacer()
-                        .frame(height: 10)
-                    
-                    Text(title)
-                        .font(Font.custom("Pretendard", size: 24).weight(.bold))
+            VStack {
+                VStack(alignment: .leading, spacing: 15) {
+                    Text.molioBold(page.title, size: 24)
                         .foregroundColor(.white)
                         .multilineTextAlignment(.leading)
                         .fixedSize(horizontal: false, vertical: true)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    if let subTitle {
-                        Spacer()
-                            .frame(height: 24)
-                        
-                        Text(subTitle)
-                            .font(Font.custom("Pretendard", size: 16))
+                    if let subTitle = page.subTitle {
+                        Text.molioMedium(subTitle, size: 16)
                             .foregroundColor(.white.opacity(0.7))
                             .multilineTextAlignment(.leading)
                             .lineSpacing(4)
                             .fixedSize(horizontal: false, vertical: true)
                             .frame(maxWidth: .infinity, alignment: .leading)
-
                     }
                 }
                 
                 Spacer()
-                    .frame(minHeight: 0)
-
-                if let image {
+                
+                if let image = page.image {
                     image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                } else {
+                    appleMusicPermisonRequestView()
+                    if isAppleMusicPermissonAllowed {
+                        Text.molioRegular("✅ Apple Music 권한 설정 완료!", size: 17)
+                            .foregroundStyle(.mainLighter)
+                    }
+                    if shoudModifyInSettingsApp {
+                        Button {
+                            openSettingsApp()
+                        } label: {
+                            Text.molioRegular("⚙️ 설정 앱에서 Apple Music 권한을 허용해주세요", size: 17)
+                                .foregroundStyle(.mainLighter)
+                        }
+                    }
                 }
                 
                 Spacer()
-                    .frame(minHeight: 0)
-
-                BasicButton(type: .onBoarding) {
-                    didButtonTapped?()
+                
+                switch page {
+                case .seven:
+                    BasicButton(type: .startMolio, isEnabled: isAppleMusicPermissonAllowed) {
+                        didButtonTapped?()
+                    }
+                default:
+                    BasicButton(type: .onBoarding) {
+                        didButtonTapped?()
+                    }
                 }
-                .padding(.bottom, 10)
             }
             .padding(.horizontal, 22)
+            .padding(.vertical, 15)
+            .onAppear {
+                if page == .seven {
+                    requestAppleMusicPermission()
+                }
+            }
+        }
+    }
+    
+    private func appleMusicPermisonRequestView() -> some View {
+        VStack(alignment: .leading) {
+            Text.molioMedium("필수 권한", size: 16)
+                .foregroundStyle(.gray)
+            HStack(alignment: .center) {
+                Image("appleMusicLogo")
+                    .resizable()
+                    .frame(width: 49, height: 49)
+                Text.molioSemiBold("미디어 및 Apple Music", size: 18)
+                    .fixedSize(horizontal: true, vertical: false)
+                Toggle(isOn: Binding(
+                    get: { isAppleMusicPermissonAllowed },
+                    set: { _ in requestAppleMusicPermission() }
+                )) {
+                    Text("Request Apple Music Permission")
+                }
+                .labelsHidden()
+            }
+            .padding(.vertical, 45)
+            .padding(.horizontal, 27)
+            .background {
+                RoundedRectangle(cornerRadius: 24)
+                    .foregroundStyle(.white)
+            }
+        }
+    }
+    
+    private func requestAppleMusicPermission() {
+        Task {
+            do {
+                try await musicKitService.checkAuthorizationStatus()
+                isAppleMusicPermissonAllowed = true
+            } catch {
+                isAppleMusicPermissonAllowed = false
+                shoudModifyInSettingsApp = true
+            }
+        }
+    }
+    
+    private func openSettingsApp() {
+        if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+            if UIApplication.shared.canOpenURL(settingsURL) {
+                UIApplication.shared.open(settingsURL)
+            }
         }
     }
 }
 
 #Preview {
-    OnBoardingView(
-        title: "나만의 플레이리스트를 만들어볼까요?",
-        subTitle: """
-                      몰리오는 기본 플레이리스트를 제공해요!
-                      내가 원하는 테마, 분위기에 따라 플리를 생성할 수 있어요.
-                      """,
-        image: Image("onBoardingPlaylist")
-    )
-}
-#Preview {
-    OnBoardingView(
-        title: """
-        쉽고 빠르게 스와이프로
-        내 취향인 노래를 저장해보세요!
-        """,
-        image: Image("onBoardingSwipe")
-    )
-}
-#Preview {
-    OnBoardingView(
-        title: """
-        몰리오에서 만들 플레이리스트를
-        다른 플랫폼으로 내보낼 수 있어요!
-        """,
-        subTitle: """
-                      애플 뮤직을 구독하지 않은 경우에는
-                      플레이리스트를 사진으로 내보낼 수 있어요.
-                      """,
-        image: Image("onBoardingExport")
-    )
-}
-
-#Preview {
-    OnBoardingView(
-        title: """
-        내 친구의 플레이리스트를
-        구경할 수 있어요!
-        """,
-        image: Image("onBoardingCommunity")
-    )
-}
-
-#Preview {
-    OnBoardingView(
-        title: """
-        친구의 플레이리스트에서
-        마음에 드는 노래를 가져올 수 있어요!
-        """,
-        image: Image("onBoardingFriendPlaylist")
-    )
+    OnBoardingView(page: .seven)
 }
