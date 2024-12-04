@@ -390,10 +390,12 @@ final class SwipeMusicViewController: UIViewController {
     }
     
     @objc private func didTapLikeButton() {
+        setRandomRotationAngle(isLike: true)
         likeButtonDidTapPublisher.send()
     }
     
     @objc private func didTapDislikeButton() {
+        setRandomRotationAngle(isLike: false)
         dislikeButtonDidTapPublisher.send()
     }
     
@@ -422,6 +424,23 @@ final class SwipeMusicViewController: UIViewController {
             }
         }
         self.present(musicFilterVC, animated: true)
+    }
+    
+    /// 버튼 클릭시, (상, 중, 하)에 따라 달라지는 카드 애니메이션 값 적용하는 메서드
+    private func setRandomRotationAngle(isLike: Bool) {
+        let randomDirection = [-1, 0, 1].randomElement() ?? 0
+        let rotationDirection: CGFloat = isLike ? 1 : -1
+        switch randomDirection {
+        case -1:
+            previousYDirection = -1
+            previousRotationAngle = .pi / 6 * rotationDirection
+        case 1:
+            previousYDirection = 1
+            previousRotationAngle = .pi / 6 * rotationDirection * -1
+        default:
+            previousYDirection = 0
+            previousRotationAngle = 0
+        }
     }
     
     /// 이동하는 값에 따라 두 색깔 사이의 값으로 배경색이 변하는 메서드
