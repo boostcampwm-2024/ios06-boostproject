@@ -2,7 +2,7 @@ import MusicKit
 
 struct DefaultMusicKitService: MusicKitService {
     /// 애플 뮤직 권한 상태 확인
-    func checkAuthorizationStatus() throws {
+    func checkAuthorizationStatus() async throws {
         switch MusicAuthorization.currentStatus {
         case .authorized:
             break
@@ -11,8 +11,9 @@ struct DefaultMusicKitService: MusicKitService {
         case .restricted:
             throw MusicKitError.restricted
         case .notDetermined:
-            Task {
-                await requestAuthorization()
+            let status = await requestAuthorization()
+            if status != .authorized {
+                throw MusicKitError.deniedPermission
             }
         @unknown default:
             break
@@ -29,7 +30,7 @@ struct DefaultMusicKitService: MusicKitService {
     }
     
     func fetchGenres() async throws -> [MusicGenre] {
-        try checkAuthorizationStatus()
+        try await checkAuthorizationStatus()
         let request = MusicCatalogResourceRequest<Genre>()
         let response = try await request.response()
         return response.items.map(\.name)
@@ -38,7 +39,7 @@ struct DefaultMusicKitService: MusicKitService {
     /// 랜덤하게 추천 음악을 불러온다.
     /// - `genres` : 전달받은 장르에 해당하는 차트 음악들을 불러와서 랜덤하게 섞어서 반환
     func fetchRecommendedMusics(by genres: [MusicGenre]) async throws -> [MolioMusic] {
-        try checkAuthorizationStatus()
+        try await checkAuthorizationStatus()
         var recommendedMusics: [MolioMusic] = []
         let musicKitGenres = try await convertToAppleMusicGenre(genres)
         
@@ -58,7 +59,7 @@ struct DefaultMusicKitService: MusicKitService {
     }
     
     func getMusic(with isrcs: [String]) async throws -> [MolioMusic] {
-        try checkAuthorizationStatus()
+        try await checkAuthorizationStatus()
         return await withTaskGroup(of: (Int, MolioMusic?).self) { group in
             for (index, isrc) in isrcs.enumerated() {
                 group.addTask {
@@ -78,7 +79,7 @@ struct DefaultMusicKitService: MusicKitService {
     
     /// 애플 뮤직 플레이리스트 내보내기
     func exportAppleMusicPlaylist(name: String, isrcs: [String]) async throws -> String? {
-        try checkAuthorizationStatus()
+        try await checkAuthorizationStatus()
         let playlist = try await createPlaylist(name: name)
         for isrc in isrcs {
             guard let song = await searchSong(with: isrc) else { continue }
@@ -94,15 +95,16 @@ struct DefaultMusicKitService: MusicKitService {
     // MARK: - Private methods
     
     /// 애플 뮤직 접근 권한 요청
-    private func requestAuthorization() async {
-        _ = await MusicAuthorization.request()
+    private func requestAuthorization() async -> MusicAuthorization.Status {
+        let status = await MusicAuthorization.request()
+        return status
     }
     
     /// ISRC 코드로 애플 뮤직 카탈로그 음악을 검색
     ///  - Parameters: 검색할 isrc 문자열
     ///  - Returns: 응답 데이터 (RandomMusic)
     private func getMusic(with isrc: String) async -> MolioMusic? {
-        try? checkAuthorizationStatus()
+        try? await checkAuthorizationStatus()
         guard let searchedSong = await searchSong(with: isrc) else { return nil }
         return SongMapper.toDomain(searchedSong)
     }

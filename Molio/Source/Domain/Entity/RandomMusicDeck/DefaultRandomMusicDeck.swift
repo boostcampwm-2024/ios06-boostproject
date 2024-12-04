@@ -104,6 +104,7 @@ final class DefaultRandomMusicDeck: RandomMusicDeck {
         randomMusics
             .map { $0.count }
             .receive(on: DispatchQueue.main)
+            .debounce(for: .seconds(0.2), scheduler: DispatchQueue.main)
             .sink { [weak self] musicCount in
                 if musicCount < 10 {
                     self?.loadRandomMusic()
@@ -117,26 +118,28 @@ final class DefaultRandomMusicDeck: RandomMusicDeck {
         
         Task { [weak self] in
             do {
+                // 추천 노래를 받아온다.
                 let fetchedMusics = try await self?.fetchRecommendedMusicUseCase.execute(with: filter)
-                
-                let usersAllMusicISRCs: [String]
-                // TODO: 이걸 현재 플리에 있는 노래만 추천받지 않도록 할 지를 수정해야 한다.
-                if let playlists = try await self?.fetchPlaylistUseCase.fetchMyAllPlaylists() {
-                    usersAllMusicISRCs = playlists.flatMap { $0.musicISRCs }
-                } else {
-                    // 유저 플레이리스트 자체가 없는 경우
-                    usersAllMusicISRCs = []
-                }
-                                
+
                 guard let fetchedMusics else { return }
+
+                // 현재 플리의 노래들
+                let currentPlaylistmusics: [String] = self?.currentPlaylist?.musicISRCs ?? []
                 
                 // 이미 플리에 있는 노래는 추천받지 않는다.
                 let filteredMusics = fetchedMusics.filter { music in
-                    return !usersAllMusicISRCs.contains(music.isrc)
+                    return !currentPlaylistmusics.contains(music.isrc)
                 }
                 
+                // 중복 제거 (Hashable이 아니라서 이렇게 함)
+                let uniqueFilteredMusics = Array(
+                    Dictionary(grouping: filteredMusics, by: { $0.isrc })
+                        .compactMap { $0.value.first }
+                )
+
+                // 덱의 노래들에 넣는다.
                 DispatchQueue.main.async { [weak self] in
-                    self?.randomMusics.value.append(contentsOf: fetchedMusics)
+                    self?.randomMusics.value.append(contentsOf: uniqueFilteredMusics)
                 }
             } catch {
                 print(error.localizedDescription)

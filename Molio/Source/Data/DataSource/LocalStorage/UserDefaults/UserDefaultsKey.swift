@@ -1,3 +1,3 @@
 enum UserDefaultKey: String {
-    case currentPlaylist, defaultPlaylist
+    case currentPlaylist, defaultPlaylist, isOnboarded
 }
