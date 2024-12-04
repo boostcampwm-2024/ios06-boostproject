@@ -4,19 +4,14 @@ final class OnBoardingAppleMusicAccessViewController: UIHostingController<OnBoar
     // MARK: - Initializer
     
     init() {
-        let onBordingView = OnBoardingView(
-            title: """
-            쉽고 빠르게 스와이프로
-            내 취향인 노래를 저장해보세요!
-            """,
-            image: Image("")
-        )
+        let onBoardingView = OnBoardingView(page: .seven)
         
-        super.init(rootView: onBordingView)
+        super.init(rootView: onBoardingView)
 
         rootView.didButtonTapped = { [weak self] in
             guard let self = self else { return }
-            self.navigateToSwipeMusicViewController()
+            self.navigateToLoginViewController()
+            setIsOnboardedTrue()
         }
     }
     
@@ -38,9 +33,21 @@ final class OnBoardingAppleMusicAccessViewController: UIHostingController<OnBoar
     
     // MARK: - Private func
     
-    private func navigateToSwipeMusicViewController() {
-        print("메인 화면으로 이동")
-        // TODO: 메인 화면으로 이동하는 로직 추가 아예 rootView를 갈아 끼워야?
+    private func navigateToLoginViewController() {
+        let loginViewController = LoginViewController(viewModel: LoginViewModel())
+
+        guard let window = self.view.window else { return }
+        
+        UIView.transition(with: window, duration: 0.5) {
+            loginViewController.view.alpha = 0.0
+            window.rootViewController = loginViewController
+            loginViewController.view.alpha = 1.0
+        }
+        
+        window.makeKeyAndVisible()
     }
     
+    private func setIsOnboardedTrue() {
+        UserDefaults.standard.set(true, forKey: UserDefaultKey.isOnboarded.rawValue)
+    }
 }
