@@ -13,14 +13,15 @@ struct DefaultFirebaseAuthService: AuthService {
         return try getCurrentUser().uid
     }
     
-    func signInApple(info: AppleAuthInfo) async throws {
+    func signInApple(info: AppleAuthInfo) async throws -> (uid: String, isNewUser: Bool) {
         let credential = OAuthProvider.appleCredential(
             withIDToken: info.idToken,
             rawNonce: info.nonce,
             fullName: info.fullName
         )
         do {
-            try await Auth.auth().signIn(with: credential)
+            let authResult = try await Auth.auth().signIn(with: credential)
+            return (authResult.user.uid, authResult.additionalUserInfo?.isNewUser ?? false)
         } catch {
             throw FirebaseAuthError.loginFailed
         }
