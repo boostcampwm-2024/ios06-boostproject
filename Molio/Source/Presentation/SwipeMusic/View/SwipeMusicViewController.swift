@@ -279,6 +279,10 @@ final class SwipeMusicViewController: UIViewController {
                     self.currentCardView.center = CGPoint(x: movedCenterX, y: movedCenterY)
                     // 카드 회전
                     self.currentCardView.transform = CGAffineTransform(rotationAngle: previousRotationAngle ?? 0)
+                    // 배경색 변경
+                    let nextCardBackgroundColor = nextCardBackgroundColor
+                        .flatMap { UIColor(rgbaColor: $0) } ?? self.basicBackgroundColor
+                    self.view.backgroundColor = nextCardBackgroundColor
                 },
                 completion: { [weak self] _ in
                     guard let self else { return }
