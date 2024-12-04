@@ -42,12 +42,32 @@ final class FollowRelationViewController: UIHostingController<FollowRelationList
     // MARK: - Present Sheet or Navigation
     
     private func navigateTofriendViewController(with user: MolioFollower) {
-        let friendProfileViewController = FriendProfileViewController(
-            profileType: .friend (
-                userID: user.id,
-                isFollowing: user.followRelation
-            )
-        )
-        navigationController?.pushViewController(friendProfileViewController, animated: true)
+        let useCase: CurrentUserIdUseCase = DIContainer.shared.resolve()
+        
+        do {
+            let userID = try useCase.execute()
+            
+            // 사용자 ID에 따라 화면을 결정
+            let viewController: UIViewController
+            if user.id == userID {
+                // 자신의 플레이리스트
+                viewController = UserProfileViewController(profileType: .me)
+            } else {
+                // 친구의 프로필
+                viewController = FriendProfileViewController(
+                    profileType: .friend(
+                        userID: user.id,
+                        isFollowing: user.followRelation
+                    )
+                )
+            }
+            
+            // 네비게이션으로 이동
+            navigationController?.pushViewController(viewController, animated: true)
+            
+        } catch {
+            print("Error retrieving user ID: \(error.localizedDescription)")
+        }
+       
     }
 }
