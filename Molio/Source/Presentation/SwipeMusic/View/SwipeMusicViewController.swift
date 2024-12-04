@@ -19,7 +19,10 @@ final class SwipeMusicViewController: UIViewController {
     private let basicBackgroundColor = UIColor(resource: .background)
     private var impactFeedBack = UIImpactFeedbackGenerator(style: .medium)
     private var hasProvidedImpactFeedback: Bool = false
-    private var anchoredRotationDirection: CGFloat? // 각 스와이프 제스처의 회전 방향을 고정하기 위한 값
+    private var currentCardBackgroundColor: RGBAColor?
+    private var nextCardBackgroundColor: RGBAColor?
+    private var previousRotationAngle: CGFloat?
+    private var previousYDirection: CGFloat?
     
     private let loadingIndicatorView: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .large)
@@ -217,6 +220,7 @@ final class SwipeMusicViewController: UIViewController {
                 } else {
                     self.updateCurrentCard(with: music)
                 }
+                currentCardBackgroundColor = music.artworkBackgroundColor
             }
             .store(in: &cancellables)
         
@@ -229,6 +233,7 @@ final class SwipeMusicViewController: UIViewController {
                 } else {
                     nextCardView.configure(music: music)
                 }
+                nextCardBackgroundColor = music.artworkBackgroundColor
             }
             .store(in: &cancellables)
         
@@ -261,23 +266,19 @@ final class SwipeMusicViewController: UIViewController {
         let currentCenter = currentCardView.center
         let frameWidth = view.frame.width
         
-        // 랜덤 회전 방향 설정
-        let rotationDirection: CGFloat = [-1, 0, 1].randomElement() ?? 0
-        let maxRotationAngle: CGFloat = .pi / 12
-        
         switch direction {
         case .left, .right:
             self.isMusicCardAnimating = true
             let movedCenterX = currentCenter.x + direction.rawValue * frameWidth
+            let movedCenterY = currentCenter.y + (previousYDirection ?? 0) * frameWidth
             UIView.animate(
                 withDuration: 0.3,
                 animations: { [weak self] in
                     guard let self else { return }
                     // 카드 이동
-                    self.currentCardView.center = CGPoint(x: movedCenterX, y: currentCenter.y)
+                    self.currentCardView.center = CGPoint(x: movedCenterX, y: movedCenterY)
                     // 카드 회전
-                    let rotationAngle = maxRotationAngle * rotationDirection
-                    self.currentCardView.transform = CGAffineTransform(rotationAngle: rotationAngle)
+                    self.currentCardView.transform = CGAffineTransform(rotationAngle: previousRotationAngle ?? 0)
                 },
                 completion: { [weak self] _ in
                     guard let self else { return }
@@ -299,19 +300,18 @@ final class SwipeMusicViewController: UIViewController {
                 guard let self else { return }
                 self.currentCardView.center = self.nextCardView.center
                 self.currentCardView.transform = .identity
+                let currentCardBackgroundColor = currentCardBackgroundColor
+                    .flatMap { UIColor(rgbaColor: $0) } ?? self.basicBackgroundColor
+                
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.view.backgroundColor = currentCardBackgroundColor
+                })
             }
         }
     }
     
     /// 현재 노래 카드 정보 변경 및 현재 노래 재생하는 메서드
     private func updateCurrentCard(with music: SwipeMusicTrackModel) {
-        let artworkBackgroundColor = music.artworkBackgroundColor
-            .flatMap { UIColor(rgbaColor: $0) } ?? self.basicBackgroundColor
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            self.view.backgroundColor = artworkBackgroundColor
-        })
-        
         currentCardView.configure(music: music)
         self.loadAndPlaySongs(url: music.previewAsset)
     }
@@ -348,36 +348,27 @@ final class SwipeMusicViewController: UIViewController {
         guard let card = gesture.view else { return }
         
         let translation = gesture.translation(in: view)
-        if gesture.state == .began {
-            // 제스처 시작 시 손가락 탭 위치와 카드 중심을 비교해서 회전 방향 선택
-            let gestureLocation = gesture.location(in: view)
-            let cardCenter = card.center
-            anchoredRotationDirection = (gestureLocation.y >= cardCenter.y ? -1 : 1)
-        }
         
-        // 카드 이동
         card.center = CGPoint(
             x: nextCardView.center.x + translation.x,
             y: nextCardView.center.y + translation.y
         )
-        // 카드 회전
-        let maxRotationAngle: CGFloat = .pi / 12
-        let horizontalFactor = translation.x / view.bounds.width
-        if let rotationDirection = anchoredRotationDirection {
-            let rotationAngle = maxRotationAngle * horizontalFactor * rotationDirection
-            card.transform = CGAffineTransform(rotationAngle: rotationAngle)
-        }
+        
+        let rotationAngle = calculateRotationAngle(movedPoint: translation)
+        card.transform = CGAffineTransform(rotationAngle: rotationAngle)
         
         if gesture.state == .changed {
             musicCardDidChangeSwipePublisher.send(translation.x)
             providedImpactFeedback(translationX: translation.x)
+            interpolateBackgroundColor(
+                from: currentCardBackgroundColor,
+                to: nextCardBackgroundColor,
+                movedX: translation.x
+            )
         } else if gesture.state == .ended {
-            UIView.animate(withDuration: 0.3) {
-                card.center = self.view.center
-                card.transform = .identity
-            }
+            previousRotationAngle = rotationAngle
+            previousYDirection = translation.y >= 0 ? 1 : -1
             musicCardDidFinishSwipePublisher.send(translation.x)
-            anchoredRotationDirection = nil
         }
     }
     
@@ -425,6 +416,39 @@ final class SwipeMusicViewController: UIViewController {
             }
         }
         self.present(musicFilterVC, animated: true)
+    }
+    
+    /// 이동하는 값에 따라 두 색깔 사이의 값으로 배경색이 변하는 메서드
+    private func interpolateBackgroundColor(from: RGBAColor?, to: RGBAColor?, movedX: CGFloat) {
+        let from = from ?? RGBAColor.background
+        let to = to ?? RGBAColor.background
+        let progress: CGFloat = min((abs(movedX) / viewModel.swipeThreshold), 1.0)
+        let red = from.red + (to.red - from.red) * progress
+        let green = from.green + (to.green - from.green) * progress
+        let blue = from.blue + (to.blue - from.blue) * progress
+        let alpha = from.alpha + (to.alpha - from.alpha) * progress
+        view.backgroundColor = UIColor(red: red, green: green, blue: blue, alpha: alpha)
+    }
+    
+    /// 카드 이동에 따른 회전 각도 계산하는 메서드
+    private func calculateRotationAngle(movedPoint: CGPoint) -> CGFloat {
+        let maxRotationAngle: CGFloat = .pi / 6
+        let diagonalFactor = calculateRotationFactor(point: movedPoint)
+        let rotationSign = getRotationSign(point: movedPoint)
+        return maxRotationAngle * diagonalFactor * rotationSign
+    }
+    
+    /// 회전 비율을 결정하는 메서드
+    private func calculateRotationFactor(point: CGPoint) -> CGFloat {
+        let absX = abs(point.x)
+        let absY = abs(point.y)
+        
+        return min(absX, absY) / (view.bounds.width / 2)
+    }
+    
+    /// 회전 방향을 구하는 메서드
+    private func getRotationSign(point: CGPoint) -> CGFloat {
+        return point.x * point.y >= 0 ? -1.0 : 1.0
     }
     
     private func setupSelectPlaylistView() {
