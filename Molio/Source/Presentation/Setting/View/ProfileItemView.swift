@@ -30,6 +30,7 @@ struct ProfileItemView: View {
                     .foregroundStyle(.gray)
                     .padding(.trailing, 16)
             }
+            .padding(.vertical, 8)
         }
         .background(Color(uiColor: UIColor(resource: .background)))
     }

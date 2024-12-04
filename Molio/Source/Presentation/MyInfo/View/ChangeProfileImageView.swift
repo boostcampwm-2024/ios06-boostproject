@@ -17,9 +17,11 @@ struct ChangeProfileImageView: View {
                 if let image = phase.image {
                     image
                         .resizable()
+                        .scaledToFill()
                 } else {
                     Image(ImageResource.personCircle)
                         .resizable()
+                        .scaledToFill()
                 }
             }
             .frame(width: 110, height: 110)
