@@ -35,7 +35,6 @@ final class OnBoardingPlaylistViewController: UIHostingController<OnBoardingView
         let viewController = OnBoardingSwipeViewController()
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
 }
 
 // MARK: - Preview

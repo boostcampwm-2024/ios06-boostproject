@@ -36,5 +36,4 @@ final class OnBoardingFriendPlaylistViewController: UIHostingController<OnBoardi
         let viewController = OnBoardingAppleMusicAccessViewController()
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
 }

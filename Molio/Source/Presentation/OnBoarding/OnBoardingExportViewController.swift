@@ -36,5 +36,4 @@ final class OnBoardingExportViewController: UIHostingController<OnBoardingView> 
         let viewController = OnBoardingCommunityViewController()
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
 }

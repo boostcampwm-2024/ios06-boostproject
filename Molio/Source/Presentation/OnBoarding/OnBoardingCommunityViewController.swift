@@ -36,5 +36,4 @@ final class OnBoardingCommunityViewController: UIHostingController<OnBoardingVie
         let viewController = OnBoardingFriendPlaylistViewController()
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
 }

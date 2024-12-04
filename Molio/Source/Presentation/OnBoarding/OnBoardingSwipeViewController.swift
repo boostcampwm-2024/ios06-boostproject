@@ -35,6 +35,4 @@ final class OnBoardingSwipeViewController: UIHostingController<OnBoardingView> {
         let viewController = OnBoardingFilterViewController()
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
 }
-
