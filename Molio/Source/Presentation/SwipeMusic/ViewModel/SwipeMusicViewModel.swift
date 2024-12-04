@@ -58,9 +58,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
         fetchImageUseCase: FetchImageUseCase = DIContainer.shared.resolve(),
         managePlaylistUseCase: ManageMyPlaylistUseCase = DIContainer.shared.resolve()
     ) {
-        self.musicDeck = DefaultRandomMusicDeck(
-            fetchRecommendedMusicUseCase: fetchRecommendedMusicUseCase
-        )
+        self.musicDeck = DefaultRandomMusicDeck()
         self.fetchImageUseCase = fetchImageUseCase
         self.managePlaylistUseCase = managePlaylistUseCase
         
