@@ -1,6 +1,5 @@
 import Foundation
 import Combine
-import MusicKit
 
 final class SwipeMusicViewModel: InputOutputViewModel {
     struct Input {
