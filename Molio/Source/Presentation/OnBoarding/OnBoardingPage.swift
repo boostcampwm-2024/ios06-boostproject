@@ -35,12 +35,12 @@ enum OnBoardingPage {
     
     var image: Image? {
         switch self {
-        case .one: Image("onBoardingOne")
-        case .two: Image("onBoardingTwo")
-        case .three: Image("onBoardingThree")
-        case .four: Image("onBoardingFour")
-        case .five: Image("onBoardingFive")
-        case .six: Image("onBoardingSix")
+        case .one: Image(.onboardingOne)
+        case .two: Image(.onBoardingTwo)
+        case .three: Image(.onBoardingThree)
+        case .four: Image(.onboardingFour)
+        case .five: Image(.onboardingFive)
+        case .six: Image(.onboardingSix)
         case .seven: nil
         }
     }
