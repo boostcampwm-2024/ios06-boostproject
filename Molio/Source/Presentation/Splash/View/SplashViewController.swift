@@ -21,7 +21,8 @@ final class SplashViewController: UIViewController {
     
     private let molioTitleLabel: UILabel = {
         let label = UILabel()
-        label.molioBold(text: StringLiterals.title, size: 72)
+        label.font = UIFont(name: "GmarketSansTTFBold", size: 54)
+        label.text = StringLiterals.title
         label.textColor = .main
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
