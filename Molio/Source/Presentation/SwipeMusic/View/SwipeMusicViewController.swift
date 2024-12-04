@@ -522,8 +522,8 @@ final class SwipeMusicViewController: UIViewController {
         
         view.addSubview(loadingIndicatorView)
         NSLayoutConstraint.activate([
-            loadingIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loadingIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            loadingIndicatorView.centerXAnchor.constraint(equalTo: nextCardView.centerXAnchor),
+            loadingIndicatorView.centerYAnchor.constraint(equalTo: nextCardView.centerYAnchor)
         ])
     }
     
