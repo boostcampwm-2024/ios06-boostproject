@@ -90,12 +90,12 @@ struct UserProfileView: View {
                     .frame(maxWidth: .infinity, maxHeight: 82)
                     .padding(.horizontal, 22)
                     .padding(.top, 16)
-                    
-                    Spacer().frame(height: 21)
-                    
+                                        
                     // MARK: - 유저 description
                     
-                    if let description = viewModel.user?.description {
+                    if let description = viewModel.user?.description, description != "" {
+                        Spacer().frame(height: 21)
+
                         Text(description)
                             .font(.system(size: 14, weight: .regular))
                             .foregroundColor(.white)
@@ -125,6 +125,9 @@ struct UserProfileView: View {
                     }
                     
                     Spacer().frame(height: 13)
+                    
+                    Divider()
+                        .background(Color.gray)
                     
                     // MARK: - 유저 플레이리스트
                     
@@ -167,9 +170,6 @@ struct UserProfileView: View {
     }
 }
 
-
-
-
 struct UserPlaylistRowView: View {
     let playlist: MolioPlaylist
     
@@ -182,8 +182,13 @@ struct UserPlaylistRowView: View {
                 HStack {
                     ForEach(playlist.filter, id: \.self) { genre in
                         FilterTag(content: genre.description)
+                            .lineLimit(1) 
                     }
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .layoutPriority(1)
+                .allowsTightening(true)
+                .clipped()
             }
             Spacer()
             Image(systemName: "chevron.right")
