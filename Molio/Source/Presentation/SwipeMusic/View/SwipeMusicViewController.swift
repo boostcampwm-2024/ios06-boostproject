@@ -204,8 +204,10 @@ final class SwipeMusicViewController: UIViewController {
             .sink { [weak self] isLoading in
                 guard let self else { return }
                 if isLoading {
+                    currentCardView.isUserInteractionEnabled = false
                     loadingIndicatorView.startAnimating()
                 } else {
+                    currentCardView.isUserInteractionEnabled = true
                     loadingIndicatorView.stopAnimating()
                 }
             }
