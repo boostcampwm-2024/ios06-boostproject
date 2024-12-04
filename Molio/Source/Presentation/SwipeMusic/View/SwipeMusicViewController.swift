@@ -19,6 +19,18 @@ final class SwipeMusicViewController: UIViewController {
     private let basicBackgroundColor = UIColor(resource: .background)
     private var impactFeedBack = UIImpactFeedbackGenerator(style: .medium)
     private var hasProvidedImpactFeedback: Bool = false
+    private var currentCardBackgroundColor: RGBAColor?
+    private var nextCardBackgroundColor: RGBAColor?
+    private var previousRotationAngle: CGFloat?
+    private var previousYDirection: CGFloat?
+    
+    private let loadingIndicatorView: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .white
+        indicator.hidesWhenStopped = true
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
     
     private let playlistSelectButton: UIButton = {
         let button = UIButton()
@@ -26,12 +38,11 @@ final class SwipeMusicViewController: UIViewController {
         button.layer.masksToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        // 글래스모피즘 효과 추가
         let blurEffect = UIBlurEffect(style: .systemMaterialDark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.layer.cornerRadius = 10
         blurEffectView.clipsToBounds = true
-        blurEffectView.isUserInteractionEnabled = false // 터치 이벤트 차단 방지
+        blurEffectView.isUserInteractionEnabled = false
         blurEffectView.translatesAutoresizingMaskIntoConstraints = false
         blurEffectView.alpha = 0.5
         
@@ -43,7 +54,7 @@ final class SwipeMusicViewController: UIViewController {
             blurEffectView.bottomAnchor.constraint(equalTo: button.bottomAnchor)
         ])
         
-        button.backgroundColor = UIColor.black.withAlphaComponent(0.1) // 반투명 배경
+        button.backgroundColor = UIColor.black.withAlphaComponent(0.1)
         return button
     }()
     
@@ -188,6 +199,18 @@ final class SwipeMusicViewController: UIViewController {
             }
             .store(in: &cancellables)
         
+        output.isLoading
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isLoading in
+                guard let self else { return }
+                if isLoading {
+                    loadingIndicatorView.startAnimating()
+                } else {
+                    loadingIndicatorView.stopAnimating()
+                }
+            }
+            .store(in: &cancellables)
+        
         output.currentMusicTrack
             .receive(on: DispatchQueue.main)
             .sink { [weak self] music in
@@ -197,6 +220,7 @@ final class SwipeMusicViewController: UIViewController {
                 } else {
                     self.updateCurrentCard(with: music)
                 }
+                currentCardBackgroundColor = music.artworkBackgroundColor
             }
             .store(in: &cancellables)
         
@@ -209,6 +233,7 @@ final class SwipeMusicViewController: UIViewController {
                 } else {
                     nextCardView.configure(music: music)
                 }
+                nextCardBackgroundColor = music.artworkBackgroundColor
             }
             .store(in: &cancellables)
         
@@ -245,10 +270,15 @@ final class SwipeMusicViewController: UIViewController {
         case .left, .right:
             self.isMusicCardAnimating = true
             let movedCenterX = currentCenter.x + direction.rawValue * frameWidth
+            let movedCenterY = currentCenter.y + (previousYDirection ?? 0) * frameWidth
             UIView.animate(
                 withDuration: 0.3,
                 animations: { [weak self] in
-                    self?.currentCardView.center = CGPoint(x: movedCenterX, y: currentCenter.y)
+                    guard let self else { return }
+                    // 카드 이동
+                    self.currentCardView.center = CGPoint(x: movedCenterX, y: movedCenterY)
+                    // 카드 회전
+                    self.currentCardView.transform = CGAffineTransform(rotationAngle: previousRotationAngle ?? 0)
                 },
                 completion: { [weak self] _ in
                     guard let self else { return }
@@ -262,25 +292,26 @@ final class SwipeMusicViewController: UIViewController {
                         self.pendingMusic.nextMusic = nil
                     }
                     
+                    self.currentCardView.transform = .identity
                     self.isMusicCardAnimating = false
                 })
         case .none:
             UIView.animate(withDuration: 0.3) { [weak self] in
                 guard let self else { return }
                 self.currentCardView.center = self.nextCardView.center
+                self.currentCardView.transform = .identity
+                let currentCardBackgroundColor = currentCardBackgroundColor
+                    .flatMap { UIColor(rgbaColor: $0) } ?? self.basicBackgroundColor
+                
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.view.backgroundColor = currentCardBackgroundColor
+                })
             }
         }
     }
     
     /// 현재 노래 카드 정보 변경 및 현재 노래 재생하는 메서드
     private func updateCurrentCard(with music: SwipeMusicTrackModel) {
-        let artworkBackgroundColor = music.artworkBackgroundColor
-            .flatMap { UIColor(rgbaColor: $0) } ?? self.basicBackgroundColor
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            self.view.backgroundColor = artworkBackgroundColor
-        })
-        
         currentCardView.configure(music: music)
         self.loadAndPlaySongs(url: music.previewAsset)
     }
@@ -317,15 +348,26 @@ final class SwipeMusicViewController: UIViewController {
         guard let card = gesture.view else { return }
         
         let translation = gesture.translation(in: view)
+        
         card.center = CGPoint(
             x: nextCardView.center.x + translation.x,
             y: nextCardView.center.y + translation.y
         )
         
+        let rotationAngle = calculateRotationAngle(movedPoint: translation)
+        card.transform = CGAffineTransform(rotationAngle: rotationAngle)
+        
         if gesture.state == .changed {
             musicCardDidChangeSwipePublisher.send(translation.x)
             providedImpactFeedback(translationX: translation.x)
+            interpolateBackgroundColor(
+                from: currentCardBackgroundColor,
+                to: nextCardBackgroundColor,
+                movedX: translation.x
+            )
         } else if gesture.state == .ended {
+            previousRotationAngle = rotationAngle
+            previousYDirection = translation.y >= 0 ? 1 : -1
             musicCardDidFinishSwipePublisher.send(translation.x)
         }
     }
@@ -350,7 +392,8 @@ final class SwipeMusicViewController: UIViewController {
     }
     
     @objc func didTapPlaylistSelectButton() {
-        let selectPlaylistVC = SelectPlaylistViewController(viewModel: ManagePlaylistViewModel())
+        let viewModel = ManagePlaylistViewModel()
+        let selectPlaylistVC = SelectPlaylistViewController(viewModel: viewModel)
         selectPlaylistVC.delegate = self
         self.presentCustomSheet(selectPlaylistVC)
     }
@@ -366,9 +409,46 @@ final class SwipeMusicViewController: UIViewController {
         musicPlayer.stop()
         let viewModel = MusicFilterViewModel()
         let musicFilterVC = MusicFilterViewController(viewModel: viewModel) { [weak self] updatedFilter in
-            self?.filterDidUpdatePublisher.send(updatedFilter)
+            if let updatedFilter = updatedFilter {
+                self?.filterDidUpdatePublisher.send(updatedFilter)
+            } else {
+                self?.musicPlayer.play() // 필터를 설정하지 않고 dismiss한 경우 이어서 재생
+            }
         }
-        navigationController?.pushViewController(musicFilterVC, animated: true)
+        self.present(musicFilterVC, animated: true)
+    }
+    
+    /// 이동하는 값에 따라 두 색깔 사이의 값으로 배경색이 변하는 메서드
+    private func interpolateBackgroundColor(from: RGBAColor?, to: RGBAColor?, movedX: CGFloat) {
+        let from = from ?? RGBAColor.background
+        let to = to ?? RGBAColor.background
+        let progress: CGFloat = min((abs(movedX) / viewModel.swipeThreshold), 1.0)
+        let red = from.red + (to.red - from.red) * progress
+        let green = from.green + (to.green - from.green) * progress
+        let blue = from.blue + (to.blue - from.blue) * progress
+        let alpha = from.alpha + (to.alpha - from.alpha) * progress
+        view.backgroundColor = UIColor(red: red, green: green, blue: blue, alpha: alpha)
+    }
+    
+    /// 카드 이동에 따른 회전 각도 계산하는 메서드
+    private func calculateRotationAngle(movedPoint: CGPoint) -> CGFloat {
+        let maxRotationAngle: CGFloat = .pi / 6
+        let diagonalFactor = calculateRotationFactor(point: movedPoint)
+        let rotationSign = getRotationSign(point: movedPoint)
+        return maxRotationAngle * diagonalFactor * rotationSign
+    }
+    
+    /// 회전 비율을 결정하는 메서드
+    private func calculateRotationFactor(point: CGPoint) -> CGFloat {
+        let absX = abs(point.x)
+        let absY = abs(point.y)
+        
+        return min(absX, absY) / (view.bounds.width / 2)
+    }
+    
+    /// 회전 방향을 구하는 메서드
+    private func getRotationSign(point: CGPoint) -> CGFloat {
+        return point.x * point.y >= 0 ? -1.0 : 1.0
     }
     
     private func setupSelectPlaylistView() {
@@ -396,19 +476,6 @@ final class SwipeMusicViewController: UIViewController {
         ])
     }
     
-    private func refreshCurrentMusicTrackView() {
-        currentCardView.removeFromSuperview()
-        
-        view.insertSubview(currentCardView, aboveSubview: nextCardView)
-        
-        NSLayoutConstraint.activate([
-            currentCardView.topAnchor.constraint(equalTo: playlistSelectButton.bottomAnchor, constant: 12),
-            currentCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
-            currentCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
-            currentCardView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -107)
-        ])
-    }
-    
     private func setupMusicTrackView() {
         // MARK: 다음 노래 카드
         view.insertSubview(nextCardView, belowSubview: playlistSelectButton)
@@ -426,6 +493,12 @@ final class SwipeMusicViewController: UIViewController {
             currentCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
             currentCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
             currentCardView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -107)
+        ])
+        
+        view.addSubview(loadingIndicatorView)
+        NSLayoutConstraint.activate([
+            loadingIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     

@@ -6,4 +6,11 @@ struct RGBAColor {
     let green: CGFloat
     let blue: CGFloat
     let alpha: CGFloat
+    
+    static let background = RGBAColor(
+        red: 50/255,
+        green: 50/255,
+        blue: 50/255,
+        alpha: 1.0
+    )
 }
