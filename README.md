@@ -40,11 +40,10 @@
 | ------ |
 | <img width=250 src=https://github.com/user-attachments/assets/39790551-ed52-481e-8d60-f8296fa80924> <img width=250 src=https://github.com/user-attachments/assets/70f29ce7-7e94-468e-8ed4-dc7fd34c3b00> |
 
-<!--
 | 플레이리스트 이미지로 내보내기 |
 | ------ |
-| <img width=250 src=> <img width=250 src=> |
--->
+| <img width=250 src=https://github.com/user-attachments/assets/64f15d2f-aac0-4652-87a4-6ff5a41879b2> |
+
 
 ### 4. 다른 유저의 몰리오를 찾아보세요! **👯‍♂️**
 
@@ -76,9 +75,9 @@
 | 깃허브 링크 | [@Park-kxng](https://github.com/Park-kxng) | [@alstn38](https://github.com/alstn38) | [@kybeen](https://github.com/kybeen) | [@windowcow](https://github.com/windowcow) |
 
 ## 7. 개발 환경
-![iOS](https://img.shields.io/badge/iOS-16%2B-000000?style=for-the-badge&logo=apple&logoColor=white)
-![Swift](https://img.shields.io/badge/Swift-5.9-FA7343?style=for-the-badge&logo=swift&logoColor=white)
-![Xcode](https://img.shields.io/badge/Xcode-15.4-1575F9?style=for-the-badge&logo=Xcode&logoColor=white)
+![iOS](https://img.shields.io/badge/iOS-16%2B-000000?style=for-the-badge&logo=apple&logoColor=white)  
+![Swift](https://img.shields.io/badge/Swift-5.9-FA7343?style=for-the-badge&logo=swift&logoColor=white)  
+![Xcode](https://img.shields.io/badge/Xcode-15.4-1575F9?style=for-the-badge&logo=Xcode&logoColor=white)  
 ![Firebase](https://img.shields.io/badge/Firebase-Integrated-FFCA28?style=for-the-badge&logo=firebase&logoColor=white)
 
 ## 8. 문서
