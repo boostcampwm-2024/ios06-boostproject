@@ -73,8 +73,13 @@
 | 사진   | <img width=150 src="https://github.com/user-attachments/assets/7af07e9b-7e88-443f-896e-392b954ba675">| <img width=150 src="https://github.com/user-attachments/assets/b8922aca-bd78-4947-9ad6-69f4239e3c4f"> | <img width=150 src="https://github.com/user-attachments/assets/df00dd8d-5731-4f01-9662-16ebbf8bf7ce"> | <img width=150 src="https://github.com/user-attachments/assets/f582911e-5711-4fe6-9d82-db65521f635b"> |
 | 깃허브 링크 | [@Park-kxng](https://github.com/Park-kxng) | [@alstn38](https://github.com/alstn38) | [@kybeen](https://github.com/kybeen) | [@windowcow](https://github.com/windowcow) |
 
+## 7. 개발 환경
+![iOS](https://img.shields.io/badge/iOS-16%2B-000000?style=for-the-badge&logo=apple&logoColor=white)
+![Swift](https://img.shields.io/badge/Swift-5.9-FA7343?style=for-the-badge&logo=swift&logoColor=white)
+![Xcode](https://img.shields.io/badge/Xcode-15.4-1575F9?style=for-the-badge&logo=Xcode&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-Integrated-FFCA28?style=for-the-badge&logo=firebase&logoColor=white)
 
-## 7. 문서
+## 8. 문서
 
 |📚 문서|[Wiki](https://github.com/boostcampwm-2024/iOS06-molio/wiki)|[팀 노션](https://silly-squid-e4b.notion.site/iOS06-12aa06a926628080bfeed6d8ce906062?pvs=4)|[그라운드 룰](https://silly-squid-e4b.notion.site/12da06a92662809cb5a5c6a5f21bf16b?pvs=4)|[개발 규칙](https://silly-squid-e4b.notion.site/12da06a926628000b18ec72def7595af?pvs=4)|[회의록](https://silly-squid-e4b.notion.site/12aa06a926628084b3c3d18f3c960e55?v=133a06a9266280febf43000cbd62645e&pvs=4)|[Figma](https://www.figma.com/design/AUazDR6Oe91jGPGnFhrXal/MOLIO?node-id=0-1&t=I2PNeHHz4tDP0bQc-1)|
 |:-:|:-:|:-:|:-:|:-:|:-:|:--:|
