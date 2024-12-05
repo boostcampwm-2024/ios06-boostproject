@@ -23,14 +23,13 @@
 2. 내 취향인 노래는 `오른쪽으로 스와이프`해서 내 몰리오에 저장할 수 있어요. **💚**
 3. 내 취향이 아니라면 `왼쪽으로 스와이프`해서 다음노래를 추천받아요. 👈
 
-![카드 스와이프](https://github.com/user-attachments/assets/007a00ef-2953-4359-b5b7-cb23a2c26c48)
-
+<img width=250 src='https://github.com/user-attachments/assets/007a00ef-2953-4359-b5b7-cb23a2c26c48'>
 
 ### 2. 몰리오에 저장된 음악을 들을 수 있어요! **🎶**
 
 1. 내 몰리오에 `저장된 음악`은 모두 들을 수 있어요! 🙌
 
-![플리 재생](https://github.com/user-attachments/assets/dd1b8a21-321b-4095-b07c-3763818d9f2c)
+<img width=250 src='[https://github.com/user-attachments/assets/007a00ef-2953-4359-b5b7-cb23a2c26c48](https://github.com/user-attachments/assets/dd1b8a21-321b-4095-b07c-3763818d9f2c)'>
 
 ### 3. 내 몰리오를 다른 앱에서도 들을 수 있어요! **📱**
 
