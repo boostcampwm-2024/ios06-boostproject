@@ -23,7 +23,7 @@
 2. 내 취향인 노래는 `오른쪽으로 스와이프`해서 내 몰리오에 저장할 수 있어요. **💚**
 3. 내 취향이 아니라면 `왼쪽으로 스와이프`해서 다음노래를 추천받아요. 👈
 
-<img width=250 src='https://github.com/user-attachments/assets/007a00ef-2953-4359-b5b7-cb23a2c26c48'>
+<img width=250 src='https://github.com/user-attachments/assets/240cf7db-5b3e-40ae-acec-7fc2c42c5deb'>
 
 ### 2. 몰리오에 저장된 음악을 들을 수 있어요! **🎶**
 
@@ -36,27 +36,29 @@
 1. 내 몰리오를 애플 뮤직 플레이리스트로 `내보내기` 할 수 있습니다. 🎧
 2. 플레이리스트 목록을 `이미지로 다운`받아서, 다른 플랫폼의 플레이리스트 생성 기능에 활용해보세요! 🖼️
 
-<aside>
-💡
+| 애플 뮤직 플레이리스트 내보내기 |
+| ------ |
+| <img width=250 src=https://github.com/user-attachments/assets/39790551-ed52-481e-8d60-f8296fa80924> <img width=250 src=https://github.com/user-attachments/assets/70f29ce7-7e94-468e-8ed4-dc7fd34c3b00> |
 
-이미지 업데이트
-
-</aside>
+<!--
+| 플레이리스트 이미지로 내보내기 |
+| ------ |
+| <img width=250 src=> <img width=250 src=> |
+-->
 
 ### 4. 다른 유저의 몰리오를 찾아보세요! **👯‍♂️**
 
 1. 다른 유저들을 검색해서 찾아볼 수 있어요 🔗
 2. 다른 유저의 몰리오를 구경하고 좋은 노래가 있다면 내 몰리오로 불러올 수 있어요. 👀
 
-<aside>
-💡
+| 유저 검색 및 팔로우 | 노래 가져오기 | 가져온 노래 확인 |
+| ------ | ------ | ------ |
+| <img width=250 alt=검색및팔로우 src=https://github.com/user-attachments/assets/b8afe3fa-0b80-4b6f-a0fb-ac95ed8d8352> | <img width=250 alt=노래가져오기 src=https://github.com/user-attachments/assets/1c67b4e6-0186-42ba-a882-70d1a7bce687> | <img width=250 alt=가져온노래확인 src=https://github.com/user-attachments/assets/abc76fd7-a0ae-4e51-be9e-3f6e0dddc686> |
 
-이미지 업데이트
 
-</aside>
 
 ## 5. 아키텍쳐
-<img width="1000" alt="molio팀의 피그잼" src="https://github.com/user-attachments/assets/b5e7716a-f9d2-4e77-b7ab-280464448061">
+<img width="1000" alt="molio팀의 피그잼" src="https://github.com/user-attachments/assets/0124b622-4e99-43bf-b5d9-9ded8169f655">
 
 
 
