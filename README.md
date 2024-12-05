@@ -36,13 +36,9 @@
 1. 내 몰리오를 애플 뮤직 플레이리스트로 `내보내기` 할 수 있습니다. 🎧
 2. 플레이리스트 목록을 `이미지로 다운`받아서, 다른 플랫폼의 플레이리스트 생성 기능에 활용해보세요! 🖼️
 
-| 애플 뮤직 플레이리스트 내보내기 |
-| ------ |
-| <img width=250 src=https://github.com/user-attachments/assets/39790551-ed52-481e-8d60-f8296fa80924> <img width=250 src=https://github.com/user-attachments/assets/70f29ce7-7e94-468e-8ed4-dc7fd34c3b00> |
-
-| 플레이리스트 이미지로 내보내기 |
-| ------ |
-| <img width=250 src=https://github.com/user-attachments/assets/64f15d2f-aac0-4652-87a4-6ff5a41879b2> |
+| 애플 뮤직 플레이리스트 내보내기 | 플레이리스트 이미지로 내보내기 |
+| ------ | ------ |
+| <img width=250 src=https://github.com/user-attachments/assets/39790551-ed52-481e-8d60-f8296fa80924> <img width=250 src=https://github.com/user-attachments/assets/70f29ce7-7e94-468e-8ed4-dc7fd34c3b00> | <img width=250 src=https://github.com/user-attachments/assets/64f15d2f-aac0-4652-87a4-6ff5a41879b2> |
 
 
 ### 4. 다른 유저의 몰리오를 찾아보세요! **👯‍♂️**
