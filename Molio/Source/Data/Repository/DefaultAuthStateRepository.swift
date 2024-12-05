@@ -28,8 +28,8 @@ final class DefaultAuthStateRepository: AuthStateRepository {
         authLocalStorage.authSelection = selection
     }
     
-    func signInApple(info: AppleAuthInfo) async throws {
-        try await firebaseService.signInApple(info: info)
+    func signInApple(info: AppleAuthInfo) async throws -> (uid: String, isNewUser: Bool) {
+        return try await firebaseService.signInApple(info: info)
     }
     
     func logout() throws {
