@@ -184,7 +184,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
                         self.nextMusicTrackPublisher.send(swipeMusicTrackModel)
                     } catch {
                         self.nextMusicTrackPublisher.send(
-                            SwipeMusicTrackModel(randomMusic: nextMusic,imageData: nil)
+                            SwipeMusicTrackModel(randomMusic: nextMusic, imageData: nil)
                         )
                     }
                 }
