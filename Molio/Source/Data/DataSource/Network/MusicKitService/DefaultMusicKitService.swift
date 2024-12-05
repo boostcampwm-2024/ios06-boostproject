@@ -1,3 +1,4 @@
+import Foundation
 import MusicKit
 
 struct DefaultMusicKitService: MusicKitService {
@@ -113,7 +114,8 @@ struct DefaultMusicKitService: MusicKitService {
     /// - 생성에 실패한 경우 `MusicKitError.failedToCreatePlaylist` 에러를 throw
     private func createPlaylist(name: String) async throws -> MusicKit.Playlist {
         do {
-            return try await MusicLibrary.shared.createPlaylist(name: name)
+            let appName = Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String
+            return try await MusicLibrary.shared.createPlaylist(name: name, authorDisplayName: appName)
         } catch {
             throw MusicKitError.failedToCreatePlaylist(name: name)
         }
