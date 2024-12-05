@@ -1,3 +1,4 @@
+import Foundation
 import MusicKit
 
 struct DefaultMusicKitService: MusicKitService {
@@ -43,7 +44,7 @@ struct DefaultMusicKitService: MusicKitService {
         var recommendedMusics: [MolioMusic] = []
         let musicKitGenres = try await convertToAppleMusicGenre(genres)
         
-        // 설정된 장르가 없는 경우
+        // 설정된 장르가 없는 경우 Top Songs 차트의 음악 검색
         if musicKitGenres.isEmpty {
             let songs = try await getMusicCatalogChart()
             let molioMusics = songs.compactMap({ SongMapper.toDomain($0) })
@@ -113,7 +114,8 @@ struct DefaultMusicKitService: MusicKitService {
     /// - 생성에 실패한 경우 `MusicKitError.failedToCreatePlaylist` 에러를 throw
     private func createPlaylist(name: String) async throws -> MusicKit.Playlist {
         do {
-            return try await MusicLibrary.shared.createPlaylist(name: name)
+            let appName = Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String
+            return try await MusicLibrary.shared.createPlaylist(name: name, authorDisplayName: appName)
         } catch {
             throw MusicKitError.failedToCreatePlaylist(name: name)
         }
@@ -140,14 +142,15 @@ struct DefaultMusicKitService: MusicKitService {
     }
     
     /// 애플 뮤직 카탈로그의 차트 음악들을 불러온다.
-    /// - `genre` : 해당 장르에 해당하는 차트 음악들을 불러옴
+    /// - `genre` : 해당 차트 음악들을 불러옴
+    /// - `kinds` : 불러올 차트 종류 지정 (Daily Top 100, City Charts, Top Playlists)
     private func getMusicCatalogChart(of appleMusicGenre: Genre? = nil) async throws -> [Song] {
         var request = MusicCatalogChartsRequest(
             genre: appleMusicGenre,
             kinds: [.dailyGlobalTop, .cityTop, .mostPlayed],
             types: [Song.self]
         )
-        request.limit = 100
+        request.limit = 200
         let response = try await request.response()
         return response.songCharts.flatMap(\.items)
     }

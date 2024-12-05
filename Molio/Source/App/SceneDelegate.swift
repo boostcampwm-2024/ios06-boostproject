@@ -10,6 +10,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         configureAudioSession()
         setupNavigationBarAppearance()
+        setupAlertTintColor()
         let splashViewController = SplashViewController(viewModel: SplashViewModel())
         
         window = UIWindow(windowScene: windowScene)
@@ -43,6 +44,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         appearance.standardAppearance = navigationBarAppearance
         appearance.scrollEdgeAppearance = navigationBarAppearance
         appearance.tintColor = .main
+    }
+    
+    private func setupAlertTintColor() {
+        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .main
     }
     
     func switchToLoginViewController() {

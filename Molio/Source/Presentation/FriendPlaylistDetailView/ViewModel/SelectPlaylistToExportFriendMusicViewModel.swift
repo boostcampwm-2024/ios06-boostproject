@@ -13,7 +13,6 @@ final class SelectPlaylistToExportFriendMusicViewModel: ObservableObject {
     init(
         fetchPlaylistUseCase: FetchPlaylistUseCase = DIContainer.shared.resolve(),
         manageMyPlaylistUseCase: ManageMyPlaylistUseCase = DIContainer.shared.resolve(),
-        
         selectedMusic: MolioMusic
     ) {
         self.fetchPlaylistUseCase = fetchPlaylistUseCase

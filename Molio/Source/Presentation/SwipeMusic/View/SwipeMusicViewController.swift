@@ -248,8 +248,12 @@ final class SwipeMusicViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] buttonHighlight in
                 guard let self else { return }
+                
                 self.likeButton.isHighlighted = buttonHighlight.isLikeHighlighted
+                animateButtonScale(button: self.likeButton, isHighlighted: buttonHighlight.isLikeHighlighted)
+                
                 self.dislikeButton.isHighlighted = buttonHighlight.isDislikeHighlighted
+                animateButtonScale(button: self.dislikeButton, isHighlighted: buttonHighlight.isDislikeHighlighted)
             }
             .store(in: &cancellables)
         
@@ -258,6 +262,7 @@ final class SwipeMusicViewController: UIViewController {
             .sink { [weak self] swipeDirection in
                 guard let self else { return }
                 self.animateMusicCard(direction: swipeDirection)
+                
             }
             .store(in: &cancellables)
     }
@@ -479,6 +484,12 @@ final class SwipeMusicViewController: UIViewController {
     /// 회전 방향을 구하는 메서드
     private func getRotationSign(point: CGPoint) -> CGFloat {
         return point.x * point.y >= 0 ? -1.0 : 1.0
+    }
+    
+    private func animateButtonScale(button: UIButton, isHighlighted: Bool) {
+        UIView.animate(withDuration: 0.1) {
+            button.transform = isHighlighted ? CGAffineTransform(scaleX: 1.2, y: 1.2) : .identity
+        }
     }
     
     private func setupSelectPlaylistView() {

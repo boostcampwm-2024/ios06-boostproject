@@ -1,6 +1,5 @@
 import Combine
 import Foundation
-import MusicKit
 import UIKit
 
 final class SwipeMusicViewModel: InputOutputViewModel {
@@ -60,9 +59,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
         fetchImageUseCase: FetchImageUseCase = DIContainer.shared.resolve(),
         managePlaylistUseCase: ManageMyPlaylistUseCase = DIContainer.shared.resolve()
     ) {
-        self.musicDeck = DefaultRandomMusicDeck(
-            fetchRecommendedMusicUseCase: fetchRecommendedMusicUseCase
-        )
+        self.musicDeck = DefaultRandomMusicDeck()
         self.fetchImageUseCase = fetchImageUseCase
         self.managePlaylistUseCase = managePlaylistUseCase
         
@@ -187,7 +184,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
                         self.nextMusicTrackPublisher.send(swipeMusicTrackModel)
                     } catch {
                         self.nextMusicTrackPublisher.send(
-                            SwipeMusicTrackModel(randomMusic: nextMusic,imageData: nil)
+                            SwipeMusicTrackModel(randomMusic: nextMusic, imageData: nil)
                         )
                     }
                 }
