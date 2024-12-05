@@ -9,8 +9,8 @@ final class DefaultCurrentUserIdUseCaseTests: XCTestCase {
             throw FirestoreError.documentFetchError
         }
         
-        func signInApple(info: Molio.AppleAuthInfo) async throws {
-            
+        func signInApple(info: AppleAuthInfo) async throws -> (uid: String, isNewUser: Bool) {
+            return ("", false)
         }
         
         func logout() throws {
@@ -43,8 +43,8 @@ final class DefaultCurrentUserIdUseCaseTests: XCTestCase {
             return isLoggedIn
         }
         
-        func singInApple(info: AppleAuthInfo) async throws {
-            
+        func signInApple(info: AppleAuthInfo) async throws -> (uid: String, isNewUser: Bool) {
+            return ("", false)
         }
         
         func loginGuest() {

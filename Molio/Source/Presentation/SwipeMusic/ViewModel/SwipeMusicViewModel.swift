@@ -1,5 +1,6 @@
-import Foundation
 import Combine
+import Foundation
+import UIKit
 
 final class SwipeMusicViewModel: InputOutputViewModel {
     struct Input {
@@ -12,7 +13,7 @@ final class SwipeMusicViewModel: InputOutputViewModel {
     
     struct Output {
         let selectedPlaylist: AnyPublisher<MolioPlaylist, Never>
-        let isLoading: AnyPublisher<Bool, Never> // TODO: 로딩 UI 구현 및 연결
+        let isLoading: AnyPublisher<Bool, Never>
         let buttonHighlight: AnyPublisher<ButtonHighlight, Never>
         let musicCardSwipeAnimation: AnyPublisher<SwipeDirection, Never>
         let currentMusicTrack: AnyPublisher<SwipeMusicTrackModel, Never>
@@ -32,7 +33,8 @@ final class SwipeMusicViewModel: InputOutputViewModel {
     }
     
     var swipeThreshold: CGFloat {
-        return 170.0
+        let cardViewMargin: CGFloat = 44
+        return (UIScreen.main.bounds.width - cardViewMargin) / 2
     }
     
     private let musicDeck: any RandomMusicDeck
