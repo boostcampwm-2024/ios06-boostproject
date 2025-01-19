@@ -63,12 +63,12 @@
 
 ### 🐵 등차수열 팀 (iOS06)
 - 저희 팀은 왜 등차수열일까요?🙈
-    
+
 |        | S023                                   | S002                                   | S015                                  | S003                                   |
 | ------ | -------------------------------------- | -------------------------------------- | ------------------------------------- | -------------------------------------- |
 | 이름   | 박근영                                  | 강민수                                  | 김영빈                                 | 강창우                                  |
 | 생일   | 2002.02                                | 2000.10                                | 199x.06                               | 199x.11                                |
-| 사진   | <img width=150 src="https://github.com/user-attachments/assets/7af07e9b-7e88-443f-896e-392b954ba675">| <img width=150 src="https://github.com/user-attachments/assets/b8922aca-bd78-4947-9ad6-69f4239e3c4f"> | <img width=150 src="https://github.com/user-attachments/assets/df00dd8d-5731-4f01-9662-16ebbf8bf7ce"> | <img width=150 src="https://github.com/user-attachments/assets/f582911e-5711-4fe6-9d82-db65521f635b"> |
+| 사진   | <img width=150 src="https://github.com/user-attachments/assets/5c9d2bd9-d033-4d2c-a16c-fed317041be0">| <img width=150 src="https://github.com/user-attachments/assets/b8922aca-bd78-4947-9ad6-69f4239e3c4f"> | <img width=150 src="https://github.com/user-attachments/assets/df00dd8d-5731-4f01-9662-16ebbf8bf7ce"> | <img width=150 src="https://github.com/user-attachments/assets/f582911e-5711-4fe6-9d82-db65521f635b"> |
 | 깃허브 링크 | [@Park-kxng](https://github.com/Park-kxng) | [@alstn38](https://github.com/alstn38) | [@kybeen](https://github.com/kybeen) | [@windowcow](https://github.com/windowcow) |
 
 ## 7. 개발 환경
